@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lezione NotebookLM · Guida pratica per il formatore</title>
+<style>
+  :root{
+    --ink:#1E1B4B; --indigo:#4F46E5; --violet:#7C3AED; --cyan:#0891B2;
+    --coral:#EA6A1E; --teal:#0E9488; --bg:#F7F6FB; --text:#1A1730; --muted:#6B6790; --line:#E6E3FB; --card:#fff;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  body{font-family:'Inter','Segoe UI',-apple-system,Arial,sans-serif;background:var(--bg);color:var(--text);line-height:1.5;}
+  .wrap{max-width:900px;margin:0 auto;padding:36px 24px 80px;}
+  header{margin-bottom:18px;}
+  h1{font-size:30px;font-weight:800;color:var(--ink);}
+  .sub{color:var(--muted);font-size:15px;margin-top:4px;}
+  .sec-label{font-size:13px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);font-weight:700;margin:28px 0 10px;}
+  .block{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:20px 22px;margin-bottom:16px;border-left:6px solid var(--indigo);}
+  .block.setup{border-left-color:var(--teal);} .block.teoria{border-left-color:var(--cyan);} .block.pratica{border-left-color:var(--coral);}
+  .bhead{display:flex;align-items:baseline;gap:10px;margin-bottom:4px;flex-wrap:wrap;}
+  .bnum{font-size:13px;font-weight:800;color:#fff;background:var(--indigo);border-radius:20px;padding:2px 10px;}
+  .block.setup .bnum{background:var(--teal);} .block.teoria .bnum{background:var(--cyan);} .block.pratica .bnum{background:var(--coral);}
+  .btitle{font-size:20px;font-weight:800;color:var(--ink);}
+  .btime{font-size:13px;color:var(--muted);margin-left:auto;font-weight:600;}
+  .steps{list-style:none;counter-reset:s;margin-top:10px;}
+  .steps li{counter-increment:s;padding-left:30px;position:relative;margin-bottom:8px;font-size:15px;}
+  .steps li::before{content:counter(s);position:absolute;left:0;top:1px;width:20px;height:20px;background:var(--indigo);color:#fff;border-radius:50%;font-size:12px;font-weight:700;display:flex;align-items:center;justify-content:center;}
+  .steps b{color:var(--ink);}
+  ul.plain{list-style:none;margin-top:8px;} ul.plain li{font-size:15px;padding-left:18px;position:relative;margin-bottom:6px;}
+  ul.plain li::before{content:"";position:absolute;left:0;top:9px;width:6px;height:6px;border-radius:50%;background:var(--muted);}
+  .say{margin-top:12px;background:#F0EFFA;border-radius:8px;padding:10px 14px;font-size:14.5px;font-style:italic;color:var(--ink);}
+  .say b{font-style:normal;color:var(--violet);font-weight:700;}
+  .feat{list-style:none;margin-top:10px;}
+  .feat li{font-size:15px;padding-left:18px;position:relative;margin-bottom:9px;}
+  .feat li::before{content:"▸";position:absolute;left:0;top:0;color:var(--coral);font-weight:700;}
+  .feat b{color:var(--ink);}
+  .cue{display:inline-block;background:#FFF1E6;color:var(--coral);border:1px solid #F6D9C2;border-radius:6px;padding:1px 8px;font-size:13px;font-weight:700;margin-top:10px;}
+  .note{margin-top:8px;font-size:13.5px;color:var(--muted);} .note b{color:var(--text);}
+  @media print{ body{background:#fff;} .block{break-inside:avoid;} }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header>
+    <h1>Lezione NotebookLM · Guida pratica per il formatore</h1>
+    <div class="sub">La scaletta da seguire: cosa mostrare, in ordine. Strumento intuitivo, quasi tutto pratica. Mi raccomando: leggere sempre i prompt e le opzioni per intero.</div>
+  </header>
+
+  <div class="sec-label">Prima della lezione (setup)</div>
+  <div class="block setup">
+    <div class="bhead"><span class="bnum">0</span><span class="btitle">Da avere pronto</span></div>
+    <ul class="plain">
+      <li>Accesso a NotebookLM con l'account <b>Google</b> del corso.</li>
+      <li><b>Due notebook aperti</b>: uno vuoto (per mostrare il flusso da zero) e uno <b>già pronto</b>, con la fonte caricata e tutte le rielaborazioni dello Studio già generate (podcast, video, mappa, report, quiz, flashcard, infografica, tabella).</li>
+      <li>Il <b>file fonte</b> nella cartella condivisa di NotebookLM: un esempio di ricerca (su come l'IA impatterà l'insegnamento). Loro potranno caricare qualsiasi materiale, questo è l'esempio.</li>
+    </ul>
+    <div class="note">Sei pronto a spiegare quando hai i due notebook aperti.</div>
+  </div>
+
+  <div class="sec-label">Parte teorica · slide, veloce</div>
+  <div class="block teoria">
+    <div class="bhead"><span class="bnum">T</span><span class="btitle">Le slide introduttive</span></div>
+    <ul class="plain">
+      <li>E se uno strumento studiasse solo con i vostri materiali, senza inventare niente? È NotebookLM.</li>
+      <li>I tre vantaggi: <b>solo le tue fonti</b> (non divaga, a differenza di Claude che ha memoria e cerca online) · <b>niente allucinazioni</b> (cita il punto esatto, si clicca e si verifica) · <b>per studio e ricerca</b>, per gli alunni e per voi, sui vostri materiali o esterni.</li>
+      <li>Tre colonne: <b>Fonti</b> · <b>Chat</b> (domande ai tuoi materiali, con citazione) · <b>Studio</b> (le rielaborazioni). Funzioni Studio: podcast, video, quiz e flashcard, mappe, slide, riassunti e guide, infografiche, tabelle.</li>
+    </ul>
+    <div class="cue">Slide deck: 1-9</div>
+  </div>
+
+  <div class="sec-label">Parte pratica · cosa mostrare, in ordine</div>
+
+  <div class="block pratica">
+    <div class="bhead"><span class="bnum">1</span><span class="btitle">Apri NotebookLM e crea un notebook</span></div>
+    <ul class="steps">
+      <li>Accesso con Google. Trovi già l'esempio pronto. Parti dal notebook vuoto: <b>Crea nuovo notebook</b>.</li>
+      <li>Breve excursus su cosa si può caricare: <b>PDF, immagini, documenti, audio</b> (MP3/MP4, li trascrive), <b>siti web e blog</b>, <b>link YouTube</b> (riassume anche i video), Drive, oppure <b>testo copiato e incollato</b>.</li>
+    </ul>
+    <div class="say"><b>Da dire:</b> "Potete caricare tutti i vostri materiali e ritrovarli per sempre: quando vi serve un esercizio o una cosa che ricordate di avere, la chiedete e la tirate fuori."</div>
+  </div>
+
+  <div class="block pratica">
+    <div class="bhead"><span class="bnum">2</span><span class="btitle">Carica la fonte (colonna Fonti, sinistra)</span></div>
+    <ul class="steps">
+      <li>Trascina il <b>file di esempio</b> dalla cartella e mettilo lì. NotebookLM se lo legge.</li>
+      <li>Mostra che si possono <b>cercare</b> fonti o <b>caricare le proprie</b> (sempre l'opzione migliore). Si possono caricare fino a <b>50 fonti</b>.</li>
+      <li>Si possono <b>selezionare e deselezionare</b> le fonti, per parlare con tutte o solo con alcune.</li>
+    </ul>
+  </div>
+
+  <div class="block pratica">
+    <div class="bhead"><span class="bnum">3</span><span class="btitle">La Chat (colonna centrale): le citazioni</span></div>
+    <ul class="steps">
+      <li>Fai una domanda ai materiali, es. "dammi i punti chiave". (Anche documenti in inglese si possono avere in italiano.)</li>
+      <li>Mostra i <b>numeri/pallini delle citazioni</b> accanto alla risposta: clicca su uno e si apre il <b>punto esatto del testo</b> da cui ha preso l'informazione. Si legge il concetto, non tutto il testo.</li>
+      <li>Usa le <b>domande suggerite</b>. Per tenere una risposta utile, clicca <b>Salva nella nota</b>: si salva a destra.</li>
+      <li>Fai 2-3 esempi di domande diverse sul file.</li>
+    </ul>
+  </div>
+
+  <div class="block pratica">
+    <div class="bhead"><span class="bnum">4</span><span class="btitle">Lo Studio (colonna destra): le rielaborazioni</span></div>
+    <div class="note">Lancia qualcosa in diretta sul notebook vuoto e mostra gli esempi <b>già pronti</b> nell'altro notebook (per i tempi). Su ognuna, cliccando la freccia, ci sono le opzioni: leggile.</div>
+    <ul class="feat">
+      <li><b>Audio Overview (podcast):</b> formato (Approfondimento, Epilogo, Critica — utile per gli insegnanti, Dibattito), lingua, lunghezza, focus (es. "focus per insegnanti"). Genera. Mostra l'esempio, falli ascoltare 2-3 minuti, chiedi un feedback.</li>
+      <li><b>Video Overview:</b> formato spiegazione o epilogo, stile, focus (es. prospettiva del docente). Genera (3-5 min). Mostra l'esempio: è una presentazione con la voce sotto.</li>
+      <li><b>Presentazioni:</b> presentazione dettagliata o slide per il presentatore. Belle ma <b>non editabili</b>: per le presentazioni consigliamo Gamma, però mostriamo che si può fare.</li>
+      <li><b>Mappa mentale:</b> utile soprattutto per <b>esplorare un file velocemente</b>. Mettila a tutto schermo ed espandi i nodi.</li>
+      <li><b>Report:</b> riepilogo, guida allo studio (quiz e risposta breve), domande per il saggio, glossario, blog post, concetti chiave. Mostra l'esempio: domande con le chiavi di risposta, copiabile.</li>
+      <li><b>Quiz:</b> scegli quantità, difficoltà, argomenti. Genera. Mostra l'esempio (10 quiz): rispondi, ti spiega perché è giusto o sbagliato, c'è il pulsante <b>Spiega</b>, lo <b>score finale</b> con gli argomenti da ripassare, <b>Ripeti/Rivedi</b>.</li>
+      <li><b>Flashcard:</b> di più o di meno, livello di difficoltà. Domanda, clicca per la risposta, <b>Spiega</b> se non è chiaro. Ok la toglie, X la ripropone. Score finale.</li>
+      <li><b>Infografica:</b> formato (orizzontale, verticale, quadrato), livello di dettaglio, focus, stile. Genera. Mostra l'esempio: riassume tante pagine in una bella infografica da dare agli studenti.</li>
+      <li><b>Tabella dati:</b> riassume i dati principali (autore, titolo dello studio, tecnologie esaminate, temi etici, la fonte). Mostra l'esempio.</li>
+    </ul>
+    <div class="say"><b>Da dire (importante):</b> "Quiz e flashcard sono pensati per lo studio: è scientificamente provato che mettersi alla prova fa ricordare di più. È lo strumento definitivo per studiare."</div>
+    <div class="cue">Slide deck: 8 (le funzioni dello Studio)</div>
+  </div>
+
+  <div class="block pratica">
+    <div class="bhead"><span class="bnum">5</span><span class="btitle">Tocca a voi</span><span class="btime">~1 ora</span></div>
+    <ul class="steps">
+      <li>"Accedete a NotebookLM e iniziate: scegliete cosa caricare (vostri materiali, ricerche). Un documento si può trovare anche su <b>Google Scholar</b>."</li>
+      <li>Per circa un'ora provano liberamente le funzioni e fanno domande quando serve.</li>
+    </ul>
+    <div class="say"><b>Nota metodologica:</b> di proposito non diamo a tutti lo stesso documento. Che ognuno trovi il suo, in autonomia: l'esercizio è proprio quello. Il formatore resta a disposizione.</div>
+    <div class="cue">Slide deck: 10 (tocca a voi)</div>
+  </div>
+
+</div>
+</body>
+</html>

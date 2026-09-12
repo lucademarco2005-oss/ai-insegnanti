@@ -1,0 +1,568 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Incontro 3 · Etica, responsabilità e l'IA nel mondo</title>
+<!--
+  COME USARLO
+  · Presentare: apri nel browser. Frecce o scroll per cambiare slide. Tasto F = schermo intero.
+  · Esportare in PDF/slide: Stampa (Cmd/Ctrl+P), poi Orizzontale, Margini Nessuno, "Grafica di sfondo" ATTIVA, Salva come PDF.
+  · Modificare: ogni slide e un blocco section.slide con commento SLIDE N. Colori in :root.
+  TIPI DI SLIDE (colore = funzione):
+  · ink (navy)       = statement chiave
+  · light            = contenuto
+  · indigobg (viola) = GANCIO: domanda introduttiva (solo a inizio sezione)
+  · coralbg (arancio)= DIBATTITO / parla la stanza
+-->
+<style>
+  :root{
+    --ink:#1E1B4B; --ink2:#2A2566; --indigo:#4F46E5; --violet:#7C3AED;
+    --cyan:#06B6D4; --coral:#F97316; --light:#F6F5FF; --text:#1A1730;
+    --muted:#6B6790; --white:#ffffff; --cfcb:#CFCBF0; --faint:#8E8AC4;
+    --line:#E6E3FB;
+    --font:'Inter','Segoe UI',-apple-system,Arial,sans-serif;
+  }
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap');
+  *{box-sizing:border-box;margin:0;padding:0;}
+  html,body{background:#0c0a1f;font-family:var(--font);}
+  .deck{height:100vh;overflow-y:scroll;scroll-snap-type:y mandatory;scroll-behavior:smooth;}
+  .slide{height:100vh;display:flex;align-items:center;justify-content:center;scroll-snap-align:start;background:#0c0a1f;}
+  .canvas{position:relative;width:min(100vw,177.78vh);height:min(56.25vw,100vh);container-type:size;overflow:hidden;}
+  .ink{background:var(--ink);} .light{background:var(--light);} .coralbg{background:var(--coral);} .indigobg{background:var(--indigo);}
+
+  .cy{color:var(--cyan);} .co{color:var(--coral);} .in{color:var(--indigo);}
+  .vi{color:var(--violet);} .wh{color:var(--white);} .tx{color:var(--text);}
+  .mu{color:var(--muted);} .inkc{color:var(--ink);}
+
+  .chip{position:absolute;top:8cqh;left:5.5cqw;padding:1.3cqh 2.2cqh;border-radius:2cqh;
+        font-size:2.4cqh;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#fff;}
+  .chip.violet{background:var(--violet);} .chip.cyan{background:var(--cyan);}
+  .chip.indigo{background:var(--indigo);} .chip.coral{background:var(--coral);} .chip.muted{background:var(--muted);}
+
+  .title{position:absolute;top:14cqh;left:5.5cqw;right:5.5cqw;font-size:6cqh;font-weight:800;color:var(--text);line-height:1.05;}
+
+  .stbar{position:absolute;top:34cqh;left:6.7cqw;width:4.2cqh;height:1.3cqh;background:var(--coral);}
+  .statement{position:absolute;top:38cqh;left:6.5cqw;right:6cqw;font-size:7cqh;font-weight:800;line-height:1.1;}
+  .statement.big{font-size:8.4cqh;}
+
+  .foot{position:absolute;bottom:4cqh;left:5.5cqw;font-size:1.7cqh;color:var(--muted);}
+  .pageno{position:absolute;bottom:4cqh;right:5.5cqw;font-size:1.7cqh;color:var(--muted);}
+  .pageno.dark{color:var(--faint);}
+
+  .dots{position:absolute;display:flex;gap:1.4cqh;}
+  .dots span{width:2cqh;height:2cqh;border-radius:50%;}
+
+  .eyebrow{position:absolute;top:21cqh;left:5.5cqw;font-size:2.6cqh;font-weight:700;letter-spacing:.18em;color:var(--cyan);}
+  .cover-title{position:absolute;top:27cqh;left:5.2cqw;right:6cqw;font-size:8.4cqh;font-weight:800;color:#fff;line-height:.98;}
+  .cover-bar{position:absolute;top:57cqh;left:5.6cqw;width:4cqh;height:1.2cqh;background:var(--coral);}
+  .cover-sub{position:absolute;top:61cqh;left:5.5cqw;font-size:3.6cqh;color:var(--cfcb);}
+  .cover-foot{position:absolute;bottom:5cqh;left:5.5cqw;font-size:1.9cqh;color:var(--faint);}
+
+  .circ{position:absolute;border-radius:50%;}
+
+  .hook-eyebrow{position:absolute;top:20cqh;left:6cqw;font-size:2.7cqh;font-weight:700;letter-spacing:.16em;color:var(--cfcb);text-transform:uppercase;}
+  .hook-q{position:absolute;top:35cqh;left:6cqw;right:7cqw;font-size:6.8cqh;font-weight:800;color:#fff;line-height:1.12;}
+
+  .cards{position:absolute;top:31cqh;left:5.5cqw;right:5.5cqw;display:flex;flex-direction:column;gap:2cqh;}
+  .card{display:flex;align-items:center;gap:2.6cqh;background:#fff;border:1px solid var(--line);
+        border-radius:2.2cqh;padding:2.6cqh 3cqh;box-shadow:0 4px 14px rgba(80,70,160,.10);}
+  .card-ic{flex:none;width:8cqh;height:8cqh;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:3.6cqh;color:#fff;}
+  .card h3{font-size:3.2cqh;font-weight:700;color:var(--text);margin-bottom:.4cqh;}
+  .card p{font-size:2.5cqh;color:var(--muted);line-height:1.25;}
+
+  .datawrap{position:absolute;top:29cqh;left:5.5cqw;right:5.5cqw;display:flex;gap:3cqh;}
+  .stat{flex:1;border-radius:2.6cqh;padding:4cqh 2cqh;text-align:center;}
+  .stat.dark{background:var(--ink);} .stat.lite{background:#fff;border:1.5px solid var(--line);}
+  .stat .num{font-size:15cqh;font-weight:800;line-height:1;}
+  .stat .lab{font-size:3cqh;margin-top:2cqh;}
+  .takeaway{position:absolute;top:78cqh;left:5.5cqw;right:5.5cqw;font-size:3cqh;font-weight:600;color:var(--text);line-height:1.3;}
+
+  .cols{position:absolute;top:30cqh;left:5.5cqw;right:5.5cqw;display:flex;gap:3cqh;}
+  .col{flex:1;background:#fff;border:1px solid var(--line);border-radius:2.2cqh;overflow:hidden;}
+  .col-head{font-size:3.4cqh;font-weight:800;color:#fff;text-align:center;padding:2.2cqh;letter-spacing:.04em;}
+  .col ul{list-style:none;padding:2.6cqh 3cqh;}
+  .col li{display:flex;gap:1.6cqh;align-items:flex-start;font-size:2.7cqh;color:var(--text);line-height:1.25;margin-bottom:2.2cqh;}
+  .col li::before{content:"";flex:none;width:1.6cqh;height:1.6cqh;border-radius:50%;margin-top:.6cqh;background:currentColor;}
+  .col.cdmuted li{color:var(--muted);} .col.cdindigo li{color:var(--indigo);}
+  .col li span{color:var(--text);}
+
+  /* corpo discorsivo */
+  .body{position:absolute;left:5.5cqw;right:6cqw;top:30cqh;font-size:3.5cqh;color:var(--text);line-height:1.42;}
+  .body.b2{top:30cqh;}
+  .body em{font-style:normal;font-weight:700;color:var(--indigo);}
+  .body .hl{font-weight:700;color:var(--text);}
+  .note{position:absolute;left:5.5cqw;right:6cqw;border-radius:2.2cqh;background:var(--ink);color:var(--cfcb);
+        font-size:3cqh;font-weight:600;line-height:1.3;padding:2.8cqh 3.2cqh;}
+  .note .cy{color:var(--cyan);}
+
+  .deb-tag{position:absolute;top:9cqh;left:5.5cqw;background:#fff;color:var(--coral);
+           padding:1.3cqh 2.4cqh;border-radius:2.3cqh;font-size:2.5cqh;font-weight:700;letter-spacing:.12em;}
+  .deb-room{position:absolute;top:9.6cqh;left:28cqw;font-size:2.6cqh;font-style:italic;color:#FFE4D3;}
+  .deb-q{position:absolute;top:34cqh;left:5.5cqw;right:6cqw;font-size:6.4cqh;font-weight:800;color:#fff;line-height:1.12;}
+  .deb-sub{position:absolute;top:72cqh;left:5.6cqw;right:8cqw;font-size:3cqh;color:#FFEAD9;line-height:1.3;}
+
+  .ponte-big{position:absolute;top:20cqh;left:5.5cqw;font-size:9cqh;font-weight:800;color:var(--text);}
+  .ponte-sub{position:absolute;top:36cqh;left:5.6cqw;right:8cqw;font-size:3.4cqh;color:var(--muted);}
+  .pcards{position:absolute;top:54cqh;left:5.5cqw;right:5.5cqw;display:flex;gap:2.6cqh;}
+  .pcard{flex:1;background:#fff;border:1px solid var(--line);border-radius:2.2cqh;padding:3cqh;}
+  .pnum{width:10cqh;height:10cqh;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:4.6cqh;font-weight:800;color:#fff;margin-bottom:2cqh;}
+  .pcard h3{font-size:2.9cqh;font-weight:700;color:var(--text);line-height:1.15;}
+
+  .divnum{position:absolute;top:30cqh;left:5.5cqw;font-size:14cqh;font-weight:800;line-height:1;}
+  .divttl{position:absolute;top:48cqh;left:5.6cqw;right:8cqw;font-size:5cqh;font-weight:800;color:var(--text);}
+  .divsub{position:absolute;top:61cqh;left:5.6cqw;right:8cqw;font-size:3cqh;color:var(--muted);line-height:1.3;}
+
+  /* spunto */
+  .sp-q{position:absolute;top:32cqh;left:5.5cqw;right:6cqw;font-size:3.7cqh;color:var(--text);line-height:1.38;}
+  .sp-i{position:absolute;top:64cqh;left:5.5cqw;right:6cqw;font-size:3.1cqh;color:var(--muted);line-height:1.3;}
+  .sp-i b{color:var(--indigo);}
+
+  .hint{position:fixed;bottom:14px;right:16px;font-size:12px;color:#888;font-family:var(--font);z-index:50;}
+
+  @media print{
+    @page{size:1280px 720px;margin:0;}
+    html,body{background:#fff;}
+    .deck{height:auto;overflow:visible;display:block;}
+    .slide{height:720px;width:1280px;display:block;page-break-after:always;break-after:page;}
+    .canvas{width:1280px;height:720px;}
+    .hint{display:none;}
+    *{-webkit-print-color-adjust:exact;print-color-adjust:exact;}
+  }
+</style>
+</head>
+<body>
+<div class="deck" id="deck">
+
+  <!-- SLIDE 1 — COPERTINA -->
+  <section class="slide"><div class="canvas ink">
+    <div class="circ" style="top:-19%;left:78%;width:34%;height:60%;background:var(--indigo);opacity:.45;"></div>
+    <div class="circ" style="top:58%;left:88%;width:25%;height:45%;background:var(--violet);opacity:.4;"></div>
+    <div class="circ" style="top:70%;left:-8%;width:24%;height:42%;background:var(--coral);opacity:.3;"></div>
+    <div class="eyebrow">USARE L'INTELLIGENZA ARTIFICIALE</div>
+    <div class="cover-title">Etica, responsabilità<br>e l'IA nel mondo</div>
+    <div class="cover-bar"></div>
+    <div class="cover-sub">Incontro 3 · Rendere visibile l'invisibile</div>
+    <div class="dots" style="top:77%;left:5.6%;"><span style="background:var(--cyan)"></span><span style="background:var(--indigo)"></span><span style="background:var(--violet)"></span><span style="background:var(--coral)"></span></div>
+    <div class="cover-foot">Formazione docenti sull'Intelligenza Artificiale · PNRR DM 219/2025</div>
+  </div></section>
+
+  <!-- SLIDE 2 — RIPRESA -->
+  <section class="slide"><div class="canvas light">
+    <div class="chip cyan">Dove siamo arrivati</div>
+    <div class="title">Il filo del corso</div>
+    <div class="cards">
+      <div class="card"><div class="card-ic" style="background:var(--indigo)">1</div><div><h3>Cos'è l'IA</h3><p>Non pensa, predice il testo. È come uno stagista che sa tutto ma non conosce la vostra classe.</p></div></div>
+      <div class="card"><div class="card-ic" style="background:var(--cyan)">2</div><div><h3>Il metodo</h3><p>I quattro principi per usarla bene, e come iniziare a insegnarla ai vostri studenti.</p></div></div>
+      <div class="card"><div class="card-ic" style="background:var(--coral)">3</div><div><h3>Oggi</h3><p>La responsabilità nell'usarla, e uno sguardo a come sta cambiando il mondo intorno a noi.</p></div></div>
+    </div>
+    <div class="foot">AI INSEGNANTI · Formazione PNRR</div><div class="pageno">2 / 43</div>
+  </div></section>
+
+  <!-- SLIDE 3 — PONTE / INTRO -->
+  <section class="slide"><div class="canvas light">
+    <div class="chip coral">Oggi cambia la domanda</div>
+    <div class="title">Non più "come", ma "con quale responsabilità"</div>
+    <div class="body" style="top:31cqh;">Nei primi due incontri abbiamo visto cos'è l'IA e come usarla con metodo. Oggi facciamo un passo diverso: ci chiediamo con quale responsabilità usarla, verso i nostri studenti e verso quello che le affidiamo.</div>
+    <div class="note" style="top:62cqh;">E allarghiamo lo sguardo: l'IA non vive nel vuoto, sta già cambiando il mondo intorno a noi. <span class="cy">L'etica, qui, non è una lista di divieti: è usare lo strumento da professionisti.</span></div>
+    <div class="foot">AI INSEGNANTI · Formazione PNRR</div><div class="pageno">3 / 43</div>
+  </div></section>
+
+  <!-- SLIDE 4 — GANCIO A -->
+  <section class="slide"><div class="canvas indigobg">
+    <div class="circ" style="top:-20%;left:75%;width:38%;height:66%;background:#fff;opacity:.08;"></div>
+    <div class="hook-eyebrow">Parte 1 · La responsabilità diretta</div>
+    <div class="hook-q wh">Cosa dei vostri studenti<br>non dovrebbe mai finire <span class="cy">dentro un'IA</span>?</div>
+    <div class="pageno dark">4 / 43</div>
+  </div></section>
+
+  <!-- SLIDE 5 — Protezione studenti -->
+  <section class="slide"><div class="canvas light">
+    <div class="chip indigo">Proteggere i dati degli studenti</div>
+    <div class="title">Quello che caricate esce dalla scuola</div>
+    <div class="body" style="top:30cqh;">Quando chiedete aiuto all'IA, tutto ciò che incollate finisce sui server di un'azienda, fuori dalla scuola. Per questo alcune cose non vanno mai caricate: <span class="hl">i PEI, le certificazioni DSA, i dati sanitari, gli elaborati con nome e cognome di un minorenne, i verbali disciplinari.</span></div>
+    <div class="note" style="top:67cqh;">Non è una formalità: il Dirigente è il responsabile legale del trattamento dei dati (GDPR, AI Act, DM 166/2025).</div>
+    <div class="foot">AI INSEGNANTI · Formazione PNRR</div><div class="pageno">5 / 43</div>
+  </div></section>
+
+  <!-- SLIDE 6 — STATEMENT regola pratica -->
+  <section class="slide"><div class="canvas ink">
+    <div class="chip indigo">La regola pratica</div>
+    <div class="statement wh" style="top:33cqh;font-size:5.8cqh;">Se non lo incollereste sulla <span class="cy">porta della classe</span>, non caricatelo sull'IA.</div>
+    <div class="pageno dark">6 / 43</div>
+  </div></section>
+
+  <!-- SLIDE 7 — Valutazione -->
+  <section class="slide"><div class="canvas light">
+    <div class="chip indigo">Ripensare i compiti</div>
+    <div class="title">Il problema non è la disonestà</div>
+    <div class="body" style="top:30cqh;">Ormai quasi nove studenti su dieci usano l'IA anche per i compiti che diamo. Ma il punto non è che imbrogliano: è che un compito che misura solo il prodotto finale non dimostra più niente, perché quel prodotto può averlo fatto l'IA.</div>
+    <div class="note" style="top:66cqh;">La via d'uscita non è vietare. È cambiare cosa valutiamo: spostarci dal prodotto al <span class="cy">processo</span>, cioè a come lo studente ci è arrivato.</div>
+    <div class="foot">Fonte: GoStudent / HEPI 2025</div><div class="pageno">7 / 43</div>
+  </div></section>
+
+  <!-- SLIDE 8 — le 5 leve -->
+  <section class="slide"><div class="canvas light">
+    <div class="chip indigo">Ripensare un compito</div>
+    <div class="title">Cinque modi concreti</div>
+    <div class="cards" style="top:28cqh;gap:1.4cqh;">
+      <div class="card" style="padding:1.7cqh 3cqh;"><div class="card-ic" style="background:var(--indigo);width:5.8cqh;height:5.8cqh;font-size:2.6cqh;">1</div><div><h3 style="margin:0;font-size:2.8cqh">Far usare l'IA apertamente, dentro il compito</h3></div></div>
+      <div class="card" style="padding:1.7cqh 3cqh;"><div class="card-ic" style="background:var(--cyan);width:5.8cqh;height:5.8cqh;font-size:2.6cqh;">2</div><div><h3 style="margin:0;font-size:2.8cqh">Chiedere anche il percorso, non solo il risultato</h3></div></div>
+      <div class="card" style="padding:1.7cqh 3cqh;"><div class="card-ic" style="background:var(--violet);width:5.8cqh;height:5.8cqh;font-size:2.6cqh;">3</div><div><h3 style="margin:0;font-size:2.8cqh">Ancorare a qualcosa di reale e personale</h3></div></div>
+      <div class="card" style="padding:1.7cqh 3cqh;"><div class="card-ic" style="background:var(--coral);width:5.8cqh;height:5.8cqh;font-size:2.6cqh;">4</div><div><h3 style="margin:0;font-size:2.8cqh">Spostare in aula la parte che conta davvero</h3></div></div>
+      <div class="card" style="padding:1.7cqh 3cqh;"><div class="card-ic" style="background:var(--indigo);width:5.8cqh;height:5.8cqh;font-size:2.6cqh;">5</div><div><h3 style="margin:0;font-size:2.8cqh">Usare l'IA come punto di partenza, non di arrivo</h3></div></div>
+    </div>
+    <div class="foot">AI INSEGNANTI · Formazione PNRR</div><div class="pageno">8 / 43</div>
+  </div></section>
+
+  <!-- SLIDE 9 — esempio confronto -->
+  <section class="slide"><div class="canvas light">
+    <div class="chip indigo">Un esempio</div>
+    <div class="title">Lo stesso compito, ripensato</div>
+    <div class="cols">
+      <div class="col"><div class="col-head" style="background:var(--muted)">COSÌ NON FUNZIONA PIÙ</div><ul class="cdmuted"><li><span>"Riassumi il capitolo": l'IA lo fa in dieci secondi e non dimostra che lo studente abbia capito.</span></li></ul></div>
+      <div class="col"><div class="col-head" style="background:var(--indigo)">COSÌ TORNA A FUNZIONARE</div><ul class="cdindigo"><li><span>"Fatti fare il riassunto dall'IA, poi confrontalo con il libro e trova tre cose che ha sbagliato o tralasciato."</span></li></ul></div>
+    </div>
+    <div class="takeaway">Nel secondo caso lo studente deve capire davvero, perché il lavoro è giudicare l'IA, non sostituirsi a lei.</div>
+    <div class="foot">AI INSEGNANTI · Formazione PNRR</div><div class="pageno">9 / 43</div>
+  </div></section>
+
+  <!-- SLIDE 10 — BRAINSTORMING ripensare i compiti -->
+  <section class="slide"><div class="canvas coralbg">
+    <div class="circ" style="top:-21%;left:80%;width:38%;height:67%;background:#fff;opacity:.12;"></div>
+    <div class="circ" style="top:62%;left:-10%;width:30%;height:53%;background:var(--ink);opacity:.18;"></div>
+    <div class="deb-tag">BRAINSTORMING</div><div class="deb-room">Parla la stanza</div>
+    <div class="deb-q wh">Un compito che date spesso: <span class="inkc">come potreste ripensarlo</span>?</div>
+    <div class="deb-sub">Provate con le cinque leve. Buttate lì le idee, anche grezze.</div>
+    <div class="pageno dark">10 / 43</div>
+  </div></section>
+
+  <!-- SLIDE 11 — GANCIO B -->
+  <section class="slide"><div class="canvas indigobg">
+    <div class="circ" style="top:-20%;left:75%;width:38%;height:66%;background:#fff;opacity:.08;"></div>
+    <div class="hook-eyebrow">Parte 2 · L'IA nel mondo</div>
+    <div class="hook-q wh">L'IA sembra fatta d'aria.<br>Ma cosa <span class="cy">lascia dietro di sé</span>?</div>
+    <div class="pageno dark">11 / 43</div>
+  </div></section>
+
+  <!-- SLIDE 12 — ambiente big stat -->
+  <section class="slide"><div class="canvas light">
+    <div class="chip cyan">L'impatto ambientale</div>
+    <div class="title">Dietro ogni risposta, un consumo reale</div>
+    <div class="stat dark" style="position:absolute;top:32cqh;left:5.5cqw;right:5.5cqw;padding:5cqh 3cqh;border-radius:2.6cqh;text-align:center;">
+      <div style="font-size:7.5cqh;font-weight:800;color:var(--cyan);line-height:1.05;">come tutto il Giappone</div>
+      <div style="font-size:3cqh;color:#fff;margin-top:2cqh;line-height:1.3;">Entro il 2030 i grandi centri di calcolo che fanno funzionare l'IA consumeranno il doppio di oggi: tanta elettricità quanta ne usa un intero Paese.</div>
+    </div>
+    <div class="foot">Fonte: IEA, Energy and AI, 2025</div><div class="pageno">12 / 43</div>
+  </div></section>
+
+  <!-- SLIDE 13 — ambiente costo nascosto -->
+  <section class="slide"><div class="canvas light">
+    <div class="chip cyan">L'impatto ambientale</div>
+    <div class="title">Un costo che non vediamo</div>
+    <div class="body" style="top:30cqh;">Questi centri consumano anche enormi quantità d'acqua per raffreddarsi: solo Google ne ha usata circa trenta miliardi di litri in un anno. Gira online il dato "una domanda all'IA costa mezzo litro d'acqua": è suggestivo, ma non è verificato, le stime cambiano anche di cento volte. Il numero solido è quello complessivo.</div>
+    <div class="note" style="top:70cqh;">Il punto da portare in classe: anche la tecnologia che sembra immateriale <span class="cy">lascia un'impronta concreta</span>.</div>
+    <div class="foot">Fonte: Google Environmental Report 2025</div><div class="pageno">13 / 43</div>
+  </div></section>
+
+  <!-- SLIDE 14 — zero-click -->
+  <section class="slide"><div class="canvas light">
+    <div class="chip cyan">L'ecosistema dell'informazione</div>
+    <div class="title">Nessuno apre più le fonti</div>
+    <div class="datawrap" style="top:31cqh;">
+      <div class="stat dark"><div class="num cy">8%</div><div class="lab wh">le volte in cui, con il riassunto dell'IA, si apre davvero una fonte (prima era il 15%)</div></div>
+      <div class="stat lite"><div class="num co">-33%</div><div class="lab tx">il traffico dai motori di ricerca verso i siti di notizie, in un solo anno</div></div>
+    </div>
+    <div class="foot">Fonti: Pew Research 2025 · Reuters/Chartbeat 2026</div><div class="pageno">14 / 43</div>
+  </div></section>
+
+  <!-- SLIDE 15 — paradosso -->
+  <section class="slide"><div class="canvas light">
+    <div class="chip cyan">L'ecosistema dell'informazione</div>
+    <div class="title">Il paradosso dei giornalisti</div>
+    <div class="body" style="top:30cqh;">Le notizie che l'IA ci riassume le ha scritte qualcuno: un giornalista, una redazione. Ma se la gente legge il riassunto e non apre più l'articolo, quel giornale perde lettori e ricavi. Così l'IA vive del lavoro di chi, intanto, smette di poterlo fare. E se spariscono le fonti affidabili, <span class="hl">peggiora anche l'IA, che proprio su quelle si addestra.</span></div>
+    <div class="foot">AI INSEGNANTI · Formazione PNRR</div><div class="pageno">15 / 43</div>
+  </div></section>
+
+  <!-- SLIDE 16 — model collapse -->
+  <section class="slide"><div class="canvas light">
+    <div class="chip cyan">Perché ci riguarda tutti</div>
+    <div class="title">Senza fonti umane, l'IA peggiora</div>
+    <div class="body" style="top:30cqh;">Uno studio pubblicato su Nature ha mostrato una cosa sorprendente: se l'IA viene addestrata sui testi prodotti da altre IA, col tempo degrada. Le risposte perdono varietà e senso. Per restare utile ha bisogno di contenuti scritti da persone vere.</div>
+    <div class="note" style="top:66cqh;">Ecco perché il crollo di chi produce informazione di qualità <span class="cy">è un problema anche per l'IA stessa</span>.</div>
+    <div class="foot">Fonte: Shumailov et al., Nature 2024</div><div class="pageno">16 / 43</div>
+  </div></section>
+
+  <!-- SLIDE 17 — Anthropic -->
+  <section class="slide"><div class="canvas light">
+    <div class="chip cyan">Su cosa è addestrata l'IA</div>
+    <div class="title">Il caso Anthropic</div>
+    <div class="body" style="top:29cqh;font-size:3.3cqh;">Anthropic, l'azienda che produce Claude, ha addestrato il modello scaricando milioni di libri da siti pirata. Gli autori l'hanno portata in tribunale, e nel 2025 è arrivato un accordo da <span class="hl">1,5 miliardi di dollari</span>, il più grande mai visto sul diritto d'autore.</div>
+    <div class="note" style="top:64cqh;">Il giudice ha fissato un principio semplice: usare i libri per addestrare l'IA è lecito, scaricarli rubati no. <span class="cy">Conta come ottieni l'opera.</span></div>
+    <div class="foot">Fonte: Bartz contro Anthropic, accordo 2025</div><div class="pageno">17 / 43</div>
+  </div></section>
+
+  <!-- SLIDE 18 — DIBATTITO Anthropic -->
+  <section class="slide"><div class="canvas coralbg">
+    <div class="circ" style="top:-21%;left:80%;width:38%;height:67%;background:#fff;opacity:.12;"></div>
+    <div class="circ" style="top:62%;left:-10%;width:30%;height:53%;background:var(--ink);opacity:.18;"></div>
+    <div class="deb-tag">DIBATTITO</div><div class="deb-room">Parla la stanza</div>
+    <div class="deb-q wh">È giusto usare un'IA addestrata su libri presi <span class="inkc">senza permesso</span>?</div>
+    <div class="deb-sub">Non c'è una risposta giusta: si raccolgono le posizioni. Il filo è sempre lo stesso: dietro ogni risposta dell'IA c'è il lavoro di qualcuno.</div>
+  <div class="pageno dark">18 / 43</div>
+  </div></section>
+
+  <!-- SLIDE 19 — deepfake data -->
+  <section class="slide"><div class="canvas light">
+    <div class="chip cyan">Disinformazione e deepfake</div>
+    <div class="title">Non li riconosciamo a occhio</div>
+    <div class="body" style="top:29cqh;font-size:3.3cqh;">Le immagini, le voci e i video falsi creati dall'IA sono ormai indistinguibili dai veri. In uno studio, solo una persona su mille li ha riconosciuti tutti correttamente, e la maggior parte restava sicura di sé anche quando sbagliava. Per clonare una voce bastano tre secondi di audio.</div>
+    <div class="note" style="top:67cqh;">Caso simbolo: 25,6 milioni di dollari truffati a un'azienda con un <span class="cy">finto capo in videochiamata</span> (Hong Kong, 2024).</div>
+    <div class="foot">Fonti: iProov 2025 · CNN 2024</div><div class="pageno">19 / 43</div>
+  </div></section>
+
+  <!-- SLIDE 20 — liar's dividend -->
+  <section class="slide"><div class="canvas light">
+    <div class="chip cyan">L'effetto più insidioso</div>
+    <div class="title">Quando anche il vero diventa sospetto</div>
+    <div class="body" style="top:31cqh;">C'è una conseguenza ancora più profonda. In un mondo pieno di falsi, anche un video autentico può essere liquidato con un "tanto è un deepfake". Il rischio non è solo credere a ciò che è falso: è <span class="hl">smettere di credere a ciò che è vero</span>.</div>
+    <div class="foot">Concetto: Chesney e Citron, 2019</div><div class="pageno">20 / 43</div>
+  </div></section>
+
+  <!-- SLIDE 21 — caso scuola -->
+  <section class="slide"><div class="canvas light">
+    <div class="chip coral">Riguarda già le nostre classi</div>
+    <div class="title">Non è un problema lontano</div>
+    <div class="body" style="top:30cqh;">Sono in forte aumento i casi di immagini sessuali false create dagli studenti stessi, usando i volti delle compagne, con vittime in decine di Paesi. È la faccia più dura di questa tecnologia, ed è già entrata nelle scuole.</div>
+    <div class="note" style="top:66cqh;">Va trattato per quello che è: <span class="cy">un reato e una questione di tutela del minore</span>, non una bravata.</div>
+    <div class="foot">Fonte: dati NCMEC 2024-2025</div><div class="pageno">21 / 43</div>
+  </div></section>
+
+  <!-- SLIDE 22 — STATEMENT -->
+  <section class="slide"><div class="canvas ink">
+    <div class="chip coral">Disinformazione</div>
+    <div class="stbar"></div>
+    <div class="statement wh big">Vedere non è più <span class="co">credere</span>.</div>
+    <div class="pageno dark">22 / 43</div>
+  </div></section>
+
+  <!-- SLIDE 23 — la difesa -->
+  <section class="slide"><div class="canvas light">
+    <div class="chip cyan">La difesa</div>
+    <div class="title">Non si difende l'occhio, si verifica</div>
+    <div class="body" style="top:28cqh;font-size:3.2cqh;">Allenare i ragazzi a "riconoscere" il falso non funziona, perché non ci riusciamo nemmeno noi. Quello che possiamo insegnare è un comportamento:</div>
+    <div class="cards" style="top:46cqh;gap:1.6cqh;">
+      <div class="card" style="padding:2cqh 3cqh;"><div class="card-ic" style="background:var(--indigo);width:6.4cqh;height:6.4cqh;">🔎</div><div><h3 style="margin:0;font-size:2.9cqh">Chiedersi da dove viene e chi lo dice</h3></div></div>
+      <div class="card" style="padding:2cqh 3cqh;"><div class="card-ic" style="background:var(--cyan);width:6.4cqh;height:6.4cqh;">📞</div><div><h3 style="margin:0;font-size:2.9cqh">Nel dubbio, verificare da un'altra parte</h3></div></div>
+      <div class="card" style="padding:2cqh 3cqh;"><div class="card-ic" style="background:var(--coral);width:6.4cqh;height:6.4cqh;">✋</div><div><h3 style="margin:0;font-size:2.9cqh">Non condividere d'impulso, dubitare prima di reagire</h3></div></div>
+    </div>
+    <div class="foot">Fonte: UNESCO, Deepfakes and the crisis of knowing</div><div class="pageno">23 / 43</div>
+  </div></section>
+
+  <!-- SLIDE 24 — GANCIO C -->
+  <section class="slide"><div class="canvas indigobg">
+    <div class="circ" style="top:-20%;left:75%;width:38%;height:66%;background:#fff;opacity:.08;"></div>
+    <div class="hook-eyebrow">Parte 3 · Tocca a voi</div>
+    <div class="hook-q wh">Un'attività da portare in classe<br>per insegnare a <span class="cy">usare l'IA bene</span>.</div>
+    <div class="pageno dark">24 / 43</div>
+  </div></section>
+
+  <!-- SLIDE 25 — lente universale -->
+  <section class="slide"><div class="canvas light">
+    <div class="chip violet">La lente che vale a ogni livello</div>
+    <div class="title">Cosa può fare l'IA, cosa solo voi</div>
+    <div class="body" style="top:30cqh;">Prima di scegliere un'attività, una domanda che vale dall'infanzia alle superiori: di quello che proponete ai vostri ragazzi, cosa potrebbe fare anche l'IA, e cosa invece può accadere solo con voi, in classe? Più i bambini sono piccoli, più la risposta è "quasi tutto": il vostro lavoro è già il più al riparo.</div>
+    <div class="foot">AI INSEGNANTI · Formazione PNRR</div><div class="pageno">25 / 43</div>
+  </div></section>
+
+  <!-- SLIDE 26 — DIVIDER Primaria -->
+  <section class="slide"><div class="canvas light">
+    <div class="chip cyan">Variante A</div>
+    <div class="divnum cy">5</div>
+    <div class="divttl">Spunti per la Primaria (e infanzia)</div>
+    <div class="divsub">Qui non si fa un patto e non si parla di deepfake: si pianta il seme del pensiero critico, attraverso il gioco. Scegliete uno spunto e adattatelo alla vostra classe.</div>
+    <div class="foot">AI INSEGNANTI · Formazione PNRR</div><div class="pageno">26 / 43</div>
+  </div></section>
+
+  <!-- SLIDE 27 — P1 -->
+  <section class="slide"><div class="canvas light">
+    <div class="chip cyan">Primaria · spunto 1</div>
+    <div class="title">Vero o finto?</div>
+    <div class="sp-q">Fate sentire ai bambini due voci, o vedere due immagini: una vera e una creata dalla macchina. Loro indovinano quale sia quale, poi ne parlate insieme.</div>
+    <div class="sp-i"><b>Cosa insegna:</b> la macchina sa imitare molto bene, ma non è una persona vera.</div>
+    <div class="foot">AI INSEGNANTI · Formazione PNRR</div><div class="pageno">27 / 43</div>
+  </div></section>
+
+  <!-- SLIDE 28 — P2 -->
+  <section class="slide"><div class="canvas light">
+    <div class="chip cyan">Primaria · spunto 2</div>
+    <div class="title">Il robottino che indovina</div>
+    <div class="sp-q">Raccontate la storia di un robottino che sa sempre dire la parola dopo, ma non capisce cosa significa. Poi giocate a completare le frasi come farebbe lui.</div>
+    <div class="sp-i"><b>Cosa insegna:</b> l'IA indovina ciò che viene dopo, non pensa e non ci vuole bene.</div>
+    <div class="foot">AI INSEGNANTI · Formazione PNRR</div><div class="pageno">28 / 43</div>
+  </div></section>
+
+  <!-- SLIDE 29 — P3 -->
+  <section class="slide"><div class="canvas light">
+    <div class="chip cyan">Primaria · spunto 3</div>
+    <div class="title">Trova l'errore dell'IA</div>
+    <div class="sp-q">Mostrate ai bambini una risposta dell'IA che contiene un errore. Loro diventano detective e devono scoprirlo.</div>
+    <div class="sp-i"><b>Cosa insegna:</b> l'IA può sbagliare e va sempre controllata. E li rende attivi, non passivi davanti allo schermo.</div>
+    <div class="foot">AI INSEGNANTI · Formazione PNRR</div><div class="pageno">29 / 43</div>
+  </div></section>
+
+  <!-- SLIDE 30 — P4 -->
+  <section class="slide"><div class="canvas light">
+    <div class="chip cyan">Primaria · spunto 4</div>
+    <div class="title">La caccia alla fonte</div>
+    <div class="sp-q">La classe chiede all'IA qualcosa, per esempio "quanti anni vive una tartaruga?". Lei risponde, e voi rilanciate: "ma come facciamo a sapere se è vero?". Poi insieme lo controllate su un libro o un sito fidato.</div>
+    <div class="sp-i"><b>Cosa insegna:</b> il primo passo del verificare. "L'ha detto l'IA" non basta.</div>
+    <div class="foot">AI INSEGNANTI · Formazione PNRR</div><div class="pageno">30 / 43</div>
+  </div></section>
+
+  <!-- SLIDE 31 — P5 -->
+  <section class="slide"><div class="canvas light">
+    <div class="chip cyan">Primaria · spunto 5</div>
+    <div class="title">Le regole dei nostri amici robot</div>
+    <div class="sp-q">Costruite insieme alla classe tre o quattro regole semplici per usare l'IA, scritte con parole loro e appese in aula.</div>
+    <div class="sp-i"><b>Cosa insegna:</b> è la versione piccola del patto. Le regole le decidono anche loro, così le sentono proprie.</div>
+    <div class="foot">AI INSEGNANTI · Formazione PNRR</div><div class="pageno">31 / 43</div>
+  </div></section>
+
+  <!-- SLIDE 32 — DIVIDER Medie/Superiori -->
+  <section class="slide"><div class="canvas light">
+    <div class="chip violet">Variante B</div>
+    <div class="divnum vi">7</div>
+    <div class="divttl">Spunti per Medie e Superiori</div>
+    <div class="divsub">Qui gli studenti la usano già: si lavora sull'uso critico e sulla cittadinanza digitale. Scegliete uno spunto, adattatelo, e costruite il patto di classe.</div>
+    <div class="foot">AI INSEGNANTI · Formazione PNRR</div><div class="pageno">32 / 43</div>
+  </div></section>
+
+  <!-- SLIDE 33 — M1 -->
+  <section class="slide"><div class="canvas light">
+    <div class="chip violet">Medie/Superiori · spunto 1</div>
+    <div class="title">Interroga e verifica</div>
+    <div class="sp-q">Gli studenti chiedono all'IA un argomento di studio, poi prendono due sue affermazioni e le verificano su fonti vere. Quante ne ha sbagliate?</div>
+    <div class="sp-i"><b>Cosa insegna:</b> a non fidarsi ciecamente e a controllare sempre.</div>
+    <div class="foot">AI INSEGNANTI · Formazione PNRR</div><div class="pageno">33 / 43</div>
+  </div></section>
+
+  <!-- SLIDE 34 — M2 -->
+  <section class="slide"><div class="canvas light">
+    <div class="chip violet">Medie/Superiori · spunto 2</div>
+    <div class="title">Smonta il falso</div>
+    <div class="sp-q">Portate in classe esempi reali di deepfake e fake news, e analizzateli insieme passo per passo: come sono fatti, come si verificano.</div>
+    <div class="sp-i"><b>Cosa insegna:</b> la media literacy nell'era dell'IA generativa.</div>
+    <div class="foot">AI INSEGNANTI · Formazione PNRR</div><div class="pageno">34 / 43</div>
+  </div></section>
+
+  <!-- SLIDE 35 — M3 -->
+  <section class="slide"><div class="canvas light">
+    <div class="chip violet">Medie/Superiori · spunto 3</div>
+    <div class="title">Tutor socratico</div>
+    <div class="sp-q">Gli studenti usano l'IA per farsi spiegare un errore che hanno fatto, invece di chiederle la risposta giusta.</div>
+    <div class="sp-i"><b>Cosa insegna:</b> l'IA serve a capire meglio, non a saltare il lavoro.</div>
+    <div class="foot">AI INSEGNANTI · Formazione PNRR</div><div class="pageno">35 / 43</div>
+  </div></section>
+
+  <!-- SLIDE 36 — M4 -->
+  <section class="slide"><div class="canvas light">
+    <div class="chip violet">Medie/Superiori · spunto 4</div>
+    <div class="title">L'avvocato del diavolo</div>
+    <div class="sp-q">Gli studenti scrivono una loro tesi, poi chiedono all'IA di trovare tutti gli argomenti contrari, e provano a difenderla.</div>
+    <div class="sp-i"><b>Cosa insegna:</b> a rafforzare le proprie idee mettendole alla prova.</div>
+    <div class="foot">AI INSEGNANTI · Formazione PNRR</div><div class="pageno">36 / 43</div>
+  </div></section>
+
+  <!-- SLIDE 37 — M5 -->
+  <section class="slide"><div class="canvas light">
+    <div class="chip violet">Medie/Superiori · spunto 5</div>
+    <div class="title">Fact-check di un'IA</div>
+    <div class="sp-q">Si prende una risposta dell'IA su un tema storico o scientifico e la si verifica con fonti accademiche affidabili.</div>
+    <div class="sp-i"><b>Cosa insegna:</b> dove l'IA è davvero forte e dove invece inventa.</div>
+    <div class="foot">AI INSEGNANTI · Formazione PNRR</div><div class="pageno">37 / 43</div>
+  </div></section>
+
+  <!-- SLIDE 38 — M6 -->
+  <section class="slide"><div class="canvas light">
+    <div class="chip violet">Medie/Superiori · spunto 6</div>
+    <div class="title">Il costo nascosto</div>
+    <div class="sp-q">Gli studenti preparano una piccola ricerca e presentazione sull'impatto ambientale dell'IA o sul paradosso dei giornalisti.</div>
+    <div class="sp-i"><b>Cosa insegna:</b> a vedere quello che sta dietro lo strumento, non solo l'output.</div>
+    <div class="foot">AI INSEGNANTI · Formazione PNRR</div><div class="pageno">38 / 43</div>
+  </div></section>
+
+  <!-- SLIDE 39 — M7 -->
+  <section class="slide"><div class="canvas light">
+    <div class="chip violet">Medie/Superiori · spunto 7</div>
+    <div class="title">Chi ha scritto questo?</div>
+    <div class="sp-q">Si parte dal caso Anthropic per discutere di proprietà intellettuale: cosa significa creare, e chi possiede ciò che l'IA produce.</div>
+    <div class="sp-i"><b>Cosa insegna:</b> il lavoro creativo ha valore, e il modo in cui ottieni un contenuto conta sempre.</div>
+    <div class="foot">AI INSEGNANTI · Formazione PNRR</div><div class="pageno">39 / 43</div>
+  </div></section>
+
+  <!-- SLIDE 40 — Patto sociale -->
+  <section class="slide"><div class="canvas light">
+    <div class="chip violet">Medie/Superiori · il risultato</div>
+    <div class="title">Il patto di classe sull'IA</div>
+    <div class="cards" style="top:29cqh;gap:1.3cqh;">
+      <div class="card" style="padding:1.6cqh 3cqh;"><div class="card-ic" style="background:var(--indigo);width:5.6cqh;height:5.6cqh;font-size:2.5cqh;">1</div><div><h3 style="margin:0;font-size:2.7cqh">Quando si può usare l'IA</h3></div></div>
+      <div class="card" style="padding:1.6cqh 3cqh;"><div class="card-ic" style="background:var(--coral);width:5.6cqh;height:5.6cqh;font-size:2.5cqh;">2</div><div><h3 style="margin:0;font-size:2.7cqh">Quando invece non si usa</h3></div></div>
+      <div class="card" style="padding:1.6cqh 3cqh;"><div class="card-ic" style="background:var(--cyan);width:5.6cqh;height:5.6cqh;font-size:2.5cqh;">3</div><div><h3 style="margin:0;font-size:2.7cqh">Se l'hai usata, lo dichiari</h3></div></div>
+      <div class="card" style="padding:1.6cqh 3cqh;"><div class="card-ic" style="background:var(--violet);width:5.6cqh;height:5.6cqh;font-size:2.5cqh;">4</div><div><h3 style="margin:0;font-size:2.7cqh">Cosa non si carica mai</h3></div></div>
+      <div class="card" style="padding:1.6cqh 3cqh;"><div class="card-ic" style="background:var(--indigo);width:5.6cqh;height:5.6cqh;font-size:2.5cqh;">5</div><div><h3 style="margin:0;font-size:2.7cqh">Una regola decisa insieme agli studenti</h3></div></div>
+    </div>
+    <div class="foot">Da finalizzare con la classe, non calato dall'alto</div><div class="pageno">40 / 43</div>
+  </div></section>
+
+  <!-- SLIDE 41 — Condivisione -->
+  <section class="slide"><div class="canvas coralbg">
+    <div class="circ" style="top:-21%;left:80%;width:38%;height:67%;background:#fff;opacity:.12;"></div>
+    <div class="deb-tag">CONDIVISIONE</div><div class="deb-room">Tutti insieme</div>
+    <div class="deb-q wh">Quale attività avete scelto, e <span class="inkc">perché proprio quella</span>?</div>
+    <div class="deb-sub">I due livelli si ascoltano a vicenda. Ognuno, al suo livello, pianta qualcosa.</div>
+  <div class="pageno dark">41 / 43</div>
+  </div></section>
+
+  <!-- SLIDE 42 — PONTE -->
+  <section class="slide"><div class="canvas light">
+    <div class="chip violet">La prossima volta</div>
+    <div class="ponte-big">Le tecniche</div>
+    <div class="ponte-sub">Adesso sappiamo cosa è giusto. Nel prossimo incontro vediamo come si fa bene: come parlare davvero all'IA.</div>
+    <div class="pcards">
+      <div class="pcard"><div class="pnum" style="background:var(--indigo)">📝</div><h3>Le cinque fasi del prompt</h3></div>
+      <div class="pcard"><div class="pnum" style="background:var(--cyan)">⚠️</div><h3>Bias e allucinazioni</h3></div>
+      <div class="pcard"><div class="pnum" style="background:var(--coral)">🚦</div><h3>Il sistema a semafori</h3></div>
+    </div>
+    <div class="foot">AI INSEGNANTI · Formazione PNRR</div><div class="pageno">42 / 43</div>
+  </div></section>
+
+  <!-- SLIDE 43 — CHIUSURA -->
+  <section class="slide"><div class="canvas ink">
+    <div class="circ" style="top:-19%;left:78%;width:34%;height:60%;background:var(--indigo);opacity:.45;"></div>
+    <div class="circ" style="top:58%;left:88%;width:25%;height:45%;background:var(--violet);opacity:.4;"></div>
+    <div class="circ" style="top:70%;left:-8%;width:24%;height:42%;background:var(--cyan);opacity:.3;"></div>
+    <div class="statement wh" style="top:31cqh;font-size:5.4cqh;">Dietro ogni risposta dell'IA c'è il lavoro di <span class="cy">qualcuno</span>. Voi accendete la <span class="co">luce</span>.</div>
+    <div style="position:absolute;top:64cqh;left:6.5cqw;right:8cqw;font-size:3.2cqh;color:var(--cfcb);">E a ogni livello, ognuno pianta qualcosa.</div>
+    <div class="dots" style="top:81%;left:6.6%;"><span style="background:var(--cyan)"></span><span style="background:var(--indigo)"></span><span style="background:var(--violet)"></span><span style="background:var(--coral)"></span></div>
+  <div class="pageno dark">43 / 43</div>
+  </div></section>
+
+</div>
+<div class="hint">frecce o scroll · F schermo intero · Cmd/Ctrl+P per esportare PDF</div>
+<script>
+  const deck=document.getElementById('deck');
+  const slides=[...document.querySelectorAll('.slide')];
+  let i=0;
+  function go(n){i=Math.max(0,Math.min(slides.length-1,n));slides[i].scrollIntoView({behavior:'smooth'});}
+  deck.addEventListener('scroll',()=>{i=Math.round(deck.scrollTop/window.innerHeight);},{passive:true});
+  window.addEventListener('keydown',e=>{
+    if(['ArrowDown','ArrowRight','PageDown',' '].includes(e.key)){e.preventDefault();go(i+1);}
+    else if(['ArrowUp','ArrowLeft','PageUp'].includes(e.key)){e.preventDefault();go(i-1);}
+    else if(e.key==='Home'){e.preventDefault();go(0);}
+    else if(e.key==='End'){e.preventDefault();go(slides.length-1);}
+    else if(e.key.toLowerCase()==='f'){if(!document.fullscreenElement)document.documentElement.requestFullscreen();else document.exitFullscreen();}
+  });
+</script>
+</body>
+</html>

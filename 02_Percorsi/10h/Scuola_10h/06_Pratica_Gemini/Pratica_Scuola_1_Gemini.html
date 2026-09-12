@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pratica Scuola · Lezione 1 · Gemini: l'IA di tutti i giorni</title>
+<!--
+  SLIDE 1-4 = apertura. SLIDE 5-7 = com'e' fatto Gemini. SLIDE 8-12 = la Gem.
+  SLIDE 13-19 = sei esempi pronti, uno per ordine di scuola. SLIDE 20-21 = pratica e chiusura.
+  Colori: ink = statement · light = contenuto · indigobg = gancio · coralbg = pratica e dibattito.
+-->
+<style>
+  :root{
+    --ink:#1E1B4B; --ink2:#2A2566; --indigo:#4F46E5; --violet:#7C3AED;
+    --cyan:#06B6D4; --coral:#F97316; --light:#F6F5FF; --text:#1A1730;
+    --muted:#6B6790; --white:#ffffff; --cfcb:#CFCBF0; --faint:#8E8AC4;
+    --line:#E6E3FB;
+    --font:'Inter','Segoe UI',-apple-system,Arial,sans-serif;
+  }
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap');
+  *{box-sizing:border-box;margin:0;padding:0;}
+  html,body{background:#0c0a1f;font-family:var(--font);}
+  .deck{height:100vh;overflow-y:scroll;scroll-snap-type:y mandatory;scroll-behavior:smooth;}
+  .slide{height:100vh;display:flex;align-items:center;justify-content:center;scroll-snap-align:start;background:#0c0a1f;}
+  .canvas{position:relative;width:min(100vw,177.78vh);height:min(56.25vw,100vh);container-type:size;overflow:hidden;}
+  .ink{background:var(--ink);} .light{background:var(--light);} .coralbg{background:var(--coral);} .indigobg{background:var(--indigo);}
+
+  .cy{color:var(--cyan);} .co{color:var(--coral);} .in{color:var(--indigo);}
+  .vi{color:var(--violet);} .wh{color:var(--white);} .tx{color:var(--text);}
+  .mu{color:var(--muted);} .inkc{color:var(--ink);}
+
+  .chip{position:absolute;top:8cqh;left:5.5cqw;padding:1.3cqh 2.2cqh;border-radius:2cqh;
+        font-size:2.4cqh;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#fff;}
+  .chip.violet{background:var(--violet);} .chip.cyan{background:var(--cyan);}
+  .chip.indigo{background:var(--indigo);} .chip.coral{background:var(--coral);} .chip.muted{background:var(--muted);}
+
+  .title{position:absolute;top:15cqh;left:5.5cqw;right:5.5cqw;font-size:6.2cqh;font-weight:800;color:var(--text);line-height:1.05;}
+
+  .stbar{position:absolute;top:34cqh;left:6.7cqw;width:4.2cqh;height:1.3cqh;background:var(--coral);}
+  .statement{position:absolute;top:38cqh;left:6.5cqw;right:6cqw;font-size:7.6cqh;font-weight:800;line-height:1.08;}
+  .statement.big{font-size:8.6cqh;}
+
+  .foot{position:absolute;bottom:4cqh;left:5.5cqw;font-size:1.7cqh;color:var(--muted);}
+  .foot.dark{color:var(--faint);}
+  .pageno{position:absolute;bottom:4cqh;right:5.5cqw;font-size:1.7cqh;color:var(--muted);}
+  .pageno.dark{color:var(--faint);}
+
+  /* flag "se avanza tempo" (in basso a destra, sopra il numero di pagina) */
+  .flag{position:absolute;bottom:9cqh;right:5.5cqw;max-width:46cqw;text-align:right;
+        border-radius:2.2cqh;padding:1.6cqh 2.4cqh;background:#fff;border:1.5px solid var(--coral);}
+  .flag b{display:block;font-size:2.2cqh;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--coral);}
+  .flag span{display:block;font-size:2.1cqh;color:var(--muted);line-height:1.2;margin-top:.5cqh;}
+  .flag.onbg{background:rgba(255,255,255,.16);border-color:rgba(255,255,255,.75);}
+  .flag.onbg b{color:#fff;} .flag.onbg span{color:#FFE9DA;}
+
+
+  .dots{position:absolute;display:flex;gap:1.4cqh;}
+  .dots span{width:2cqh;height:2cqh;border-radius:50%;}
+
+  .eyebrow{position:absolute;top:21cqh;left:5.5cqw;font-size:2.6cqh;font-weight:700;letter-spacing:.18em;color:var(--cyan);}
+  .cover-title{position:absolute;top:27cqh;left:5.2cqw;right:6cqw;font-size:8.8cqh;font-weight:800;color:#fff;line-height:.98;}
+  .cover-bar{position:absolute;top:57cqh;left:5.6cqw;width:4cqh;height:1.2cqh;background:var(--coral);}
+  .cover-sub{position:absolute;top:61cqh;left:5.5cqw;font-size:3.6cqh;color:var(--cfcb);}
+  .cover-foot{position:absolute;bottom:5cqh;left:5.5cqw;font-size:1.9cqh;color:var(--faint);}
+
+  .circ{position:absolute;border-radius:50%;}
+
+  .hook-eyebrow{position:absolute;top:20cqh;left:6cqw;font-size:2.7cqh;font-weight:700;letter-spacing:.16em;color:var(--cfcb);text-transform:uppercase;}
+  .hook-q{position:absolute;top:36cqh;left:6cqw;right:7cqw;font-size:7.4cqh;font-weight:800;color:#fff;line-height:1.1;}
+
+  .cards{position:absolute;top:33cqh;left:5.5cqw;right:5.5cqw;display:flex;flex-direction:column;gap:2.4cqh;}
+  .card{display:flex;align-items:center;gap:2.6cqh;background:#fff;border:1px solid var(--line);
+        border-radius:2.2cqh;padding:3cqh 3cqh;box-shadow:0 4px 14px rgba(80,70,160,.10);}
+  .card-ic{flex:none;width:9cqh;height:9cqh;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:4.4cqh;color:#fff;}
+  .card h3{font-size:3.6cqh;font-weight:700;color:var(--text);margin-bottom:.5cqh;}
+  .card p{font-size:2.6cqh;color:var(--muted);line-height:1.25;}
+
+  .takeaway{position:absolute;top:79cqh;left:5.5cqw;right:5.5cqw;font-size:3.2cqh;font-weight:700;font-style:italic;color:var(--indigo);line-height:1.2;}
+
+  .cols{position:absolute;top:31cqh;left:5.5cqw;right:5.5cqw;display:flex;gap:3cqh;}
+  .col{flex:1;background:#fff;border:1px solid var(--line);border-radius:2.2cqh;overflow:hidden;}
+  .col-head{font-size:3.6cqh;font-weight:800;color:#fff;text-align:center;padding:2.2cqh;letter-spacing:.04em;}
+  .col ul{list-style:none;padding:2.6cqh 3cqh;}
+  .col li{display:flex;gap:1.6cqh;align-items:flex-start;font-size:2.7cqh;color:var(--text);line-height:1.2;margin-bottom:2.2cqh;}
+  .col li::before{content:"";flex:none;width:1.7cqh;height:1.7cqh;border-radius:50%;margin-top:.6cqh;background:currentColor;}
+  .col.cdcoral li{color:var(--coral);} .col.cdcyan li{color:var(--cyan);}
+  .col.cdindigo li{color:var(--indigo);} .col.cdmuted li{color:var(--muted);}
+  .col li span{color:var(--text);}
+  .col .para{padding:2.6cqh 3cqh;font-size:2.4cqh;color:var(--text);line-height:1.36;}
+
+  .cbox{position:absolute;left:5.5cqw;right:5.5cqw;border-radius:2.2cqh;padding:3cqh 3.4cqh;}
+  .cbox.white{background:#fff;border:1px solid var(--line);}
+  .cbox.dark{background:var(--ink);}
+  .cbox h4{font-size:3.7cqh;font-weight:700;color:var(--text);line-height:1.15;}
+  .cbox .ex{font-size:3.1cqh;color:var(--text);margin-top:1.5cqh;}
+  .cbox.dark p{font-size:3.8cqh;color:var(--cfcb);font-weight:700;}
+
+  /* lista di domande (Identifica) */
+  .qlist{position:absolute;left:5.5cqw;right:6cqw;top:30cqh;}
+  .qlist li{list-style:none;display:flex;gap:2.2cqh;align-items:flex-start;font-size:3.3cqh;color:var(--text);line-height:1.3;margin-bottom:2.7cqh;}
+  .qlist li::before{content:"";flex:none;width:1.8cqh;height:1.8cqh;border-radius:50%;margin-top:1cqh;background:var(--indigo);}
+  .qnote{position:absolute;left:5.5cqw;right:6cqw;top:80cqh;font-size:2.7cqh;font-style:italic;color:var(--muted);line-height:1.25;}
+
+  /* scheda compilata (file di contesto) */
+  .fieldbox{position:absolute;left:5.5cqw;right:5.5cqw;top:25cqh;background:#fff;border:1px solid var(--line);
+            border-radius:2.2cqh;padding:3cqh 3.6cqh;box-shadow:0 4px 14px rgba(80,70,160,.08);}
+  .fieldbox p{font-size:2.9cqh;line-height:1.42;color:var(--text);}
+  .fieldbox p+p{margin-top:1.8cqh;}
+  .fieldbox b{font-weight:800;letter-spacing:.04em;}
+
+  /* riquadro prompt */
+  .promptbox{position:absolute;left:5.5cqw;right:5.5cqw;top:28cqh;background:var(--ink);border-radius:2.2cqh;padding:3cqh 3.6cqh;}
+  .promptbox p{font-size:2.7cqh;line-height:1.44;color:var(--cfcb);font-weight:600;}
+  .promptbox .slot{color:var(--coral);font-weight:800;}
+  .promptbox .blk{color:var(--cyan);font-weight:800;}
+
+
+  .copysub{position:absolute;top:26.5cqh;left:6cqw;right:6cqw;font-size:2.5cqh;color:var(--muted);font-style:italic;}
+  .codebox{position:absolute;top:32cqh;left:6cqw;right:6cqw;background:#fff;border:1.5px solid var(--line);border-radius:1.8cqh;padding:3.4cqh 3.8cqh;font-size:3cqh;line-height:1.42;color:var(--text);box-shadow:0 6px 20px rgba(80,70,160,.10);}
+  .codebox.sm{top:29cqh;font-size:2.3cqh;line-height:1.36;}
+  .codebox .slot{color:var(--indigo);font-weight:700;}
+  .deb-tag{position:absolute;top:9cqh;left:5.5cqw;background:#fff;color:var(--coral);
+           padding:1.3cqh 2.4cqh;border-radius:2.3cqh;font-size:2.5cqh;font-weight:700;letter-spacing:.12em;}
+  .deb-room{position:absolute;top:9.6cqh;left:28cqw;font-size:2.6cqh;font-style:italic;color:#FFE4D3;}
+  .deb-q{position:absolute;top:38cqh;left:5.5cqw;right:6cqw;font-size:7cqh;font-weight:800;color:#fff;line-height:1.1;}
+  .deb-q.sm{font-size:6cqh;}
+  .deb-sub{position:absolute;top:74cqh;left:5.6cqw;right:8cqw;font-size:2.9cqh;color:#FFEAD9;line-height:1.25;}
+
+  .ponte-big{position:absolute;top:22cqh;left:5.5cqw;font-size:10cqh;font-weight:800;color:var(--text);}
+  .ponte-sub{position:absolute;top:40cqh;left:5.6cqw;right:8cqw;font-size:3.4cqh;color:var(--muted);}
+  .pcards{position:absolute;top:55cqh;left:5.5cqw;right:5.5cqw;display:flex;gap:2.6cqh;}
+  .pcard{flex:1;background:#fff;border:1px solid var(--line);border-radius:2.2cqh;padding:3cqh;}
+  .pnum{width:11cqh;height:11cqh;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:5cqh;font-weight:800;color:#fff;margin-bottom:2cqh;}
+  .pcard h3{font-size:3cqh;font-weight:700;color:var(--text);line-height:1.15;}
+
+  .hint{position:fixed;bottom:14px;right:16px;font-size:12px;color:#888;font-family:var(--font);z-index:50;}
+
+  @media print{
+    @page{size:1280px 720px;margin:0;}
+    html,body{background:#fff;}
+    .deck{height:auto;overflow:visible;display:block;}
+    .slide{height:720px;width:1280px;display:block;page-break-after:always;break-after:page;}
+    .canvas{width:1280px;height:720px;}
+    .hint{display:none;}
+    *{-webkit-print-color-adjust:exact;print-color-adjust:exact;}
+  }
+</style>
+</head>
+<body>
+<div class="deck" id="deck">
+  <!-- SLIDE 1 · COPERTINA -->
+  <section class="slide"><div class="canvas ink">
+    <div class="circ" style="top:-19%;left:78%;width:34%;height:60%;background:var(--indigo);opacity:.45;"></div>
+    <div class="circ" style="top:58%;left:88%;width:25%;height:45%;background:var(--violet);opacity:.4;"></div>
+    <div class="circ" style="top:70%;left:-8%;width:24%;height:42%;background:var(--cyan);opacity:.3;"></div>
+    <div class="eyebrow">PRATICA · PERCORSO SCUOLA</div>
+    <div class="cover-title">Gemini:<br>l'IA di tutti i giorni</div>
+    <div class="cover-bar"></div>
+    <div class="cover-sub">Lezione pratica 1 · dalla chat all'assistente che vi conosce</div>
+    <div class="dots" style="top:74%;left:5.6%;"><span style="background:var(--cyan)"></span><span style="background:var(--indigo)"></span><span style="background:var(--violet)"></span><span style="background:var(--coral)"></span></div>
+    <div class="cover-foot">Formazione docenti sull'Intelligenza Artificiale · PNRR DM 219/2025</div>
+    
+  </div></section>
+
+  <!-- SLIDE 2 · GANCIO apertura -->
+  <section class="slide"><div class="canvas indigobg">
+    <div class="circ" style="top:-20%;left:75%;width:38%;height:66%;background:#fff;opacity:.08;"></div>
+    <div class="hook-eyebrow">Dove arriviamo oggi</div>
+    <div class="hook-q wh">E se l'IA sapesse già chi siete,<br>ogni volta che la <span class="cy">aprite</span>?</div>
+    <div class="pageno dark">2 / 24</div>
+  </div></section>
+
+  <!-- SLIDE 3 · DOVE SIAMO -->
+  <section class="slide"><div class="canvas light">
+    <div class="chip cyan">Dove siamo</div>
+    <div class="title">Dai cinque incontri a oggi</div>
+    <div class="cards">
+      <div class="card"><div class="card-ic" style="background:var(--indigo)">1</div><div><h3>Il metodo, dai primi quattro incontri</h3><p>I 4 principi, le 5 fasi del prompt, la responsabilità su dati e fonti.</p></div></div>
+      <div class="card"><div class="card-ic" style="background:var(--cyan)">5</div><div><h3>Il vostro file di contesto</h3><p>Scritto la volta scorsa: chi siete, come lavorate, come valutate.</p></div></div>
+      <div class="card"><div class="card-ic" style="background:var(--coral)">6</div><div><h3>Oggi: le mani sullo strumento</h3><p>Lo stesso metodo, dentro Gemini. Niente di nuovo da imparare a memoria.</p></div></div>
+    </div>
+    <div class="foot">Pratica Scuola · Gemini</div>
+    <div class="pageno">3 / 24</div>
+  </div></section>
+
+  <!-- SLIDE 4 · STATEMENT metodo/strumento -->
+  <section class="slide"><div class="canvas ink">
+    <div class="chip violet">Il salto di oggi</div>
+    <div class="stbar"></div>
+    <div class="statement wh">Il metodo l'avete già.<br>Oggi gli diamo uno <span class="cy">strumento</span>.</div>
+    <div class="pageno dark">4 / 24</div>
+  </div></section>
+
+  <!-- SLIDE 5 · COS'E' GEMINI -->
+  <section class="slide"><div class="canvas light">
+    <div class="chip indigo">Lo strumento</div>
+    <div class="title">Cos'è Gemini</div>
+    <div class="cards">
+      <div class="card"><div class="card-ic" style="background:var(--indigo)">◆</div><div><h3>L'intelligenza artificiale di Google</h3><p>La stessa famiglia di strumenti che la scuola usa già: Drive, Documenti, Gmail.</p></div></div>
+      <div class="card"><div class="card-ic" style="background:var(--cyan)">🔑</div><div><h3>Si entra con l'account che avete</h3><p>Da gemini.google.com, con l'account della scuola oppure con il vostro. Nessuna registrazione nuova.</p></div></div>
+      <div class="card"><div class="card-ic" style="background:var(--violet)">✳</div><div><h3>Generalista</h3><p>Testo, immagini, PDF, fogli di calcolo. Bravo un po' a tutto, come gli altri assistenti.</p></div></div>
+    </div>
+    <div class="foot">Pratica Scuola · Gemini</div>
+    <div class="pageno">5 / 24</div>
+  </div></section>
+
+  <!-- SLIDE 6 · LA SCHERMATA -->
+  <section class="slide"><div class="canvas light">
+    <div class="chip indigo">Com'è fatto</div>
+    <div class="title">Le quattro cose che contano</div>
+    <div class="cards" style="top:30cqh;gap:1.8cqh;">
+      <div class="card" style="padding:2.1cqh 3cqh;"><div class="card-ic" style="background:var(--indigo);width:7cqh;height:7cqh;font-size:3.2cqh;">💬</div><div><h3 style="font-size:3cqh;margin:0">La chat</h3><p>Dove chiedete. Una conversazione per argomento, non una sola infinita.</p></div></div>
+      <div class="card" style="padding:2.1cqh 3cqh;"><div class="card-ic" style="background:var(--cyan);width:7cqh;height:7cqh;font-size:3.2cqh;">📎</div><div><h3 style="font-size:3cqh;margin:0">I file</h3><p>Trascinate dentro un PDF, la foto di una pagina, un foglio. Lavora su quelli.</p></div></div>
+      <div class="card" style="padding:2.1cqh 3cqh;"><div class="card-ic" style="background:var(--violet);width:7cqh;height:7cqh;font-size:3.2cqh;">📄</div><div><h3 style="font-size:3cqh;margin:0">Canvas</h3><p>Il pannello dove la risposta diventa un documento che correggete riga per riga.</p></div></div>
+      <div class="card" style="padding:2.1cqh 3cqh;"><div class="card-ic" style="background:var(--coral);width:7cqh;height:7cqh;font-size:3.2cqh;">💎</div><div><h3 style="font-size:3cqh;margin:0">Le Gem</h3><p>Le versioni di Gemini che vi conoscono già. Ci arriviamo tra due slide.</p></div></div>
+    </div>
+    <div class="foot">Pratica Scuola · Gemini</div>
+    <div class="pageno">6 / 24</div>
+  </div></section>
+
+  <!-- SLIDE 7 · LA REGOLA DEI FILE -->
+  <section class="slide"><div class="canvas light">
+    <div class="chip coral">Prima di caricare</div>
+    <div class="title">Vale la regola dell'incontro 3</div>
+    <div class="cbox white" style="top:32cqh;"><h4>Se non lo incollereste sulla porta della classe, non caricatelo qui.</h4>
+      <div class="ex">Niente nomi di alunni, niente PEI, niente certificazioni, niente verbali.</div></div>
+    <div class="cbox dark" style="top:62cqh;"><p>Il materiale si anonimizza: <span class="cy">"un alunno di seconda che fa fatica a leggere"</span>, non il suo nome.</p></div>
+    <div class="foot">Pratica Scuola · Gemini</div>
+    <div class="pageno">7 / 24</div>
+  </div></section>
+
+  <!-- SLIDE 8 · GANCIO la Gem -->
+  <section class="slide"><div class="canvas indigobg">
+    <div class="circ" style="top:-20%;left:75%;width:38%;height:66%;background:#fff;opacity:.08;"></div>
+    <div class="hook-eyebrow">Parte 2 · La Gem</div>
+    <div class="hook-q wh">E se l'IA non ripartisse<br>ogni volta da <span class="cy">zero</span>?</div>
+    <div class="pageno dark">8 / 24</div>
+  </div></section>
+
+  <!-- SLIDE 9 · COS'E' UNA GEM -->
+  <section class="slide"><div class="canvas light">
+    <div class="chip cyan">La Gem</div>
+    <div class="title">Una versione di Gemini che vi conosce</div>
+    <div class="cards">
+      <div class="card"><div class="card-ic" style="background:var(--indigo)">✎</div><div><h3>Istruzioni che restano</h3><p>Chi siete, come lavorate, come volete le risposte. Le scrivete una volta.</p></div></div>
+      <div class="card"><div class="card-ic" style="background:var(--cyan)">▤</div><div><h3>I vostri file sempre a portata</h3><p>La programmazione, un capitolo del libro, un materiale ben riuscito.</p></div></div>
+      <div class="card"><div class="card-ic" style="background:var(--coral)">↺</div><div><h3>La richiamate quando volete</h3><p>Ogni nuova chat parte già sapendo tutto. Niente preamboli, mai più.</p></div></div>
+    </div>
+    <div class="foot">Pratica Scuola · Gemini</div>
+    <div class="pageno">9 / 24</div>
+  </div></section>
+
+  <!-- SLIDE 10 · COME SI CREA -->
+  <section class="slide"><div class="canvas light">
+    <div class="chip cyan">Tre passi</div>
+    <div class="title">Come si costruisce, in cinque minuti</div>
+    <div class="cards">
+      <div class="card"><div class="card-ic" style="background:var(--indigo)">1</div><div><h3>Aprite le Gem e createne una nuova</h3><p>Datele un nome vostro: "La mia quarta", "Storia terza media", "Scienze biennio".</p></div></div>
+      <div class="card"><div class="card-ic" style="background:var(--cyan)">2</div><div><h3>Istruzioni: incollate il vostro file</h3><p>È già scritto. È quello dell'incontro 5, non serve rifarlo.</p></div></div>
+      <div class="card"><div class="card-ic" style="background:var(--coral)">3</div><div><h3>Conoscenza: caricate i materiali</h3><p>Quelli che deve avere sempre sotto gli occhi. Si aggiungono anche dopo.</p></div></div>
+    </div>
+    <div class="foot">Pratica Scuola · Gemini</div>
+    <div class="pageno">10 / 24</div>
+  </div></section>
+
+  
+  <!-- SLIDE 11 · GEM 1 cos'è lo scrittore di prompt -->
+  <section class="slide"><div class="canvas light">
+    <div class="chip coral">Gem 1 · La prima che costruite</div>
+    <div class="title">Lo scrittore di prompt</div>
+    <div class="cards">
+      <div class="card"><div class="card-ic" style="background:var(--indigo)">✎</div><div><h3>Non fa il lavoro: scrive la richiesta</h3><p>Le dite cosa vi serve, anche di corsa. Lei vi restituisce il prompt fatto bene, da copiare.</p></div></div>
+      <div class="card"><div class="card-ic" style="background:var(--cyan)">?</div><div><h3>Vi fa al massimo due domande</h3><p>Che classe, quanto tempo, che formato. Poi scrive. Sono le 5 fasi dell'incontro 4, messe da lei.</p></div></div>
+      <div class="card"><div class="card-ic" style="background:var(--coral)">↺</div><div><h3>Vale per tutti e serve subito</h3><p>Uguale dalla primaria alle superiori. La userete in questo modulo e nei tre che seguono.</p></div></div>
+    </div>
+    <div class="foot">Pratica Scuola · Gemini</div>
+    <div class="pageno">11 / 24</div>
+  </div></section>
+
+  <!-- SLIDE 12 · GEM 1 il testo da incollare -->
+  <section class="slide"><div class="canvas light">
+    <div class="chip indigo">Da copiare · Istruzioni</div>
+    <div class="title">Il testo da incollare, tutto</div>
+    <div class="copysub">Nome della Gem: Scrittore di prompt. Conoscenza: niente, non le servono file.</div>
+    <div class="codebox sm">"Sei uno scrittore di prompt per insegnanti. Il tuo unico lavoro è trasformare quello che ti chiedo in un prompt pronto da copiare in un'altra chat.<br><br>Regola assoluta: non rispondere mai al contenuto della richiesta. Non scrivere tu la verifica, non scrivere tu la scheda. Scrivi soltanto il prompt che la farà scrivere bene.<br><br>Come lavori. Se ti manca qualcosa di importante, fammi al massimo due domande, una alla volta: che classe, quanto tempo ho, che formato voglio. Se hai già abbastanza informazioni, parti subito senza chiedere.<br><br>Cosa deve contenere il prompt che scrivi, in un testo scorrevole e senza etichette: chi deve essere l'IA e per chi lavora, il compito espresso con un verbo preciso, il contesto (materia, classe, età, livello, tempo a disposizione), il formato dell'output (quante parti, quanto lungo, che tono) e i vincoli (cosa non fare, in che lingua, cosa fare se non sa una cosa).<br><br>Scrivilo in italiano naturale, frasi corte, senza parole tecniche e senza etichette tipo Ruolo o Contesto. Deve funzionare copiato e incollato così com'è.<br><br>Dopo il prompt aggiungi due righe soltanto: cosa hai aggiunto rispetto a come te l'avevo chiesto, e perché migliora il risultato.<br><br>Se il prompt che ti do è già buono, dimmelo e cambia solo quello che serve davvero."</div>
+    <div class="foot">Pratica Scuola · Gemini</div>
+    <div class="pageno">12 / 24</div>
+  </div></section>
+
+  <!-- SLIDE 13 · GEM 1 come si usa -->
+  <section class="slide"><div class="canvas light">
+    <div class="chip cyan">Come si usa</div>
+    <div class="title">Voi chiedete di corsa, lei scrive bene</div>
+    <div class="cols">
+      <div class="col"><div class="col-head" style="background:var(--muted)">QUELLO CHE SCRIVETE VOI</div><div class="para" style="padding:2.6cqh 3cqh;font-size:2.8cqh;color:var(--text);line-height:1.3;">"Mi serve una verifica di storia sulla Prima guerra mondiale per la terza media."</div></div>
+      <div class="col"><div class="col-head" style="background:var(--indigo)">QUELLO CHE VI TORNA</div><div class="para" style="padding:2.6cqh 3cqh;font-size:2.8cqh;color:var(--text);line-height:1.3;">Due domande veloci (quanto dura, che tipo di domande), poi il prompt completo, pronto da incollare.</div></div>
+    </div>
+    <div class="takeaway">Il prompt che vi torna lo incollate in una chat nuova, o dentro la vostra Gem personale.</div>
+    <div class="foot">Pratica Scuola · Gemini</div>
+    <div class="pageno">13 / 24</div>
+  </div></section>
+<!-- SLIDE 14 · GEM 2 la vostra -->
+  <section class="slide"><div class="canvas light">
+    <div class="chip indigo">Gem 2 · La vostra</div>
+    <div class="title">Quella che conosce voi e la vostra classe</div>
+    <div class="copysub">Nelle Istruzioni: prima il vostro file dell'incontro 5, poi queste righe in fondo.</div>
+    <div class="codebox">"<span class="slot">[Qui incollate il vostro file di contesto permanente.]</span> Lavora sempre con questo profilo. Quando ti chiedo un materiale, prima controlla di avere quello che ti serve: se manca un dato importante, fammi una domanda sola e poi parti. Scrivi in italiano, frasi corte, senza giri di parole. Non inventare fonti né dati: se non sai una cosa, dimmelo. Alla fine di ogni materiale aggiungi una riga: cosa devo controllare io prima di portarlo in classe."</div>
+    <div class="foot">Pratica Scuola · Gemini</div>
+    <div class="pageno">14 / 24</div>
+  </div></section>
+
+  <!-- SLIDE 15 · STATEMENT le Gem -->
+  <section class="slide"><div class="canvas ink">
+    <div class="chip cyan">Cosa cambia</div>
+    <div class="stbar"></div>
+    <div class="statement wh" style="font-size:6.4cqh;">La Gem è il vostro file di contesto.<br>Solo che non lo <span class="cy">incollate più</span>.</div>
+    <div class="pageno dark">15 / 24</div>
+  </div></section>
+
+  <!-- SLIDE 16 · GANCIO gli esempi -->
+  <section class="slide"><div class="canvas indigobg">
+    <div class="circ" style="top:-20%;left:75%;width:38%;height:66%;background:#fff;opacity:.08;"></div>
+    <div class="hook-eyebrow">Parte 3 · Da lunedì</div>
+    <div class="hook-q wh">Sei cose che potete chiedergli<br>già la <span class="cy">settimana prossima</span>.</div>
+    <div class="deb-sub" style="color:#D9D5F2;">Sono esempi, non binari: cambiate materia, classe e argomento.</div>
+    <div class="pageno dark">16 / 24</div>
+  </div></section>
+
+  <!-- SLIDE 17 · ESEMPIO 1 primaria -->
+  <section class="slide"><div class="canvas light">
+    <div class="chip indigo">Da copiare · Primaria</div>
+    <div class="title">La scheda per chi resta indietro</div>
+    <div class="copysub">Caricate la scheda che usate già, poi chiedete la versione facilitata.</div>
+    <div class="codebox">"Ti allego la scheda di matematica che uso in seconda primaria sulle addizioni con il riporto. Riscrivila in una versione facilitata per tre bambini che vanno più piano: stessi obiettivi e stessi numeri, ma un esercizio in meno per riga, la consegna in una frase sola, un esempio già svolto in alto da usare come modello e uno spazio più grande per scrivere. Non cambiare argomento e non aggiungere difficoltà nuove. Alla fine scrivimi due righe per me: cosa guardare mentre lavorano per capire se il problema è il riporto o la lettura della consegna."</div>
+    <div class="foot">Pratica Scuola · Gemini</div>
+    <div class="pageno">17 / 24</div>
+  </div></section>
+
+  <!-- SLIDE 18 · ESEMPIO 2 medie -->
+  <section class="slide"><div class="canvas light">
+    <div class="chip indigo">Da copiare · Medie</div>
+    <div class="title">La verifica, con la sua griglia</div>
+    <div class="copysub">Funziona meglio dentro la Gem: conosce già il programma e il vostro stile.</div>
+    <div class="codebox">"Preparami una verifica di storia per la terza media sulla Prima guerra mondiale, da 50 minuti. Struttura: 4 domande a risposta chiusa, 3 aperte brevi da cinque righe, 1 domanda di collegamento fra causa ed effetto. Accanto a ogni domanda scrivi quale obiettivo sto verificando. Aggiungi la griglia di valutazione con i punteggi e i criteri, e una versione ridotta per chi ha bisogno di meno testo. Linguaggio semplice, frasi corte, niente domande a trabocchetto."</div>
+    <div class="foot">Pratica Scuola · Gemini</div>
+    <div class="pageno">18 / 24</div>
+  </div></section>
+
+  <!-- SLIDE 19 · ESEMPIO 3 superiori -->
+  <section class="slide"><div class="canvas light">
+    <div class="chip indigo">Da copiare · Superiori</div>
+    <div class="title">Lo stesso concetto, a tre livelli</div>
+    <div class="copysub">Utile quando in classe avete velocità molto diverse.</div>
+    <div class="codebox">"Sono insegnante di scienze al biennio delle superiori. Spiegami la fotosintesi in tre versioni: una in dieci righe per chi parte da zero, una con il linguaggio corretto della disciplina, e una che parte da una domanda provocatoria per aprire la lezione. Poi dimmi i tre errori più comuni che fanno gli studenti su questo argomento e, per ciascuno, una domanda breve che li fa venire fuori."</div>
+    <div class="foot">Pratica Scuola · Gemini</div>
+    <div class="pageno">19 / 24</div>
+  </div></section>
+
+  <!-- SLIDE 20 · ESEMPIO 4 trasversale -->
+  <section class="slide"><div class="canvas light">
+    <div class="chip indigo">Da copiare · Trasversale</div>
+    <div class="title">La comunicazione alle famiglie</div>
+    <div class="copysub">Il caso in cui si perde più tempo, e in cui il tono conta di più.</div>
+    <div class="codebox">"Devo scrivere alle famiglie della mia classe per l'uscita didattica del 14 marzo al museo di scienze. Tono cordiale ma istituzionale, massimo quindici righe, e in fondo un elenco puntato con le informazioni pratiche: ritrovo, orari, cosa portare, costo, data entro cui riconsegnare l'autorizzazione. Niente parole burocratiche e niente frasi lunghe. Poi dammi una seconda versione di tre righe, da mandare come avviso sul registro elettronico."</div>
+    <div class="foot">Pratica Scuola · Gemini</div>
+    <div class="pageno">20 / 24</div>
+  </div></section>
+
+  <!-- SLIDE 21 · ESEMPIO 5 Canvas -->
+  <section class="slide"><div class="canvas light">
+    <div class="chip indigo">Da copiare · Dal libro</div>
+    <div class="title">Dal PDF al riassunto e alla mappa</div>
+    <div class="copysub">Caricate il capitolo, poi aprite Canvas per sistemare il testo a mano.</div>
+    <div class="codebox">"Ti carico il capitolo del libro che devo spiegare la prossima settimana. Fammi tre cose. Uno: un riassunto in dieci punti nel linguaggio dei miei studenti. Due: una mappa dei concetti principali con i collegamenti fra loro, scritta come elenco a livelli. Tre: cinque domande di ripasso, dalla più facile alla più difficile. Resta dentro il capitolo: se una cosa non c'è, dimmelo invece di aggiungerla."</div>
+    <div class="foot">Pratica Scuola · Gemini</div>
+    <div class="pageno">21 / 24</div>
+  </div></section>
+
+  <!-- SLIDE 22 · ESEMPIO 6 tutor socratico -->
+  <section class="slide"><div class="canvas light">
+    <div class="chip indigo">Da copiare · Medie e superiori</div>
+    <div class="title">Il tutor che non dà la risposta</div>
+    <div class="copysub">Questa la costruite una volta, poi la fate usare a loro.</div>
+    <div class="codebox">"Fai da tutor a uno studente di terza media su <span class="slot">[argomento]</span>. Regola principale: non dare mai la risposta. Fai una domanda alla volta, parti da quello che lo studente già sa, e se sbaglia non correggerlo subito: chiedigli come ci è arrivato. Parole semplici, frasi corte, un tono incoraggiante. Dopo cinque scambi fai il punto: cosa ha capito e cosa gli manca. Se ti chiede la soluzione, rispondi con la domanda che lo avvicina."</div>
+    <div class="foot">Pratica Scuola · Gemini</div>
+    <div class="pageno">22 / 24</div>
+  </div></section>
+
+  <!-- SLIDE 23 · PRATICA -->
+  <section class="slide"><div class="canvas coralbg">
+    <div class="circ" style="top:-20%;left:75%;width:38%;height:66%;background:#fff;opacity:.10;"></div>
+    <div class="circ" style="top:62%;left:-10%;width:30%;height:53%;background:var(--ink);opacity:.16;"></div>
+    <div class="chip" style="background:#fff;color:var(--coral)">Tocca a voi · circa 35 minuti</div>
+    <div class="statement wh" style="font-size:6.2cqh;">Prima lo <span style="color:var(--ink)">scrittore di prompt</span>.<br>Poi la Gem che conosce voi.</div>
+    <div class="deb-sub">E poi chiedetele la prima cosa vera: quella che vi serve davvero questa settimana.</div>
+    <div class="pageno dark">23 / 24</div>
+  </div></section>
+
+  <!-- SLIDE 24 · CHIUSURA -->
+  <section class="slide"><div class="canvas ink">
+    <div class="circ" style="top:-19%;left:78%;width:34%;height:60%;background:var(--indigo);opacity:.45;"></div>
+    <div class="circ" style="top:58%;left:88%;width:25%;height:45%;background:var(--violet);opacity:.4;"></div>
+    <div class="circ" style="top:70%;left:-8%;width:24%;height:42%;background:var(--cyan);opacity:.3;"></div>
+    <div class="chip violet">In una frase</div>
+    <div class="stbar"></div>
+    <div class="statement wh" style="font-size:6.4cqh;">Non è uno strumento nuovo da imparare.<br>È il vostro <span class="cy">metodo</span>, che adesso ha una casa.</div>
+    <div class="dots" style="top:80%;left:6.6%;"><span style="background:var(--cyan)"></span><span style="background:var(--indigo)"></span><span style="background:var(--violet)"></span><span style="background:var(--coral)"></span></div>
+    <div class="pageno dark">24 / 24</div>
+  </div></section>
+</div>
+<div class="hint">↑ ↓ frecce · F schermo intero · Cmd/Ctrl+P per esportare PDF</div>
+<script>
+  const deck=document.getElementById('deck');
+  const slides=[...document.querySelectorAll('.slide')];
+  let i=0;
+  function go(n){i=Math.max(0,Math.min(slides.length-1,n));slides[i].scrollIntoView({behavior:'smooth'});}
+  deck.addEventListener('scroll',()=>{i=Math.round(deck.scrollTop/window.innerHeight);},{passive:true});
+  window.addEventListener('keydown',e=>{
+    if(['ArrowDown','ArrowRight','PageDown',' '].includes(e.key)){e.preventDefault();go(i+1);}
+    else if(['ArrowUp','ArrowLeft','PageUp'].includes(e.key)){e.preventDefault();go(i-1);}
+    else if(e.key==='Home'){e.preventDefault();go(0);}
+    else if(e.key==='End'){e.preventDefault();go(slides.length-1);}
+    else if(e.key.toLowerCase()==='f'){if(!document.fullscreenElement)document.documentElement.requestFullscreen();else document.exitFullscreen();}
+  });
+</script>
+</body>
+</html>

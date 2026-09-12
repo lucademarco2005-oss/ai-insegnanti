@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Infanzia · Lezione 3 · NotebookLM: studiare sulle tue fonti</title>
+<!--
+  SLIDE 1-7 = intro (perché NotebookLM, le funzioni, le 3 colonne). La parte pratica si fa dal vivo, dopo la slide 7.
+-->
+<style>
+  :root{
+    --ink:#1E1B4B; --indigo:#4F46E5; --violet:#7C3AED; --cyan:#06B6D4; --coral:#F97316;
+    --light:#F6F5FF; --text:#1A1730; --muted:#6B6790; --white:#fff; --cfcb:#CFCBF0; --faint:#8E8AC4; --line:#E6E3FB;
+    --font:'Inter','Segoe UI',-apple-system,Arial,sans-serif;
+  }
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap');
+  *{box-sizing:border-box;margin:0;padding:0;}
+  html,body{background:#0c0a1f;font-family:var(--font);}
+  .deck{height:100vh;overflow-y:scroll;scroll-snap-type:y mandatory;scroll-behavior:smooth;}
+  .slide{height:100vh;display:flex;align-items:center;justify-content:center;scroll-snap-align:start;background:#0c0a1f;}
+  .canvas{position:relative;width:min(100vw,177.78vh);height:min(56.25vw,100vh);container-type:size;overflow:hidden;}
+  .ink{background:var(--ink);} .light{background:var(--light);} .indigobg{background:var(--indigo);} .coralbg{background:var(--coral);}
+  .cy{color:var(--cyan);} .co{color:var(--coral);} .wh{color:var(--white);}
+  .chip{position:absolute;top:8cqh;left:5.5cqw;padding:1.3cqh 2.2cqh;border-radius:2cqh;font-size:2.4cqh;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#fff;}
+  .chip.violet{background:var(--violet);} .chip.cyan{background:var(--cyan);} .chip.indigo{background:var(--indigo);} .chip.coral{background:var(--coral);}
+  .title{position:absolute;top:15cqh;left:5.5cqw;right:5.5cqw;font-size:6.2cqh;font-weight:800;color:var(--text);line-height:1.05;}
+  .stbar{position:absolute;top:34cqh;left:6.7cqw;width:4.2cqh;height:1.3cqh;background:var(--coral);}
+  .statement{position:absolute;top:38cqh;left:6.5cqw;right:6cqw;font-size:7.4cqh;font-weight:800;line-height:1.08;}
+  .foot{position:absolute;bottom:4cqh;left:5.5cqw;font-size:1.7cqh;color:var(--muted);}
+  .pageno{position:absolute;bottom:4cqh;right:5.5cqw;font-size:1.7cqh;color:var(--muted);} .pageno.dark{color:var(--faint);}
+  .dots{position:absolute;display:flex;gap:1.4cqh;} .dots span{width:2cqh;height:2cqh;border-radius:50%;}
+  .eyebrow{position:absolute;top:21cqh;left:5.5cqw;font-size:2.6cqh;font-weight:700;letter-spacing:.18em;color:var(--cyan);}
+  .cover-title{position:absolute;top:27cqh;left:5.2cqw;right:6cqw;font-size:8.6cqh;font-weight:800;color:#fff;line-height:.98;}
+  .cover-bar{position:absolute;top:57cqh;left:5.6cqw;width:4cqh;height:1.2cqh;background:var(--coral);}
+  .cover-sub{position:absolute;top:61cqh;left:5.5cqw;font-size:3.4cqh;color:var(--cfcb);}
+  .cover-foot{position:absolute;bottom:5cqh;left:5.5cqw;font-size:1.9cqh;color:var(--faint);}
+  .circ{position:absolute;border-radius:50%;}
+  .hook-eyebrow{position:absolute;top:20cqh;left:6cqw;font-size:2.7cqh;font-weight:700;letter-spacing:.16em;color:var(--cfcb);text-transform:uppercase;}
+  .hook-q{position:absolute;top:33cqh;left:6cqw;right:7cqw;font-size:7cqh;font-weight:800;color:#fff;line-height:1.1;}
+  .cards{position:absolute;top:31cqh;left:5.5cqw;right:5.5cqw;display:flex;flex-direction:column;gap:2.2cqh;}
+  .card{display:flex;align-items:center;gap:2.6cqh;background:#fff;border:1px solid var(--line);border-radius:2.2cqh;padding:2.6cqh 3cqh;box-shadow:0 4px 14px rgba(80,70,160,.10);}
+  .card-ic{flex:none;width:8.4cqh;height:8.4cqh;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:4cqh;color:#fff;}
+  .card h3{font-size:3.2cqh;font-weight:700;color:var(--text);margin-bottom:.4cqh;}
+  .card p{font-size:2.4cqh;color:var(--muted);line-height:1.22;}
+  .cols{position:absolute;top:32cqh;left:5.5cqw;right:5.5cqw;display:flex;gap:2.6cqh;}
+  .col{flex:1;background:#fff;border:1px solid var(--line);border-radius:2.2cqh;overflow:hidden;}
+  .col-head{font-size:3.2cqh;font-weight:800;color:#fff;text-align:center;padding:2cqh;letter-spacing:.03em;}
+  .col p{font-size:2.5cqh;color:var(--text);line-height:1.25;padding:2.4cqh 2.6cqh;}
+  /* griglia funzioni */
+  .fgrid{position:absolute;top:30cqh;left:5.5cqw;right:5.5cqw;display:grid;grid-template-columns:repeat(4,1fr);gap:2cqh;}
+  .fitem{background:#fff;border:1px solid var(--line);border-radius:1.6cqh;padding:2cqh 1.6cqh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;gap:1cqh;min-height:19cqh;box-shadow:0 4px 12px rgba(80,70,160,.08);}
+  .fitem .ic{font-size:4.4cqh;}
+  .fitem h4{font-size:2.4cqh;font-weight:700;color:var(--text);line-height:1.12;}
+  .bigicon{position:absolute;top:30cqh;left:7cqw;width:22cqh;height:22cqh;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:11cqh;}
+  .bigtext{position:absolute;top:33cqh;left:34cqw;right:6cqw;font-size:3.7cqh;color:var(--text);line-height:1.32;}
+  .bigtext b{font-weight:800;color:var(--indigo);}
+  .hint{position:fixed;bottom:14px;right:16px;font-size:12px;color:#888;font-family:var(--font);z-index:50;}
+  @media print{
+    @page{size:1280px 720px;margin:0;}
+    html,body{background:#fff;}
+    .deck{height:auto;overflow:visible;display:block;}
+    .slide{height:720px;width:1280px;display:block;page-break-after:always;break-after:page;}
+    .canvas{width:1280px;height:720px;}
+    .hint{display:none;}
+    *{-webkit-print-color-adjust:exact;print-color-adjust:exact;}
+  }
+</style>
+</head>
+<body>
+<div class="deck" id="deck">
+
+  <!-- SLIDE 1 — COPERTINA -->
+  <section class="slide"><div class="canvas ink">
+    <div class="circ" style="top:-19%;left:78%;width:34%;height:60%;background:var(--cyan);opacity:.4;"></div>
+    <div class="circ" style="top:58%;left:88%;width:25%;height:45%;background:var(--violet);opacity:.4;"></div>
+    <div class="eyebrow">PRATICA · PERCORSO INFANZIA</div>
+    <div class="cover-title">NotebookLM:<br>studiare sulle tue fonti</div>
+    <div class="cover-bar"></div>
+    <div class="cover-sub">Lezione pratica 3 · studiare sulle fonti, e dare voce con ElevenLabs</div>
+    <div class="dots" style="top:76%;left:5.6%;"><span style="background:var(--cyan)"></span><span style="background:var(--indigo)"></span><span style="background:var(--violet)"></span><span style="background:var(--coral)"></span></div>
+    <div class="cover-foot">Formazione docenti sull'Intelligenza Artificiale · PNRR DM 219/2025</div>
+  </div></section>
+
+  <!-- SLIDE 2 — GANCIO -->
+  <section class="slide"><div class="canvas indigobg">
+    <div class="circ" style="top:-20%;left:75%;width:38%;height:66%;background:#fff;opacity:.08;"></div>
+    <div class="hook-eyebrow">Dove arriviamo oggi</div>
+    <div class="hook-q wh">E se uno strumento studiasse solo i <span class="cy">vostri materiali</span>, senza inventare niente?</div>
+    <div class="pageno dark">2 / 17</div>
+  </div></section>
+
+  <!-- SLIDE 3 — VANTAGGIO 1 -->
+  <section class="slide"><div class="canvas light">
+    <div class="chip indigo">Vantaggio 1</div>
+    <div class="title">Lavora solo sulle tue fonti</div>
+    <div class="bigicon" style="background:var(--indigo);">📚</div>
+    <div class="bigtext">A differenza degli altri strumenti, non risponde a memoria sua: legge <b>soltanto i documenti che gli dai</b>. Niente divagazioni, niente cose prese da altre parti.</div>
+    <div class="foot">Infanzia · NotebookLM</div><div class="pageno">3 / 17</div>
+  </div></section>
+
+  <!-- SLIDE 4 — VANTAGGIO 2 -->
+  <section class="slide"><div class="canvas light">
+    <div class="chip cyan">Vantaggio 2</div>
+    <div class="title">Niente allucinazioni</div>
+    <div class="bigicon" style="background:var(--cyan);">✅</div>
+    <div class="bigtext">Ogni risposta è <b>citata</b>: ti mostra il punto esatto del testo da cui l'ha presa. Puoi cliccare e verificare. Per lo studio è ciò che conta di più: ti puoi fidare.</div>
+    <div class="foot">Infanzia · NotebookLM</div><div class="pageno">4 / 17</div>
+  </div></section>
+
+  <!-- SLIDE 5 — VANTAGGIO 3 -->
+  <section class="slide"><div class="canvas light">
+    <div class="chip coral">Vantaggio 3</div>
+    <div class="title">Per studiare e per cercare</div>
+    <div class="bigicon" style="background:var(--coral);">🔎</div>
+    <div class="bigtext">È lo strumento perfetto per i vostri <b>alunni</b> e per <b>voi</b>: per ripassare, ma anche quando dovete fare ricerca sui vostri materiali.</div>
+    <div class="foot">Infanzia · NotebookLM</div><div class="pageno">5 / 17</div>
+  </div></section>
+
+  <!-- SLIDE 6 — RIASSUNTIVA -->
+  <section class="slide"><div class="canvas light">
+    <div class="chip violet">In breve</div>
+    <div class="title">Lo strumento definitivo per lo studio</div>
+    <div class="cards">
+      <div class="card"><div class="card-ic" style="background:var(--indigo)">📚</div><div><h3>Solo le tue fonti</h3><p>Legge i tuoi documenti, non divaga.</p></div></div>
+      <div class="card"><div class="card-ic" style="background:var(--cyan)">✅</div><div><h3>Niente allucinazioni</h3><p>Cita il punto esatto: ti puoi fidare.</p></div></div>
+      <div class="card"><div class="card-ic" style="background:var(--coral)">🔎</div><div><h3>Studio e ricerca</h3><p>Per gli alunni e per voi.</p></div></div>
+    </div>
+    <div class="foot">Infanzia · NotebookLM</div><div class="pageno">6 / 17</div>
+  </div></section>
+
+  <!-- SLIDE 7 — LE 3 COLONNE (prima dello Studio) -->
+  <section class="slide"><div class="canvas light">
+    <div class="chip indigo">Com'è fatto</div>
+    <div class="title">Tre colonne</div>
+    <div class="cols">
+      <div class="col"><div class="col-head" style="background:var(--indigo)">FONTI</div><p>Carichi qui i tuoi documenti: libro, schede, PDF, link. Scegli quali usare.</p></div>
+      <div class="col"><div class="col-head" style="background:var(--cyan)">CHAT</div><p>Fai domande ai tuoi materiali. Ogni risposta cita il punto esatto della fonte.</p></div>
+      <div class="col"><div class="col-head" style="background:var(--coral)">STUDIO</div><p>Il pannello dove si generano le rielaborazioni dalle stesse fonti.</p></div>
+    </div>
+    <div class="foot">Infanzia · NotebookLM</div><div class="pageno">7 / 17</div>
+  </div></section>
+
+  <!-- SLIDE 8 — LO STUDIO: TUTTE LE FUNZIONI -->
+  <section class="slide"><div class="canvas light">
+    <div class="chip cyan">Lo Studio</div>
+    <div class="title">Cosa genera dalle tue fonti</div>
+    <div class="fgrid">
+      <div class="fitem"><span class="ic">🎧</span><h4>Podcast (Audio Overview)</h4></div>
+      <div class="fitem"><span class="ic">🎬</span><h4>Video riassunto</h4></div>
+      <div class="fitem"><span class="ic">🧠</span><h4>Mappa concettuale</h4></div>
+      <div class="fitem"><span class="ic">📊</span><h4>Slide e presentazioni</h4></div>
+      <div class="fitem"><span class="ic">❓</span><h4>Quiz e flashcard</h4></div>
+      <div class="fitem"><span class="ic">📝</span><h4>Riassunti e guide di studio</h4></div>
+      <div class="fitem"><span class="ic">📌</span><h4>Infografiche</h4></div>
+      <div class="fitem"><span class="ic">📋</span><h4>Tabelle e FAQ</h4></div>
+    </div>
+    <div class="foot">Infanzia · NotebookLM</div><div class="pageno">8 / 17</div>
+  </div></section>
+
+  <!-- SLIDE 9 — PONTE alla demo -->
+  <section class="slide"><div class="canvas ink">
+    <div class="chip coral">Si parte</div>
+    <div class="stbar"></div>
+    <div class="statement wh">Ora apriamo <span class="cy">NotebookLM</span><br>e carichiamo una fonte.</div>
+    <div class="pageno dark">9 / 17</div>
+  </div></section>
+
+  <!-- SLIDE 10 — PRATICA (tocca a voi, arancio) -->
+  <section class="slide"><div class="canvas coralbg">
+    <div class="circ" style="top:-20%;left:75%;width:38%;height:66%;background:#fff;opacity:.10;"></div>
+    <div class="chip" style="background:#fff;color:var(--coral)">Tocca a voi · circa 1 ora</div>
+    <div class="statement wh">Aprite NotebookLM e usate <span style="color:var(--ink)">tutti</span> gli strumenti che vi mette a disposizione.</div>
+    <div class="pageno" style="color:#FFE4D3">10 / 17</div>
+  </div></section>
+
+  <!-- ==================== BLOCCO ELEVENLABS ==================== -->
+
+  <!-- SLIDE 11 — GANCIO ElevenLabs -->
+  <section class="slide"><div class="canvas indigobg">
+    <div class="circ" style="top:-20%;left:75%;width:38%;height:66%;background:#fff;opacity:.08;"></div>
+    <div class="hook-eyebrow">Ancora un passo · ElevenLabs</div>
+    <div class="hook-q wh">E se le vostre lezioni avessero <span class="cy">una voce</span>, senza doverle leggere voi?</div>
+    <div class="pageno dark">11 / 17</div>
+  </div></section>
+
+  <!-- SLIDE 12 — COS'E' ElevenLabs -->
+  <section class="slide"><div class="canvas light">
+    <div class="chip violet">Cos'è ElevenLabs</div>
+    <div class="title">Uno strumento che dà voce al testo</div>
+    <div class="bigicon" style="background:var(--violet);color:#fff;">🎙️</div>
+    <div class="bigtext">È un'intelligenza artificiale che trasforma un <b>testo scritto</b> in una <b>voce vera</b>, naturale, che legge al posto vostro. Voi scrivete, lei parla: una lezione diventa interattiva senza che nessuno debba leggerla dal vivo.</div>
+    <div class="foot">Infanzia · ElevenLabs</div><div class="pageno">12 / 17</div>
+  </div></section>
+
+  <!-- SLIDE 13 — CREDITI -->
+  <section class="slide"><div class="canvas light">
+    <div class="chip violet">Account e crediti</div>
+    <div class="title">Funziona a crediti</div>
+    <div class="cards">
+      <div class="card"><div class="card-ic" style="background:var(--indigo)">🎁</div><div><h3>Versione gratuita</h3><p>Basta registrarsi: avete già crediti sufficienti per creare le vostre prime voci.</p></div></div>
+      <div class="card"><div class="card-ic" style="background:var(--coral)">⚡</div><div><h3>Si consuma a crediti</h3><p>Ogni audio usa un po' di crediti, come le funzioni Magic di Canva: si usano con criterio.</p></div></div>
+    </div>
+    <div class="foot">Infanzia · ElevenLabs</div><div class="pageno">13 / 17</div>
+  </div></section>
+
+  <!-- SLIDE 14 — LE VOCI -->
+  <section class="slide"><div class="canvas light">
+    <div class="chip violet">La sezione Voci</div>
+    <div class="title">Oltre 3000 voci, in ogni lingua</div>
+    <div class="bigicon" style="background:var(--cyan);color:#fff;">🗣️</div>
+    <div class="bigtext">Nella libreria trovate più di <b>3000 voci</b>: uomini, donne, toni allegri o calmi, in <b>tutte le lingue del mondo</b>. Scegliete quella giusta per un racconto, una filastrocca o un personaggio della storia.</div>
+    <div class="foot">Infanzia · ElevenLabs</div><div class="pageno">14 / 17</div>
+  </div></section>
+
+  <!-- SLIDE 15 — TEXT TO SPEECH + esempio -->
+  <section class="slide"><div class="canvas light">
+    <div class="chip violet">Text to Speech</div>
+    <div class="title">Da testo a voce</div>
+    <div style="position:absolute;top:26cqh;left:5.5cqw;right:6cqw;font-size:3cqh;color:var(--muted);">Incollate un testo, scegliete una voce e generate l'audio.</div>
+    <div style="position:absolute;top:39cqh;left:5.5cqw;font-size:2.3cqh;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--violet);">Esempio da dare alla voce</div>
+    <div style="position:absolute;top:45cqh;left:5.5cqw;right:5.5cqw;background:#fff;border:1px solid var(--line);border-radius:2.2cqh;padding:3cqh 3.4cqh;font-size:3.1cqh;line-height:1.42;font-style:italic;color:var(--text);box-shadow:0 4px 14px rgba(80,70,160,.08);">"Ieri abbiamo imparato tante cose belle! Abbiamo conosciuto gli animali della fattoria: la mucca fa muuu, la gallina fa coccodè, la pecora fa bee. Poi abbiamo giocato con i colori dell'autunno. Bravi bambini! Oggi scopriamo qualcosa di nuovo insieme."</div>
+    <div class="foot">Infanzia · ElevenLabs</div><div class="pageno">15 / 17</div>
+  </div></section>
+
+  <!-- SLIDE 16 — STUDIO -->
+  <section class="slide"><div class="canvas light">
+    <div class="chip violet">La versione Studio</div>
+    <div class="title">Costruire un piccolo podcast</div>
+    <div class="cards">
+      <div class="card"><div class="card-ic" style="background:var(--indigo)">🎵</div><div><h3>Stacchetto e sigla</h3><p>Una musichetta all'inizio e alla fine, come una vera trasmissione.</p></div></div>
+      <div class="card"><div class="card-ic" style="background:var(--cyan)">🗣️</div><div><h3>Più voci</h3><p>Voci diverse che si alternano, una per ogni personaggio o momento.</p></div></div>
+      <div class="card"><div class="card-ic" style="background:var(--coral)">✂️</div><div><h3>Montaggio</h3><p>Pause, effetti e ordine: un audio curato, non solo una voce che legge.</p></div></div>
+    </div>
+    <div class="foot">Infanzia · ElevenLabs</div><div class="pageno">16 / 17</div>
+  </div></section>
+
+  <!-- SLIDE 17 — ATTIVITA ElevenLabs -->
+  <section class="slide"><div class="canvas coralbg">
+    <div class="circ" style="top:-20%;left:75%;width:38%;height:66%;background:#fff;opacity:.10;"></div>
+    <div class="chip" style="background:#fff;color:var(--coral)">Tocca a voi · liberi</div>
+    <div class="statement wh">Aprite ElevenLabs e date voce a <span style="color:var(--ink)">qualcosa di vostro</span>. Un racconto, una filastrocca, un saluto: come volete.</div>
+    <div class="pageno" style="color:#FFE4D3">17 / 17</div>
+  </div></section>
+
+</div>
+<div class="hint">Frecce o scroll · F schermo intero · Cmd/Ctrl+P per esportare PDF</div>
+<script>
+  const deck=document.getElementById('deck');
+  const slides=[...document.querySelectorAll('.slide')];
+  let i=0;
+  function go(n){i=Math.max(0,Math.min(slides.length-1,n));slides[i].scrollIntoView({behavior:'smooth'});}
+  deck.addEventListener('scroll',()=>{i=Math.round(deck.scrollTop/window.innerHeight);},{passive:true});
+  window.addEventListener('keydown',e=>{
+    if(['ArrowDown','ArrowRight','PageDown',' '].includes(e.key)){e.preventDefault();go(i+1);}
+    else if(['ArrowUp','ArrowLeft','PageUp'].includes(e.key)){e.preventDefault();go(i-1);}
+    else if(e.key==='Home'){e.preventDefault();go(0);}
+    else if(e.key==='End'){e.preventDefault();go(slides.length-1);}
+    else if(e.key.toLowerCase()==='f'){if(!document.fullscreenElement)document.documentElement.requestFullscreen();else document.exitFullscreen();}
+  });
+</script>
+</body>
+</html>

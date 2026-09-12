@@ -1,0 +1,554 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Incontro 10 · Futuro e chiusura</title>
+<!--
+  COME USARLO
+  · Presentare: apri nel browser. Frecce su giù sinistra destra o scroll per cambiare slide. Tasto F = schermo intero.
+  · Esportare in PDF/slide: Stampa (Cmd/Ctrl+P) → Layout ORIZZONTALE → Margini Nessuno → "Grafica di sfondo" ATTIVA → Salva come PDF.
+  · Modificare: ogni slide è un blocco <section class="slide"> con commento SLIDE N. Cambia il testo dentro. I colori in :root (sotto).
+  TIPI DI SLIDE (colore = funzione):
+  · ink (navy scuro)  = statement chiave
+  · light             = contenuto
+  · indigobg (viola)  = GANCIO: domanda introduttiva del relatore (dà ritmo)
+  · coralbg (arancio) = DIBATTITO: parla la stanza
+-->
+<style>
+  :root{
+    --ink:#1E1B4B; --ink2:#2A2566; --indigo:#4F46E5; --violet:#7C3AED;
+    --cyan:#06B6D4; --coral:#F97316; --light:#F6F5FF; --text:#1A1730;
+    --muted:#6B6790; --white:#ffffff; --cfcb:#CFCBF0; --faint:#8E8AC4;
+    --line:#E6E3FB;
+    --font:'Inter','Segoe UI',-apple-system,Arial,sans-serif;
+  }
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap');
+  *{box-sizing:border-box;margin:0;padding:0;}
+  html,body{background:#0c0a1f;font-family:var(--font);}
+  .deck{height:100vh;overflow-y:scroll;scroll-snap-type:y mandatory;scroll-behavior:smooth;}
+  .slide{height:100vh;display:flex;align-items:center;justify-content:center;scroll-snap-align:start;background:#0c0a1f;}
+  .canvas{position:relative;width:min(100vw,177.78vh);height:min(56.25vw,100vh);container-type:size;overflow:hidden;}
+  .ink{background:var(--ink);} .light{background:var(--light);} .coralbg{background:var(--coral);} .indigobg{background:var(--indigo);}
+
+  .cy{color:var(--cyan);} .co{color:var(--coral);} .in{color:var(--indigo);}
+  .vi{color:var(--violet);} .wh{color:var(--white);} .tx{color:var(--text);}
+  .mu{color:var(--muted);} .inkc{color:var(--ink);}
+
+  .chip{position:absolute;top:8cqh;left:5.5cqw;padding:1.3cqh 2.2cqh;border-radius:2cqh;
+        font-size:2.4cqh;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#fff;}
+  .chip.violet{background:var(--violet);} .chip.cyan{background:var(--cyan);}
+  .chip.indigo{background:var(--indigo);} .chip.coral{background:var(--coral);} .chip.muted{background:var(--muted);}
+
+  .title{position:absolute;top:15cqh;left:5.5cqw;right:5.5cqw;font-size:6.2cqh;font-weight:800;color:var(--text);line-height:1.05;}
+
+  .stbar{position:absolute;top:34cqh;left:6.7cqw;width:4.2cqh;height:1.3cqh;background:var(--coral);}
+  .statement{position:absolute;top:38cqh;left:6.5cqw;right:6cqw;font-size:7.6cqh;font-weight:800;line-height:1.08;}
+  .statement.big{font-size:8.6cqh;}
+
+  .foot{position:absolute;bottom:4cqh;left:5.5cqw;font-size:1.7cqh;color:var(--muted);}
+  .foot.dark{color:var(--faint);}
+  .pageno{position:absolute;bottom:4cqh;right:5.5cqw;font-size:1.7cqh;color:var(--muted);}
+  .pageno.dark{color:var(--faint);}
+
+  .dots{position:absolute;display:flex;gap:1.4cqh;}
+  .dots span{width:2cqh;height:2cqh;border-radius:50%;}
+
+  .eyebrow{position:absolute;top:21cqh;left:5.5cqw;font-size:2.6cqh;font-weight:700;letter-spacing:.18em;color:var(--cyan);}
+  .cover-title{position:absolute;top:27cqh;left:5.2cqw;right:6cqw;font-size:9.4cqh;font-weight:800;color:#fff;line-height:.96;}
+  .cover-bar{position:absolute;top:54cqh;left:5.6cqw;width:4cqh;height:1.2cqh;background:var(--coral);}
+  .cover-sub{position:absolute;top:58cqh;left:5.5cqw;font-size:3.6cqh;color:var(--cfcb);}
+  .cover-foot{position:absolute;bottom:5cqh;left:5.5cqw;font-size:1.9cqh;color:var(--faint);}
+
+  .circ{position:absolute;border-radius:50%;}
+
+  /* hook (gancio) */
+  .hook-eyebrow{position:absolute;top:20cqh;left:6cqw;font-size:2.7cqh;font-weight:700;letter-spacing:.16em;color:var(--cfcb);text-transform:uppercase;}
+  .hook-q{position:absolute;top:36cqh;left:6cqw;right:7cqw;font-size:7.4cqh;font-weight:800;color:#fff;line-height:1.1;}
+
+  .cards{position:absolute;top:33cqh;left:5.5cqw;right:5.5cqw;display:flex;flex-direction:column;gap:2.4cqh;}
+  .card{display:flex;align-items:center;gap:2.6cqh;background:#fff;border:1px solid var(--line);
+        border-radius:2.2cqh;padding:3cqh 3cqh;box-shadow:0 4px 14px rgba(80,70,160,.10);}
+  .card-ic{flex:none;width:9cqh;height:9cqh;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:4.4cqh;color:#fff;}
+  .card h3{font-size:3.6cqh;font-weight:700;color:var(--text);margin-bottom:.5cqh;}
+  .card p{font-size:2.6cqh;color:var(--muted);line-height:1.25;}
+
+  .datawrap{position:absolute;top:30cqh;left:5.5cqw;right:5.5cqw;display:flex;gap:3cqh;}
+  .stat{flex:1;border-radius:2.6cqh;padding:4cqh 2cqh;text-align:center;}
+  .stat.dark{background:var(--ink);} .stat.lite{background:#fff;border:1.5px solid var(--line);}
+  .stat .num{font-size:16cqh;font-weight:800;line-height:1;}
+  .stat .lab{font-size:3.2cqh;margin-top:2cqh;}
+  .stat.sm .num{font-size:11cqh;} .stat.sm .lab{font-size:2.7cqh;}
+  .takeaway{position:absolute;top:79cqh;left:5.5cqw;right:5.5cqw;font-size:3.2cqh;font-weight:700;font-style:italic;color:var(--indigo);line-height:1.2;}
+
+  .cols{position:absolute;top:31cqh;left:5.5cqw;right:5.5cqw;display:flex;gap:3cqh;}
+  .col{flex:1;background:#fff;border:1px solid var(--line);border-radius:2.2cqh;overflow:hidden;}
+  .col-head{font-size:3.6cqh;font-weight:800;color:#fff;text-align:center;padding:2.2cqh;letter-spacing:.04em;}
+  .col ul{list-style:none;padding:2.6cqh 3cqh;}
+  .col li{display:flex;gap:1.6cqh;align-items:flex-start;font-size:2.7cqh;color:var(--text);line-height:1.2;margin-bottom:2.2cqh;}
+  .col li::before{content:"";flex:none;width:1.7cqh;height:1.7cqh;border-radius:50%;margin-top:.6cqh;background:currentColor;}
+  .col.cdcoral li{color:var(--coral);} .col.cdcyan li{color:var(--cyan);}
+  .col.cdindigo li{color:var(--indigo);} .col.cdmuted li{color:var(--muted);}
+  .col li span{color:var(--text);}
+
+  /* big icon + text (analogy / framing) */
+  .bigicon{position:absolute;top:36cqh;left:7cqw;width:24cqh;height:24cqh;border-radius:50%;
+           display:flex;align-items:center;justify-content:center;font-size:12cqh;}
+  .bigtext{position:absolute;top:34cqh;left:33cqw;right:6cqw;font-size:3.5cqh;color:var(--text);line-height:1.3;}
+  .bigquote{position:absolute;top:78cqh;left:33cqw;right:6cqw;font-size:2.9cqh;font-style:italic;font-weight:700;}
+
+  .cbox{position:absolute;left:5.5cqw;right:5.5cqw;border-radius:2.2cqh;padding:3cqh 3.4cqh;}
+  .cbox.white{background:#fff;border:1px solid var(--line);}
+  .cbox.dark{background:var(--ink);}
+  .cbox h4{font-size:3.7cqh;font-weight:700;color:var(--text);line-height:1.15;}
+  .cbox .ex{font-size:3.1cqh;color:var(--text);margin-top:1.5cqh;}
+  .cbox.dark p{font-size:3.8cqh;color:var(--cfcb);font-weight:700;}
+
+  .deb-tag{position:absolute;top:9cqh;left:5.5cqw;background:#fff;color:var(--coral);
+           padding:1.3cqh 2.4cqh;border-radius:2.3cqh;font-size:2.5cqh;font-weight:700;letter-spacing:.12em;}
+  .deb-room{position:absolute;top:9.6cqh;left:24cqw;font-size:2.6cqh;font-style:italic;color:#FFE4D3;}
+  .deb-q{position:absolute;top:38cqh;left:5.5cqw;right:6cqw;font-size:7cqh;font-weight:800;color:#fff;line-height:1.1;}
+
+  /* matrice */
+  .mtx{position:absolute;top:23cqh;left:4cqw;width:92cqw;height:66cqh;}
+
+  .hint{position:fixed;bottom:14px;right:16px;font-size:12px;color:#888;font-family:var(--font);z-index:50;}
+
+  @media print{
+    @page{size:1280px 720px;margin:0;}
+    html,body{background:#fff;}
+    .deck{height:auto;overflow:visible;display:block;}
+    .slide{height:720px;width:1280px;display:block;page-break-after:always;break-after:page;}
+    .canvas{width:1280px;height:720px;}
+    .hint{display:none;}
+    *{-webkit-print-color-adjust:exact;print-color-adjust:exact;}
+  }
+</style>
+</head>
+<body>
+<div class="deck" id="deck">
+
+  <!-- SLIDE 1 — COPERTINA -->
+  <section class="slide"><div class="canvas ink">
+    <div class="circ" style="top:-19%;left:78%;width:34%;height:60%;background:var(--indigo);opacity:.45;"></div>
+    <div class="circ" style="top:58%;left:88%;width:25%;height:45%;background:var(--violet);opacity:.4;"></div>
+    <div class="circ" style="top:70%;left:-8%;width:24%;height:42%;background:var(--cyan);opacity:.3;"></div>
+    <div class="eyebrow">FUTURO E CHIUSURA</div>
+    <div class="cover-title">Uno sguardo<br>avanti</div>
+    <div class="cover-bar"></div>
+    <div class="cover-sub">Incontro 10 · Ripasso, futuro e chiusura</div>
+    <div class="dots" style="top:74%;left:5.6%;"><span style="background:var(--cyan)"></span><span style="background:var(--indigo)"></span><span style="background:var(--violet)"></span><span style="background:var(--coral)"></span></div>
+    <div class="cover-foot">Formazione docenti sull'Intelligenza Artificiale · PNRR DM 219/2025</div>
+  </div></section>
+
+  <!-- SLIDE 2 — INTRO RIPASSO -->
+  <section class="slide"><div class="canvas light">
+    <div class="chip violet">Ripasso</div>
+    <div class="title">Dove siamo arrivati</div>
+    <div class="cbox white" style="top:33cqh;">
+      <h4>Nove incontri: il metodo, l'etica, il prompt, il sistema, e i quattro strumenti in pratica.</h4>
+      <div class="ex">Prima di guardare avanti, rimettiamo in fila tutto quello che ci siamo detti.</div>
+    </div>
+    <div class="cbox dark" style="top:62cqh;"><p>Si insegna il <span class="cy">metodo</span>, non il tool.&nbsp;&nbsp;I tool cambiano ogni sei mesi, il metodo resta.</p></div>
+    <div class="foot">AI INSEGNANTI · Formazione PNRR</div><div class="pageno">2 / 35</div>
+  </div></section>
+
+  <!-- SLIDE 3 — RIPASSO I1 (a): cos'è l'IA -->
+  <section class="slide"><div class="canvas light">
+    <div class="chip cyan">Incontro 1</div>
+    <div class="title">Cos'è l'IA</div>
+    <div class="bigicon" style="background:var(--violet)">🎓</div>
+    <div class="bigtext"><strong>Non pensa</strong>: riconosce pattern e predice il testo più probabile.<br><br><strong class="vi">Lo stagista brillante</strong>: ha letto tutto, conosce le teorie del mondo, ma non ha vissuto la vostra scuola, le vostre classi, i vostri studenti.</div>
+    <div class="bigquote vi">"Sa tutto e non sa niente del vostro contesto."</div>
+    <div class="foot">AI INSEGNANTI · Formazione PNRR</div><div class="pageno">3 / 35</div>
+  </div></section>
+
+  <!-- SLIDE 4 — RIPASSO I1 (b): la scelta di fondo -->
+  <section class="slide"><div class="canvas light">
+    <div class="chip cyan">Incontro 1</div>
+    <div class="title">La scelta di fondo</div>
+    <div class="cols">
+      <div class="col"><div class="col-head" style="background:var(--coral)">SCORCIATOIA</div><ul class="cdcoral"><li><span>Delego il pensiero e accetto l'output</span></li><li><span>Faccio prima oggi</span></li><li><span>Debito cognitivo nel tempo</span></li></ul></div>
+      <div class="col"><div class="col-head" style="background:var(--indigo)">SUPERPOTERE</div><ul class="cdindigo"><li><span>Uso il mio giudizio, esploro, correggo</span></li><li><span>Amplifico le mie capacità</span></li><li><span>Cresce nel tempo, non si spegne</span></li></ul></div>
+    </div>
+    <div class="foot">AI INSEGNANTI · Formazione PNRR</div><div class="pageno">4 / 35</div>
+  </div></section>
+
+  <!-- SLIDE 5 — RIPASSO I2 (a): i 4 principi -->
+  <section class="slide"><div class="canvas light">
+    <div class="chip cyan">Incontro 2</div>
+    <div class="title">Il metodo: i 4 principi</div>
+    <div class="cards" style="top:30cqh;gap:1.7cqh;">
+      <div class="card" style="padding:2.1cqh 3cqh;"><div class="card-ic" style="background:var(--indigo);width:7cqh;height:7cqh;font-size:3.2cqh;">1</div><div><h3 style="font-size:3cqh;margin:0">Non spegnere il cervello</h3><p>L'IA è accurata, voi siete appropriati. Ogni output è una bozza.</p></div></div>
+      <div class="card" style="padding:2.1cqh 3cqh;"><div class="card-ic" style="background:var(--cyan);width:7cqh;height:7cqh;font-size:3.2cqh;">2</div><div><h3 style="font-size:3cqh;margin:0">L'IA è un collega da formare</h3><p>Contesto, feedback mirato, iterazione. Non un tasto, un collaboratore.</p></div></div>
+      <div class="card" style="padding:2.1cqh 3cqh;"><div class="card-ic" style="background:var(--violet);width:7cqh;height:7cqh;font-size:3.2cqh;">3</div><div><h3 style="font-size:3cqh;margin:0">Obiettivi chiari</h3><p>Cosa voglio, in che formato, come capirò se è buono.</p></div></div>
+      <div class="card" style="padding:2.1cqh 3cqh;"><div class="card-ic" style="background:var(--coral);width:7cqh;height:7cqh;font-size:3.2cqh;">4</div><div><h3 style="font-size:3cqh;margin:0">AI First</h3><p>Pensala dall'inizio, non alla fine. Non "miglioramela", ma "dammi 5 strutture".</p></div></div>
+    </div>
+    <div class="foot">AI INSEGNANTI · Formazione PNRR</div><div class="pageno">5 / 35</div>
+  </div></section>
+
+  <!-- SLIDE 6 — RIPASSO I2 (b): non solo i compiti -->
+  <section class="slide"><div class="canvas light">
+    <div class="chip cyan">Incontro 2</div>
+    <div class="title">Non riguarda i vostri bambini</div>
+    <div class="cbox dark" style="top:31cqh;"><p>Il <span class="co">41,8%</span> degli adolescenti si rivolge all'IA quando si sente triste, solo o ansioso.</p></div>
+    <div class="cbox white" style="top:58cqh;">
+      <h4>L'IA si insegna a ogni età, anche all'infanzia</h4>
+      <div class="ex">I vostri bambini sono piccoli: è un fenomeno che riguarda <strong class="in">voi</strong>. Non si protegge vietando, si comincia con giochi semplici, come "reale o inventato".</div>
+    </div>
+    <div class="foot">Fonte: Save the Children, Atlante dell'Infanzia a rischio 2025</div><div class="pageno">6 / 35</div>
+  </div></section>
+
+  <!-- SLIDE 7 — RIPASSO I3 (a): la responsabilità diretta -->
+  <section class="slide"><div class="canvas light">
+    <div class="chip cyan">Incontro 3</div>
+    <div class="title">Etica: la responsabilità diretta</div>
+    <div class="cards" style="top:32cqh;gap:2.4cqh;">
+      <div class="card"><div class="card-ic" style="background:var(--indigo)">🔒</div><div><h3>Protezione studenti</h3><p>Mai dati sensibili. "Se non lo incollerei alla porta della classe, non lo carico." Il Dirigente è il responsabile legale.</p></div></div>
+      <div class="card"><div class="card-ic" style="background:var(--cyan)">✍️</div><div><h3>Ripensare la valutazione</h3><p>Non vietare l'IA, ridisegnare le verifiche: testare il processo, non solo il prodotto.</p></div></div>
+    </div>
+    <div class="foot">AI INSEGNANTI · Formazione PNRR</div><div class="pageno">7 / 35</div>
+  </div></section>
+
+  <!-- SLIDE 8 — RIPASSO I3 (b): l'IA nel mondo -->
+  <section class="slide"><div class="canvas light">
+    <div class="chip cyan">Incontro 3</div>
+    <div class="title">Come l'IA cambia il mondo</div>
+    <div class="cards" style="top:30cqh;gap:1.7cqh;">
+      <div class="card" style="padding:2.1cqh 3cqh;"><div class="card-ic" style="background:var(--cyan);width:7cqh;height:7cqh;font-size:3.2cqh;">🌍</div><div><h3 style="font-size:3cqh;margin:0">Ambiente</h3><p>I data center consumano come un intero Paese. Il costo è nascosto.</p></div></div>
+      <div class="card" style="padding:2.1cqh 3cqh;"><div class="card-ic" style="background:var(--indigo);width:7cqh;height:7cqh;font-size:3.2cqh;">📰</div><div><h3 style="font-size:3cqh;margin:0">Informazione</h3><p>Chi crea le notizie non riceve più i clic. Caso Anthropic: 1,5 miliardi per i libri piratati.</p></div></div>
+      <div class="card" style="padding:2.1cqh 3cqh;"><div class="card-ic" style="background:var(--coral);width:7cqh;height:7cqh;font-size:3.2cqh;">🎭</div><div><h3 style="font-size:3cqh;margin:0">Deepfake</h3><p>Vedere non è più credere. La difesa non è vedere, è verificare.</p></div></div>
+    </div>
+    <div class="foot">AI INSEGNANTI · Formazione PNRR</div><div class="pageno">8 / 35</div>
+  </div></section>
+
+  <!-- SLIDE 9 — RIPASSO I4 (a): le 5 fasi -->
+  <section class="slide"><div class="canvas light">
+    <div class="chip cyan">Incontro 4</div>
+    <div class="title">Parlare all'IA: le 5 fasi</div>
+    <div class="cards" style="top:26cqh;gap:1.2cqh;">
+      <div class="card" style="padding:1.6cqh 3cqh;"><div class="card-ic" style="background:var(--indigo);width:6.2cqh;height:6.2cqh;font-size:2.9cqh;">1</div><div><h3 style="font-size:2.8cqh;margin:0">Obiettivo</h3><p>Cosa devo fare, come lo voglio, in che formato.</p></div></div>
+      <div class="card" style="padding:1.6cqh 3cqh;"><div class="card-ic" style="background:var(--cyan);width:6.2cqh;height:6.2cqh;font-size:2.9cqh;">2</div><div><h3 style="font-size:2.8cqh;margin:0">Contesto</h3><p>Chi sei, per chi, che ruolo deve avere l'IA.</p></div></div>
+      <div class="card" style="padding:1.6cqh 3cqh;"><div class="card-ic" style="background:var(--violet);width:6.2cqh;height:6.2cqh;font-size:2.9cqh;">3</div><div><h3 style="font-size:2.8cqh;margin:0">Esempi e materiali</h3><p>Mostra il "fatto bene", non descriverlo.</p></div></div>
+      <div class="card" style="padding:1.6cqh 3cqh;"><div class="card-ic" style="background:var(--coral);width:6.2cqh;height:6.2cqh;font-size:2.9cqh;">4</div><div><h3 style="font-size:2.8cqh;margin:0">Valutazione</h3><p>L'output è una bozza. Feedback mirati, non "no" secchi.</p></div></div>
+      <div class="card" style="padding:1.6cqh 3cqh;"><div class="card-ic" style="background:var(--indigo);width:6.2cqh;height:6.2cqh;font-size:2.9cqh;">5</div><div><h3 style="font-size:2.8cqh;margin:0">Iterazione</h3><p>Il primo prompt è una bozza. Il valore sta nel ciclo.</p></div></div>
+    </div>
+    <div class="foot">AI INSEGNANTI · Formazione PNRR</div><div class="pageno">9 / 35</div>
+  </div></section>
+
+  <!-- SLIDE 10 — RIPASSO I4 (b): le difese -->
+  <section class="slide"><div class="canvas light">
+    <div class="chip cyan">Incontro 4</div>
+    <div class="title">Le difese: dove l'IA sbaglia</div>
+    <div class="cards" style="top:30cqh;gap:1.7cqh;">
+      <div class="card" style="padding:2.1cqh 3cqh;"><div class="card-ic" style="background:var(--cyan);width:7cqh;height:7cqh;font-size:3.2cqh;">🚦</div><div><h3 style="font-size:3cqh;margin:0">Il semaforo di affidabilità</h3><p>Una riga nel prompt: l'IA etichetta ogni informazione e dichiara la sua confidenza.</p></div></div>
+      <div class="card" style="padding:2.1cqh 3cqh;"><div class="card-ic" style="background:var(--coral);width:7cqh;height:7cqh;font-size:3.2cqh;">💬</div><div><h3 style="font-size:3cqh;margin:0">Allucinazioni e bias</h3><p>Inventa con sicurezza quando non sa, e si porta dietro il passato (caso Amazon).</p></div></div>
+      <div class="card" style="padding:2.1cqh 3cqh;"><div class="card-ic" style="background:var(--violet);width:7cqh;height:7cqh;font-size:3.2cqh;">🔎</div><div><h3 style="font-size:3cqh;margin:0">Riconoscere un testo scritto dall'IA</h3><p>Tre indizi: stile levigato, struttura prolissa, tic di vocabolario.</p></div></div>
+    </div>
+    <div class="foot">AI INSEGNANTI · Formazione PNRR</div><div class="pageno">10 / 35</div>
+  </div></section>
+
+  <!-- SLIDE 11 — RIPASSO I5 (a): IPU -->
+  <section class="slide"><div class="canvas light">
+    <div class="chip cyan">Incontro 5</div>
+    <div class="title">Dal prompt al sistema: la formula IPU</div>
+    <div class="cards" style="top:32cqh;gap:2.2cqh;">
+      <div class="card"><div class="card-ic" style="background:var(--indigo)">🔍</div><div><h3>Identifica</h3><p>Un'attività ripetitiva, organizzativa, di ricerca o analisi. Una sola, da cui partire.</p></div></div>
+      <div class="card"><div class="card-ic" style="background:var(--cyan)">🧪</div><div><h3>Prova</h3><p>Costruisci il prompt con le 5 fasi e itera. Il fallimento dice cosa aggiungere.</p></div></div>
+      <div class="card"><div class="card-ic" style="background:var(--coral)">💾</div><div><h3>Utilizza</h3><p>Quando funziona, non lasciarlo morire nella chat: salvalo. Da qui nasce il Progetto.</p></div></div>
+    </div>
+    <div class="foot">AI INSEGNANTI · Formazione PNRR</div><div class="pageno">11 / 35</div>
+  </div></section>
+
+  <!-- SLIDE 12 — RIPASSO I5 (b): il Progetto -->
+  <section class="slide"><div class="canvas light">
+    <div class="chip cyan">Incontro 5</div>
+    <div class="title">Il Progetto: la memoria permanente</div>
+    <div class="cbox white" style="top:30cqh;">
+      <h4>Separa il contesto che varia (la singola richiesta) dal contesto permanente (chi siete, come lavorate).</h4>
+      <div class="ex">Lo scrivete una volta, e ogni nuova chat parte già sapendo tutto. Niente più preamboli.</div>
+    </div>
+    <div class="cards" style="top:60cqh;flex-direction:row;gap:2.4cqh;">
+      <div class="card" style="flex:1;padding:2.2cqh;flex-direction:column;text-align:center;"><div class="card-ic" style="background:var(--indigo)">📄</div><div><h3 style="font-size:3cqh">Dati</h3></div></div>
+      <div class="card" style="flex:1;padding:2.2cqh;flex-direction:column;text-align:center;"><div class="card-ic" style="background:var(--cyan)">⚙️</div><div><h3 style="font-size:3cqh">Istruzioni</h3></div></div>
+      <div class="card" style="flex:1;padding:2.2cqh;flex-direction:column;text-align:center;"><div class="card-ic" style="background:var(--violet)">⭐</div><div><h3 style="font-size:3cqh">Esempi</h3></div></div>
+    </div>
+    <div class="foot">AI INSEGNANTI · Formazione PNRR</div><div class="pageno">12 / 35</div>
+  </div></section>
+
+  <!-- SLIDE 13 — RIPASSO I5 (c): il file di contesto -->
+  <section class="slide"><div class="canvas light">
+    <div class="chip cyan">Incontro 5</div>
+    <div class="title">Il file di contesto permanente</div>
+    <div class="cbox dark" style="top:31cqh;"><p>Non dite all'IA <span class="co">cosa fare</span>.<br>Le insegnate <span class="cy">come ragionate voi</span>.</p></div>
+    <div class="cbox white" style="top:60cqh;">
+      <h4>Il cuore del corso: il meta-prompting.</h4>
+      <div class="ex">Il vostro modo di insegnare, scritto <strong class="in">una volta sola</strong>, in un file che tenete e aggiornate. Da lì in poi è sempre con voi.</div>
+    </div>
+    <div class="foot">AI INSEGNANTI · Formazione PNRR</div><div class="pageno">13 / 35</div>
+  </div></section>
+
+  <!-- SLIDE 14 — RIPASSO i 4 strumenti pratici -->
+  <section class="slide"><div class="canvas light">
+    <div class="chip cyan">Il blocco pratico</div>
+    <div class="title">Gli strumenti, in pratica</div>
+    <div class="cards" style="top:26cqh;gap:1.2cqh;">
+      <div class="card" style="padding:1.5cqh 3cqh;"><div class="card-ic" style="background:var(--indigo);width:5.8cqh;height:5.8cqh;font-size:2.7cqh;">💬</div><div><h3 style="font-size:2.7cqh;margin:0">Claude</h3><p>Progetto, skill, routine e il pianificatore dei temi dell'anno.</p></div></div>
+      <div class="card" style="padding:1.5cqh 3cqh;"><div class="card-ic" style="background:var(--cyan);width:5.8cqh;height:5.8cqh;font-size:2.7cqh;">🎨</div><div><h3 style="font-size:2.7cqh;margin:0">Canva</h3><p>Materiali belli e interattivi: presentazione, scheda, gioco.</p></div></div>
+      <div class="card" style="padding:1.5cqh 3cqh;"><div class="card-ic" style="background:var(--violet);width:5.8cqh;height:5.8cqh;font-size:2.7cqh;">📓</div><div><h3 style="font-size:2.7cqh;margin:0">NotebookLM</h3><p>Studiare e aggiornarsi solo sulle proprie fonti.</p></div></div>
+      <div class="card" style="padding:1.5cqh 3cqh;"><div class="card-ic" style="background:var(--coral);width:5.8cqh;height:5.8cqh;font-size:2.7cqh;">🎙️</div><div><h3 style="font-size:2.7cqh;margin:0">ElevenLabs</h3><p>Dare voce: racconti, filastrocche, canzoncine, versi dei giochi.</p></div></div>
+      <div class="card" style="padding:1.5cqh 3cqh;"><div class="card-ic" style="background:var(--indigo);width:5.8cqh;height:5.8cqh;font-size:2.7cqh;">🔧</div><div><h3 style="font-size:2.7cqh;margin:0">Laboratorio</h3><p>I quattro strumenti insieme per un'attività completa.</p></div></div>
+    </div>
+    <div class="foot">Versione Infanzia · negli altri percorsi gli strumenti cambiano</div><div class="pageno">14 / 35</div>
+  </div></section>
+
+  <!-- SLIDE 15 — PONTE verso il futuro -->
+  <section class="slide"><div class="canvas ink">
+    <div class="chip coral">E adesso?</div>
+    <div class="stbar"></div>
+    <div class="statement wh">Tutto questo per arrivare a oggi.<br>E adesso? Il <span class="cy">futuro</span>.</div>
+    <div class="pageno dark">15 / 35</div>
+  </div></section>
+
+  <!-- SLIDE 16 — GANCIO B1 -->
+  <section class="slide"><div class="canvas indigobg">
+    <div class="circ" style="top:-20%;left:75%;width:38%;height:66%;background:#fff;opacity:.08;"></div>
+    <div class="hook-eyebrow">Il futuro del lavoro</div>
+    <div class="hook-q wh">Quanti dei vostri alunni faranno<br>un lavoro che <span class="cy">ancora non esiste?</span></div>
+    <div class="pageno dark">16 / 35</div>
+  </div></section>
+
+  <!-- SLIDE 17 — B1 dato WEF -->
+  <section class="slide"><div class="canvas light">
+    <div class="chip cyan">Come cambiano le competenze</div>
+    <div class="title">Il lavoro non scompare, cambia</div>
+    <div class="datawrap">
+      <div class="stat dark"><div class="num cy">+78M</div><div class="lab wh">ruoli netti in più entro il 2030</div></div>
+      <div class="stat lite"><div class="num co">39%</div><div class="lab tx">delle competenze cambia entro il 2030</div></div>
+    </div>
+    <div class="takeaway">Non spariscono i lavori. Cambiano le competenze, e la transizione è già in corso.</div>
+    <div class="foot">Fonte: WEF Future of Jobs Report 2025</div><div class="pageno">17 / 35</div>
+  </div></section>
+
+  <!-- SLIDE 18 — B1 cresce / cala -->
+  <section class="slide"><div class="canvas light">
+    <div class="chip cyan">Come cambiano le competenze</div>
+    <div class="title">Dall'esecuzione al giudizio</div>
+    <div class="cols">
+      <div class="col"><div class="col-head" style="background:var(--cyan)">CRESCE</div><ul class="cdcyan"><li><span>Pensiero critico</span></li><li><span>IA e big data</span></li><li><span>Resilienza e curiosità</span></li><li><span>Competenze sociali ed emotive</span></li></ul></div>
+      <div class="col"><div class="col-head" style="background:var(--coral)">CALA</div><ul class="cdcoral"><li><span>Domanda per abilità manuali</span></li><li><span>Domanda per nozioni di base</span></li><li><span>Esecuzione ripetitiva</span></li></ul></div>
+    </div>
+    <div class="foot">Fonte: WEF 2025 · McKinsey</div><div class="pageno">18 / 35</div>
+  </div></section>
+
+  <!-- SLIDE 19 — STATEMENT scuola allena -->
+  <section class="slide"><div class="canvas ink">
+    <div class="chip cyan">Il senso</div>
+    <div class="stbar"></div>
+    <div class="statement wh">Quello che <span class="co">cresce</span><br>è ciò che la <span class="cy">scuola allena</span>.</div>
+    <div class="pageno dark">19 / 35</div>
+  </div></section>
+
+  <!-- SLIDE 20 — GANCIO B2 -->
+  <section class="slide"><div class="canvas indigobg">
+    <div class="circ" style="top:-20%;left:75%;width:38%;height:66%;background:#fff;opacity:.08;"></div>
+    <div class="hook-eyebrow">La matrice</div>
+    <div class="hook-q wh">Quale parte del vostro lavoro<br>non affidereste <span class="cy">mai</span> a una macchina?</div>
+    <div class="pageno dark">20 / 35</div>
+  </div></section>
+
+  <!-- SLIDE 21 — LA MATRICE (grafico) -->
+  <section class="slide"><div class="canvas light">
+    <div class="chip indigo">La matrice</div>
+    <div class="title">Leggere il lavoro su due assi</div>
+    <svg class="mtx" viewBox="0 0 1000 540" preserveAspectRatio="xMidYMid meet" font-family="Inter,Arial">
+      <!-- divisori quadranti -->
+      <line x1="540" y1="50" x2="540" y2="470" stroke="#E0DDF5" stroke-width="2" stroke-dasharray="7 7"/>
+      <line x1="130" y1="262" x2="970" y2="262" stroke="#E0DDF5" stroke-width="2" stroke-dasharray="7 7"/>
+      <!-- assi -->
+      <line x1="130" y1="50" x2="130" y2="470" stroke="#1E1B4B" stroke-width="4"/>
+      <line x1="130" y1="470" x2="970" y2="470" stroke="#1E1B4B" stroke-width="4"/>
+      <!-- titoli assi -->
+      <text x="545" y="525" fill="#1E1B4B" font-size="24" font-weight="800" text-anchor="middle">LIVELLO DI RESPONSABILITÀ</text>
+      <text x="150" y="497" fill="#6B6790" font-size="20" font-weight="700" text-anchor="start">BASSA</text>
+      <text x="955" y="497" fill="#6B6790" font-size="20" font-weight="700" text-anchor="end">ALTA</text>
+      <text x="48" y="262" fill="#1E1B4B" font-size="24" font-weight="800" text-anchor="middle" transform="rotate(-90 48 262)">TIPO DI LAVORO</text>
+      <text x="100" y="150" fill="#6B6790" font-size="19" font-weight="700" text-anchor="middle" transform="rotate(-90 100 150)">WHITE COLLAR</text>
+      <text x="100" y="380" fill="#6B6790" font-size="19" font-weight="700" text-anchor="middle" transform="rotate(-90 100 380)">BLUE COLLAR</text>
+      <!-- WHITE COLLAR / bassa responsabilità -->
+      <circle cx="300" cy="100" r="11" fill="#9AA3B2"/><text x="320" y="106" fill="#1E1B4B" font-size="21" font-weight="700">Data entry</text>
+      <circle cx="260" cy="175" r="11" fill="#9AA3B2"/><text x="280" y="181" fill="#1E1B4B" font-size="21" font-weight="700">Impiegato amministrativo</text>
+      <!-- WHITE COLLAR / alta responsabilità -->
+      <circle cx="815" cy="95" r="11" fill="#9AA3B2"/><text x="797" y="101" fill="#1E1B4B" font-size="21" font-weight="700" text-anchor="end">CEO</text>
+      <circle cx="770" cy="155" r="11" fill="#9AA3B2"/><text x="752" y="161" fill="#1E1B4B" font-size="21" font-weight="700" text-anchor="end">Dirigente scolastico</text>
+      <circle cx="710" cy="220" r="13" fill="#F97316"/><text x="692" y="226" fill="#F97316" font-size="22" font-weight="800" text-anchor="end">Insegnante</text>
+      <!-- BLUE COLLAR / bassa responsabilità -->
+      <circle cx="310" cy="330" r="11" fill="#79B0E0"/><text x="330" y="336" fill="#1E1B4B" font-size="21" font-weight="700">Operaio generico</text>
+      <circle cx="265" cy="415" r="11" fill="#79B0E0"/><text x="285" y="421" fill="#1E1B4B" font-size="21" font-weight="700">Addetto pulizie</text>
+      <!-- BLUE COLLAR / alta responsabilità -->
+      <circle cx="730" cy="345" r="11" fill="#79B0E0"/><text x="712" y="351" fill="#1E1B4B" font-size="21" font-weight="700" text-anchor="end">Chirurgo</text>
+      <circle cx="775" cy="425" r="11" fill="#79B0E0"/><text x="757" y="431" fill="#1E1B4B" font-size="21" font-weight="700" text-anchor="end">Tecnico specializzato</text>
+    </svg>
+    <div class="foot">AI INSEGNANTI · Formazione PNRR</div><div class="pageno">21 / 35</div>
+  </div></section>
+
+  <!-- SLIDE 22 — B2 reversibile / irreversibile -->
+  <section class="slide"><div class="canvas light">
+    <div class="chip indigo">La matrice</div>
+    <div class="title">La discriminante: si può tornare indietro?</div>
+    <div class="cols">
+      <div class="col"><div class="col-head" style="background:var(--cyan)">ERRORE REVERSIBILE</div><ul class="cdcyan"><li><span>Bozza di una circolare</span></li><li><span>Categorizzare materiali</span></li><li><span>L'IA opera, revisione leggera</span></li></ul></div>
+      <div class="col"><div class="col-head" style="background:var(--coral)">ERRORE IRREVERSIBILE</div><ul class="cdcoral"><li><span>Valutare uno studente</span></li><li><span>Segnalare un DSA</span></li><li><span>Decide sempre l'umano</span></li></ul></div>
+    </div>
+    <div class="foot">Fonte: framework Bezos 2015 · EDPS 2025</div><div class="pageno">22 / 35</div>
+  </div></section>
+
+  <!-- SLIDE 23 — B2 non è cortesia, è legge -->
+  <section class="slide"><div class="canvas light">
+    <div class="chip indigo">La matrice</div>
+    <div class="title">Non è una cortesia, è legge</div>
+    <div class="cbox dark" style="top:31cqh;"><p>L'<span class="cy">AI Act</span> mette la valutazione degli studenti tra i sistemi ad alto rischio. Human in the Loop obbligatorio.</p></div>
+    <div class="cbox white" style="top:60cqh;">
+      <h4>Dove stanno gli insegnanti</h4>
+      <div class="ex">Alta responsabilità, errori spesso irreversibili. Una posizione protetta non per fortuna, ma <strong class="in">perché l'errore conta</strong>.</div>
+    </div>
+    <div class="foot">Fonte: EU AI Act, Art. 14 e Annex III</div><div class="pageno">23 / 35</div>
+  </div></section>
+
+  <!-- SLIDE 24 — B2 il futuro dei vostri studenti -->
+  <section class="slide"><div class="canvas light">
+    <div class="chip indigo">Il futuro dei vostri studenti</div>
+    <div class="title">Sulla stessa matrice</div>
+    <div class="cbox white" style="top:31cqh;">
+      <h4>Non conta quale mestiere faranno.</h4>
+      <div class="ex">Conta dove si collocheranno: nella parte automatizzabile, o in quella che <strong class="in">resta umana</strong>.</div>
+    </div>
+    <div class="cbox dark" style="top:60cqh;"><p>Pensiero critico e giudizio non sono materie in più.<br><span class="cy">Sono il loro salvagente professionale.</span></p></div>
+    <div class="foot">AI INSEGNANTI · Formazione PNRR</div><div class="pageno">24 / 35</div>
+  </div></section>
+
+  <!-- SLIDE 25 — GANCIO B3 -->
+  <section class="slide"><div class="canvas indigobg">
+    <div class="circ" style="top:-20%;left:75%;width:38%;height:66%;background:#fff;opacity:.08;"></div>
+    <div class="hook-eyebrow">Il GenAI Wall</div>
+    <div class="hook-q wh">Se l'IA fa già il lavoro del principiante,<br>come si diventa <span class="cy">esperti?</span></div>
+    <div class="pageno dark">25 / 35</div>
+  </div></section>
+
+  <!-- SLIDE 26 — B3 dato junior -->
+  <section class="slide"><div class="canvas light">
+    <div class="chip cyan">Il GenAI Wall</div>
+    <div class="title">La gavetta sta sparendo</div>
+    <div class="datawrap">
+      <div class="stat dark"><div class="num cy">43%</div><div class="lab wh">dei CEO taglierà ruoli junior entro 1-2 anni</div></div>
+      <div class="stat lite"><div class="num co">-12%</div><div class="lab tx">impiego junior nelle aziende con GenAI</div></div>
+    </div>
+    <div class="takeaway">I compiti da principiante (ricerca, riassunti, analisi di base) sono i primi a essere automatizzati.</div>
+    <div class="foot">Fonte: Oliver Wyman Forum 2026 · Harvard/SSRN 2025</div><div class="pageno">26 / 35</div>
+  </div></section>
+
+  <!-- SLIDE 27 — B3 il problema (cinghia) -->
+  <section class="slide"><div class="canvas light">
+    <div class="chip cyan">Il GenAI Wall</div>
+    <div class="title">Il problema: la cinghia si rompe</div>
+    <div class="cbox dark" style="top:33cqh;"><p>Se non assumo junior, perché l'IA costa meno,<br><span class="co">non avrò mai senior</span> tra cinque anni.</p></div>
+    <div class="cbox white" style="top:63cqh;">
+      <div class="ex">La cinghia di trasmissione delle competenze si rompe: si automatizza proprio il gradino con cui si imparava a salire.</div>
+    </div>
+    <div class="foot">AI INSEGNANTI · Formazione PNRR</div><div class="pageno">27 / 35</div>
+  </div></section>
+
+  <!-- SLIDE 28 — B3 l'università perde valore (92/88/25, senza fonte) -->
+  <section class="slide"><div class="canvas light">
+    <div class="chip cyan">E nella scuola</div>
+    <div class="title">L'università perde valore</div>
+    <div class="datawrap" style="top:32cqh;">
+      <div class="stat lite sm"><div class="num cy">92%</div><div class="lab tx">degli studenti usa l'IA</div></div>
+      <div class="stat dark sm"><div class="num wh">88%</div><div class="lab wh">la usa per le valutazioni</div></div>
+      <div class="stat lite sm"><div class="num co">25%</div><div class="lab tx">delega tutto all'IA</div></div>
+    </div>
+    <div class="takeaway">Il luogo che dovrebbe costruire competenza la sta perdendo. La scuola è il passo prima.</div>
+    <div class="foot">AI INSEGNANTI · Formazione PNRR</div><div class="pageno">28 / 35</div>
+  </div></section>
+
+  <!-- SLIDE 29 — B3 statement ruolo scuola -->
+  <section class="slide"><div class="canvas ink">
+    <div class="chip coral">Il ruolo della scuola</div>
+    <div class="stbar"></div>
+    <div class="statement wh big">Non si previene <span class="co">vietando</span>.<br>Si previene <span class="cy">insegnando</span>.</div>
+    <div class="pageno dark">29 / 35</div>
+  </div></section>
+
+  <!-- SLIDE 30 — DIBATTITO Q1 (il vostro lavoro) -->
+  <section class="slide"><div class="canvas coralbg">
+    <div class="circ" style="top:-21%;left:80%;width:38%;height:67%;background:#fff;opacity:.12;"></div>
+    <div class="circ" style="top:62%;left:-10%;width:30%;height:53%;background:var(--ink);opacity:.2;"></div>
+    <div class="deb-tag">DIBATTITO</div><div class="deb-room">Parla la stanza</div>
+    <div class="deb-q wh">Guardando la matrice: quali parti del<br>vostro lavoro <span class="inkc">resteranno vostre</span>, e quali no?</div>
+    <div class="pageno dark">30 / 35</div>
+  </div></section>
+
+  <!-- SLIDE 31 — DIBATTITO Q2 (la scuola e gli studenti) -->
+  <section class="slide"><div class="canvas coralbg">
+    <div class="circ" style="top:-21%;left:80%;width:38%;height:67%;background:#fff;opacity:.12;"></div>
+    <div class="deb-tag">DIBATTITO</div><div class="deb-room">Parla la stanza</div>
+    <div class="deb-q wh">Cosa deve cambiare nella <span class="inkc">scuola</span><br>per preparare i ragazzi al lavoro che troveranno?</div>
+    <div class="pageno dark">31 / 35</div>
+  </div></section>
+
+  <!-- SLIDE 32 — DIBATTITO Q3 (aperta, torna dall'I1) -->
+  <section class="slide"><div class="canvas coralbg">
+    <div class="circ" style="top:-21%;left:80%;width:38%;height:67%;background:#fff;opacity:.12;"></div>
+    <div class="deb-tag">DIBATTITO</div><div class="deb-room">Domanda aperta · torna dall'Incontro 1</div>
+    <div class="deb-q wh">Cos'è che nessuna IA potrà mai fare<br>al posto <span class="inkc">vostro?</span></div>
+    <div class="pageno dark">32 / 35</div>
+  </div></section>
+
+  <!-- SLIDE 33 — PIANO PERSONALE (con domande-guida) -->
+  <section class="slide"><div class="canvas light">
+    <div class="chip violet">Il vostro piano</div>
+    <div class="title">Una cosa concreta, da lunedì</div>
+    <div class="cols" style="top:31cqh;">
+      <div class="col"><div class="col-head" style="background:var(--violet)">RISPONDETE A TRE DOMANDE</div><ul class="cdmuted"><li><span>Quale attività della prossima settimana?</span></li><li><span>Con quale strumento, tra quelli visti?</span></li><li><span>Come capirò che ha funzionato?</span></li></ul></div>
+    </div>
+    <div class="cbox dark" style="top:74cqh;"><p>Il valore non si accumula con i buoni propositi.&nbsp;&nbsp;<span class="cy">Si accumula con la prima prova.</span></p></div>
+    <div class="foot">AI INSEGNANTI · Formazione PNRR</div><div class="pageno">33 / 35</div>
+  </div></section>
+
+  <!-- SLIDE 34 — STATEMENT finale -->
+  <section class="slide"><div class="canvas ink">
+    <div class="chip coral">Il messaggio</div>
+    <div class="stbar"></div>
+    <div class="statement wh">I professori sono gli<br><span class="cy">agenti di cambiamento</span> di questa società.</div>
+    <div style="position:absolute;top:70cqh;left:6.5cqw;right:8cqw;font-size:3.2cqh;color:var(--cfcb);">Non perché devono usare l'IA, ma perché possono insegnare come usarla bene.</div>
+    <div class="pageno dark">34 / 35</div>
+  </div></section>
+
+  <!-- SLIDE 35 — CHIUSURA -->
+  <section class="slide"><div class="canvas ink">
+    <div class="circ" style="top:-19%;left:78%;width:34%;height:60%;background:var(--indigo);opacity:.45;"></div>
+    <div class="circ" style="top:58%;left:88%;width:25%;height:45%;background:var(--violet);opacity:.4;"></div>
+    <div class="circ" style="top:70%;left:-8%;width:24%;height:42%;background:var(--cyan);opacity:.3;"></div>
+    <div class="statement wh" style="top:38cqh;">Insegnate il <span class="cy">metodo</span>.<br>Il futuro lo scrivono <span class="co">loro</span>.</div>
+    <div class="dots" style="top:82%;left:6.6%;"><span style="background:var(--cyan)"></span><span style="background:var(--indigo)"></span><span style="background:var(--violet)"></span><span style="background:var(--coral)"></span></div>
+    <div class="pageno dark">35 / 35</div>
+  </div></section>
+
+</div>
+<div class="hint">frecce su giù · F schermo intero · Cmd/Ctrl+P per esportare PDF</div>
+<script>
+  const deck=document.getElementById('deck');
+  const slides=[...document.querySelectorAll('.slide')];
+  let i=0;
+  function go(n){i=Math.max(0,Math.min(slides.length-1,n));slides[i].scrollIntoView({behavior:'smooth'});}
+  deck.addEventListener('scroll',()=>{i=Math.round(deck.scrollTop/window.innerHeight);},{passive:true});
+  window.addEventListener('keydown',e=>{
+    if(['ArrowDown','ArrowRight','PageDown',' '].includes(e.key)){e.preventDefault();go(i+1);}
+    else if(['ArrowUp','ArrowLeft','PageUp'].includes(e.key)){e.preventDefault();go(i-1);}
+    else if(e.key==='Home'){e.preventDefault();go(0);}
+    else if(e.key==='End'){e.preventDefault();go(slides.length-1);}
+    else if(e.key.toLowerCase()==='f'){if(!document.fullscreenElement)document.documentElement.requestFullscreen();else document.exitFullscreen();}
+  });
+</script>
+</body>
+</html>

@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lezione Canva · Guida pratica per il formatore</title>
+<style>
+  :root{
+    --ink:#1E1B4B; --indigo:#4F46E5; --violet:#7C3AED; --cyan:#0891B2;
+    --coral:#EA6A1E; --teal:#0E9488; --bg:#F7F6FB; --text:#1A1730; --muted:#6B6790; --line:#E6E3FB; --card:#fff;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  body{font-family:'Inter','Segoe UI',-apple-system,Arial,sans-serif;background:var(--bg);color:var(--text);line-height:1.5;}
+  .wrap{max-width:900px;margin:0 auto;padding:36px 24px 80px;}
+  header{margin-bottom:18px;}
+  h1{font-size:30px;font-weight:800;color:var(--ink);}
+  .sub{color:var(--muted);font-size:15px;margin-top:4px;}
+  .sec-label{font-size:13px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);font-weight:700;margin:28px 0 10px;}
+  .block{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:20px 22px;margin-bottom:16px;border-left:6px solid var(--indigo);}
+  .block.setup{border-left-color:var(--teal);} .block.teoria{border-left-color:var(--cyan);} .block.pratica{border-left-color:var(--coral);}
+  .bhead{display:flex;align-items:baseline;gap:10px;margin-bottom:4px;flex-wrap:wrap;}
+  .bnum{font-size:13px;font-weight:800;color:#fff;background:var(--indigo);border-radius:20px;padding:2px 10px;}
+  .block.setup .bnum{background:var(--teal);} .block.teoria .bnum{background:var(--cyan);} .block.pratica .bnum{background:var(--coral);}
+  .btitle{font-size:20px;font-weight:800;color:var(--ink);}
+  .btime{font-size:13px;color:var(--muted);margin-left:auto;font-weight:600;}
+  .steps{list-style:none;counter-reset:s;margin-top:10px;}
+  .steps li{counter-increment:s;padding-left:30px;position:relative;margin-bottom:8px;font-size:15px;}
+  .steps li::before{content:counter(s);position:absolute;left:0;top:1px;width:20px;height:20px;background:var(--indigo);color:#fff;border-radius:50%;font-size:12px;font-weight:700;display:flex;align-items:center;justify-content:center;}
+  .steps b{color:var(--ink);}
+  ul.plain{list-style:none;margin-top:8px;} ul.plain li{font-size:15px;padding-left:18px;position:relative;margin-bottom:6px;}
+  ul.plain li::before{content:"";position:absolute;left:0;top:9px;width:6px;height:6px;border-radius:50%;background:var(--muted);}
+  .say{margin-top:12px;background:#F0EFFA;border-radius:8px;padding:10px 14px;font-size:14.5px;font-style:italic;color:var(--ink);}
+  .say b{font-style:normal;color:var(--violet);font-weight:700;}
+  .prompt{margin-top:10px;background:#FFF8F2;border:1px solid #F6D9C2;border-radius:8px;padding:10px 14px;font-size:14px;color:var(--ink);}
+  .prompt b{color:var(--coral);}
+  .cue{display:inline-block;background:#FFF1E6;color:var(--coral);border:1px solid #F6D9C2;border-radius:6px;padding:1px 8px;font-size:13px;font-weight:700;margin-top:10px;}
+  .note{margin-top:8px;font-size:13.5px;color:var(--muted);} .note b{color:var(--text);}
+  @media print{ body{background:#fff;} .block{break-inside:avoid;} }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header>
+    <h1>Lezione Canva · Guida pratica per il formatore</h1>
+    <div class="sub">La scaletta da seguire: cosa mostrare, in ordine. Lezione semplice e più corta (~1h30), quasi tutta pratica. Mi raccomando: leggere sempre i prompt per intero.</div>
+  </header>
+
+  <div class="sec-label">Prima della lezione (setup)</div>
+  <div class="block setup">
+    <div class="bhead"><span class="bnum">0</span><span class="btitle">Da avere pronto</span></div>
+    <ul class="plain">
+      <li>Account <b>Canva Pro</b> del corso: accesso con lo stesso Google usato per Claude.</li>
+      <li>I tre prompt pronti da copiare (presentazione, scheda, gioco Canva Code) e il prompt-ponte per Claude.</li>
+    </ul>
+  </div>
+
+  <div class="sec-label">Parte teorica · slide, veloce</div>
+  <div class="block teoria">
+    <div class="bhead"><span class="bnum">T</span><span class="btitle">Le slide introduttive</span></div>
+    <ul class="plain">
+      <li>Canva rende le lezioni belle e interattive in pochi minuti. Molte scuole hanno già Canva: spieghiamo solo le cose con l'IA, che sono le più importanti.</li>
+      <li>Le funzioni: <b>Magic Design</b> (presentazioni e schede da un prompt), template e <b>Magic Charts</b> (infografiche), <b>Canva Code</b> (giochi).</li>
+      <li><b>Canva for Education</b> a disposizione: ci sono limiti sull'IA, ma non si esauriscono se non ci passano tutto il giorno.</li>
+    </ul>
+    <div class="cue">Slide deck: 1-5</div>
+  </div>
+
+  <div class="sec-label">Parte pratica · cosa mostrare, in ordine</div>
+
+  <div class="block pratica">
+    <div class="bhead"><span class="bnum">1</span><span class="btitle">Apri Canva</span></div>
+    <ul class="steps">
+      <li>Accesso con Google (stesso account di Claude).</li>
+      <li>La cosa che ci interessa è <b>Canva AI</b> (in basso): può creare design, immagini, documenti, <b>codice</b> e videoclip. Le chat restano a lato.</li>
+    </ul>
+    <div class="note">Struttura simile agli altri strumenti. Ricorda di leggere sempre i prompt per intero.</div>
+  </div>
+
+  <div class="block pratica">
+    <div class="bhead"><span class="bnum">2</span><span class="btitle">Esempio 1 · La presentazione (Magic Design)</span></div>
+    <ul class="steps">
+      <li>Incolla il prompt della presentazione, scegli <b>Design</b> e <b>Presentazione</b>, fai Submit.</li>
+      <li>Claude mostra prima i <b>titoli di tutte le slide</b>: se vanno bene clicca <b>Generate Presentation</b> (si può anche modificare il contenuto di una slide scrivendoglielo).</li>
+      <li>Crea le 8 slide da solo: commenta mentre lavora, mostra il risultato.</li>
+      <li>Segna cosa non è perfetto (es. la slide 2 poco leggibile). Due modi di correggere: <b>a mano</b> (template, elementi, testo, come Canva normale) oppure con <b>Canva AI</b>: "nella slide 2 il testo è poco leggibile, rendilo più leggibile". Modifica da solo.</li>
+      <li>Per cambiare esempio: <b>Home</b> torna a Canva AI; la <b>X</b> su "design" chiude quel design.</li>
+    </ul>
+    <div class="prompt"><b>Prompt:</b> "Crea una presentazione di 8 slide per bambini di 9 anni dal titolo 'I paesaggi d'Italia: montagna, collina e pianura'. Frasi brevi, linguaggio semplice, caratteri grandi, un'immagine illustrata serena per slide, slide numerate, e alla fine una slide di ripasso con tre domande."</div>
+    <div class="cue">Slide deck: 6 (presentazione)</div>
+  </div>
+
+  <div class="block pratica">
+    <div class="bhead"><span class="bnum">3</span><span class="btitle">Esempio 2 · La scheda (Magic Design)</span></div>
+    <ul class="steps">
+      <li>Incolla il prompt della scheda, scegli <b>Design</b>, lancia.</li>
+      <li>Parte in formato presentazione, poi capisce che serve l'<b>A4</b> e cambia formato. Lasciagli fare il lavoro.</li>
+      <li>Aggiustamenti: a mano (seleziona e sposta gli elementi) oppure con Canva AI con richieste semplici, es. "cambia il colore del riquadro Ricorda in rosa".</li>
+    </ul>
+    <div class="say"><b>Consiglio da dare:</b> esempi semplici. Le cose veloci si fanno a mano, le modifiche più articolate le chiedi a Canva AI.</div>
+    <div class="prompt"><b>Prompt:</b> "Crea una scheda didattica A4 verticale per bambini di 9 anni dal titolo 'I punti cardinali' (segue la descrizione con bussola, i quattro punti, il riquadro Ricorda e l'esercizio Completa)."</div>
+    <div class="cue">Slide deck: 7 (scheda)</div>
+  </div>
+
+  <div class="block pratica">
+    <div class="bhead"><span class="bnum">4</span><span class="btitle">Esempio 3 · Il gioco (Canva Code)</span></div>
+    <ul class="steps">
+      <li>Home, X sul design. Incolla il prompt del quiz e clicca <b>Code</b> (non Design), poi Vai. La struttura cambia perché è la modalità code.</li>
+      <li>Crea il quiz interattivo a schermo intero. Provalo: rispondi (giusto verde, sbagliato rosso), c'è anche "Ricomincia".</li>
+      <li>La cosa che ci interessa è <b>Publish</b>: metti un nome, pubblica, <b>copia il link</b>. Aprilo nel browser: è un link condivisibile con gli alunni o da proiettare alla LIM.</li>
+    </ul>
+    <div class="prompt"><b>Prompt:</b> "Crea un quiz interattivo a schermo intero per bambini di 9 anni sui punti cardinali, adatto alla LIM (segue la descrizione: 5 domande a scelta multipla, feedback giusto/sbagliato, punteggio e Ricomincia)."</div>
+    <div class="cue">Slide deck: 8 (gioco)</div>
+  </div>
+
+  <div class="block pratica">
+    <div class="bhead"><span class="bnum">5</span><span class="btitle">Il ponte con Claude</span></div>
+    <ul class="steps">
+      <li>Spiega: questi prompt non li abbiamo scritti noi, li abbiamo <b>preparati con Claude</b>. "Apri Claude nel progetto della tua classe e chiedi il prompt per Canva."</li>
+      <li>Esempio dal vivo: in una chat fai <b>/prompt-optimizer</b> (mostra che le skill servono), poi detta/scrivi: "crea un prompt per Canva Code, un quiz interattivo di matematica sulle addizioni".</li>
+      <li>Prendi il prompt che ti dà, <b>incollalo in Canva AI</b>, scegli Code, lui crea il quiz. Provalo e fai Publish.</li>
+    </ul>
+    <div class="say"><b>Da dire:</b> "Letteralmente, con una skill e due righe di messaggio, create un gioco interattivo su misura. Il prompt-ponte è quello che già avete pronto da copiare."</div>
+    <div class="cue">Slide deck: 9-11 (ponte e prompt per Claude)</div>
+  </div>
+
+  <div class="block pratica">
+    <div class="bhead"><span class="bnum">6</span><span class="btitle">Tocca a voi</span><span class="btime">~1h / 1h30</span></div>
+    <ul class="steps">
+      <li>"Scegline una e falla bene": una sola tra presentazione, scheda/infografica e gioco.</li>
+      <li>Il flusso: entra su Claude, fai le domande giuste, chiedi il prompt, poi fallo in Canva.</li>
+      <li>Il formatore gira e risponde. Chi finisce prima ne fa una seconda o una terza.</li>
+    </ul>
+    <div class="note">Lezione più corta (~1h30) perché la pratica su Claude era già lunga. Le slide di tutto il corso saranno comunque condivise, così possono ritrovare i prompt.</div>
+    <div class="cue">Slide deck: 12 (tocca a voi)</div>
+  </div>
+
+</div>
+</body>
+</html>

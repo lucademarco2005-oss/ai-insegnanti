@@ -1,0 +1,620 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Incontro 4 · Parlare all'IA: il metodo del prompt</title>
+<!--
+  COME USARLO
+  · Presentare: apri nel browser. Frecce o scroll per cambiare slide. Tasto F = schermo intero.
+  · Esportare in PDF/slide: Stampa (Cmd/Ctrl+P), poi Orizzontale, Margini Nessuno, "Grafica di sfondo" ATTIVA, Salva come PDF.
+  · Modificare: ogni slide è un blocco <section class="slide"> con commento SLIDE N. Colori in :root.
+  TIPI DI SLIDE (colore = funzione):
+  · ink (navy)       = statement chiave
+  · light            = contenuto
+  · indigobg (viola) = GANCIO: domanda introduttiva del relatore / intro pratica
+  · coralbg (arancio)= DIBATTITO / DOMANDA: parla la stanza
+-->
+<style>
+  :root{
+    --ink:#1E1B4B; --ink2:#2A2566; --indigo:#4F46E5; --violet:#7C3AED;
+    --cyan:#06B6D4; --coral:#F97316; --light:#F6F5FF; --text:#1A1730;
+    --muted:#6B6790; --white:#ffffff; --cfcb:#CFCBF0; --faint:#8E8AC4;
+    --line:#E6E3FB;
+    --font:'Inter','Segoe UI',-apple-system,Arial,sans-serif;
+  }
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap');
+  *{box-sizing:border-box;margin:0;padding:0;}
+  html,body{background:#0c0a1f;font-family:var(--font);}
+  .deck{height:100vh;overflow-y:scroll;scroll-snap-type:y mandatory;scroll-behavior:smooth;}
+  .slide{height:100vh;display:flex;align-items:center;justify-content:center;scroll-snap-align:start;background:#0c0a1f;}
+  .canvas{position:relative;width:min(100vw,177.78vh);height:min(56.25vw,100vh);container-type:size;overflow:hidden;}
+  .ink{background:var(--ink);} .light{background:var(--light);} .coralbg{background:var(--coral);} .indigobg{background:var(--indigo);}
+
+  .cy{color:var(--cyan);} .co{color:var(--coral);} .in{color:var(--indigo);}
+  .vi{color:var(--violet);} .wh{color:var(--white);} .tx{color:var(--text);}
+  .mu{color:var(--muted);} .inkc{color:var(--ink);}
+
+  .chip{position:absolute;top:8cqh;left:5.5cqw;padding:1.3cqh 2.2cqh;border-radius:2cqh;
+        font-size:2.4cqh;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#fff;}
+  .chip.violet{background:var(--violet);} .chip.cyan{background:var(--cyan);}
+  .chip.indigo{background:var(--indigo);} .chip.coral{background:var(--coral);} .chip.muted{background:var(--muted);}
+
+  .title{position:absolute;top:15cqh;left:5.5cqw;right:5.5cqw;font-size:6.2cqh;font-weight:800;color:var(--text);line-height:1.05;}
+
+  .stbar{position:absolute;top:34cqh;left:6.7cqw;width:4.2cqh;height:1.3cqh;background:var(--coral);}
+  .statement{position:absolute;top:38cqh;left:6.5cqw;right:6cqw;font-size:7.6cqh;font-weight:800;line-height:1.08;}
+  .statement.big{font-size:8.6cqh;}
+
+  .foot{position:absolute;bottom:4cqh;left:5.5cqw;font-size:1.7cqh;color:var(--muted);}
+  .foot.dark{color:var(--faint);}
+  .pageno{position:absolute;bottom:4cqh;right:5.5cqw;font-size:1.7cqh;color:var(--muted);}
+  .pageno.dark{color:var(--faint);}
+
+  /* flag "se avanza tempo" (in basso a destra, sopra il numero di pagina) */
+  .flag{position:absolute;bottom:9cqh;right:5.5cqw;max-width:46cqw;text-align:right;
+        border-radius:2.2cqh;padding:1.6cqh 2.4cqh;background:#fff;border:1.5px solid var(--coral);}
+  .flag b{display:block;font-size:2.2cqh;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--coral);}
+  .flag span{display:block;font-size:2.1cqh;color:var(--muted);line-height:1.2;margin-top:.5cqh;}
+  .flag.onbg{background:rgba(255,255,255,.16);border-color:rgba(255,255,255,.75);}
+  .flag.onbg b{color:#fff;} .flag.onbg span{color:#FFE9DA;}
+
+  .dots{position:absolute;display:flex;gap:1.4cqh;}
+  .dots span{width:2cqh;height:2cqh;border-radius:50%;}
+
+  .eyebrow{position:absolute;top:21cqh;left:5.5cqw;font-size:2.6cqh;font-weight:700;letter-spacing:.18em;color:var(--cyan);}
+  .cover-title{position:absolute;top:27cqh;left:5.2cqw;right:6cqw;font-size:9.4cqh;font-weight:800;color:#fff;line-height:.96;}
+  .cover-bar{position:absolute;top:57cqh;left:5.6cqw;width:4cqh;height:1.2cqh;background:var(--coral);}
+  .cover-sub{position:absolute;top:61cqh;left:5.5cqw;font-size:3.6cqh;color:var(--cfcb);}
+  .cover-foot{position:absolute;bottom:5cqh;left:5.5cqw;font-size:1.9cqh;color:var(--faint);}
+
+  .circ{position:absolute;border-radius:50%;}
+
+  .hook-eyebrow{position:absolute;top:20cqh;left:6cqw;font-size:2.7cqh;font-weight:700;letter-spacing:.16em;color:var(--cfcb);text-transform:uppercase;}
+  .hook-q{position:absolute;top:36cqh;left:6cqw;right:7cqw;font-size:7.4cqh;font-weight:800;color:#fff;line-height:1.1;}
+
+  .cards{position:absolute;top:33cqh;left:5.5cqw;right:5.5cqw;display:flex;flex-direction:column;gap:2.4cqh;}
+  .card{display:flex;align-items:center;gap:2.6cqh;background:#fff;border:1px solid var(--line);
+        border-radius:2.2cqh;padding:3cqh 3cqh;box-shadow:0 4px 14px rgba(80,70,160,.10);}
+  .card-ic{flex:none;width:9cqh;height:9cqh;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:4.4cqh;color:#fff;}
+  .card h3{font-size:3.6cqh;font-weight:700;color:var(--text);margin-bottom:.5cqh;}
+  .card p{font-size:2.6cqh;color:var(--muted);line-height:1.25;}
+
+  .datawrap{position:absolute;top:30cqh;left:5.5cqw;right:5.5cqw;display:flex;gap:3cqh;}
+  .stat{flex:1;border-radius:2.6cqh;padding:4cqh 2cqh;text-align:center;}
+  .stat.dark{background:var(--ink);} .stat.lite{background:#fff;border:1.5px solid var(--line);}
+  .stat .num{font-size:16cqh;font-weight:800;line-height:1;}
+  .stat .lab{font-size:3.2cqh;margin-top:2cqh;}
+  .takeaway{position:absolute;top:79cqh;left:5.5cqw;right:5.5cqw;font-size:3.2cqh;font-weight:700;font-style:italic;color:var(--indigo);line-height:1.2;}
+
+  .cols{position:absolute;top:31cqh;left:5.5cqw;right:5.5cqw;display:flex;gap:3cqh;}
+  .col{flex:1;background:#fff;border:1px solid var(--line);border-radius:2.2cqh;overflow:hidden;}
+  .col-head{font-size:3.6cqh;font-weight:800;color:#fff;text-align:center;padding:2.2cqh;letter-spacing:.04em;}
+  .col ul{list-style:none;padding:2.6cqh 3cqh;}
+  .col li{display:flex;gap:1.6cqh;align-items:flex-start;font-size:2.7cqh;color:var(--text);line-height:1.2;margin-bottom:2.2cqh;}
+  .col li::before{content:"";flex:none;width:1.7cqh;height:1.7cqh;border-radius:50%;margin-top:.6cqh;background:currentColor;}
+  .col.cdcoral li{color:var(--coral);} .col.cdcyan li{color:var(--cyan);}
+  .col.cdindigo li{color:var(--indigo);} .col.cdmuted li{color:var(--muted);}
+  .col li span{color:var(--text);}
+  .col .para{padding:2.6cqh 3cqh;font-size:2.4cqh;color:var(--text);line-height:1.36;}
+
+  .cbox{position:absolute;left:5.5cqw;right:5.5cqw;border-radius:2.2cqh;padding:3cqh 3.4cqh;}
+  .cbox.white{background:#fff;border:1px solid var(--line);}
+  .cbox.dark{background:var(--ink);}
+  .cbox h4{font-size:3.7cqh;font-weight:700;color:var(--text);line-height:1.15;}
+  .cbox .ex{font-size:3.1cqh;color:var(--text);margin-top:1.5cqh;}
+  .cbox.dark p{font-size:3.8cqh;color:var(--cfcb);font-weight:700;}
+
+  /* esempi prompt: fatto male / fatto bene */
+  .pex{position:absolute;left:5.5cqw;right:5.5cqw;border-radius:1.8cqh;padding:2.4cqh 3cqh;background:#fff;border:1px solid var(--line);box-shadow:0 4px 14px rgba(80,70,160,.08);}
+  .pex .lab{font-size:2.2cqh;font-weight:700;letter-spacing:.1em;text-transform:uppercase;margin-bottom:1cqh;}
+  .pex.bad{top:22cqh;border-left:7px solid var(--muted);}
+  .pex.bad .lab{color:var(--muted);}
+  .pex.bad .txt{font-size:3cqh;color:var(--text);font-style:italic;line-height:1.3;}
+  .pex.good{top:39cqh;border:1.5px solid var(--indigo);border-left:7px solid var(--indigo);}
+  .pex.good .lab{color:var(--indigo);}
+  .pex.good .txt{font-size:2.55cqh;color:var(--text);line-height:1.34;}
+  .pex-tags{position:absolute;left:5.5cqw;right:5.5cqw;top:80cqh;font-size:2.4cqh;color:var(--muted);font-weight:600;}
+  .pex-tags b{color:var(--indigo);font-weight:700;}
+
+  .legend{position:absolute;left:5.5cqw;right:5.5cqw;font-size:3cqh;font-weight:700;color:var(--text);line-height:1.3;}
+
+  .deb-tag{position:absolute;top:9cqh;left:5.5cqw;background:#fff;color:var(--coral);
+           padding:1.3cqh 2.4cqh;border-radius:2.3cqh;font-size:2.5cqh;font-weight:700;letter-spacing:.12em;}
+  .deb-room{position:absolute;top:9.6cqh;left:28cqw;font-size:2.6cqh;font-style:italic;color:#FFE4D3;}
+  .deb-q{position:absolute;top:38cqh;left:5.5cqw;right:6cqw;font-size:7cqh;font-weight:800;color:#fff;line-height:1.1;}
+  .deb-q.sm{font-size:6cqh;}
+  .deb-sub{position:absolute;top:74cqh;left:5.6cqw;right:8cqw;font-size:2.9cqh;color:#FFEAD9;line-height:1.25;}
+
+  .ponte-big{position:absolute;top:22cqh;left:5.5cqw;font-size:10cqh;font-weight:800;color:var(--text);}
+  .ponte-sub{position:absolute;top:40cqh;left:5.6cqw;right:8cqw;font-size:3.4cqh;color:var(--muted);}
+  .pcards{position:absolute;top:55cqh;left:5.5cqw;right:5.5cqw;display:flex;gap:2.6cqh;}
+  .pcard{flex:1;background:#fff;border:1px solid var(--line);border-radius:2.2cqh;padding:3cqh;}
+  .pnum{width:11cqh;height:11cqh;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:5cqh;font-weight:800;color:#fff;margin-bottom:2cqh;}
+  .pcard h3{font-size:3cqh;font-weight:700;color:var(--text);line-height:1.15;}
+
+  .hint{position:fixed;bottom:14px;right:16px;font-size:12px;color:#888;font-family:var(--font);z-index:50;}
+
+  @media print{
+    @page{size:1280px 720px;margin:0;}
+    html,body{background:#fff;}
+    .deck{height:auto;overflow:visible;display:block;}
+    .slide{height:720px;width:1280px;display:block;page-break-after:always;break-after:page;}
+    .canvas{width:1280px;height:720px;}
+    .hint{display:none;}
+    *{-webkit-print-color-adjust:exact;print-color-adjust:exact;}
+  }
+</style>
+</head>
+<body>
+<div class="deck" id="deck">
+
+  <!-- SLIDE 1 — COPERTINA -->
+  <section class="slide"><div class="canvas ink">
+    <div class="circ" style="top:-19%;left:78%;width:34%;height:60%;background:var(--indigo);opacity:.45;"></div>
+    <div class="circ" style="top:58%;left:88%;width:25%;height:45%;background:var(--violet);opacity:.4;"></div>
+    <div class="circ" style="top:70%;left:-8%;width:24%;height:42%;background:var(--cyan);opacity:.3;"></div>
+    <div class="eyebrow">USARE L'INTELLIGENZA ARTIFICIALE</div>
+    <div class="cover-title">Parlare all'IA:<br>il metodo del prompt</div>
+    <div class="cover-bar"></div>
+    <div class="cover-sub">Incontro 4 · Dire bene quello che volete</div>
+    <div class="dots" style="top:77%;left:5.6%;"><span style="background:var(--cyan)"></span><span style="background:var(--indigo)"></span><span style="background:var(--violet)"></span><span style="background:var(--coral)"></span></div>
+    <div class="cover-foot">Formazione personale ATA e segreteria · PNRR DM 219/2025</div>
+  </div></section>
+
+  <!-- SLIDE 2 — RIPRESA -->
+  <section class="slide"><div class="canvas light">
+    <div class="chip cyan">Dove siamo arrivati</div>
+    <div class="title">Il filo del corso</div>
+    <div class="cards">
+      <div class="card"><div class="card-ic" style="background:var(--indigo)">1</div><div><h3>Cos'è l'IA</h3><p>Non pensa, predice il testo. Lo stagista che sa tutto ma non conosce la vostra classe.</p></div></div>
+      <div class="card"><div class="card-ic" style="background:var(--cyan)">2</div><div><h3>Il metodo e l'etica</h3><p>I principi per usarla bene, come insegnarla, e la responsabilità verso gli studenti.</p></div></div>
+      <div class="card"><div class="card-ic" style="background:var(--coral)">4</div><div><h3>Oggi: come si fa</h3><p>Il gesto pratico che mancava: come si chiede, e come si capisce quando sbaglia.</p></div></div>
+    </div>
+    <div class="foot">AI INSEGNANTI · Formazione PNRR</div><div class="pageno">2 / 43</div>
+  </div></section>
+
+  <!-- SLIDE 3 — STATEMENT apertura -->
+  <section class="slide"><div class="canvas ink">
+    <div class="chip indigo">Perché siamo qui oggi</div>
+    <div class="stbar"></div>
+    <div class="statement wh" style="font-size:6.6cqh;">Non serve un linguaggio segreto.<br>Serve dire con <span class="cy">ordine</span> quello che avete in testa.</div>
+    <div class="pageno dark">3 / 43</div>
+  </div></section>
+
+  <!-- SLIDE 4 — GANCIO A -->
+  <section class="slide"><div class="canvas indigobg">
+    <div class="circ" style="top:-20%;left:75%;width:38%;height:66%;background:#fff;opacity:.08;"></div>
+    <div class="hook-eyebrow">Parte 1 · Dall'istinto al metodo</div>
+    <div class="hook-q wh">Quando l'IA vi delude,<br>è colpa sua o di <span class="cy">come gliel'avete chiesto</span>?</div>
+    <div class="pageno dark">4 / 43</div>
+  </div></section>
+
+  <!-- SLIDE 5 — CONFRONTO istintivo/sistematico -->
+  <section class="slide"><div class="canvas light">
+    <div class="chip indigo">Due modi di chiedere</div>
+    <div class="title">Istintivo contro sistematico</div>
+    <div class="cols">
+      <div class="col"><div class="col-head" style="background:var(--muted)">ISTINTIVO</div><ul class="cdmuted"><li><span>Due righe buttate lì</span></li><li><span>A volte funziona, a volte no</span></li><li><span>Non capite perché, non migliorate</span></li></ul></div>
+      <div class="col"><div class="col-head" style="background:var(--indigo)">SISTEMATICO</div><ul class="cdindigo"><li><span>Una struttura che si ripete</span></li><li><span>Risultati coerenti</span></li><li><span>Riutilizzabile, e migliora nel tempo</span></li></ul></div>
+    </div>
+    <div class="takeaway">Non è talento. È metodo: lo stesso che insegnate ai vostri studenti.</div>
+    <div class="foot">AI INSEGNANTI · Formazione PNRR</div><div class="pageno">5 / 43</div>
+  </div></section>
+
+  <!-- SLIDE 6 — DATO 73% -->
+  <section class="slide"><div class="canvas light">
+    <div class="chip indigo">Il dato</div>
+    <div class="title">La struttura batte l'istinto</div>
+    <div class="stat dark" style="position:absolute;top:31cqh;left:5.5cqw;right:5.5cqw;padding:5cqh 3cqh;border-radius:2.6cqh;text-align:center;">
+      <div style="font-size:15cqh;font-weight:800;color:var(--cyan);line-height:1;">73%</div>
+      <div style="font-size:3.4cqh;color:#fff;margin-top:2.5cqh;">i prompt strutturati sono preferiti<br>rispetto a quelli scritti di getto</div>
+    </div>
+    <div class="takeaway">Una struttura semplice, sempre la stessa, e i risultati cambiano.</div>
+    <div class="foot">Fonte: test OpenAI 2024 · prompt engineering</div><div class="pageno">6 / 43</div>
+  </div></section>
+
+  <!-- SLIDE 7 — OVERVIEW 5 fasi -->
+  <section class="slide"><div class="canvas light">
+    <div class="chip violet">Il metodo</div>
+    <div class="title">Le 5 fasi del prompt</div>
+    <div class="cards" style="top:30cqh;gap:1.5cqh;">
+      <div class="card" style="padding:1.8cqh 3cqh;"><div class="card-ic" style="background:var(--indigo);width:6.4cqh;height:6.4cqh;font-size:3cqh;">1</div><div><h3 style="margin:0;font-size:3cqh">Obiettivo</h3></div></div>
+      <div class="card" style="padding:1.8cqh 3cqh;"><div class="card-ic" style="background:var(--cyan);width:6.4cqh;height:6.4cqh;font-size:3cqh;">2</div><div><h3 style="margin:0;font-size:3cqh">Contesto</h3></div></div>
+      <div class="card" style="padding:1.8cqh 3cqh;"><div class="card-ic" style="background:var(--violet);width:6.4cqh;height:6.4cqh;font-size:3cqh;">3</div><div><h3 style="margin:0;font-size:3cqh">Esempi e materiali</h3></div></div>
+      <div class="card" style="padding:1.8cqh 3cqh;"><div class="card-ic" style="background:var(--coral);width:6.4cqh;height:6.4cqh;font-size:3cqh;">4</div><div><h3 style="margin:0;font-size:3cqh">Valutazione</h3></div></div>
+      <div class="card" style="padding:1.8cqh 3cqh;"><div class="card-ic" style="background:var(--indigo);width:6.4cqh;height:6.4cqh;font-size:3cqh;">5</div><div><h3 style="margin:0;font-size:3cqh">Iterazione</h3></div></div>
+    </div>
+    <div class="foot">AI INSEGNANTI · Formazione PNRR</div><div class="pageno">7 / 43</div>
+  </div></section>
+
+  <!-- SLIDE 8 — FASE 1 Obiettivo -->
+  <section class="slide"><div class="canvas light">
+    <div class="chip indigo">Fase 1 · Obiettivo</div>
+    <div class="title">Cosa, come, in che formato</div>
+    <div class="cards" style="top:34cqh;">
+      <div class="card"><div class="card-ic" style="background:var(--indigo)">?</div><div><h3>Cosa devo fare</h3></div></div>
+      <div class="card"><div class="card-ic" style="background:var(--cyan)">≡</div><div><h3>Come lo voglio</h3></div></div>
+      <div class="card"><div class="card-ic" style="background:var(--coral)">▦</div><div><h3>Che formato mi serve</h3><p>Tabella, 5 punti, 100 parole: la leva più sottovalutata.</p></div></div>
+    </div>
+    <div class="foot">Senza obiettivo, arriva una risposta generica</div><div class="pageno">8 / 43</div>
+  </div></section>
+
+  <!-- SLIDE 9 — FASE 2 Contesto -->
+  <section class="slide"><div class="canvas light">
+    <div class="chip indigo">Fase 2 · Contesto</div>
+    <div class="title">L'IA non sa niente di voi</div>
+    <div class="cbox white" style="top:31cqh;"><h4>Ditele chi siete, chi è il destinatario, che ruolo deve avere. E aggiungete tutti i dettagli utili.</h4><div class="ex">"Maestra di quarta, 22 alunni vivaci, prima volta sull'argomento": ogni dettaglio in più la avvicina a voi.</div></div>
+    <div class="cbox dark" style="top:64cqh;"><p>Più contesto le date, <span class="cy">meglio lavora. "Sei un esperto" generico, da solo, serve a poco.</span></p></div>
+    <div class="foot">AI INSEGNANTI · Formazione PNRR</div><div class="pageno">9 / 43</div>
+  </div></section>
+
+  <!-- SLIDE 10 — FASE 3 Esempi e materiali -->
+  <section class="slide"><div class="canvas light">
+    <div class="chip indigo">Fase 3 · Esempi e materiali</div>
+    <div class="title">Mostrare, non descrivere</div>
+    <div class="cards" style="top:34cqh;">
+      <div class="card"><div class="card-ic" style="background:var(--indigo)">▢</div><div><h3>Uno screenshot</h3></div></div>
+      <div class="card"><div class="card-ic" style="background:var(--cyan)">¶</div><div><h3>Il testo su cui lavorare</h3></div></div>
+      <div class="card"><div class="card-ic" style="background:var(--coral)">★</div><div><h3>Un modello del "fatto bene"</h3><p>Un esempio vale più di cento istruzioni.</p></div></div>
+    </div>
+    <div class="foot">AI INSEGNANTI · Formazione PNRR</div><div class="pageno">10 / 43</div>
+  </div></section>
+
+  <!-- SLIDE 11 — FASE 4 Valutazione -->
+  <section class="slide"><div class="canvas light">
+    <div class="chip indigo">Fase 4 · Valutazione</div>
+    <div class="title">Il risultato è una bozza</div>
+    <div class="cbox white" style="top:32cqh;"><h4>Niente "no" secchi. A un collaboratore spieghereste cosa non va e perché.</h4><div class="ex">"Troppo difficile per una prima: semplifica il lessico e accorcia le frasi."</div></div>
+    <div class="cbox dark" style="top:62cqh;"><p>Più il feedback è preciso, <span class="cy">meglio risponde.</span></p></div>
+    <div class="foot">AI INSEGNANTI · Formazione PNRR</div><div class="pageno">11 / 43</div>
+  </div></section>
+
+  <!-- SLIDE 12 — FASE 5 Iterazione -->
+  <section class="slide"><div class="canvas light">
+    <div class="chip indigo">Fase 5 · Iterazione</div>
+    <div class="title">Il valore sta nel ciclo</div>
+    <div class="cards" style="top:34cqh;">
+      <div class="card"><div class="card-ic" style="background:var(--indigo)">1</div><div><h3>Migliorare il prompt</h3><p>Riscrivete più preciso quello che non ha funzionato.</p></div></div>
+      <div class="card"><div class="card-ic" style="background:var(--cyan)">2</div><div><h3>Dividere in sezioni</h3><p>Un pezzo alla volta, invece di tutto insieme.</p></div></div>
+      <div class="card"><div class="card-ic" style="background:var(--coral)">3</div><div><h3>Aggiungere limiti</h3><p>Vincoli di lunghezza, tono, formato: meno deriva.</p></div></div>
+    </div>
+    <div class="foot">Il primo prompt è quasi sempre da correggere. È normale.</div><div class="pageno">12 / 43</div>
+  </div></section>
+
+  <!-- SLIDE 13 — STATEMENT bozza/ciclo -->
+  <section class="slide"><div class="canvas ink">
+    <div class="chip violet">Il cuore del metodo</div>
+    <div class="stbar"></div>
+    <div class="statement wh">Il primo prompt è una <span class="co">bozza</span>.<br>Il valore sta nel <span class="cy">ciclo</span>, non nel colpo singolo.</div>
+    <div class="pageno dark">13 / 43</div>
+  </div></section>
+
+  <!-- SLIDE 14 — LEAD-IN esempi -->
+  <section class="slide"><div class="canvas light">
+    <div class="chip violet">Cinque compiti veri</div>
+    <div class="title">Fatto male, fatto bene</div>
+    <div class="cbox white" style="top:34cqh;"><h4>A sinistra come chiediamo di solito. A destra come conviene chiedere, con le 5 fasi dentro.</h4></div>
+    <div class="cbox dark" style="top:58cqh;"><p>Il "fatto bene" non è più difficile. <span class="cy">È solo più pensato.</span></p></div>
+    <div class="foot">Uno per ogni livello: dalla primaria alle superiori, fino alla segreteria</div><div class="pageno">14 / 43</div>
+  </div></section>
+
+  <!-- SLIDE 15 — ESEMPIO 1 Verifica -->
+  <section class="slide"><div class="canvas light">
+    <div class="chip indigo">Esempio 1 · Verifica · secondaria</div>
+    <div class="pex bad"><div class="lab">Fatto male</div><div class="txt">"Fammi una verifica sulla Seconda guerra mondiale."</div></div>
+    <div class="pex good"><div class="lab">Fatto bene</div><div class="txt">"Sei un insegnante di storia di terza media. Prepara una verifica sulla Seconda guerra mondiale per 22 alunni di livello misto: 4 domande chiuse, 3 aperte brevi (massimo 5 righe), 1 di collegamento causa-effetto. Linguaggio semplice. Ti allego la mia verifica dell'anno scorso: tienine tono e difficoltà. Per ogni domanda indica l'obiettivo che verifica. Se un argomento non è nel programma allegato, non inserirlo."</div></div>
+    <div class="pex-tags">Le 5 fasi: <b>Obiettivo</b> · <b>Contesto</b> · <b>Esempi</b> · <b>Valutazione</b> · <b>Iterazione</b></div>
+    <div class="pageno">15 / 43</div>
+  </div></section>
+
+  <!-- SLIDE 16 — ESEMPIO 2 Frazioni -->
+  <section class="slide"><div class="canvas light">
+    <div class="chip indigo">Esempio 2 · Spiegare un concetto · primaria</div>
+    <div class="pex bad"><div class="lab">Fatto male</div><div class="txt">"Spiega le frazioni."</div></div>
+    <div class="pex good"><div class="lab">Fatto bene</div><div class="txt">"Sei un maestro di quarta. Spiega le frazioni a bambini di 9 anni che le vedono per la prima volta. Un solo esempio concreto e quotidiano (la pizza), frasi brevi, nessun termine tecnico non spiegato, massimo 150 parole. Chiudi con 3 domande semplici per capire se hanno capito. Se usi una parola difficile, spiegala subito tra parentesi."</div></div>
+    <div class="pex-tags">Le 5 fasi: <b>Obiettivo</b> · <b>Contesto</b> · <b>Esempi</b> · <b>Valutazione</b> · <b>Iterazione</b></div>
+    <div class="pageno">16 / 43</div>
+  </div></section>
+
+  <!-- SLIDE 17 — ESEMPIO 3 Mail -->
+  <section class="slide"><div class="canvas light">
+    <div class="chip indigo">Esempio 3 · Comunicazione · segreteria</div>
+    <div class="pex bad"><div class="lab">Fatto male</div><div class="txt">"Scrivi una mail ai genitori per l'uscita didattica."</div></div>
+    <div class="pex good"><div class="lab">Fatto bene</div><div class="txt">"Sei la segreteria di una scuola primaria. Scrivi ai genitori per un'uscita al museo di scienze il 14 marzo. Tono cordiale e chiaro, massimo 120 parole. Devono risultare evidenti: ritrovo e rientro, costo, cosa portare, scadenza dell'autorizzazione. Chiudi con i contatti della segreteria. Niente tono burocratico."</div></div>
+    <div class="pex-tags">Le 5 fasi: <b>Obiettivo</b> · <b>Contesto</b> · <b>Materiali</b> · <b>Valutazione</b> · <b>Iterazione</b></div>
+    <div class="pageno">17 / 43</div>
+  </div></section>
+
+  <!-- SLIDE 18 — ESEMPIO 4 Lezione -->
+  <section class="slide"><div class="canvas light">
+    <div class="chip indigo">Esempio 4 · Progettare la lezione · trasversale</div>
+    <div class="pex bad"><div class="lab">Fatto male</div><div class="txt">"Fammi una lezione sull'intelligenza artificiale."</div></div>
+    <div class="pex good"><div class="lab">Fatto bene</div><div class="txt">"Sei un insegnante di secondaria di primo grado. Progetta una lezione di 50 minuti per una seconda media per imparare a capire quando un'informazione è affidabile, usando l'IA come esempio. Struttura in 3 momenti con i tempi (apertura con una domanda, attività a gruppi, discussione). Proponi un'attività concreta svolgibile in classe e indica i materiali. Se serve un dispositivo, dammi anche un'alternativa senza."</div></div>
+    <div class="pex-tags">Le 5 fasi: <b>Obiettivo</b> · <b>Contesto</b> · <b>Esempi</b> · <b>Valutazione</b> · <b>Iterazione</b></div>
+    <div class="pageno">18 / 43</div>
+  </div></section>
+
+  <!-- SLIDE 19 — ESEMPIO 5 Griglia -->
+  <section class="slide"><div class="canvas light">
+    <div class="chip indigo">Esempio 5 · Griglia di valutazione · secondaria</div>
+    <div class="pex bad"><div class="lab">Fatto male</div><div class="txt">"Fammi una griglia per valutare i temi."</div></div>
+    <div class="pex good"><div class="lab">Fatto bene</div><div class="txt">"Sei un insegnante di italiano del biennio. Crea una griglia per valutare un tema argomentativo su 4 criteri: aderenza alla traccia, coerenza, lessico, correttezza. Per ogni criterio 4 livelli (da insufficiente a ottimo) con una descrizione concreta di cosa li distingue. Formato tabella. La grammatica vale al massimo un quarto del voto. Usa un linguaggio condivisibile con gli studenti."</div></div>
+    <div class="pex-tags">Le 5 fasi: <b>Obiettivo</b> · <b>Contesto</b> · <b>Materiali</b> · <b>Valutazione</b> · <b>Iterazione</b></div>
+    <div class="pageno">19 / 43</div>
+  </div></section>
+
+  <!-- SLIDE 20 — STATEMENT esempi -->
+  <section class="slide"><div class="canvas ink">
+    <div class="chip violet">La sintesi</div>
+    <div class="stbar"></div>
+    <div class="statement wh">Il "fatto bene" è lungo<br>solo perché è <span class="cy">pensato</span>.</div>
+    <div class="pageno dark">20 / 43</div>
+  </div></section>
+
+  <!-- SLIDE 21 — GANCIO B -->
+  <section class="slide"><div class="canvas indigobg">
+    <div class="circ" style="top:-20%;left:75%;width:38%;height:66%;background:#fff;opacity:.08;"></div>
+    <div class="hook-eyebrow">Parte 2 · Dove l'IA sbaglia</div>
+    <div class="hook-q wh">Vi è mai capitato un risultato perfetto nella forma,<br>ma <span class="cy">sbagliato nei fatti</span>?</div>
+    <div class="pageno dark">21 / 43</div>
+  </div></section>
+
+  <!-- SLIDE 22 — Allucinazioni -->
+  <section class="slide"><div class="canvas light">
+    <div class="chip indigo">Le allucinazioni</div>
+    <div class="title">Inventa con sicurezza</div>
+    <div class="cbox white" style="top:31cqh;"><h4>L'IA tende a rispondere sempre. Quando non sa, non dice "non lo so": dice qualcosa di plausibile.</h4><div class="ex">È lo studente brillante che, pur di non ammettere di non sapere, costruisce una risposta convincente.</div></div>
+    <div class="cbox dark" style="top:64cqh;"><p>Il guaio: <span class="cy">una risposta sbagliata può sembrare perfetta nella forma.</span></p></div>
+    <div class="foot">AI INSEGNANTI · Formazione PNRR</div><div class="pageno">22 / 43</div>
+  </div></section>
+
+  <!-- SLIDE 23 — Voi siete gli esperti -->
+  <section class="slide"><div class="canvas light">
+    <div class="chip indigo">Il vostro vantaggio</div>
+    <div class="title">Voi siete gli esperti</div>
+    <div class="cbox white" style="top:31cqh;"><h4>Chi conosce la materia riconosce subito quando l'IA inventa. L'errore che inganna un principiante, a voi salta all'occhio.</h4></div>
+    <div class="cbox dark" style="top:60cqh;"><p>Più siete esperti, <span class="cy">meglio usate l'IA: la vostra competenza è il filtro.</span></p></div>
+    <div class="foot">AI INSEGNANTI · Formazione PNRR</div><div class="pageno">23 / 43</div>
+  </div></section>
+
+  <!-- SLIDE 24 — Bias Amazon -->
+  <section class="slide"><div class="canvas light">
+    <div class="chip indigo">I bias</div>
+    <div class="title">Lo specchio del passato</div>
+    <div class="cbox white" style="top:31cqh;"><h4>Nel 2018 Amazon usava un sistema automatico per selezionare i curriculum. Penalizzava le donne.</h4><div class="ex">Aveva imparato da dieci anni di assunzioni in gran parte maschili, e ne aveva dedotto che "uomo" fosse un segnale positivo. Amazon lo ha ritirato.</div></div>
+    <div class="cbox dark" style="top:65cqh;"><p>L'IA riflette il mondo com'era, <span class="cy">non com'è giusto. Accorgersene è parte del mestiere.</span></p></div>
+    <div class="foot">Fonte: caso Amazon, 2018</div><div class="pageno">24 / 43</div>
+  </div></section>
+
+  <!-- SLIDE 25 — STATEMENT difesa -->
+  <section class="slide"><div class="canvas ink">
+    <div class="chip indigo">La regola</div>
+    <div class="stbar"></div>
+    <div class="statement wh" style="font-size:6.4cqh;">Più l'errore è difficile da correggere,<br>più la decisione resta <span class="cy">vostra</span>.</div>
+    <div class="foot dark">L'IA prepara, l'umano decide. Per le scelte ad alto impatto è anche legge: AI Act, Art. 14</div>
+    <div class="pageno dark">25 / 43</div>
+  </div></section>
+
+  <!-- SLIDE 26 — MARCIA IN PIÙ overview -->
+  <section class="slide"><div class="canvas light">
+    <div class="chip cyan">Una marcia in più</div>
+    <div class="title">Consigli per migliorare il prompt</div>
+    <div class="cards" style="top:30cqh;gap:1.6cqh;">
+      <div class="card" style="padding:1.9cqh 3cqh;"><div class="card-ic" style="background:var(--indigo);width:6.4cqh;height:6.4cqh;font-size:2.8cqh;">1</div><div><h3 style="margin:0;font-size:2.9cqh">Completare il contesto</h3><p>Fatevi fare le domande chiave dall'IA.</p></div></div>
+      <div class="card" style="padding:1.9cqh 3cqh;"><div class="card-ic" style="background:var(--cyan);width:6.4cqh;height:6.4cqh;font-size:2.8cqh;">2</div><div><h3 style="margin:0;font-size:2.9cqh">Il ruolo giusto</h3><p>Chi lo farebbe meglio al mondo?</p></div></div>
+      <div class="card" style="padding:1.9cqh 3cqh;"><div class="card-ic" style="background:var(--violet);width:6.4cqh;height:6.4cqh;font-size:2.8cqh;">3</div><div><h3 style="margin:0;font-size:2.9cqh">Ridurre le allucinazioni</h3><p>"Se non sai, dimmelo."</p></div></div>
+      <div class="card" style="padding:1.9cqh 3cqh;"><div class="card-ic" style="background:var(--coral);width:6.4cqh;height:6.4cqh;font-size:2.8cqh;">4</div><div><h3 style="margin:0;font-size:2.9cqh">Il semaforo di affidabilità</h3><p>Fatele dichiarare quanto è sicura.</p></div></div>
+    </div>
+    <div class="foot">Piccole frasi da aggiungere al prompt, grande differenza</div><div class="pageno">26 / 43</div>
+  </div></section>
+
+  <!-- SLIDE 27 — Consiglio 1 · completare il contesto -->
+  <section class="slide"><div class="canvas light">
+    <div class="chip indigo">Consiglio 1 · completare il contesto</div>
+    <div class="title">Fatevi intervistare dall'IA</div>
+    <div class="cbox dark" style="top:33cqh;"><p style="font-size:3.2cqh;">"Prima di rispondere, fammi le domande chiave che ti servono per rispondere bene al mio quesito."</p></div>
+    <div class="cbox white" style="top:61cqh;"><h4>Invece di indovinare cosa manca, è l'IA a chiedervelo. Voi rispondete, e lei lavora con il contesto giusto.</h4></div>
+    <div class="foot">AI INSEGNANTI · Formazione PNRR</div><div class="pageno">27 / 43</div>
+  </div></section>
+
+  <!-- SLIDE 28 — Consiglio 2 · il ruolo giusto -->
+  <section class="slide"><div class="canvas light">
+    <div class="chip indigo">Consiglio 2 · il ruolo giusto</div>
+    <div class="title">Chi lo farebbe meglio al mondo?</div>
+    <div class="cbox dark" style="top:33cqh;"><p style="font-size:3.2cqh;">"Chi è la figura professionale migliore al mondo per questo compito? Comportati come lei e procedi."</p></div>
+    <div class="cbox white" style="top:61cqh;"><h4>Quando non sapete che ruolo darle, partite da questa domanda. Il ruolo giusto alza subito la qualità.</h4></div>
+    <div class="foot">AI INSEGNANTI · Formazione PNRR</div><div class="pageno">28 / 43</div>
+  </div></section>
+
+  <!-- SLIDE 29 — Consiglio 3 · ridurre le allucinazioni -->
+  <section class="slide"><div class="canvas light">
+    <div class="chip indigo">Consiglio 3 · ridurre le allucinazioni</div>
+    <div class="title">"Se non sai, dimmelo"</div>
+    <div class="cbox dark" style="top:33cqh;"><p style="font-size:3.2cqh;">"Se non conosci un concetto, se non trovi un dato, se non sei sicuro: dimmelo, invece di inventare."</p></div>
+    <div class="cbox white" style="top:61cqh;"><h4>Le togliete il permesso di riempire i vuoti. Meglio un "non lo so" sincero che una risposta falsa e convincente.</h4></div>
+    <div class="foot">La difesa diretta contro le allucinazioni viste prima</div><div class="pageno">29 / 43</div>
+  </div></section>
+
+  <!-- SLIDE 30 — Consiglio 4 · il semaforo di affidabilità -->
+  <section class="slide"><div class="canvas light">
+    <div class="chip indigo">Consiglio 4 · il semaforo di affidabilità</div>
+    <div class="title">Fatele dichiarare quanto è sicura</div>
+    <div class="cbox dark" style="top:29cqh;"><p style="font-size:2.7cqh;font-weight:600;color:var(--cfcb);line-height:1.4;">"Presenta i risultati così: accanto a ogni informazione un'etichetta ✅ verificato, ⚠️ parziale, ❌ non verificato; in cima il livello di confidenza (Alto, Medio, Basso); chiudi con «Cosa manca ancora» e i passi per verificarlo."</p></div>
+    <div class="legend" style="top:71cqh;">✅ verde: ti fidi &nbsp;·&nbsp; ⚠️ giallo: controlli &nbsp;·&nbsp; ❌ rosso: non ti fidi</div>
+    <div class="foot">Particolarmente utile quando le chiedete una ricerca</div><div class="pageno">30 / 43</div>
+  </div></section>
+
+  <!-- SLIDE 31 — PRATICA 1 intro -->
+  <section class="slide"><div class="canvas indigobg">
+    <div class="circ" style="top:-20%;left:75%;width:38%;height:66%;background:#fff;opacity:.08;"></div>
+    <div class="hook-eyebrow">Pratica 1 · ora tocca a voi</div>
+    <div class="hook-q wh">Scrivete un prompt fatto bene,<br>su una <span class="cy">cosa vostra</span>.</div>
+    <div class="deb-sub" style="color:#D9D5F2;">Una mail, una consegna, una griglia, una circolare. Qualcosa della prossima settimana.</div>
+    <div class="flag onbg"><b>Se avanza tempo</b><span>Altrimenti resta uno spunto: ci ragionate voi.</span></div>
+    <div class="pageno dark">31 / 43</div>
+  </div></section>
+
+  <!-- SLIDE 32 — PRATICA 1 come -->
+  <section class="slide"><div class="canvas light">
+    <div class="chip violet">Pratica 1 · come</div>
+    <div class="title">Le 5 fasi, su carta</div>
+    <div class="cbox white" style="top:31cqh;"><h4>Da soli, otto minuti. Scrivete il prompt fase per fase. Se volete, aggiungete uno dei consigli appena visti.</h4></div>
+    <div class="cbox dark" style="top:60cqh;"><p>Poi un giro veloce: <span class="cy">qual è la fase che vi è venuta più difficile da scrivere?</span></p></div>
+    <div class="foot">AI INSEGNANTI · Formazione PNRR</div><div class="flag"><b>Se avanza tempo</b><span>Altrimenti resta uno spunto: ci ragionate voi.</span></div><div class="pageno">32 / 43</div>
+  </div></section>
+
+  <!-- SLIDE 33 — GANCIO C -->
+  <section class="slide"><div class="canvas indigobg">
+    <div class="circ" style="top:-20%;left:75%;width:38%;height:66%;background:#fff;opacity:.08;"></div>
+    <div class="hook-eyebrow">Parte 3 · Riconoscere l'IA</div>
+    <div class="hook-q wh">Quanto siete sicuri di riconoscere<br>un testo scritto da una <span class="cy">macchina</span>?</div>
+    <div class="pageno dark">33 / 43</div>
+  </div></section>
+
+  <!-- SLIDE 34 — Il paradosso -->
+  <section class="slide"><div class="canvas light">
+    <div class="chip violet">Un corto circuito</div>
+    <div class="title">Il paradosso di oggi</div>
+    <div class="cbox white" style="top:32cqh;"><h4>Scrivo tre punti chiave. Li faccio gonfiare dall'IA in un testo lungo. Lo mando a qualcuno che lo fa riassumere, di nuovo con l'IA.</h4></div>
+    <div class="cbox dark" style="top:61cqh;"><p>In mezzo, il senso evapora. <span class="cy">Serve una bussola per capire quando un testo è generato.</span></p></div>
+    <div class="foot">AI INSEGNANTI · Formazione PNRR</div><div class="pageno">34 / 43</div>
+  </div></section>
+
+  <!-- SLIDE 35 — I tre indizi -->
+  <section class="slide"><div class="canvas light">
+    <div class="chip violet">Tre famiglie di indizi</div>
+    <div class="title">Stile, struttura, vocabolario</div>
+    <div class="cols" style="top:30cqh;gap:2.4cqh;">
+      <div class="col"><div class="col-head" style="background:var(--indigo);font-size:3cqh;">STILE E TONO</div>
+        <ul class="cdindigo" style="padding:2.4cqh 2.6cqh;">
+          <li style="font-size:2.2cqh;margin-bottom:1.7cqh;"><span>Tono troppo neutro e levigato</span></li>
+          <li style="font-size:2.2cqh;margin-bottom:1.7cqh;"><span>Hype teatrale: "storico", "straordinario"</span></li>
+          <li style="font-size:2.2cqh;margin-bottom:1.7cqh;"><span>Pochi dettagli concreti e vissuti</span></li>
+          <li style="font-size:2.2cqh;margin-bottom:0;"><span>Sapore di traduzione dall'inglese</span></li>
+        </ul>
+      </div>
+      <div class="col"><div class="col-head" style="background:var(--cyan);font-size:3cqh;">STRUTTURA E FORMA</div>
+        <ul class="cdcyan" style="padding:2.4cqh 2.6cqh;">
+          <li style="font-size:2.2cqh;margin-bottom:1.7cqh;"><span>Prolisso, spiega più del necessario</span></li>
+          <li style="font-size:2.2cqh;margin-bottom:1.7cqh;"><span>Struttura scolastica "a pacchetto"</span></li>
+          <li style="font-size:2.2cqh;margin-bottom:1.7cqh;"><span>Elenchi puntati ovunque</span></li>
+          <li style="font-size:2.2cqh;margin-bottom:0;"><span>Grassetto e lineetta lunga</span></li>
+        </ul>
+      </div>
+      <div class="col"><div class="col-head" style="background:var(--coral);font-size:3cqh;">VOCABOLARIO E TIC</div>
+        <ul class="cdcoral" style="padding:2.4cqh 2.6cqh;">
+          <li style="font-size:2.2cqh;margin-bottom:1.7cqh;"><span>La regola del tre: "affascinante, dinamico e innovativo"</span></li>
+          <li style="font-size:2.2cqh;margin-bottom:1.7cqh;"><span>Connettori ripetuti: "inoltre", "tuttavia"</span></li>
+          <li style="font-size:2.2cqh;margin-bottom:1.7cqh;"><span>Frasi fatte: "è importante notare che"</span></li>
+          <li style="font-size:2.2cqh;margin-bottom:0;"><span>Lo schema "non è X, è Y"</span></li>
+        </ul>
+      </div>
+    </div>
+    <div class="foot">AI INSEGNANTI · Formazione PNRR</div><div class="pageno">35 / 43</div>
+  </div></section>
+
+  <!-- SLIDE 36 — ESEMPIO testo 1 -->
+  <section class="slide"><div class="canvas light">
+    <div class="chip violet">A confronto · comunicazione alle famiglie</div>
+    <div class="cols" style="top:25cqh;">
+      <div class="col"><div class="col-head" style="background:var(--muted)">TESTO AI</div><div class="para">La lettura non è solo un'attività, è una vera e propria rivoluzione per la mente dei nostri studenti. In un mondo sempre più digitale e frenetico, dedicare tempo ai libri è un gesto straordinario e di enorme significato. Per questo promuoviamo un'iniziativa affascinante, dinamica e innovativa: la Settimana della Lettura.</div></div>
+      <div class="col"><div class="col-head" style="background:var(--indigo)">TESTO UMANO</div><div class="para">Quest'anno dedichiamo una settimana alla lettura. Dal 10 al 14 marzo, in ogni classe, mezz'ora al giorno per leggere insieme: libri scelti dai ragazzi, ad alta voce o in silenzio. Soprattutto è un piacere, e vorremmo che i bambini lo riscoprissero senza il peso del voto. Chi vuole, porti da casa un libro a cui tiene.</div></div>
+    </div>
+    <div class="takeaway" style="top:82cqh;">A sinistra: "non è X, è Y", hype, triade. A destra: concreto, specifico, vero.</div>
+    <div class="pageno">36 / 43</div>
+  </div></section>
+
+  <!-- SLIDE 37 — ESEMPIO testo 2 -->
+  <section class="slide"><div class="canvas light">
+    <div class="chip violet">A confronto · un paragrafo sull'IA a scuola</div>
+    <div class="cols" style="top:25cqh;">
+      <div class="col"><div class="col-head" style="background:var(--muted)">TESTO AI</div><div class="para">L'intelligenza artificiale non è semplicemente uno strumento, è un'opportunità senza precedenti per la didattica. Inoltre permette di personalizzare l'apprendimento in modo straordinario. Tuttavia è fondamentale ricordare che ogni tecnologia va usata con consapevolezza. In definitiva, l'AI può diventare un alleato prezioso, dinamico e versatile. In conclusione, il futuro della scuola passa anche da qui.</div></div>
+      <div class="col"><div class="col-head" style="background:var(--indigo)">TESTO UMANO</div><div class="para">L'intelligenza artificiale può aiutare a insegnare: prepara esercizi diversi per chi va veloce e per chi ha bisogno di tempo, e fa risparmiare ore. Resta però uno strumento, e dipende da chi lo usa. Va guardato con occhio critico, soprattutto quando produce materiali per i ragazzi. Usata con la testa, toglie il lavoro ripetitivo e lascia quello che conta.</div></div>
+    </div>
+    <div class="takeaway" style="top:82cqh;">Stessi contenuti. Cambia solo la voce: una suona di catalogo, l'altra di persona.</div>
+    <div class="pageno">37 / 43</div>
+  </div></section>
+
+  <!-- SLIDE 38 — PROVOCAZIONE / la guida al contrario -->
+  <section class="slide"><div class="canvas light">
+    <div class="chip cyan">Da incollare nel prompt</div>
+    <div class="title">La guida, al contrario</div>
+    <div class="cbox dark" style="top:30cqh;"><p style="font-size:2.8cqh;font-weight:600;color:var(--cfcb);line-height:1.42;">"Scrivi in modo naturale e diretto. Evita: hype e superlativi, triadi di aggettivi, lo schema «non è X, è Y», i connettori superflui (inoltre, tuttavia, in conclusione), le lineette lunghe, le chiusure che tirano le somme. Usa frasi di lunghezza varia e almeno un dettaglio concreto."</p></div>
+    <div class="legend" style="top:77cqh;">Gli stessi indizi di prima, ribaltati in istruzioni.</div>
+    <div class="foot">Una manciata di righe, e il testo suona umano</div><div class="pageno">38 / 43</div>
+  </div></section>
+
+  <!-- SLIDE 39 — PRATICA 2 intro -->
+  <section class="slide"><div class="canvas indigobg">
+    <div class="circ" style="top:-20%;left:75%;width:38%;height:66%;background:#fff;opacity:.08;"></div>
+    <div class="circ" style="top:62%;left:-10%;width:30%;height:53%;background:var(--ink);opacity:.16;"></div>
+    <div class="hook-eyebrow">Pratica 2 · il cuore</div>
+    <div class="hook-q wh">Continuate a progettare la lezione,<br>ora con qualche <span class="cy">tecnica in più</span>.</div>
+    <div class="pageno dark">39 / 43</div>
+  </div></section>
+
+  <!-- SLIDE 40 — PRATICA 2 come -->
+  <section class="slide"><div class="canvas light">
+    <div class="chip violet">Pratica 2 · come</div>
+    <div class="title">Il prompt che genera i materiali</div>
+    <div class="cards" style="top:30cqh;gap:1.6cqh;">
+      <div class="card" style="padding:1.9cqh 3cqh;"><div class="card-ic" style="background:var(--indigo);width:6.4cqh;height:6.4cqh;font-size:2.7cqh;">1</div><div><h3 style="margin:0;font-size:2.9cqh">Obiettivo</h3><p>Che materiale voglio, in che formato, per quale momento.</p></div></div>
+      <div class="card" style="padding:1.9cqh 3cqh;"><div class="card-ic" style="background:var(--cyan);width:6.4cqh;height:6.4cqh;font-size:2.7cqh;">2</div><div><h3 style="margin:0;font-size:2.9cqh">Contesto</h3><p>Chi sono, che classe, che età, cosa sanno già.</p></div></div>
+      <div class="card" style="padding:1.9cqh 3cqh;"><div class="card-ic" style="background:var(--violet);width:6.4cqh;height:6.4cqh;font-size:2.7cqh;">3</div><div><h3 style="margin:0;font-size:2.9cqh">Esempi, Valutazione, Iterazione</h3><p>Un modello del "fatto bene", le tre cose che controllerò, la prima correzione che già immagino.</p></div></div>
+    </div>
+    <div class="foot">Output: il primo materiale vero della vostra lezione sull'IA</div><div class="pageno">40 / 43</div>
+  </div></section>
+
+  <!-- SLIDE 41 — PRATICA 2 condivisione -->
+  <section class="slide"><div class="canvas coralbg">
+    <div class="circ" style="top:-21%;left:80%;width:38%;height:67%;background:#fff;opacity:.12;"></div>
+    <div class="circ" style="top:62%;left:-10%;width:30%;height:53%;background:var(--ink);opacity:.18;"></div>
+    <div class="deb-tag">CONDIVISIONE</div><div class="deb-room">Parla la stanza</div>
+    <div class="deb-q wh">Come l'avete costruito, mettendo insieme <span class="inkc">tutte le tecniche</span>?</div>
+    <div class="deb-sub">Le 5 fasi, il semaforo dell'affidabilità, la guida al contrario: cosa avete usato e come. Un volontario lo mostra in diretta.</div>
+    <div class="pageno dark">41 / 43</div>
+  </div></section>
+
+  <!-- SLIDE 42 — PONTE I5 -->
+  <section class="slide"><div class="canvas light">
+    <div class="chip violet">La prossima volta</div>
+    <div class="ponte-big">Dal prompt al sistema</div>
+    <div class="ponte-sub">Scegliere dove conviene davvero, e insegnare all'IA a ragionare come voi.</div>
+    <div class="pcards">
+      <div class="pcard"><div class="pnum" style="background:var(--indigo)">◎</div><h3>La formula IPU</h3></div>
+      <div class="pcard"><div class="pnum" style="background:var(--cyan)">▤</div><h3>Il contesto permanente</h3></div>
+      <div class="pcard"><div class="pnum" style="background:var(--coral)">✶</div><h3>Ragionare come insegnante</h3></div>
+    </div>
+    <div class="foot">AI INSEGNANTI · Formazione PNRR</div><div class="pageno">42 / 43</div>
+  </div></section>
+
+  <!-- SLIDE 43 — CHIUSURA -->
+  <section class="slide"><div class="canvas ink">
+    <div class="circ" style="top:-19%;left:78%;width:34%;height:60%;background:var(--indigo);opacity:.45;"></div>
+    <div class="circ" style="top:58%;left:88%;width:25%;height:45%;background:var(--violet);opacity:.4;"></div>
+    <div class="circ" style="top:70%;left:-8%;width:24%;height:42%;background:var(--cyan);opacity:.3;"></div>
+    <div class="statement wh" style="top:30cqh;font-size:6cqh;">Un buon prompt è dire bene<br>quello che già <span class="cy">sapete</span> di volere.</div>
+    <div style="position:absolute;top:62cqh;left:6.5cqw;right:8cqw;font-size:3.2cqh;color:var(--cfcb);">Il primo tentativo è una bozza. E oggi la lezione che progettate da settimane è diventata reale.</div>
+    <div class="dots" style="top:80%;left:6.6%;"><span style="background:var(--cyan)"></span><span style="background:var(--indigo)"></span><span style="background:var(--violet)"></span><span style="background:var(--coral)"></span></div>
+    <div class="pageno dark">43 / 43</div>
+  </div></section>
+
+</div>
+<div class="hint">↑ ↓ frecce · F schermo intero · Cmd/Ctrl+P per esportare PDF</div>
+<script>
+  const deck=document.getElementById('deck');
+  const slides=[...document.querySelectorAll('.slide')];
+  let i=0;
+  function go(n){i=Math.max(0,Math.min(slides.length-1,n));slides[i].scrollIntoView({behavior:'smooth'});}
+  deck.addEventListener('scroll',()=>{i=Math.round(deck.scrollTop/window.innerHeight);},{passive:true});
+  window.addEventListener('keydown',e=>{
+    if(['ArrowDown','ArrowRight','PageDown',' '].includes(e.key)){e.preventDefault();go(i+1);}
+    else if(['ArrowUp','ArrowLeft','PageUp'].includes(e.key)){e.preventDefault();go(i-1);}
+    else if(e.key==='Home'){e.preventDefault();go(0);}
+    else if(e.key==='End'){e.preventDefault();go(slides.length-1);}
+    else if(e.key.toLowerCase()==='f'){if(!document.fullscreenElement)document.documentElement.requestFullscreen();else document.exitFullscreen();}
+  });
+</script>
+</body>
+</html>

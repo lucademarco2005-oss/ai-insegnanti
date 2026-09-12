@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pratica Secondaria · Lezione 2 · Canva: lezioni belle e interattive</title>
+<!--
+  SLIDE 1-5 = apertura. SLIDE 6-8 = prompt diretti da incollare in Canva. SLIDE 9-10 = il ponte con Claude. SLIDE 11-12 = prove e chiusura.
+-->
+<style>
+  :root{
+    --ink:#1E1B4B; --ink2:#2A2566; --indigo:#4F46E5; --violet:#7C3AED;
+    --cyan:#06B6D4; --coral:#F97316; --light:#F6F5FF; --text:#1A1730;
+    --muted:#6B6790; --white:#ffffff; --cfcb:#CFCBF0; --faint:#8E8AC4;
+    --line:#E6E3FB;
+    --font:'Inter','Segoe UI',-apple-system,Arial,sans-serif;
+  }
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap');
+  *{box-sizing:border-box;margin:0;padding:0;}
+  html,body{background:#0c0a1f;font-family:var(--font);}
+  .deck{height:100vh;overflow-y:scroll;scroll-snap-type:y mandatory;scroll-behavior:smooth;}
+  .slide{height:100vh;display:flex;align-items:center;justify-content:center;scroll-snap-align:start;background:#0c0a1f;}
+  .canvas{position:relative;width:min(100vw,177.78vh);height:min(56.25vw,100vh);container-type:size;overflow:hidden;}
+  .ink{background:var(--ink);} .light{background:var(--light);} .indigobg{background:var(--indigo);} .coralbg{background:var(--coral);}
+  .cy{color:var(--cyan);} .co{color:var(--coral);} .wh{color:var(--white);}
+  .chip{position:absolute;top:8cqh;left:5.5cqw;padding:1.3cqh 2.2cqh;border-radius:2cqh;font-size:2.4cqh;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#fff;}
+  .chip.violet{background:var(--violet);} .chip.cyan{background:var(--cyan);} .chip.indigo{background:var(--indigo);} .chip.coral{background:var(--coral);} .chip.muted{background:var(--muted);}
+  .title{position:absolute;top:15cqh;left:5.5cqw;right:5.5cqw;font-size:6.2cqh;font-weight:800;color:var(--text);line-height:1.05;}
+  .stbar{position:absolute;top:34cqh;left:6.7cqw;width:4.2cqh;height:1.3cqh;background:var(--coral);}
+  .statement{position:absolute;top:38cqh;left:6.5cqw;right:6cqw;font-size:7.4cqh;font-weight:800;line-height:1.08;}
+  .foot{position:absolute;bottom:4cqh;left:5.5cqw;font-size:1.7cqh;color:var(--muted);}
+  .pageno{position:absolute;bottom:4cqh;right:5.5cqw;font-size:1.7cqh;color:var(--muted);}
+  .pageno.dark{color:var(--faint);}
+  .dots{position:absolute;display:flex;gap:1.4cqh;} .dots span{width:2cqh;height:2cqh;border-radius:50%;}
+  .eyebrow{position:absolute;top:21cqh;left:5.5cqw;font-size:2.6cqh;font-weight:700;letter-spacing:.18em;color:var(--cyan);}
+  .cover-title{position:absolute;top:27cqh;left:5.2cqw;right:6cqw;font-size:9cqh;font-weight:800;color:#fff;line-height:.96;}
+  .cover-bar{position:absolute;top:55cqh;left:5.6cqw;width:4cqh;height:1.2cqh;background:var(--coral);}
+  .cover-sub{position:absolute;top:59cqh;left:5.5cqw;font-size:3.4cqh;color:var(--cfcb);}
+  .cover-foot{position:absolute;bottom:5cqh;left:5.5cqw;font-size:1.9cqh;color:var(--faint);}
+  .circ{position:absolute;border-radius:50%;}
+  .hook-eyebrow{position:absolute;top:20cqh;left:6cqw;font-size:2.7cqh;font-weight:700;letter-spacing:.16em;color:var(--cfcb);text-transform:uppercase;}
+  .hook-q{position:absolute;top:33cqh;left:6cqw;right:7cqw;font-size:7cqh;font-weight:800;color:#fff;line-height:1.1;}
+  .cards{position:absolute;top:31cqh;left:5.5cqw;right:5.5cqw;display:flex;flex-direction:column;gap:2.2cqh;}
+  .card{display:flex;align-items:center;gap:2.6cqh;background:#fff;border:1px solid var(--line);border-radius:2.2cqh;padding:2.6cqh 3cqh;box-shadow:0 4px 14px rgba(80,70,160,.10);}
+  .card-ic{flex:none;width:8.4cqh;height:8.4cqh;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:4cqh;color:#fff;}
+  .card h3{font-size:3.4cqh;font-weight:700;color:var(--text);margin-bottom:.4cqh;}
+  .card p{font-size:2.5cqh;color:var(--muted);line-height:1.22;}
+  .copysub{position:absolute;top:26.5cqh;left:6cqw;right:6cqw;font-size:2.5cqh;color:var(--muted);font-style:italic;}
+  .codebox{position:absolute;top:32cqh;left:6cqw;right:6cqw;background:#fff;border:1.5px solid var(--line);border-radius:1.8cqh;padding:3.4cqh 3.8cqh;font-size:3cqh;line-height:1.42;color:var(--text);box-shadow:0 6px 20px rgba(80,70,160,.10);}
+  .codebox.sm{top:29cqh;font-size:2.15cqh;line-height:1.34;}
+  .hint{position:fixed;bottom:14px;right:16px;font-size:12px;color:#888;font-family:var(--font);z-index:50;}
+  @media print{
+    @page{size:1280px 720px;margin:0;}
+    html,body{background:#fff;}
+    .deck{height:auto;overflow:visible;display:block;}
+    .slide{height:720px;width:1280px;display:block;page-break-after:always;break-after:page;}
+    .canvas{width:1280px;height:720px;}
+    .hint{display:none;}
+    *{-webkit-print-color-adjust:exact;print-color-adjust:exact;}
+  }
+</style>
+</head>
+<body>
+<div class="deck" id="deck">
+
+  <!-- SLIDE 1 — COPERTINA -->
+  <section class="slide"><div class="canvas ink">
+    <div class="circ" style="top:-19%;left:78%;width:34%;height:60%;background:var(--violet);opacity:.42;"></div>
+    <div class="circ" style="top:58%;left:88%;width:25%;height:45%;background:var(--cyan);opacity:.4;"></div>
+    <div class="eyebrow">PRATICA · PERCORSO SECONDARIA</div>
+    <div class="cover-title">Canva: lezioni belle<br>e interattive</div>
+    <div class="cover-bar"></div>
+    <div class="cover-sub">Lezione pratica 2 · con l'aiuto di Claude</div>
+    <div class="dots" style="top:74%;left:5.6%;"><span style="background:var(--cyan)"></span><span style="background:var(--indigo)"></span><span style="background:var(--violet)"></span><span style="background:var(--coral)"></span></div>
+    <div class="cover-foot">Formazione docenti sull'Intelligenza Artificiale · PNRR DM 219/2025</div>
+  </div></section>
+
+  <!-- SLIDE 2 — GANCIO -->
+  <section class="slide"><div class="canvas indigobg">
+    <div class="circ" style="top:-20%;left:75%;width:38%;height:66%;background:#fff;opacity:.08;"></div>
+    <div class="hook-eyebrow">Dove arriviamo oggi</div>
+    <div class="hook-q wh">E se i materiali della tua lezione diventassero <span class="cy">belli e interattivi</span>, in pochi minuti?</div>
+    <div class="pageno dark">2 / 13</div>
+  </div></section>
+
+  <!-- SLIDE 3 — COS'E' CANVA AI -->
+  <section class="slide"><div class="canvas light">
+    <div class="chip cyan">Cos'è Canva AI</div>
+    <div class="title">Tre cose, dette a parole</div>
+    <div class="cards">
+      <div class="card"><div class="card-ic" style="background:var(--indigo)">🎨</div><div><h3>Magic Design</h3><p>Presentazioni e schede generate da un prompt di testo.</p></div></div>
+      <div class="card"><div class="card-ic" style="background:var(--cyan)">📊</div><div><h3>Template e Magic Charts</h3><p>Infografiche e schede illustrate, pronte da personalizzare.</p></div></div>
+      <div class="card"><div class="card-ic" style="background:var(--coral)">🎮</div><div><h3>Canva Code</h3><p>Giochi e attività interattive create da un prompt.</p></div></div>
+    </div>
+    <div class="foot">Pratica Secondaria · Canva</div><div class="pageno">3 / 13</div>
+  </div></section>
+
+  <!-- SLIDE 4 — STATEMENT tagline -->
+  <section class="slide"><div class="canvas ink">
+    <div class="chip violet">Il senso di oggi</div>
+    <div class="stbar"></div>
+    <div class="statement wh">Canva con l'IA rende le tue lezioni <span class="cy">belle</span> e <span class="co">interattive</span>.</div>
+    <div class="pageno dark">4 / 13</div>
+  </div></section>
+
+  <!-- SLIDE 5 — ACCOUNT -->
+  <section class="slide"><div class="canvas light">
+    <div class="chip cyan">Account</div>
+    <div class="title">Canva for Education</div>
+    <div class="cards">
+      <div class="card"><div class="card-ic" style="background:var(--indigo)">🎓</div><div><h3>Gratis per i docenti</h3><p>Basta verificarsi come insegnante: sblocca le funzioni Magic.</p></div></div>
+      <div class="card"><div class="card-ic" style="background:var(--coral)">⚡</div><div><h3>Funzioni AI con limiti</h3><p>Le funzioni Magic hanno un tetto di crediti: si usano con criterio.</p></div></div>
+    </div>
+    <div class="foot">Pratica Secondaria · Canva</div><div class="pageno">5 / 13</div>
+  </div></section>
+
+  <!-- SLIDE 6 — PROMPT presentazione -->
+  <section class="slide"><div class="canvas light">
+    <div class="chip indigo">Da copiare · Presentazione</div>
+    <div class="title">Prompt: la presentazione</div>
+    <div class="copysub">In Canva: Magic Design, Crea una presentazione.</div>
+    <div class="codebox sm">"Crea una presentazione di 10 slide per una seconda di liceo scientifico dal titolo 'Le tre leggi di Newton'. Testo essenziale, un concetto per slide, caratteri grandi leggibili dal fondo dell'aula, stile pulito con sfondo chiaro, uno schema o un'immagine per slide. Slide 1 copertina col titolo. Slide 2 la domanda di partenza: perché un corpo si mette in moto o si ferma. Slide 3 il principio di inerzia, con l'esempio del passeggero in piedi sull'autobus che frena. Slide 4 la seconda legge, forza uguale massa per accelerazione, con l'esempio del carrello spinto da vuoto e da pieno. Slide 5 la terza legge, azione e reazione, con l'esempio di chi spinge il muro sui pattini. Slide 6 uno schema che mette le tre leggi a confronto. Slide 7 tre errori tipici da evitare. Slide 8 un esercizio guidato svolto passo per passo. Slide 9 due esercizi da fare in classe. Slide 10 ripasso in tre domande."</div>
+    <div class="foot">Pratica Secondaria · Canva</div><div class="pageno">6 / 13</div>
+  </div></section>
+
+  <!-- SLIDE 7 — PROMPT scheda -->
+  <section class="slide"><div class="canvas light">
+    <div class="chip indigo">Da copiare · Infografica</div>
+    <div class="title">Prompt: l'infografica</div>
+    <div class="copysub">In Canva: Magic Design. Le indicazioni grafiche contano quanto il contenuto.</div>
+    <div class="codebox sm">"Crea un'infografica A4 verticale per il biennio delle superiori dal titolo 'Come si costruisce un testo argomentativo'. Design pulito e ordinato, non affollato. Stile piatto, font grande e leggibile, palette di soli 4 colori (uno per blocco), margini ampi, pochi decori, tutto dentro la pagina. Al centro una colonna con quattro blocchi in sequenza, ciascuno col NOME in grande, una frase breve che spiega cosa ci va e un esempio di una riga in corsivo. TESI: che cosa sostengo, in una frase sola. ARGOMENTI: tre prove a sostegno, dalla più forte alla più debole. ANTITESI: l'obiezione più seria e come la smonto. CONCLUSIONE: riprendo la tesi senza ripeterla uguale. A destra una colonna stretta 'Connettivi utili' divisa in tre gruppi: per aggiungere, per opporre, per concludere. In fondo un riquadro giallo 'Errori da evitare' con tre voci: la tesi che non si capisce, gli esempi usati al posto delle prove, la conclusione che ripete l'introduzione."</div>
+    <div class="foot">Pratica Secondaria · Canva</div><div class="pageno">7 / 13</div>
+  </div></section>
+
+  <!-- SLIDE 8 — PROMPT gioco -->
+  <section class="slide"><div class="canvas light">
+    <div class="chip indigo">Da copiare · Gioco</div>
+    <div class="title">Prompt: il gioco interattivo</div>
+    <div class="copysub">In Canva: Canva AI, scegli Code.</div>
+    <div class="codebox sm">"Crea un quiz interattivo a schermo intero per una terza media sulla Prima guerra mondiale, adatto alla LIM e al gioco a squadre. Caratteri grandi, colori decisi, un timer di 20 secondi per domanda. 6 domande a scelta multipla, 4 opzioni ciascuna, con la risposta giusta indicata: 1) In che anno inizia la guerra? a) 1912 b) 1914 [giusta] c) 1917 d) 1918. 2) Quale episodio fa scoppiare il conflitto? a) l'attentato di Sarajevo [giusta] b) l'invasione della Polonia c) la presa della Bastiglia d) la battaglia di Waterloo. 3) Come si combatte soprattutto sul fronte occidentale? a) guerra lampo b) guerra di trincea [giusta] c) guerra civile d) guerra fredda. 4) In che anno entra in guerra l'Italia? a) 1914 b) 1915 [giusta] c) 1916 d) 1917. 5) Quale grande potenza entra in guerra nel 1917 a fianco dell'Intesa? a) Stati Uniti [giusta] b) Spagna c) Svizzera d) Norvegia. 6) Quale trattato chiude la guerra con la Germania? a) trattato di Versailles [giusta] b) pace di Westfalia c) congresso di Vienna d) trattato di Roma. La risposta giusta diventa verde, la sbagliata rossa e mostra quella corretta. In alto il numero della domanda ('2 di 6'). Alla fine il punteggio su 6 e un pulsante 'Ricomincia'."</div>
+    <div class="foot">Pratica Secondaria · Canva</div><div class="pageno">8 / 13</div>
+  </div></section>
+
+  <!-- SLIDE 9 — GANCIO ponte Claude -->
+  <section class="slide"><div class="canvas indigobg">
+    <div class="circ" style="top:-20%;left:75%;width:38%;height:66%;background:#fff;opacity:.08;"></div>
+    <div class="hook-eyebrow">Il colpo di scena</div>
+    <div class="hook-q wh">E se questi prompt <span class="cy">non doveste scriverli voi</span>?</div>
+    <div class="pageno dark">9 / 13</div>
+  </div></section>
+
+  <!-- SLIDE 10 — COME SI FA con Claude -->
+  <section class="slide"><div class="canvas light">
+    <div class="chip cyan">Come si fa, con Claude</div>
+    <div class="title">Tre passi, sempre uguali</div>
+    <div class="cards">
+      <div class="card"><div class="card-ic" style="background:var(--indigo)">1</div><div><h3>Apri Claude nel Progetto della classe</h3><p>Quello della lezione 1: conosce già la tua classe, la materia e la programmazione.</p></div></div>
+      <div class="card"><div class="card-ic" style="background:var(--cyan)">2</div><div><h3>Chiedi il prompt per Canva</h3><p>Digli cosa vuoi: presentazione, infografica o gioco, su quale argomento e per quale classe.</p></div></div>
+      <div class="card"><div class="card-ic" style="background:var(--coral)">3</div><div><h3>Copia e incolla in Canva</h3><p>Prendi il prompt che ti scrive e incollalo in Canva, Magic Design o Code. Genera.</p></div></div>
+    </div>
+    <div class="foot">Pratica Secondaria · Canva</div><div class="pageno">10 / 13</div>
+  </div></section>
+
+  <!-- SLIDE 11 — PROMPT con Claude -->
+  <section class="slide"><div class="canvas light">
+    <div class="chip cyan">Da copiare · con Claude</div>
+    <div class="title">Il prompt da dare a Claude</div>
+    <div class="copysub">Lo incolli a Claude, lui ti restituisce il prompt pronto per Canva.</div>
+    <div class="codebox">"Conosci la mia terza media e la mia programmazione di storia. Scrivimi un prompt pronto da incollare in Canva per creare [una presentazione / un'infografica / un gioco] su [argomento] per la mia classe, con un linguaggio adatto ai ragazzi e coerente col libro che usiamo. Dammi solo il prompt, pronto da copiare."</div>
+    <div class="foot">Pratica Secondaria · Canva</div><div class="pageno">11 / 13</div>
+  </div></section>
+
+  <!-- SLIDE 12 — LE PROVE (dibattito/azione, arancio) -->
+  <section class="slide"><div class="canvas coralbg">
+    <div class="circ" style="top:-20%;left:75%;width:38%;height:66%;background:#fff;opacity:.10;"></div>
+    <div class="chip" style="background:#fff;color:var(--coral)">Le prove</div>
+    <div class="statement wh">Adesso tocca a voi:<br>scegline <span style="color:var(--ink)">una</span> e falla bene.</div>
+    <div class="pageno" style="color:#FFE4D3">12 / 13</div>
+  </div></section>
+
+  <!-- SLIDE 13 — CHIUSURA -->
+  <section class="slide"><div class="canvas ink">
+    <div class="chip violet">In una frase</div>
+    <div class="stbar"></div>
+    <div class="statement wh">Non un programma nuovo: chiedi bene a <span class="cy">Claude</span>, lascia fare a <span class="co">Canva</span>.</div>
+    <div class="pageno dark">13 / 13</div>
+  </div></section>
+
+</div>
+<div class="hint">Frecce o scroll · F schermo intero · Cmd/Ctrl+P per esportare PDF</div>
+<script>
+  const deck=document.getElementById('deck');
+  const slides=[...document.querySelectorAll('.slide')];
+  let i=0;
+  function go(n){i=Math.max(0,Math.min(slides.length-1,n));slides[i].scrollIntoView({behavior:'smooth'});}
+  deck.addEventListener('scroll',()=>{i=Math.round(deck.scrollTop/window.innerHeight);},{passive:true});
+  window.addEventListener('keydown',e=>{
+    if(['ArrowDown','ArrowRight','PageDown',' '].includes(e.key)){e.preventDefault();go(i+1);}
+    else if(['ArrowUp','ArrowLeft','PageUp'].includes(e.key)){e.preventDefault();go(i-1);}
+    else if(e.key==='Home'){e.preventDefault();go(0);}
+    else if(e.key==='End'){e.preventDefault();go(slides.length-1);}
+    else if(e.key.toLowerCase()==='f'){if(!document.fullscreenElement)document.documentElement.requestFullscreen();else document.exitFullscreen();}
+  });
+</script>
+</body>
+</html>

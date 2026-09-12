@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Programma · Percorso Primaria · 20h</title>
+<!--
+  MODULO INDIPENDENTE E COMPLETO — Percorso PRIMARIA
+  10 incontri da 2h in fila. Ogni incontro: una parte di spiegazione e una di pratica.
+-->
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap');
+  :root{
+    --ink:#1E1B4B; --indigo:#4F46E5; --violet:#7C3AED; --cyan:#06B6D4; --coral:#F97316;
+    --light:#F6F5FF; --text:#1A1730; --muted:#6B6790; --cfcb:#CFCBF0; --faint:#8E8AC4;
+    --line:#E6E3FB; --font:'Inter','Segoe UI',-apple-system,Arial,sans-serif;
+    --acc:var(--violet);
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  html,body{background:#0c0a1f;font-family:var(--font);}
+  .deck{height:100vh;overflow-y:scroll;scroll-snap-type:y mandatory;scroll-behavior:smooth;}
+  .slide{height:100vh;display:flex;align-items:center;justify-content:center;scroll-snap-align:start;background:#0c0a1f;}
+  .canvas{position:relative;width:min(100vw,177.78vh);height:min(56.25vw,100vh);container-type:size;overflow:hidden;}
+  .ink{background:var(--ink);} .light{background:var(--light);}
+  .circ{position:absolute;border-radius:50%;}
+  .chip{position:absolute;top:8cqh;left:5.5cqw;padding:1.3cqh 2.4cqh;border-radius:2cqh;font-size:2.4cqh;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#fff;background:var(--acc);}
+  .lcode{position:absolute;top:7.4cqh;right:5.5cqw;font-size:4.2cqh;font-weight:800;color:var(--acc);letter-spacing:.02em;}
+  .title{position:absolute;top:17cqh;left:5.5cqw;right:5.5cqw;font-size:6cqh;font-weight:800;color:var(--text);line-height:1.06;}
+  .plist{position:absolute;top:38cqh;left:5.5cqw;right:5.5cqw;display:flex;flex-direction:column;gap:2.5cqh;}
+  .plist .pi{display:flex;gap:2.2cqh;align-items:flex-start;font-size:3.2cqh;color:var(--text);line-height:1.2;}
+  .plist .pi::before{content:"";flex:none;width:1.9cqh;height:1.9cqh;border-radius:50%;margin-top:.65cqh;background:var(--acc);}
+  .plist .pi b{font-weight:800;}
+  .foot{position:absolute;bottom:4cqh;left:5.5cqw;font-size:1.7cqh;color:var(--muted);}
+  .pageno{position:absolute;bottom:4cqh;right:5.5cqw;font-size:1.7cqh;color:var(--muted);}
+  .eyebrow{position:absolute;top:21cqh;left:5.5cqw;font-size:2.6cqh;font-weight:700;letter-spacing:.18em;color:var(--acc);}
+  .cover-title{position:absolute;top:27cqh;left:5.2cqw;right:6cqw;font-size:9.4cqh;font-weight:800;color:#fff;line-height:.96;}
+  .cover-bar{position:absolute;top:55cqh;left:5.6cqw;width:4cqh;height:1.2cqh;background:var(--acc);}
+  .cover-sub{position:absolute;top:59cqh;left:5.5cqw;font-size:3.4cqh;color:var(--cfcb);}
+  .cover-foot{position:absolute;bottom:5cqh;left:5.5cqw;font-size:1.9cqh;color:var(--faint);}
+  .lead{position:absolute;top:24cqh;left:5.5cqw;right:5.5cqw;font-size:3.5cqh;color:var(--text);line-height:1.32;}
+  .seq{position:absolute;top:52cqh;left:5.5cqw;right:5.5cqw;display:flex;gap:1cqh;}
+  .seq .b{flex:1;height:12cqh;border-radius:1.4cqh;display:flex;flex-direction:column;align-items:center;justify-content:center;color:#fff;font-weight:800;font-size:3cqh;background:var(--acc);}
+  .seq .b small{font-size:1.4cqh;font-weight:600;opacity:.9;margin-top:.4cqh;letter-spacing:.04em;}
+  .hint{position:fixed;bottom:14px;right:16px;font-size:12px;color:#888;z-index:50;}
+  @media print{
+    @page{size:1280px 720px;margin:0;}
+    html,body{background:#fff;}
+    .deck{height:auto;overflow:visible;display:block;}
+    .slide{height:720px;width:1280px;display:block;page-break-after:always;break-after:page;}
+    .canvas{width:1280px;height:720px;}
+    .hint{display:none;}
+    *{-webkit-print-color-adjust:exact;print-color-adjust:exact;}
+  }
+</style>
+</head>
+<body>
+<div class="deck">
+
+  <!-- 1 COVER -->
+  <section class="slide"><div class="canvas ink">
+    <div class="circ" style="top:-19%;left:78%;width:34%;height:60%;background:var(--violet);opacity:.42;"></div>
+    <div class="circ" style="top:58%;left:88%;width:25%;height:45%;background:var(--indigo);opacity:.4;"></div>
+    <div class="circ" style="top:70%;left:-8%;width:24%;height:42%;background:var(--cyan);opacity:.3;"></div>
+    <div class="eyebrow">PROGRAMMA COMPLETO 20H</div>
+    <div class="cover-title">Percorso<br>Primaria</div>
+    <div class="cover-bar"></div>
+    <div class="cover-sub">10 incontri da 2 ore</div>
+    <div class="cover-foot">Formazione docenti sull'Intelligenza Artificiale · PNRR DM 219/2025</div>
+  </div></section>
+
+  <!-- 2 PRESENTAZIONE -->
+  <section class="slide"><div class="canvas light">
+    <div class="chip">Il corso</div>
+    <div class="title">Un percorso pratico, in 10 moduli</div>
+    <div class="lead">Dieci moduli, un incontro ciascuno, riadattabili a orari diversi. In ogni modulo una parte di spiegazione e una di pratica: un percorso pratico, come richiesto dal bando.</div>
+    <div class="seq">
+      <div class="b">1<small>MODULO</small></div><div class="b">2<small>MODULO</small></div>
+      <div class="b">3<small>MODULO</small></div><div class="b">4<small>MODULO</small></div>
+      <div class="b">5<small>MODULO</small></div><div class="b">6<small>MODULO</small></div>
+      <div class="b">7<small>MODULO</small></div><div class="b">8<small>MODULO</small></div>
+      <div class="b">9<small>MODULO</small></div><div class="b">10<small>MODULO</small></div>
+    </div>
+    <div class="foot">Percorso Primaria · 20h</div><div class="pageno">2 / 13</div>
+  </div></section>
+
+  <!-- 3 INCONTRO 1 -->
+  <section class="slide"><div class="canvas light">
+    <div class="chip">Incontro 1</div><div class="lcode">01</div>
+    <div class="title">Cos'è l'IA e perché ti riguarda</div>
+    <div class="plist">
+      <div class="pi">Il divario tra studenti e insegnanti, e perché ti riguarda da vicino</div>
+      <div class="pi">Demistificare l'IA: non pensa, riconosce schemi e prevede</div>
+      <div class="pi">Due modi di vederla: scorciatoia che spegne il cervello o superpotere</div>
+      <div class="pi">Dibattito: cosa può e cosa non può davvero fare l'IA</div>
+    </div>
+    <div class="foot">Percorso Primaria · 20h</div><div class="pageno">3 / 13</div>
+  </div></section>
+
+  <!-- 4 INCONTRO 2 -->
+  <section class="slide"><div class="canvas light">
+    <div class="chip">Incontro 2</div><div class="lcode">02</div>
+    <div class="title">Il metodo: i 4 principi per lavorare con l'IA</div>
+    <div class="plist">
+      <div class="pi">Non spegnere il cervello: differenza tra uso attivo e passivo</div>
+      <div class="pi">L'IA è un collega da formare: contesto, feedback, iterazione</div>
+      <div class="pi">Obiettivi chiari e approccio AI First</div>
+      <div class="pi">Esercizio: definire obiettivo, formato e criteri di un compito reale</div>
+    </div>
+    <div class="foot">Percorso Primaria · 20h</div><div class="pageno">4 / 13</div>
+  </div></section>
+
+  <!-- 5 INCONTRO 3 -->
+  <section class="slide"><div class="canvas light">
+    <div class="chip">Incontro 3</div><div class="lcode">03</div>
+    <div class="title">Etica, responsabilità e l'IA nel mondo</div>
+    <div class="plist">
+      <div class="pi">Proteggere gli studenti e i dati sensibili (GDPR)</div>
+      <div class="pi">Plagio e ripensare la valutazione: il processo, non solo il prodotto</div>
+      <div class="pi">Dipendenza e pensiero critico</div>
+      <div class="pi">Caso pratico "Lo useresti?" su output reali</div>
+    </div>
+    <div class="foot">Percorso Primaria · 20h</div><div class="pageno">5 / 13</div>
+  </div></section>
+
+  <!-- 6 INCONTRO 4 -->
+  <section class="slide"><div class="canvas light">
+    <div class="chip">Incontro 4</div><div class="lcode">04</div>
+    <div class="title">Parlare all'IA: il metodo del prompt</div>
+    <div class="plist">
+      <div class="pi">Le 5 fasi: obiettivo, contesto, esempi, valutazione, iterazione</div>
+      <div class="pi">Demo dal vivo: come si itera un prompt fino a un buon risultato</div>
+      <div class="pi">Allucinazioni e bias: come riconoscerli</div>
+      <div class="pi">Semafori verde, giallo, rosso per fidarsi dell'output</div>
+    </div>
+    <div class="foot">Percorso Primaria · 20h</div><div class="pageno">6 / 13</div>
+  </div></section>
+
+  <!-- 7 INCONTRO 5 -->
+  <section class="slide"><div class="canvas light">
+    <div class="chip">Incontro 5</div><div class="lcode">05</div>
+    <div class="title">Dal prompt al sistema: rendere l'IA tua</div>
+    <div class="plist">
+      <div class="pi">Formula IPU: Identifica, Prova, Utilizza</div>
+      <div class="pi">Il Progetto: una memoria e istruzioni che restano nel tempo</div>
+      <div class="pi">Ragionare come un insegnante: trasferire il proprio metodo all'IA</div>
+      <div class="pi">Esercizio: abbozzare il proprio Progetto</div>
+    </div>
+    <div class="foot">Percorso Primaria · 20h</div><div class="pageno">7 / 13</div>
+  </div></section>
+
+  <!-- 8 INCONTRO 6 -->
+  <section class="slide"><div class="canvas light">
+    <div class="chip">Incontro 6</div><div class="lcode">06</div>
+    <div class="title">Claude: progettare lezioni, differenziare, creare esercizi</div>
+    <div class="plist">
+      <div class="pi">Costruire lo scheletro di una lezione e i materiali di supporto</div>
+      <div class="pi">Prompt iterativi per testi didattici e fiabe</div>
+      <div class="pi">Differenziare i contenuti per diversi livelli di apprendimento</div>
+      <div class="pi">Generare esercizi e varianti</div>
+    </div>
+    <div class="foot">Percorso Primaria · 20h</div><div class="pageno">8 / 13</div>
+  </div></section>
+
+  <!-- 9 INCONTRO 7 -->
+  <section class="slide"><div class="canvas light">
+    <div class="chip">Incontro 7</div><div class="lcode">07</div>
+    <div class="title">Canva: schede e infografiche didattiche</div>
+    <div class="plist">
+      <div class="pi">Creare schede e materiali visivi</div>
+      <div class="pi">Infografiche per spiegare i concetti</div>
+      <div class="pi">Immagini didattiche con l'IA</div>
+      <div class="pi">Materiali pronti per la classe</div>
+    </div>
+    <div class="foot">Percorso Primaria · 20h</div><div class="pageno">9 / 13</div>
+  </div></section>
+
+  <!-- 10 INCONTRO 8 -->
+  <section class="slide"><div class="canvas light">
+    <div class="chip">Incontro 8</div><div class="lcode">08</div>
+    <div class="title">NotebookLM: mappe, riassunti e quiz di ripasso</div>
+    <div class="plist">
+      <div class="pi">Caricare i propri materiali didattici</div>
+      <div class="pi">Generare mappe concettuali e riassunti</div>
+      <div class="pi">Creare quiz di ripasso per la classe</div>
+      <div class="pi">Podcast e casi studio dai contenuti</div>
+    </div>
+    <div class="foot">Percorso Primaria · 20h</div><div class="pageno">10 / 13</div>
+  </div></section>
+
+  <!-- 11 INCONTRO 9 -->
+  <section class="slide"><div class="canvas light">
+    <div class="chip">Incontro 9</div><div class="lcode">09</div>
+    <div class="title">Laboratorio: costruire un'unità didattica completa</div>
+    <div class="plist">
+      <div class="pi">Mettere insieme i tool su un'unità reale</div>
+      <div class="pi">Dalla progettazione ai materiali al ripasso</div>
+      <div class="pi">Provare dal vivo e iterare</div>
+      <div class="pi">Condividere e confrontare i risultati</div>
+    </div>
+    <div class="foot">Percorso Primaria · 20h</div><div class="pageno">11 / 13</div>
+  </div></section>
+
+  <!-- 12 INCONTRO 10 -->
+  <section class="slide"><div class="canvas light">
+    <div class="chip">Incontro 10</div><div class="lcode">10</div>
+    <div class="title">Futuro e chiusura: dove stiamo andando</div>
+    <div class="plist">
+      <div class="pi">Come stanno cambiando le competenze richieste</div>
+      <div class="pi">La Matrice: errore reversibile contro errore irreversibile</div>
+      <div class="pi">L'impatto dell'IA nella scuola</div>
+      <div class="pi">Dibattito finale: che insegnante vuoi essere nel 2030</div>
+    </div>
+    <div class="foot">Percorso Primaria · 20h</div><div class="pageno">12 / 13</div>
+  </div></section>
+
+  <!-- 13 STRUMENTI -->
+  <section class="slide"><div class="canvas light">
+    <div class="chip">Strumenti</div>
+    <div class="title">Gli strumenti del percorso</div>
+    <div class="plist">
+      <div class="pi"><b>Claude</b> — l'assistente conversazionale di base: progettazione lezioni ed esercizi</div>
+      <div class="pi"><b>Canva</b> — schede, materiali e infografiche didattiche</div>
+      <div class="pi"><b>NotebookLM</b> — mappe, riassunti, quiz e podcast dai propri materiali</div>
+      <div class="pi">Tutti gli strumenti sono usati dal docente per preparare e guidare</div>
+    </div>
+    <div class="foot">Percorso Primaria · 20h</div><div class="pageno">13 / 13</div>
+  </div></section>
+
+</div>
+<div class="hint">Frecce o scroll per navigare · F schermo intero · Stampa per PDF</div>
+</body>
+</html>

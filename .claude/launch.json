@@ -1,0 +1,17 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "formatori",
+      "runtimeExecutable": "npx",
+      "runtimeArgs": ["serve", "-p", "4200", "Formatori — AI Insegnanti"],
+      "port": 4200
+    },
+    {
+      "name": "pratica",
+      "runtimeExecutable": "npx",
+      "runtimeArgs": ["serve", "-p", "4300", "Pratica_Primaria"],
+      "port": 4300
+    }
+  ]
+}

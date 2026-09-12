@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pratica Primaria · Lezione 4 · Laboratorio: la lezione completa</title>
+<!--
+  SLIDE 1-2 apertura · 3-5 ripasso (un tool per slide) · 6-7 il flusso · 8 tocca a voi · 9-10 dibattito backup · 11 chiusura
+-->
+<style>
+  :root{
+    --ink:#1E1B4B; --indigo:#4F46E5; --violet:#7C3AED; --cyan:#06B6D4; --coral:#F97316;
+    --light:#F6F5FF; --text:#1A1730; --muted:#6B6790; --white:#fff; --cfcb:#CFCBF0; --faint:#8E8AC4; --line:#E6E3FB;
+    --font:'Inter','Segoe UI',-apple-system,Arial,sans-serif;
+  }
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap');
+  *{box-sizing:border-box;margin:0;padding:0;}
+  html,body{background:#0c0a1f;font-family:var(--font);}
+  .deck{height:100vh;overflow-y:scroll;scroll-snap-type:y mandatory;scroll-behavior:smooth;}
+  .slide{height:100vh;display:flex;align-items:center;justify-content:center;scroll-snap-align:start;background:#0c0a1f;}
+  .canvas{position:relative;width:min(100vw,177.78vh);height:min(56.25vw,100vh);container-type:size;overflow:hidden;}
+  .ink{background:var(--ink);} .light{background:var(--light);} .indigobg{background:var(--indigo);} .coralbg{background:var(--coral);}
+  .cy{color:var(--cyan);} .co{color:var(--coral);} .wh{color:var(--white);}
+  .chip{position:absolute;top:8cqh;left:5.5cqw;padding:1.3cqh 2.2cqh;border-radius:2cqh;font-size:2.4cqh;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#fff;}
+  .chip.violet{background:var(--violet);} .chip.cyan{background:var(--cyan);} .chip.indigo{background:var(--indigo);} .chip.coral{background:var(--coral);}
+  .title{position:absolute;top:15cqh;left:5.5cqw;right:5.5cqw;font-size:6cqh;font-weight:800;color:var(--text);line-height:1.05;}
+  .stbar{position:absolute;top:34cqh;left:6.7cqw;width:4.2cqh;height:1.3cqh;background:var(--coral);}
+  .statement{position:absolute;top:38cqh;left:6.5cqw;right:6cqw;font-size:7.2cqh;font-weight:800;line-height:1.08;}
+  .foot{position:absolute;bottom:4cqh;left:5.5cqw;font-size:1.7cqh;color:var(--muted);}
+  .pageno{position:absolute;bottom:4cqh;right:5.5cqw;font-size:1.7cqh;color:var(--muted);} .pageno.dark{color:var(--faint);}
+  .dots{position:absolute;display:flex;gap:1.4cqh;} .dots span{width:2cqh;height:2cqh;border-radius:50%;}
+  .eyebrow{position:absolute;top:21cqh;left:5.5cqw;font-size:2.6cqh;font-weight:700;letter-spacing:.18em;color:var(--cyan);}
+  .cover-title{position:absolute;top:27cqh;left:5.2cqw;right:6cqw;font-size:8.4cqh;font-weight:800;color:#fff;line-height:.98;}
+  .cover-bar{position:absolute;top:57cqh;left:5.6cqw;width:4cqh;height:1.2cqh;background:var(--coral);}
+  .cover-sub{position:absolute;top:61cqh;left:5.5cqw;font-size:3.4cqh;color:var(--cfcb);}
+  .cover-foot{position:absolute;bottom:5cqh;left:5.5cqw;font-size:1.9cqh;color:var(--faint);}
+  .circ{position:absolute;border-radius:50%;}
+  .hook-eyebrow{position:absolute;top:20cqh;left:6cqw;font-size:2.7cqh;font-weight:700;letter-spacing:.16em;color:var(--cfcb);text-transform:uppercase;}
+  .hook-q{position:absolute;top:34cqh;left:6cqw;right:7cqw;font-size:6.8cqh;font-weight:800;color:#fff;line-height:1.1;}
+  .bigicon{position:absolute;top:30cqh;left:7cqw;width:24cqh;height:24cqh;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:12cqh;}
+  .bigtext{position:absolute;top:34cqh;left:35cqw;right:6cqw;font-size:3.8cqh;color:var(--text);line-height:1.32;}
+  .bigtext b{font-weight:800;color:var(--indigo);}
+  .lead{position:absolute;top:36cqh;left:5.5cqw;right:6cqw;font-size:3.7cqh;color:var(--text);line-height:1.34;}
+  .lead b{font-weight:800;color:var(--coral);}
+  .copysub{position:absolute;top:26.5cqh;left:6cqw;right:6cqw;font-size:2.5cqh;color:var(--muted);font-style:italic;}
+  .codebox{position:absolute;top:32cqh;left:6cqw;right:6cqw;background:#fff;border:1.5px solid var(--line);border-radius:1.8cqh;padding:3.2cqh 3.6cqh;font-size:2.9cqh;line-height:1.4;color:var(--text);box-shadow:0 6px 20px rgba(80,70,160,.10);}
+  .codebox.sm{top:30cqh;font-size:2.4cqh;line-height:1.34;}
+  .cols{position:absolute;top:33cqh;left:5.5cqw;right:5.5cqw;display:flex;gap:2.2cqh;}
+  .col{flex:1;background:#fff;border:1px solid var(--line);border-radius:2.2cqh;overflow:hidden;}
+  .col-head{font-size:2.7cqh;font-weight:800;color:#fff;text-align:center;padding:1.8cqh;letter-spacing:.02em;line-height:1.1;}
+  .col p{font-size:2.4cqh;color:var(--text);line-height:1.25;padding:2.2cqh 2cqh;}
+  .hint{position:fixed;bottom:14px;right:16px;font-size:12px;color:#888;font-family:var(--font);z-index:50;}
+  @media print{
+    @page{size:1280px 720px;margin:0;}
+    html,body{background:#fff;}
+    .deck{height:auto;overflow:visible;display:block;}
+    .slide{height:720px;width:1280px;display:block;page-break-after:always;break-after:page;}
+    .canvas{width:1280px;height:720px;}
+    .hint{display:none;}
+    *{-webkit-print-color-adjust:exact;print-color-adjust:exact;}
+  }
+</style>
+</head>
+<body>
+<div class="deck" id="deck">
+
+  <!-- SLIDE 1 — COPERTINA -->
+  <section class="slide"><div class="canvas ink">
+    <div class="circ" style="top:-19%;left:78%;width:34%;height:60%;background:var(--coral);opacity:.4;"></div>
+    <div class="circ" style="top:58%;left:88%;width:25%;height:45%;background:var(--violet);opacity:.4;"></div>
+    <div class="eyebrow">PRATICA · PERCORSO PRIMARIA</div>
+    <div class="cover-title">Laboratorio:<br>la lezione completa</div>
+    <div class="cover-bar"></div>
+    <div class="cover-sub">Lezione pratica 4 · i tre strumenti insieme</div>
+    <div class="dots" style="top:76%;left:5.6%;"><span style="background:var(--cyan)"></span><span style="background:var(--indigo)"></span><span style="background:var(--violet)"></span><span style="background:var(--coral)"></span></div>
+    <div class="cover-foot">Formazione docenti sull'Intelligenza Artificiale · PNRR DM 219/2025</div>
+  </div></section>
+
+  <!-- SLIDE 2 — GANCIO -->
+  <section class="slide"><div class="canvas indigobg">
+    <div class="circ" style="top:-20%;left:75%;width:38%;height:66%;background:#fff;opacity:.08;"></div>
+    <div class="hook-eyebrow">Dove arriviamo oggi</div>
+    <div class="hook-q wh">E se costruiste una lezione intera, dall'idea alla presentazione, <span class="cy">in un pomeriggio</span>?</div>
+    <div class="pageno dark">2 / 16</div>
+  </div></section>
+
+  <!-- SLIDE 3 — RIPASSO CLAUDE -->
+  <section class="slide"><div class="canvas light">
+    <div class="chip indigo">Ripasso · 1</div>
+    <div class="title">Claude: il cervello che progetta</div>
+    <div class="bigicon" style="background:var(--indigo);">🧠</div>
+    <div class="bigtext">Conosce la vostra classe (il <b>Progetto</b>). Pensa la lezione: obiettivi, struttura, esercizi. È il punto di partenza.</div>
+    <div class="foot">Pratica Primaria · Laboratorio</div><div class="pageno">3 / 16</div>
+  </div></section>
+
+  <!-- SLIDE 4 — RIPASSO NOTEBOOKLM -->
+  <section class="slide"><div class="canvas light">
+    <div class="chip cyan">Ripasso · 2</div>
+    <div class="title">NotebookLM: le fonti, senza inventare</div>
+    <div class="bigicon" style="background:var(--cyan);">✅</div>
+    <div class="bigtext">Lavora <b>solo sui documenti che gli date</b> e cita il punto esatto. Trova, estrae e verifica le informazioni vere.</div>
+    <div class="foot">Pratica Primaria · Laboratorio</div><div class="pageno">4 / 16</div>
+  </div></section>
+
+  <!-- SLIDE 5 — RIPASSO CANVA -->
+  <section class="slide"><div class="canvas light">
+    <div class="chip coral">Ripasso · 3</div>
+    <div class="title">Canva: la forma bella</div>
+    <div class="bigicon" style="background:var(--coral);">🎨</div>
+    <div class="bigtext">Trasforma la lezione in materiali pronti: <b>presentazione, scheda, gioco</b>. Quello che porti davvero in classe.</div>
+    <div class="foot">Pratica Primaria · Laboratorio</div><div class="pageno">5 / 16</div>
+  </div></section>
+
+  <!-- SLIDE 6 — STATEMENT insieme -->
+  <section class="slide"><div class="canvas ink">
+    <div class="chip violet">Il salto di oggi</div>
+    <div class="stbar"></div>
+    <div class="statement wh">Oggi li usiamo <span class="cy">insieme</span>.</div>
+    <div class="pageno dark">6 / 16</div>
+  </div></section>
+
+  <!-- SLIDE 7 — IL FLUSSO -->
+  <section class="slide"><div class="canvas light">
+    <div class="chip indigo">Il flusso</div>
+    <div class="title">Quattro passi, in fila</div>
+    <div class="cols">
+      <div class="col"><div class="col-head" style="background:var(--indigo)">1 · CLAUDE</div><p>Brainstorm: imposti obiettivi, struttura e idee della lezione.</p></div>
+      <div class="col"><div class="col-head" style="background:var(--cyan)">2 · CLAUDE + NOTEBOOKLM</div><p>Ricerca: estrai e verifica le fonti, genera ipotesi e punti chiave.</p></div>
+      <div class="col"><div class="col-head" style="background:var(--violet)">3 · CLAUDE</div><p>Completi la lezione: testi, esercizi, differenziazione.</p></div>
+      <div class="col"><div class="col-head" style="background:var(--coral)">4 · CANVA</div><p>La presentazione (prompt scritto da Claude).</p></div>
+    </div>
+    <div class="foot">Claude pensa · Claude e NotebookLM fondano · Claude completa · Canva dà forma</div><div class="pageno">7 / 16</div>
+  </div></section>
+
+  <!-- SLIDE 8 — PROMPT DI ESEMPIO (inquadramento) -->
+  <section class="slide"><div class="canvas light">
+    <div class="chip coral">Prompt di esempio</div>
+    <div class="title">Spunti, non binari</div>
+    <div class="lead">Avete <b>totale libertà</b>: lavorate come preferite, coi vostri prompt e i vostri tempi. Questi sono solo esempi, uno per passo, per chi vuole un punto di partenza. Il prompt per Canva è quello che già conoscete dalla lezione 2.</div>
+    <div class="foot">Pratica Primaria · Laboratorio</div><div class="pageno">8 / 16</div>
+  </div></section>
+
+  <!-- SLIDE 9 — ESEMPIO PASSO 1 -->
+  <section class="slide"><div class="canvas light">
+    <div class="chip indigo">Esempio · Passo 1 (Claude)</div>
+    <div class="title">Brainstorm della lezione</div>
+    <div class="codebox sm">"Sei un assistente didattico esperto e ragioni come un bravo insegnante. Devo progettare una lezione di [materia] su [argomento] per [classe/grado], della durata di [minuti]. Prima di propormi qualcosa, fammi 3 domande chiave per capire cosa mi serve (cosa sanno già gli studenti, su cosa mettere l'accento, eventuali vincoli). Voglio mantenere io il controllo: proponimi la struttura della lezione (obiettivi, momenti con i tempi, idee di attività) solo quando hai le risposte e ti ho dato l'ok. Linguaggio semplice e adatto all'età."</div>
+    <div class="foot">Pratica Primaria · Laboratorio</div><div class="pageno">9 / 16</div>
+  </div></section>
+
+  <!-- SLIDE 10 — ESEMPIO PASSO 2 (Claude) -->
+  <section class="slide"><div class="canvas light">
+    <div class="chip cyan">Esempio · Passo 2 (Claude)</div>
+    <div class="title">Ricerca e ipotesi</div>
+    <div class="codebox sm">"Aiutami a documentare la lezione su [argomento] per [classe/grado]. Trova le informazioni essenziali, organizzale in punti chiave, distingui ciò che è certo da ciò che andrebbe verificato, e proponimi 2-3 spunti o ipotesi interessanti da usare in classe. Indicami quali fonti potrei caricare in NotebookLM per controllare."</div>
+    <div class="foot">Pratica Primaria · Laboratorio</div><div class="pageno">10 / 16</div>
+  </div></section>
+
+  <!-- SLIDE 11 — ESEMPIO PASSO 2 (NotebookLM) -->
+  <section class="slide"><div class="canvas light">
+    <div class="chip cyan">Esempio · Passo 2 (NotebookLM)</div>
+    <div class="title">Verifica sulle fonti</div>
+    <div class="copysub">Da scrivere nella chat di NotebookLM, sulle fonti caricate.</div>
+    <div class="codebox">"Sulla base delle fonti che ho caricato, estrai i punti chiave su [argomento] adatti a [classe/grado], in linguaggio semplice. Per ogni punto cita il passaggio della fonte. Se qualcosa non è presente nelle fonti, dimmelo invece di inventarlo."</div>
+    <div class="foot">Pratica Primaria · Laboratorio</div><div class="pageno">11 / 16</div>
+  </div></section>
+
+  <!-- SLIDE 12 — ESEMPIO PASSO 3 -->
+  <section class="slide"><div class="canvas light">
+    <div class="chip violet">Esempio · Passo 3 (Claude)</div>
+    <div class="title">Completa la lezione</div>
+    <div class="codebox sm">"Con queste informazioni verificate [incolla i punti chiave presi da NotebookLM] completa la lezione di [materia] su [argomento] per [classe/grado]: spiegazioni in linguaggio semplice, 3-4 esercizi con una versione facilitata e una breve attività. Tieni tutto al livello dell'età e coerente con gli obiettivi definiti all'inizio."</div>
+    <div class="foot">Pratica Primaria · Laboratorio</div><div class="pageno">12 / 16</div>
+  </div></section>
+
+  <!-- SLIDE 13 — TOCCA A VOI -->
+  <section class="slide"><div class="canvas coralbg">
+    <div class="circ" style="top:-20%;left:75%;width:38%;height:66%;background:#fff;opacity:.10;"></div>
+    <div class="chip" style="background:#fff;color:var(--coral)">Tocca a voi · circa 85 min</div>
+    <div class="statement wh">Costruite la vostra lezione completa,<br>dall'idea alla <span style="color:var(--ink)">presentazione</span>.</div>
+    <div class="pageno" style="color:#FFE4D3">13 / 16</div>
+  </div></section>
+
+  <!-- SLIDE 14 — DIBATTITO BACKUP 1 -->
+  <section class="slide"><div class="canvas coralbg">
+    <div class="circ" style="top:-20%;left:75%;width:38%;height:66%;background:#fff;opacity:.10;"></div>
+    <div class="hook-eyebrow" style="color:#fff;">Se finite prima · dibattito</div>
+    <div class="hook-q wh">Cosa userete <span style="color:var(--ink)">davvero</span> da lunedì? E cosa no?</div>
+    <div class="pageno" style="color:#FFE4D3">14 / 16</div>
+  </div></section>
+
+  <!-- SLIDE 15 — DIBATTITO BACKUP 2 -->
+  <section class="slide"><div class="canvas coralbg">
+    <div class="circ" style="top:-20%;left:75%;width:38%;height:66%;background:#fff;opacity:.10;"></div>
+    <div class="hook-eyebrow" style="color:#fff;">Se finite prima · dibattito</div>
+    <div class="hook-q wh">Cosa vi ha <span style="color:var(--ink)">sorpreso</span>? E cosa vi preoccupa ancora?</div>
+    <div class="pageno" style="color:#FFE4D3">15 / 16</div>
+  </div></section>
+
+  <!-- SLIDE 16 — CHIUSURA -->
+  <section class="slide"><div class="canvas ink">
+    <div class="chip violet">In una frase</div>
+    <div class="stbar"></div>
+    <div class="statement wh">Da oggi non partite più dal <span class="co">foglio bianco</span>.</div>
+    <div class="pageno dark">16 / 16</div>
+  </div></section>
+
+</div>
+<div class="hint">Frecce o scroll · F schermo intero · Cmd/Ctrl+P per esportare PDF</div>
+<script>
+  const deck=document.getElementById('deck');
+  const slides=[...document.querySelectorAll('.slide')];
+  let i=0;
+  function go(n){i=Math.max(0,Math.min(slides.length-1,n));slides[i].scrollIntoView({behavior:'smooth'});}
+  deck.addEventListener('scroll',()=>{i=Math.round(deck.scrollTop/window.innerHeight);},{passive:true});
+  window.addEventListener('keydown',e=>{
+    if(['ArrowDown','ArrowRight','PageDown',' '].includes(e.key)){e.preventDefault();go(i+1);}
+    else if(['ArrowUp','ArrowLeft','PageUp'].includes(e.key)){e.preventDefault();go(i-1);}
+    else if(e.key==='Home'){e.preventDefault();go(0);}
+    else if(e.key==='End'){e.preventDefault();go(slides.length-1);}
+    else if(e.key.toLowerCase()==='f'){if(!document.fullscreenElement)document.documentElement.requestFullscreen();else document.exitFullscreen();}
+  });
+</script>
+</body>
+</html>

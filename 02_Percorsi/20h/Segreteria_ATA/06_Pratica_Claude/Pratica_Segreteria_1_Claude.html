@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pratica ATA e segreteria · Lezione 1 · Claude: da chat a piattaforma</title>
+<!--
+  COME USARLO
+  · Presentare: apri nel browser. Frecce o scroll per cambiare slide. Tasto F = schermo intero.
+  · Esportare in PDF: Stampa (Cmd/Ctrl+P) -> Orizzontale -> Margini Nessuno -> "Grafica di sfondo" ATTIVA -> Salva come PDF.
+  · Struttura: SLIDE 1-12 = Parte A teorica. SLIDE 13-21 = prompt e materiali da copiare durante la pratica (Parte B, niente slide didattiche).
+  TIPI DI SLIDE (colore = funzione):
+  · ink (navy)        = statement chiave
+  · light             = contenuto
+  · indigobg (viola)  = GANCIO: domanda introduttiva del relatore
+-->
+<style>
+  :root{
+    --ink:#1E1B4B; --ink2:#2A2566; --indigo:#4F46E5; --violet:#7C3AED;
+    --cyan:#06B6D4; --coral:#F97316; --light:#F6F5FF; --text:#1A1730;
+    --muted:#6B6790; --white:#ffffff; --cfcb:#CFCBF0; --faint:#8E8AC4;
+    --line:#E6E3FB;
+    --font:'Inter','Segoe UI',-apple-system,Arial,sans-serif;
+  }
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap');
+  *{box-sizing:border-box;margin:0;padding:0;}
+  html,body{background:#0c0a1f;font-family:var(--font);}
+  .deck{height:100vh;overflow-y:scroll;scroll-snap-type:y mandatory;scroll-behavior:smooth;}
+  .slide{height:100vh;display:flex;align-items:center;justify-content:center;scroll-snap-align:start;background:#0c0a1f;}
+  .canvas{position:relative;width:min(100vw,177.78vh);height:min(56.25vw,100vh);container-type:size;overflow:hidden;}
+  .ink{background:var(--ink);} .light{background:var(--light);} .coralbg{background:var(--coral);} .indigobg{background:var(--indigo);}
+
+  .cy{color:var(--cyan);} .co{color:var(--coral);} .in{color:var(--indigo);}
+  .vi{color:var(--violet);} .wh{color:var(--white);} .tx{color:var(--text);}
+  .mu{color:var(--muted);} .inkc{color:var(--ink);}
+
+  .chip{position:absolute;top:8cqh;left:5.5cqw;padding:1.3cqh 2.2cqh;border-radius:2cqh;
+        font-size:2.4cqh;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#fff;}
+  .chip.violet{background:var(--violet);} .chip.cyan{background:var(--cyan);}
+  .chip.indigo{background:var(--indigo);} .chip.coral{background:var(--coral);} .chip.muted{background:var(--muted);}
+
+  .title{position:absolute;top:15cqh;left:5.5cqw;right:5.5cqw;font-size:6.2cqh;font-weight:800;color:var(--text);line-height:1.05;}
+
+  .stbar{position:absolute;top:34cqh;left:6.7cqw;width:4.2cqh;height:1.3cqh;background:var(--coral);}
+  .statement{position:absolute;top:38cqh;left:6.5cqw;right:6cqw;font-size:7.6cqh;font-weight:800;line-height:1.08;}
+  .statement.big{font-size:8.6cqh;}
+
+  .foot{position:absolute;bottom:4cqh;left:5.5cqw;font-size:1.7cqh;color:var(--muted);}
+  .foot.dark{color:var(--faint);}
+  .pageno{position:absolute;bottom:4cqh;right:5.5cqw;font-size:1.7cqh;color:var(--muted);}
+  .pageno.dark{color:var(--faint);}
+
+  .dots{position:absolute;display:flex;gap:1.4cqh;}
+  .dots span{width:2cqh;height:2cqh;border-radius:50%;}
+
+  .eyebrow{position:absolute;top:21cqh;left:5.5cqw;font-size:2.6cqh;font-weight:700;letter-spacing:.18em;color:var(--cyan);}
+  .cover-title{position:absolute;top:27cqh;left:5.2cqw;right:6cqw;font-size:9.4cqh;font-weight:800;color:#fff;line-height:.96;}
+  .cover-bar{position:absolute;top:54cqh;left:5.6cqw;width:4cqh;height:1.2cqh;background:var(--coral);}
+  .cover-sub{position:absolute;top:58cqh;left:5.5cqw;font-size:3.6cqh;color:var(--cfcb);}
+  .cover-foot{position:absolute;bottom:5cqh;left:5.5cqw;font-size:1.9cqh;color:var(--faint);}
+
+  .circ{position:absolute;border-radius:50%;}
+
+  /* hook (gancio) */
+  .hook-eyebrow{position:absolute;top:20cqh;left:6cqw;font-size:2.7cqh;font-weight:700;letter-spacing:.16em;color:var(--cfcb);text-transform:uppercase;}
+  .hook-q{position:absolute;top:34cqh;left:6cqw;right:7cqw;font-size:7.2cqh;font-weight:800;color:#fff;line-height:1.1;}
+
+  .cards{position:absolute;top:31cqh;left:5.5cqw;right:5.5cqw;display:flex;flex-direction:column;gap:2.2cqh;}
+  .card{display:flex;align-items:center;gap:2.6cqh;background:#fff;border:1px solid var(--line);
+        border-radius:2.2cqh;padding:2.6cqh 3cqh;box-shadow:0 4px 14px rgba(80,70,160,.10);}
+  .card-ic{flex:none;width:8.4cqh;height:8.4cqh;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:4cqh;color:#fff;}
+  .card h3{font-size:3.4cqh;font-weight:700;color:var(--text);margin-bottom:.4cqh;}
+  .card p{font-size:2.5cqh;color:var(--muted);line-height:1.22;}
+
+  .cols{position:absolute;top:31cqh;left:5.5cqw;right:5.5cqw;display:flex;gap:2.6cqh;}
+  .col{flex:1;background:#fff;border:1px solid var(--line);border-radius:2.2cqh;overflow:hidden;}
+  .col-head{font-size:3.2cqh;font-weight:800;color:#fff;text-align:center;padding:2cqh;letter-spacing:.03em;}
+  .col ul{list-style:none;padding:2.4cqh 2.6cqh;}
+  .col li{display:flex;gap:1.4cqh;align-items:flex-start;font-size:2.5cqh;color:var(--text);line-height:1.2;margin-bottom:2cqh;}
+  .col li::before{content:"";flex:none;width:1.5cqh;height:1.5cqh;border-radius:50%;margin-top:.6cqh;background:currentColor;}
+  .col.cdcoral li{color:var(--coral);} .col.cdcyan li{color:var(--cyan);}
+  .col.cdindigo li{color:var(--indigo);} .col.cdmuted li{color:var(--muted);} .col.cdviolet li{color:var(--violet);}
+  .col li span{color:var(--text);}
+  .col .tag{display:block;text-align:center;min-height:2.6cqh;font-size:1.9cqh;font-weight:800;letter-spacing:.04em;color:var(--indigo);padding:.7cqh 0 1cqh;}
+
+  /* big icon + text (framing) */
+  .bigicon{position:absolute;top:36cqh;left:7cqw;width:24cqh;height:24cqh;border-radius:50%;
+           display:flex;align-items:center;justify-content:center;font-size:12cqh;}
+  .bigtext{position:absolute;top:33cqh;left:33cqw;right:6cqw;font-size:3.5cqh;color:var(--text);line-height:1.3;}
+  .bigquote{position:absolute;top:76cqh;left:33cqw;right:6cqw;font-size:2.9cqh;font-style:italic;font-weight:700;color:var(--indigo);}
+
+  /* prompt da copiare */
+  .copysub{position:absolute;top:26.5cqh;left:6cqw;font-size:2.5cqh;color:var(--muted);font-style:italic;}
+  .codebox{position:absolute;top:32cqh;left:6cqw;right:6cqw;background:#fff;border:1.5px solid var(--line);
+           border-radius:1.8cqh;padding:3.4cqh 3.8cqh;font-size:3cqh;line-height:1.42;color:var(--text);
+           box-shadow:0 6px 20px rgba(80,70,160,.10);}
+  .codebox .ph{color:var(--indigo);font-weight:700;}
+  .codebox.sm{top:29cqh;font-size:2.3cqh;line-height:1.38;}
+  .codebox.xs{top:22cqh;font-size:1.32cqh;line-height:1.3;padding:2.2cqh 2.8cqh;}
+
+  .hint{position:fixed;bottom:14px;right:16px;font-size:12px;color:#888;font-family:var(--font);z-index:50;}
+
+  @media print{
+    @page{size:1280px 720px;margin:0;}
+    html,body{background:#fff;}
+    .deck{height:auto;overflow:visible;display:block;}
+    .slide{height:720px;width:1280px;display:block;page-break-after:always;break-after:page;}
+    .canvas{width:1280px;height:720px;}
+    .hint{display:none;}
+    *{-webkit-print-color-adjust:exact;print-color-adjust:exact;}
+  }
+</style>
+</head>
+<body>
+<div class="deck" id="deck">
+
+  <!-- ===================== PARTE A · TEORIA ===================== -->
+
+  <!-- SLIDE 1 — COPERTINA -->
+  <section class="slide"><div class="canvas ink">
+    <div class="circ" style="top:-19%;left:78%;width:34%;height:60%;background:var(--indigo);opacity:.45;"></div>
+    <div class="circ" style="top:58%;left:88%;width:25%;height:45%;background:var(--violet);opacity:.4;"></div>
+    <div class="circ" style="top:70%;left:-8%;width:24%;height:42%;background:var(--cyan);opacity:.3;"></div>
+    <div class="eyebrow">PRATICA · PERCORSO ATA E SEGRETERIA</div>
+    <div class="cover-title">Claude: da chat<br>a piattaforma</div>
+    <div class="cover-bar"></div>
+    <div class="cover-sub">Lezione pratica 1 · Rendere l'IA tua</div>
+    <div class="dots" style="top:74%;left:5.6%;"><span style="background:var(--cyan)"></span><span style="background:var(--indigo)"></span><span style="background:var(--violet)"></span><span style="background:var(--coral)"></span></div>
+    <div class="cover-foot">Formazione personale ATA e segreteria · PNRR DM 219/2025</div>
+  </div></section>
+
+  <!-- SLIDE 2 — GANCIO apertura -->
+  <section class="slide"><div class="canvas indigobg">
+    <div class="circ" style="top:-20%;left:75%;width:38%;height:66%;background:#fff;opacity:.08;"></div>
+    <div class="hook-eyebrow">Dove vogliamo arrivare</div>
+    <div class="hook-q wh">Avete usato l'IA per mille cose.<br>Ma l'avete mai fatta diventare<br>il vostro <span class="cy">posto di lavoro</span>?</div>
+    <div class="pageno dark">2 / 21</div>
+  </div></section>
+
+  <!-- SLIDE 3 — DOVE SIAMO -->
+  <section class="slide"><div class="canvas light">
+    <div class="chip violet">Dove siamo</div>
+    <div class="title">Dai cinque incontri a oggi</div>
+    <div class="cards">
+      <div class="card"><div class="card-ic" style="background:var(--indigo)">📚</div><div><h3>Cosa sapete</h3><p>Cos'è l'IA, il metodo, la responsabilità, il prompt e come darle una memoria.</p></div></div>
+      <div class="card"><div class="card-ic" style="background:var(--cyan)">🧩</div><div><h3>Cosa avete costruito</h3><p>Il patto dell'ufficio, il vostro file di contesto permanente, e il Progetto Mail visto sulle slide.</p></div></div>
+      <div class="card"><div class="card-ic" style="background:var(--coral)">🚀</div><div><h3>Cosa manca</h3><p>Metterlo a sistema. Dal vivo, sulla piattaforma. Oggi.</p></div></div>
+    </div>
+    <div class="foot">Pratica ATA e segreteria · Claude</div><div class="pageno">3 / 21</div>
+  </div></section>
+
+  <!-- SLIDE 4 — STATEMENT generico vs tecnico -->
+  <section class="slide"><div class="canvas ink">
+    <div class="chip violet">Il salto di oggi</div>
+    <div class="stbar"></div>
+    <div class="statement wh">Finora: uso <span class="co">generico</span>.<br>Oggi: uso <span class="cy">tecnico</span>.</div>
+    <div class="pageno dark">4 / 21</div>
+  </div></section>
+
+  <!-- SLIDE 5 — COS'E' CLAUDE -->
+  <section class="slide"><div class="canvas light">
+    <div class="chip cyan">Cos'è Claude</div>
+    <div class="title">Un generalista: bravo un po' a tutto</div>
+    <div class="bigicon" style="background:var(--indigo);">🧠</div>
+    <div class="bigtext">Claude è bravo un po' a tutto: spiegazioni, testi, idee, verifiche, comunicazioni. Non ha un mestiere solo. Per questo finora lo avete usato in modo generico, un po' per ogni cosa.</div>
+    <div class="bigquote">Oggi smettiamo di usarlo a caso e iniziamo a usarlo da tecnici.</div>
+    <div class="foot">Pratica ATA e segreteria · Claude</div><div class="pageno">5 / 21</div>
+  </div></section>
+
+  <!-- SLIDE 6 — GANCIO tre versioni -->
+  <section class="slide"><div class="canvas indigobg">
+    <div class="circ" style="top:-20%;left:75%;width:38%;height:66%;background:#fff;opacity:.08;"></div>
+    <div class="hook-eyebrow">Tre Claude diversi</div>
+    <div class="hook-q wh">Esistono tre versioni di Claude.<br>Qual è quella <span class="cy">giusta per voi</span>?</div>
+    <div class="pageno dark">6 / 21</div>
+  </div></section>
+
+  <!-- SLIDE 7 — LE TRE VERSIONI -->
+  <section class="slide"><div class="canvas light">
+    <div class="chip indigo">Le tre versioni</div>
+    <div class="title">Stessa intelligenza, ambienti diversi</div>
+    <div class="cols">
+      <div class="col"><div class="col-head" style="background:var(--cyan)">CHAT</div><span class="tag">&nbsp;</span><ul class="cdcyan"><li><span>Apri, chiedi, rispondi</span></li><li><span>Veloce e immediata</span></li><li><span>Ogni chat vive per sé</span></li></ul></div>
+      <div class="col"><div class="col-head" style="background:var(--indigo)">COWORK</div><span class="tag">La useremo oggi</span><ul class="cdindigo"><li><span>Si usa dal computer</span></li><li><span>Ti conosce: progetti, materiali, automazioni</span></li><li><span>Tutto in un posto solo</span></li></ul></div>
+      <div class="col"><div class="col-head" style="background:var(--muted)">CODE</div><span class="tag">&nbsp;</span><ul class="cdmuted"><li><span>La versione per il software</span></li><li><span>Non è il nostro caso</span></li><li><span>La nominiamo e basta</span></li></ul></div>
+    </div>
+    <div class="foot">Pratica ATA e segreteria · Claude</div><div class="pageno">7 / 21</div>
+  </div></section>
+
+  <!-- SLIDE 8 — CHAT vs COWORK -->
+  <section class="slide"><div class="canvas light">
+    <div class="chip violet">La differenza che conta</div>
+    <div class="title">Chat o Cowork?</div>
+    <div class="cols">
+      <div class="col"><div class="col-head" style="background:var(--coral)">CHAT · RISPONDE</div><ul class="cdcoral"><li><span>Una conversazione alla volta</span></li><li><span>Ricominci ogni volta da capo</span></li><li><span>Niente memoria tra le chat</span></li></ul></div>
+      <div class="col"><div class="col-head" style="background:var(--cyan)">COWORK · LAVORA CON TE</div><ul class="cdcyan"><li><span>Progetti con memoria</span></li><li><span>Skill, routine, mini-app</span></li><li><span>Costruisci una volta, ritrovi tutto</span></li></ul></div>
+    </div>
+    <div class="foot">Pratica ATA e segreteria · Claude</div><div class="pageno">8 / 21</div>
+  </div></section>
+
+  <!-- SLIDE 9 — STATEMENT lavoriamo in Cowork -->
+  <section class="slide"><div class="canvas ink">
+    <div class="chip cyan">La scelta di oggi</div>
+    <div class="stbar"></div>
+    <div class="statement wh">Oggi lavoriamo in <span class="cy">Cowork</span>.<br>Dal <span class="co">computer</span>.</div>
+    <div class="pageno dark">9 / 21</div>
+  </div></section>
+
+  <!-- SLIDE 10 — LA PIATTAFORMA -->
+  <section class="slide"><div class="canvas light">
+    <div class="chip indigo">La piattaforma</div>
+    <div class="title">Come è fatta dentro</div>
+    <div class="cards">
+      <div class="card"><div class="card-ic" style="background:var(--indigo)">📁</div><div><h3>Projects</h3><p>I contenitori con memoria del vostro lavoro.</p></div></div>
+      <div class="card"><div class="card-ic" style="background:var(--cyan)">⏰</div><div><h3>Scheduled</h3><p>Le attività che partono da sole, a un orario.</p></div></div>
+      <div class="card"><div class="card-ic" style="background:var(--coral)">📌</div><div><h3>Pinned</h3><p>Le mini-app sempre a portata di click, nella barra a sinistra.</p></div></div>
+    </div>
+    <div class="foot">Il giro vero lo facciamo a schermo</div><div class="pageno">10 / 21</div>
+  </div></section>
+
+  <!-- SLIDE 11 — LA MAPPA DI OGGI -->
+  <section class="slide"><div class="canvas light">
+    <div class="chip violet">La mappa di oggi</div>
+    <div class="title">Le quattro funzioni</div>
+    <div class="cols">
+      <div class="col"><div class="col-head" style="background:var(--indigo)">PROGETTI</div><ul class="cdindigo"><li><span>Contenere e ordinare il lavoro</span></li><li><span>Tutto un argomento in un posto</span></li></ul></div>
+      <div class="col"><div class="col-head" style="background:var(--cyan)">SKILL</div><ul class="cdcyan"><li><span>Abilità che insegni una volta</span></li><li><span>Le richiami con "/"</span></li></ul></div>
+      <div class="col"><div class="col-head" style="background:var(--violet)">AUTOMAZIONI</div><ul class="cdviolet"><li><span>Ti tengono aggiornato da sole</span></li><li><span>Es. le novità del mondo scuola</span></li></ul></div>
+      <div class="col"><div class="col-head" style="background:var(--coral)">LIVE ARTIFACT</div><ul class="cdcoral"><li><span>Una mini-app su misura</span></li><li><span>Es. il cruscotto delle scadenze</span></li></ul></div>
+    </div>
+    <div class="foot">Prima la casa delle vostre comunicazioni, poi gli strumenti dentro</div><div class="pageno">11 / 21</div>
+  </div></section>
+
+  <!-- SLIDE 12 — PONTE alla pratica -->
+  <section class="slide"><div class="canvas ink">
+    <div class="chip coral">Si parte</div>
+    <div class="stbar"></div>
+    <div class="statement wh">Ora basta guardare.<br>Apriamo e <span class="cy">costruiamo</span>,<br>dal <span class="co">Progetto</span>.</div>
+    <div class="pageno dark">12 / 21</div>
+  </div></section>
+
+  <!-- ===================== PROMPT DA COPIARE (PARTE B) ===================== -->
+
+  <!-- SLIDE 13 — PROMPT progetto da zero -->
+  <section class="slide"><div class="canvas light">
+    <div class="chip indigo">Da copiare · Progetto</div>
+    <div class="title">Prompt: creare un progetto da zero</div>
+    <div class="copysub">Nella prima chat del progetto, completando le parti in viola.</div>
+    <div class="codebox sm">"Sto creando il contesto di questo progetto. Obiettivo: <span class="ph">[scrivere tutte le comunicazioni che escono dal mio ufficio]</span>. Lo userò per: <span class="ph">[mail alle famiglie, avvisi, circolari brevi, risposte a domande ricorrenti]</span>. Informazioni di partenza: <span class="ph">[le mail già inviate e venute bene, la modulistica, lo scadenzario dell'anno]</span>. Fammi tutte le domande, una alla volta, finché non hai chiaro il contesto. Poi riassumi e salva nella memoria del progetto."</div>
+    <div class="foot">Pratica ATA e segreteria · Claude</div><div class="pageno">13 / 21</div>
+  </div></section>
+
+  <!-- SLIDE 14 — PROMPT verifica dalla banca -->
+  <section class="slide"><div class="canvas light">
+    <div class="chip indigo">Da copiare · Progetto</div>
+    <div class="title">Prompt: una comunicazione dall'archivio</div>
+    <div class="copysub">Da usare nel Progetto Mail demo, dopo aver caricato la cartella.</div>
+    <div class="codebox">"Scrivi la comunicazione alle famiglie per il rinvio dell'assemblea di classe di novembre. Dieci righe, oggetto esplicito, la nuova data in evidenza e il recapito per chi non può esserci. Pesca il tono dalle mail dell'archivio e la formula di chiusura da quelle agli enti."</div>
+    <div class="foot">Pratica ATA e segreteria · Claude</div><div class="pageno">14 / 21</div>
+  </div></section>
+
+  <!-- SLIDE 15 — PROMPT preferenze -->
+  <section class="slide"><div class="canvas light">
+    <div class="chip cyan">Da copiare · Impostazioni</div>
+    <div class="title">Prompt: preferenze personali</div>
+    <div class="copysub">Da incollare nelle preferenze personali, valgono in ogni chat.</div>
+    <div class="codebox">"Lavoro nella segreteria di una scuola. Scrivimi sempre in italiano semplice e diretto, con frasi brevi. Quando produci un testo istituzionale metti sempre in evidenza date e scadenze. Non usare formule burocratiche se la stessa cosa si può dire in italiano. Non inventare mai riferimenti normativi: se non sei sicuro, dimmelo."</div>
+    <div class="foot">Pratica ATA e segreteria · Claude</div><div class="pageno">15 / 21</div>
+  </div></section>
+
+  <!-- SLIDE 16 — Installa Prompt Optimizer -->
+  <section class="slide"><div class="canvas light">
+    <div class="chip indigo">Da installare · Skill</div>
+    <div class="title">Installa il Prompt Optimizer</div>
+    <div class="cards">
+      <div class="card"><div class="card-ic" style="background:var(--indigo)">1</div><div><h3>Prendi il testo della skill</h3><p>Il formatore vi condivide il file con il Prompt Optimizer.</p></div></div>
+      <div class="card"><div class="card-ic" style="background:var(--cyan)">2</div><div><h3>Crea la skill e incolla</h3><p>Apri una nuova skill, incolla il testo e premi Save skill.</p></div></div>
+      <div class="card"><div class="card-ic" style="background:var(--coral)">3</div><div><h3>Richiamala con "/"</h3><p>Scrivi /prompt-optimizer e dagli un prompt da migliorare.</p></div></div>
+    </div>
+    <div class="foot">Pratica ATA e segreteria · Claude</div><div class="pageno">16 / 21</div>
+  </div></section>
+
+  <!-- SLIDE 17 — Testo dello scrittore di prompt -->
+  <section class="slide"><div class="canvas light">
+    <div class="chip indigo">Da copiare · Skill</div>
+    <div class="title">Lo scrittore di prompt (il testo)</div>
+    <div class="codebox xs">Nome: Prompt Optimizer. Skill per la progettazione, revisione e ottimizzazione di prompt destinati a modelli di linguaggio (LLM). Copre prompt singoli, system prompt, istruzioni per agenti e template riutilizzabili.<br><br>RUOLO. Agisci come Prompt Engineer. Compiti: produrre un prompt ottimizzato, immediatamente eseguibile e copiabile; sviluppare progressivamente la capacità dell'utente di controllare l'output dei modelli. La didattica è implicita: il miglioramento si mostra nel prompt riscritto, non in spiegazioni teoriche.<br><br>VINCOLO PRIMARIO. Non generare mai la risposta al contenuto del prompt. Il tuo output è esclusivamente il prompt stesso e le note tecniche di accompagnamento.<br><br>ARCHITETTURA DEL PROMPT. Ogni prompt ottimizzato integra 4 componenti in modo fluido, senza etichette visibili. Persona: il punto di vista e le competenze dell'AI. Task: azione concreta con verbo imperativo. Context: informazioni di sfondo, vincoli di dominio, target. Format: struttura dell'output atteso (tabella, elenco numerato, paragrafo, JSON). Il prompt finale non deve contenere meta-etichette: la struttura è invisibile ma deterministica.<br><br>PIPELINE. Fase 1, analisi: classifica il tipo di intervento (creazione, ottimizzazione, debug), identifica le componenti mancanti; se mancano informazioni critiche fai massimo 2-3 domande mirate, altrimenti procedi. Fase 2, generazione: linguaggio naturale e fluido, specificità, verbo imperativo come nucleo, vincoli di output chiari (lunghezza, formato, tono, lingua), nessun commento interno (pronto per copia-incolla); se il task è complesso suddividilo in step. Tecniche: role assignment, constraint injection, output anchoring, uncertainty flagging ("se non hai abbastanza informazioni, segnalalo"), chain-of-thought per task analitici, few-shot (1-2 esempi), negative prompting. Fase 3, note tecniche: dopo il prompt, 1-2 modifiche chiave rispetto alla versione naive, quale tecnica è stata applicata e perché migliora il controllo; se il prompt era già solido, dichiaralo.<br><br>GESTIONE DEI PATTERN. Vago: aggiungi contesto, formato, output atteso. Sovraccarico: spezza in prompt sequenziali. Confuso: gerarchia chiara. Prolisso: comprimi. Già efficace: micro-ottimizzazioni. Idea grezza: trasforma in prompt strutturato partendo dall'output desiderato.<br><br>PRINCIPI. L'AI è un collaboratore, non un esecutore passivo: ogni prompt definisce l'obiettivo prima dell'esecuzione, include criteri per valutare la qualità, è iterabile. Sistematico vs istintivo: il prompt sistematico è riutilizzabile, coerente, parametrizzabile, verificabile.<br><br>REGOLE OPERATIVE. Mai generare la risposta al contenuto del prompt; mai citare framework o fonti esterne; ogni nota tecnica collegata a una scelta fatta nel prompt; adatta il livello del linguaggio al profilo dell'utente.<br><br>OBIETTIVO FINALE. Portare l'utente da un utilizzo reattivo ("chiedo all'AI cosa fare") a un utilizzo progettuale ("so specificare cosa produrre, come, e so valutare se il risultato è adeguato").</div>
+    <div class="foot">Pratica ATA e segreteria · Claude</div><div class="pageno">17 / 21</div>
+  </div></section>
+
+  <!-- SLIDE 18 — Esempi di skill per voi -->
+  <section class="slide"><div class="canvas light">
+    <div class="chip indigo">Skill · idee</div>
+    <div class="title">Skill utili per voi</div>
+    <div class="cols">
+      <div class="col"><div class="col-head" style="background:var(--indigo)">TONO ISTITUZIONALE</div><ul class="cdindigo"><li><span>Riscrive un testo nella voce della scuola</span></li></ul></div>
+      <div class="col"><div class="col-head" style="background:var(--cyan)">DA NORMATIVA AD AVVISO</div><ul class="cdcyan"><li><span>Da un documento lungo, dieci righe per le famiglie</span></li></ul></div>
+      <div class="col"><div class="col-head" style="background:var(--violet)">CONTROLLO PRIMA DI INVIARE</div><ul class="cdviolet"><li><span>Date incoerenti, campi mancanti, dati personali rimasti</span></li></ul></div>
+      <div class="col"><div class="col-head" style="background:var(--coral)">RISPOSTA ALLO SPORTELLO</div><ul class="cdcoral"><li><span>La risposta tipo alla domanda che torna sempre</span></li></ul></div>
+    </div>
+    <div class="foot">Pratica ATA e segreteria · Claude</div><div class="pageno">18 / 21</div>
+  </div></section>
+
+  <!-- SLIDE 18 — PROMPT creare una skill -->
+  <section class="slide"><div class="canvas light">
+    <div class="chip indigo">Da copiare · Skill</div>
+    <div class="title">Prompt: creare una skill</div>
+    <div class="copysub">Da incollare in una chat nuova per avviare il creatore di abilità.</div>
+    <div class="codebox">"Creiamo insieme un'abilità usando la tua abilità di creatore di abilità. Prima di tutto, dimmi cosa dovrebbe fare l'abilità."</div>
+    <div class="foot">Pratica ATA e segreteria · Claude</div><div class="pageno">19 / 21</div>
+  </div></section>
+
+  <!-- SLIDE 19 — PROMPT routine -->
+  <section class="slide"><div class="canvas light">
+    <div class="chip violet">Da copiare · Routine</div>
+    <div class="title">Prompt: le novità del mondo scuola</div>
+    <div class="copysub">Da incollare in una chat di Cowork. La riga sulle fonti non si toglie.</div>
+    <div class="codebox sm">"Imposta un'attività pianificata in Cowork. Ogni due settimane, il lunedì mattina, voglio ricevere in chat il punto sulle novità più rilevanti per chi lavora nella segreteria di una scuola: nuove note e circolari ministeriali, scadenze nazionali in arrivo, cambiamenti sulle procedure amministrative, sugli adempimenti e sulle piattaforme che usiamo. Massimo 8 punti. Per ognuno scrivi cosa è cambiato, da quando, e perché mi riguarda. <span class="ph">Metti sempre la fonte con il link, e se per un punto non trovi una fonte ufficiale dimmelo invece di ricostruirlo.</span> Prima spiegami come funzionano le attività pianificate, poi fammi le domande necessarie e crea la routine."</div>
+    <div class="foot">Pratica ATA e segreteria · Claude</div><div class="pageno">20 / 21</div>
+  </div></section>
+
+  <!-- SLIDE 18 — PROMPT artifact -->
+  <section class="slide"><div class="canvas light">
+    <div class="chip coral">Da copiare · Live Artifact</div>
+    <div class="title">Prompt: il cruscotto delle scadenze</div>
+    <div class="copysub">Da incollare in una chat dentro il proprio progetto.</div>
+    <div class="codebox sm">"Crea un artefatto dinamico in Cowork: un cruscotto delle scadenze della segreteria. 1) Parte da un anno scolastico italiano, da settembre ad agosto, e mi fa inserire le scadenze ricorrenti dell'ufficio, con data, di cosa si tratta, chi se ne occupa e cosa va preparato prima. 2) Mostra una tabella per mese, con lo stato: da fare, in corso, fatta. 3) In base alla data di oggi mi evidenzia cosa scade nei prossimi quindici giorni e cosa è già in ritardo. 4) Per ogni scadenza posso segnare la comunicazione collegata. 5) Posso aggiornarlo anche parlando con te in chat: se ti dico per esempio 'la scadenza si sposta al 15', aggiorni la tabella di conseguenza. 6) Resta pinnato e aggiornabile. Fammi al massimo 3 domande se ti servono, poi crea l'artefatto."</div>
+    <div class="foot">Pratica ATA e segreteria · Claude</div><div class="pageno">21 / 21</div>
+  </div></section>
+
+</div>
+<div class="hint">Frecce o scroll · F schermo intero · Cmd/Ctrl+P per esportare PDF</div>
+<script>
+  const deck=document.getElementById('deck');
+  const slides=[...document.querySelectorAll('.slide')];
+  let i=0;
+  function go(n){i=Math.max(0,Math.min(slides.length-1,n));slides[i].scrollIntoView({behavior:'smooth'});}
+  deck.addEventListener('scroll',()=>{i=Math.round(deck.scrollTop/window.innerHeight);},{passive:true});
+  window.addEventListener('keydown',e=>{
+    if(['ArrowDown','ArrowRight','PageDown',' '].includes(e.key)){e.preventDefault();go(i+1);}
+    else if(['ArrowUp','ArrowLeft','PageUp'].includes(e.key)){e.preventDefault();go(i-1);}
+    else if(e.key==='Home'){e.preventDefault();go(0);}
+    else if(e.key==='End'){e.preventDefault();go(slides.length-1);}
+    else if(e.key.toLowerCase()==='f'){if(!document.fullscreenElement)document.documentElement.requestFullscreen();else document.exitFullscreen();}
+  });
+</script>
+</body>
+</html>

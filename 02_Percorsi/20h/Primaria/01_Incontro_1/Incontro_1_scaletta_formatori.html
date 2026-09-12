@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Incontro 1 · Scaletta per i formatori</title>
+<style>
+  :root{
+    --ink:#1E1B4B; --indigo:#4F46E5; --violet:#7C3AED; --cyan:#0891B2;
+    --coral:#EA6A1E; --bg:#F7F6FB; --text:#1A1730; --muted:#6B6790; --line:#E6E3FB; --card:#fff;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  body{font-family:'Inter','Segoe UI',-apple-system,Arial,sans-serif;background:var(--bg);color:var(--text);line-height:1.5;}
+  .wrap{max-width:880px;margin:0 auto;padding:36px 24px 80px;}
+  header{margin-bottom:24px;}
+  h1{font-size:30px;font-weight:800;color:var(--ink);}
+  .sub{color:var(--muted);font-size:15px;margin-top:4px;}
+
+  /* come condurlo */
+  .rules{background:var(--ink);color:#fff;border-radius:14px;padding:20px 22px;margin:18px 0 30px;}
+  .rules h2{font-size:13px;letter-spacing:.12em;text-transform:uppercase;color:#A9A4E0;margin-bottom:12px;}
+  .rules ul{list-style:none;display:grid;grid-template-columns:1fr 1fr;gap:8px 24px;}
+  .rules li{font-size:14.5px;padding-left:20px;position:relative;}
+  .rules li::before{content:"";position:absolute;left:0;top:8px;width:8px;height:8px;border-radius:50%;background:var(--cyan);}
+
+  /* block card */
+  .block{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:20px 22px;margin-bottom:16px;border-left:6px solid var(--indigo);}
+  .block.gancio{border-left-color:var(--violet);}
+  .block.dibattito{border-left-color:var(--coral);}
+  .block.patto{border-left-color:var(--cyan);}
+  .bhead{display:flex;align-items:baseline;gap:10px;margin-bottom:4px;flex-wrap:wrap;}
+  .bnum{font-size:13px;font-weight:800;color:#fff;background:var(--indigo);border-radius:20px;padding:2px 10px;}
+  .block.gancio .bnum{background:var(--violet);} .block.dibattito .bnum{background:var(--coral);} .block.patto .bnum{background:var(--cyan);}
+  .btitle{font-size:20px;font-weight:800;color:var(--ink);}
+  .btime{font-size:13px;color:var(--muted);margin-left:auto;font-weight:600;}
+  .block ul{list-style:none;margin-top:10px;}
+  .block li{font-size:15px;padding-left:18px;position:relative;margin-bottom:6px;}
+  .block li::before{content:"";position:absolute;left:0;top:9px;width:6px;height:6px;border-radius:50%;background:var(--muted);}
+  .say{margin-top:12px;background:#F0EFFA;border-radius:8px;padding:10px 14px;font-size:14.5px;font-style:italic;color:var(--ink);}
+  .say b{font-style:normal;color:var(--indigo);font-weight:700;}
+  .data{margin-top:8px;font-size:13.5px;color:var(--cyan);font-weight:700;}
+  .data span{color:var(--muted);font-weight:400;}
+
+  .sec-label{font-size:13px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);font-weight:700;margin:26px 0 10px;}
+
+  .prep{background:#FFF6EE;border:1px solid #F6D9C2;border-radius:14px;padding:18px 22px;margin-top:26px;}
+  .prep h2{font-size:16px;color:var(--coral);margin-bottom:10px;}
+  .prep li{font-size:14.5px;margin-bottom:6px;list-style:none;padding-left:22px;position:relative;}
+  .prep li::before{content:"☐";position:absolute;left:0;top:0;color:var(--coral);}
+
+  @media print{ body{background:#fff;} .block,.rules,.prep{break-inside:avoid;} }
+  @media(max-width:640px){ .rules ul{grid-template-columns:1fr;} }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header>
+    <h1>Incontro 1 · Scaletta per i formatori</h1>
+    <div class="sub">"Cos'è l'IA e perché ti riguarda" · 2 ore · da usare come promemoria mentre si eroga</div>
+  </header>
+
+  <div class="rules">
+    <h2>Come si conduce (vale per tutto l'incontro)</h2>
+    <ul>
+      <li>Si insegna il <b>metodo, non il tool</b>. I tool si vedono negli incontri pratici.</li>
+      <li>Ogni concetto si apre con <b>una domanda</b> (il gancio), non con la teoria.</li>
+      <li><b>Tensione prima del dato</b>: prima chiedi alla stanza, poi mostri il numero.</li>
+      <li><b>1 ora teoria + 1 ora dibattito</b>, mescolati. Le slide spariscono nel dibattito.</li>
+      <li>Tono che <b>invita</b>, mai che giudica. Si impara sbagliando.</li>
+      <li>Nel dibattito guida con le domande, <b>non dai le risposte</b>.</li>
+    </ul>
+  </div>
+
+  <div class="sec-label">Teoria · circa 50 minuti</div>
+
+  <!-- BLOCCO 0 -->
+  <div class="block patto">
+    <div class="bhead"><span class="bnum">0</span><span class="btitle">Patto d'aula</span><span class="btime">5 min</span></div>
+    <ul>
+      <li>Corso interattivo e pratico, non frontale: si fa, si prova, si sbaglia.</li>
+      <li>Spazio di confronto: sull'IA siamo tutti un po' principianti.</li>
+      <li>Serve la loro partecipazione: porteranno i loro casi reali.</li>
+      <li>Regole leggere: nessuna domanda è stupida, un parlante alla volta, giudizio sospeso.</li>
+    </ul>
+    <div class="say"><b>Da dire:</b> "Io vi do il metodo e gli esempi veri. Voi mi date attenzione e i vostri casi. Ci state?" (chiedi un assenso esplicito)</div>
+  </div>
+
+  <!-- BLOCCO 1 -->
+  <div class="block">
+    <div class="bhead"><span class="bnum">1</span><span class="btitle">Apertura: il gap</span><span class="btime">12 min</span></div>
+    <ul>
+      <li>Prima chiedi: "quanti dei vostri studenti la usano ogni giorno?".</li>
+      <li>Poi il dato: gli studenti la usano, gli insegnanti molto meno.</li>
+      <li>Il gap non è tecnico, è di rilevanza: non puoi guidare un uso che non conosci.</li>
+      <li>La paura vera non è essere sostituiti, è diventare irrilevanti.</li>
+    </ul>
+    <div class="data">81% studenti vs 25% insegnanti <span>· GoStudent 2025</span></div>
+    <div class="say"><b>Da dire:</b> "Non siete indietro. Siete gli unici che possono ancora insegnare la differenza tra usarla bene e usarla male."</div>
+  </div>
+
+  <!-- BLOCCO 2 -->
+  <div class="block">
+    <div class="bhead"><span class="bnum">2</span><span class="btitle">Cos'è davvero l'IA</span><span class="btime">12 min</span></div>
+    <ul>
+      <li>L'IA non pensa e non capisce: predice la parola più probabile.</li>
+      <li>Esempio: "la capitale d'Italia è..." porta a "Roma" perché l'ha vista un miliardo di volte.</li>
+      <li>Analogia dello stagista brillante: ha letto tutto, non ha vissuto niente, non conosce il tuo contesto.</li>
+      <li>Conseguenza: tende al generico. Sei tu a portare contesto e giudizio.</li>
+    </ul>
+    <div class="say"><b>Esercizio veloce:</b> far completare ad alta voce "Tanto va la gatta al lardo che...". Tutti dicono "ci lascia lo zampino". "Ecco cosa fa l'IA, su qualsiasi frase."</div>
+  </div>
+
+  <!-- BLOCCO 3 -->
+  <div class="block">
+    <div class="bhead"><span class="bnum">3</span><span class="btitle">I due framing</span><span class="btime">15 min</span></div>
+    <ul>
+      <li>Scorciatoia (per pensare meno): delego, accetto, vado. Porta a debito cognitivo.</li>
+      <li>Superpotere (per potenziarti): amplifica le capacità, uso il mio giudizio, cresce nel tempo.</li>
+      <li>Jagged frontier (Mollick): eccelle dove non te lo aspetti, fallisce dove sembra banale.</li>
+      <li>Eccelle: 20 varianti di una spiegazione, sintesi di 50 pagine. Fallisce: capire l'umore della classe.</li>
+    </ul>
+    <div class="data">Ethan Mollick, Co-Intelligence 2024 <span>· Studio MIT 2025 sul debito cognitivo</span></div>
+    <div class="say"><b>Messaggio centrale:</b> "La differenza non è lo strumento. È il metodo."</div>
+  </div>
+
+  <!-- BLOCCO 4 -->
+  <div class="block">
+    <div class="bhead"><span class="bnum">4</span><span class="btitle">Il concetto di fatica</span><span class="btime">11 min</span></div>
+    <ul>
+      <li>Con il metodo la fatica cala nel tempo e l'output cresce: stesso tempo, più cose.</li>
+      <li>Calo della fatica non vuol dire spegnere il cervello: il controllo resta tuo.</li>
+      <li>Uso passivo (accetto e basta) spegne il pensiero critico. Uso attivo (valuto, correggo) lo allena.</li>
+      <li>Chi capisce come funziona lo strumento delega meno ciecamente.</li>
+    </ul>
+    <div class="data">Gerlich 2025 <span>· chi la usa passivamente perde pensiero critico</span></div>
+  </div>
+
+  <!-- BLOCCO 4b -->
+  <div class="block gancio">
+    <div class="bhead"><span class="bnum">+</span><span class="btitle">Allena il pensiero critico</span><span class="btime">6 min</span></div>
+    <ul>
+      <li>Tutti fanno domande all'IA. Il salto è farsi fare le domande da lei.</li>
+      <li>Le sue domande ti costringono a pensare, non a delegare.</li>
+      <li>Prompt utili: "Interrogami su questo", "Sfida le mie conclusioni", "Fai l'avvocato del diavolo", "Cosa non ho considerato?".</li>
+    </ul>
+  </div>
+
+  <div class="sec-label">Dibattito · circa 65 minuti · le slide spariscono</div>
+
+  <!-- DIBATTITO -->
+  <div class="block dibattito">
+    <div class="bhead"><span class="bnum">D</span><span class="btitle">Tre domande, in scala</span><span class="btime">65 min</span></div>
+    <ul>
+      <li><b>1.</b> Nel vostro lavoro: dove vi ha già aiutato? E dove vi ha deluso? (concreto, sul loro caso)</li>
+      <li><b>2.</b> Come cambierà il vostro ruolo? (sposta il discorso su di loro)</li>
+      <li><b>3.</b> Cosa pensi che l'IA non potrà mai fare? (resta aperta, si riapre a fine corso)</li>
+    </ul>
+    <div class="say"><b>Regole:</b> giro rapido di reazioni prima. Una cosa a testa, niente monologhi. La terza domanda non si chiude: si raccolgono le ipotesi.</div>
+  </div>
+
+  <!-- PREP -->
+  <div class="prep">
+    <h2>Da preparare prima dell'aula</h2>
+    <ul>
+      <li>Materiale di riserva per il dibattito (domande provocatorie, un caso reale da commentare).</li>
+      <li>Un esempio dell'IA da mostrare dal vivo se la stanza chiede "fammi vedere".</li>
+      <li>Tenere il ritmo: a metà tempo del dibattito si deve essere già alla seconda domanda.</li>
+    </ul>
+  </div>
+
+</div>
+</body>
+</html>

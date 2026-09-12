@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lezione Claude · Guida pratica per il formatore</title>
+<style>
+  :root{
+    --ink:#1E1B4B; --indigo:#4F46E5; --violet:#7C3AED; --cyan:#0891B2;
+    --coral:#EA6A1E; --teal:#0E9488; --bg:#F7F6FB; --text:#1A1730; --muted:#6B6790; --line:#E6E3FB; --card:#fff;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  body{font-family:'Inter','Segoe UI',-apple-system,Arial,sans-serif;background:var(--bg);color:var(--text);line-height:1.5;}
+  .wrap{max-width:900px;margin:0 auto;padding:36px 24px 80px;}
+  header{margin-bottom:18px;}
+  h1{font-size:30px;font-weight:800;color:var(--ink);}
+  .sub{color:var(--muted);font-size:15px;margin-top:4px;}
+
+  .sec-label{font-size:13px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);font-weight:700;margin:28px 0 10px;}
+
+  .block{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:20px 22px;margin-bottom:16px;border-left:6px solid var(--indigo);}
+  .block.setup{border-left-color:var(--teal);}
+  .block.teoria{border-left-color:var(--cyan);}
+  .block.pratica{border-left-color:var(--coral);}
+  .bhead{display:flex;align-items:baseline;gap:10px;margin-bottom:4px;flex-wrap:wrap;}
+  .bnum{font-size:13px;font-weight:800;color:#fff;background:var(--indigo);border-radius:20px;padding:2px 10px;}
+  .block.setup .bnum{background:var(--teal);} .block.teoria .bnum{background:var(--cyan);} .block.pratica .bnum{background:var(--coral);}
+  .btitle{font-size:20px;font-weight:800;color:var(--ink);}
+  .btime{font-size:13px;color:var(--muted);margin-left:auto;font-weight:600;}
+
+  .steps{list-style:none;counter-reset:s;margin-top:10px;}
+  .steps li{counter-increment:s;padding-left:30px;position:relative;margin-bottom:8px;font-size:15px;}
+  .steps li::before{content:counter(s);position:absolute;left:0;top:1px;width:20px;height:20px;background:var(--indigo);color:#fff;border-radius:50%;font-size:12px;font-weight:700;display:flex;align-items:center;justify-content:center;}
+  .steps b{color:var(--ink);}
+  ul.plain{list-style:none;margin-top:8px;} ul.plain li{font-size:15px;padding-left:18px;position:relative;margin-bottom:6px;}
+  ul.plain li::before{content:"";position:absolute;left:0;top:9px;width:6px;height:6px;border-radius:50%;background:var(--muted);}
+
+  .say{margin-top:12px;background:#F0EFFA;border-radius:8px;padding:10px 14px;font-size:14.5px;font-style:italic;color:var(--ink);}
+  .say b{font-style:normal;color:var(--violet);font-weight:700;}
+  .prompt{margin-top:10px;background:#FFF8F2;border:1px solid #F6D9C2;border-radius:8px;padding:10px 14px;font-size:14px;color:var(--ink);}
+  .prompt b{color:var(--coral);}
+  .cue{display:inline-block;background:#FFF1E6;color:var(--coral);border:1px solid #F6D9C2;border-radius:6px;padding:1px 8px;font-size:13px;font-weight:700;margin-top:10px;}
+  .note{margin-top:8px;font-size:13.5px;color:var(--muted);} .note b{color:var(--text);}
+
+  @media print{ body{background:#fff;} .block{break-inside:avoid;} }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header>
+    <h1>Lezione Claude · Guida pratica per il formatore</h1>
+    <div class="sub">La scaletta da seguire: cosa mostrare, in ordine, sullo schermo. Modulo e mezzo (~2 / 2,5 ore), molta pratica libera.</div>
+  </header>
+
+  <!-- ============ PRIMA DELLA LEZIONE ============ -->
+  <div class="sec-label">Prima della lezione (setup)</div>
+
+  <div class="block setup">
+    <div class="bhead"><span class="bnum">0</span><span class="btitle">Da avere pronto</span></div>
+    <ul class="plain">
+      <li>Account Claude condiviso del corso pronto (email e password Google nel file di setup).</li>
+      <li>App Claude installata e <b>Cowork</b> sul computer.</li>
+      <li>Il <b>Progetto demo Geografia</b> già creato in Cowork: nuovo progetto, "Use an existing folder", selezioni la cartella, apri, crea.</li>
+      <li>La <b>mini app</b> (pianificatore dell'anno) già creata: il suo prompt va dato e incollato prima, così è pronta da mostrare.</li>
+    </ul>
+    <div class="note">La <b>routine</b> (attività pianificata) non va preparata prima: si pianifica dal vivo nel passo 6. Dettagli e credenziali nel documento "Setup pre-lezione (per il formatore)".</div>
+  </div>
+
+  <!-- ============ PARTE TEORICA ============ -->
+  <div class="sec-label">Parte teorica · slide, veloce</div>
+
+  <div class="block teoria">
+    <div class="bhead"><span class="bnum">T</span><span class="btitle">Le slide introduttive</span><span class="btime">~15 min</span></div>
+    <ul class="plain">
+      <li>Dove arriviamo: avete usato l'IA per mille cose, ma non l'avete mai fatta diventare il vostro posto di lavoro, un secondo cervello.</li>
+      <li>Cosa sapete dai 5 incontri (cos'è l'IA, metodo, etica, prompt, file di contesto permanente). Cosa manca: metterlo a sistema, da uso generico a uso tecnico.</li>
+      <li>Claude è generalista, bravo a tutto. Le 3 versioni: Chat, Cowork (la useremo, sul computer), Code (non è il vostro caso). Chat risponde, Cowork lavora con te.</li>
+      <li>Le 4 funzioni di oggi: progetti, skill, automazioni, mini app (artifact).</li>
+    </ul>
+    <div class="say"><b>Chiusura teoria:</b> "Ora basta guardare, apriamo lo strumento e partiamo dal progetto." Da qui in poi prompt da copiare e incollare.</div>
+    <div class="cue">Slide deck: 1-12</div>
+  </div>
+
+  <!-- ============ PARTE PRATICA ============ -->
+  <div class="sec-label">Parte pratica · cosa mostrare, in ordine</div>
+
+  <!-- 1 -->
+  <div class="block pratica">
+    <div class="bhead"><span class="bnum">1</span><span class="btitle">Apri Claude: modello e sidebar</span></div>
+    <ul class="steps">
+      <li>In alto, seleziona il modello <b>Sonnet</b> e mettilo a <b>impegno alto</b>. Tienilo sempre così: per il loro piano è la scelta migliore.</li>
+      <li>Giro veloce della <b>sidebar</b>: nuova chat, Progetti, Artefatti, Personalizza, le chat recenti e, in basso, le Impostazioni.</li>
+    </ul>
+    <div class="note">Considera che hanno già usato Claude in modalità chat negli incontri scorsi: oggi lo si rende "tecnico".</div>
+  </div>
+
+  <!-- 2 -->
+  <div class="block pratica">
+    <div class="bhead"><span class="bnum">2</span><span class="btitle">Impostazioni</span></div>
+    <ul class="steps">
+      <li>Apri <b>Impostazioni</b> (in basso a sinistra).</li>
+      <li><b>Generale</b>: avatar e nome. Importante il campo <b>istruzioni</b> che Claude tiene a mente in ogni chat. Incolla l'esempio e di' che ognuno mette la propria situazione. Poi cancellalo (era solo l'esempio).</li>
+      <li><b>Privacy</b>: disattiva le due spunte (contribuire a migliorare il modello per gli altri).</li>
+      <li><b>Utilizzo</b>: qui si vede quanto resta del piano (la barra blu). Non dovrebbero avere problemi, ma sanno dove guardare.</li>
+      <li><b>Funzionalità</b>: due spunte sono disattivate di default, falle <b>attivare</b>. Meglio che abbiano <b>tutte le spunte attive</b>.</li>
+    </ul>
+    <div class="prompt"><b>Esempio istruzioni (da incollare):</b> "Sono un insegnante della scuola primaria. Scrivimi sempre in italiano semplice, con frasi brevi, adatto a bambini da 6 a 11 anni. Quando proponi attività segnala sempre una variante più semplice. Non usare termini tecnici senza spiegarli."</div>
+    <div class="cue">Slide deck: 15 (preferenze)</div>
+  </div>
+
+  <!-- 3 -->
+  <div class="block pratica">
+    <div class="bhead"><span class="bnum">3</span><span class="btitle">Cowork: il Progetto demo (una verifica dalla banca)</span></div>
+    <ul class="steps">
+      <li>Passa alla modalità <b>Cowork</b>. Spiega che si può chattare da fuori oppure da dentro un progetto.</li>
+      <li>Apri il <b>Progetto demo Geografia</b> già creato. Mostra la cartella collegata: la banca esercizi e il file con le istruzioni della verifica.</li>
+      <li>Entra nel progetto e incolla il <b>prompt della verifica</b>, poi invia.</li>
+      <li>Mentre lavora: fai vedere che <b>ragiona passo passo</b>, che <b>non hai caricato nessun file</b> (il progetto è collegato alla cartella del computer). Qui ci si può fermare per le domande.</li>
+      <li>Mostra il risultato: la verifica salvata (file Word), con la <b>griglia per l'insegnante</b> e una <b>versione facilitata</b>.</li>
+    </ul>
+    <div class="prompt"><b>Prompt verifica:</b> "Crea una verifica di simulazione di geografia per la classe quarta su orientamento e carte geografiche. Durata 45 minuti, 6 domande di tipi diversi, con una versione facilitata. Pesca dagli esercizi della banca e resta al livello della classe."</div>
+    <div class="say"><b>Da dire:</b> "Si può anche chiedere 'fammi prima delle domande' o scrivere un prompt più dettagliato: dipende dal vostro caso. E un altro uso del progetto è collegare una cartella disordinata (circolari, materiali) e farla sistemare."</div>
+    <div class="cue">Slide deck: 14 (verifica dalla banca)</div>
+  </div>
+
+  <!-- 4 -->
+  <div class="block pratica">
+    <div class="bhead"><span class="bnum">4</span><span class="btitle">Creare un progetto da zero</span></div>
+    <ul class="steps">
+      <li>Progetti, <b>Nuovo progetto</b>, parti da zero (può anche creare cartelle sul computer). Dai un nome (es. "prova") e Crea.</li>
+      <li>Incolla il <b>prompt di inizio progetto</b> e completa le parti tra parentesi (sono quelle che ognuno adatta).</li>
+      <li>Loro hanno già il <b>file di contesto permanente</b> dell'Incontro 5: caricalo nel progetto.</li>
+      <li>Ricorda i due vantaggi: le <b>chat restano ordinate</b> e c'è un <b>contesto in comune</b>.</li>
+    </ul>
+    <div class="prompt"><b>Prompt inizio progetto:</b> "Sto creando un progetto. Obiettivo: [...]. Lo userò per preparare lezioni, schede, esercizi e restare in linea col programma. Informazioni di partenza: la programmazione annuale e il libro. Fammi tutte le domande."</div>
+    <div class="cue">Slide deck: 13 (creare un progetto da zero)</div>
+  </div>
+
+  <!-- 5 -->
+  <div class="block pratica">
+    <div class="bhead"><span class="bnum">5</span><span class="btitle">Skill: installare il Prompt Optimizer e crearne una</span></div>
+    <ul class="steps">
+      <li>Spiega cosa sono: <b>abilità che insegni una volta e restano</b> (come fai ricerca, scrivere come te, aiutarti nelle verifiche, ottimizzare i prompt). Si attivano ovunque: chat, Cowork, progetti.</li>
+      <li>Due modi per crearle: <b>chiedendo in chat</b> ("voglio creare una skill che...") oppure partendo da una <b>già pronta</b>. Mostra entrambi: basta parlarle, niente di tecnico.</li>
+      <li><b>Installa il Prompt Optimizer</b>: nuova chat, incolla il testo della skill, "creami una skill". Lui scrive, testa, raccoglie i feedback e la pacchettizza. Premi <b>Salva skill</b>.</li>
+      <li>Richiamala con <b>/prompt-optimizer</b> (diventa blu quando è attiva). Provala con una richiesta vera e mostra il prompt fatto bene che restituisce (se servono dettagli, ti fa domande). Si copia e si usa.</li>
+      <li>Mostra anche l'esempio "scrivi come me": gli dai contesto, generi ed esempi del tuo stile.</li>
+    </ul>
+    <div class="say"><b>Analogia da dire:</b> "È come aver studiato le capitali: quando serve, richiamate l'abilità. Lo stesso fa Claude con la skill."</div>
+    <div class="note"><b>Idee di skill per loro:</b> riassumere fonti (come lo fate voi), il vostro stile per gli avvisi, differenziare un esercizio in tre livelli, da un testo creare domande e lessico. Per crearne una da zero: "Creiamo insieme un'abilità usando la tua abilità di creatore di abilità...".</div>
+    <div class="cue">Slide deck: 16 (installa Prompt Optimizer) · 17 (idee di skill) · 18 (creare una skill)</div>
+  </div>
+
+  <!-- 6 -->
+  <div class="block pratica">
+    <div class="bhead"><span class="bnum">6</span><span class="btitle">Routine: l'attività pianificata</span></div>
+    <ul class="steps">
+      <li>Spiega: attività che <b>partono da sole</b> a un certo giorno e ora. Si creano da una <b>chat normale</b>, non serve cliccare in un punto preciso.</li>
+      <li>Incolla il prompt della routine in chat e invia. Claude spiega come funzionano e ti fa qualche domanda (l'orario): rispondi e <b>Pianifica</b>.</li>
+      <li>La ritrovi sotto <b>Programmato</b>. Fai <b>Esegui ora</b> per vederla partire: mostra quante fonti legge (una vera rassegna stampa).</li>
+    </ul>
+    <div class="prompt"><b>Prompt routine:</b> "Imposta un'attività pianificata in Cowork. Ogni due settimane, di lunedì mattina, voglio ricevere in chat un report con le novità più utili per un insegnante di geografia della primaria: nuove risorse, strumenti, idee, attività da fare in classe, eventuali novità su programmi e didattica. Tienilo breve e pratico, massimo 8 punti."</div>
+    <div class="say"><b>Da dire:</b> "Così restate aggiornati senza fatica. Potete anche scegliere le fonti di cui vi fidate e farvi la rassegna stampa ogni mattina."</div>
+    <div class="cue">Slide deck: 19 (prompt routine)</div>
+  </div>
+
+  <!-- 7 -->
+  <div class="block pratica">
+    <div class="bhead"><span class="bnum">7</span><span class="btitle">Mini app (Live Artifact): il pianificatore dell'anno</span></div>
+    <ul class="steps">
+      <li>Parti dalla mini app già pronta (setup). Il caso: "siamo sempre indietro col programma", quindi un'app per pianificare l'anno e vedere a che punto si è.</li>
+      <li>Mostra come si crea: incolli il prompt, Claude costruisce la dashboard e la pinna a sinistra.</li>
+      <li>Fai vedere cosa fa: settimane totali, di lezione, di vacanza, pianificate; scegli materie e argomenti; il piano settimanale; assegni gli argomenti alle settimane; stato (da fare, in corso, fatto); il punto dell'anno in tempo reale.</li>
+      <li>Per crearne una nuova: nuova chat, "ho bisogno di un'app che faccia [...], creamela con gli artefatti".</li>
+    </ul>
+    <div class="cue">Slide deck: 20 (prompt "Stai in programma")</div>
+  </div>
+
+  <!-- 8 -->
+  <div class="block pratica">
+    <div class="bhead"><span class="bnum">8</span><span class="btitle">Pratica libera</span><span class="btime">~1 ora / 1h15</span></div>
+    <ul class="steps">
+      <li>"Ora tocca a voi": ognuno lavora sul proprio caso. Chi vuole una mini app, chi un'attività programmata, chi un progetto, chi una skill.</li>
+      <li>Il formatore gira tra i banchi, sblocca, risponde alle domande (saranno in questo ambito).</li>
+    </ul>
+    <div class="note">Tempi liberi: la prima parte può durare ~1 ora o poco più, il resto è pratica. La lezione è un modulo e mezzo: se serve si spezza con una pausa. Hanno questa scaletta da tenere sul telefono o stampata, per spuntare cosa stanno facendo.</div>
+  </div>
+
+</div>
+</body>
+</html>

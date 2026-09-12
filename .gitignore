@@ -1,0 +1,49 @@
+# ============================================================
+# AI Insegnanti: cosa NON va in repo
+# Principio: si versiona la SORGENTE, non l'output.
+# I deck sono HTML, i PDF sono un export (Cmd+P). Si rigenerano.
+# ============================================================
+
+# Rumore di sistema
+.DS_Store
+._*
+.Spotlight-V100
+.Trashes
+Thumbs.db
+
+# Dipendenze e build del tooling slide
+node_modules/
+dist/
+build/
+*.log
+
+# Knowledge graph: si rigenera con /graphify, non si condivide
+graphify-out/
+
+# Dati personali dei collaboratori (CV, attestati, compensi).
+# Restano solo in locale da Luca: non riguardano il lavoro sui contenuti.
+03_Team/
+
+# Pacchetti di consegna: sono COPIE dei file di lavoro del percorso.
+# Si riassemblano quando si consegna. Tenerli qui duplicherebbe tutto.
+_Consegna/
+
+# Archivi: sempre rigenerabili dalla cartella che li origina
+*.zip
+
+# Export PDF dei deck e delle scalette (33 file, ~95 MB).
+# Sorgente = il .html accanto.
+*.pdf
+
+# Eccezioni: PDF che sono SORGENTE, non export. Servono in aula.
+!**/Scrittore di prompt.pdf
+!**/141-151*.pdf
+
+# File temporanei di lavoro
+*.tmp
+~$*
+
+# Credenziali dell'account corso in chiaro (email + password dell'account
+# Claude condiviso). Il file resta in locale: NON va nella history di git,
+# che e' permanente. Si passa al formatore per un canale separato.
+02_Percorsi/20h/Primaria/06_Pratica_Claude/Pratica_Primaria_1_SETUP_FORMATORE.html
