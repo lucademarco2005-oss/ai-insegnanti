@@ -47,7 +47,7 @@
 1. **In una frase:** l'IA è veloce e fluente, voi siete appropriati e contestuali. Ogni output è una bozza da giudicare, non una risposta da copiare.
 2. **L'aggancio al mestiere:** il vostro valore non è produrre il materiale, è giudicare se è giusto per quella classe, oggi.
 
-> **Domandina alla stanza (2 min):** "Dove, nel vostro lavoro, sareste tentati di accettare l'output senza guardarlo? E lì, cosa potrebbe andare storto?"
+> **Domandina alla stanza (2 min):** "Un collega vi passa una verifica fatta con l'IA in due minuti. Cosa guardate prima di darla alla vostra classe?" Non si chiedono tecniche di controllo (arrivano nell'Incontro 4): si raccoglie il giudizio da docente, cioè livello, esempi, alunni con DSA, tempi.
 > **Frase chiave:** "L'IA è accurata. Voi siete appropriati."
 
 ---
@@ -112,7 +112,7 @@ Slide-gancio: **"Usate l'IA alla fine del lavoro, o dall'inizio?"**
 2. **L'esempio che chiarisce:** non scrivere la lezione e poi "miglioramela", ma chiedere cinque strutture diverse prima di scrivere, e partire da lì.
 3. **Origine (una riga):** "AI first" nasce con Google (Pichai, 2017): non una moda, un modo di ripensare il lavoro.
 
-> **Domandina alla stanza (2 min):** "Un compito che oggi fate 'come sempre': se lo ripensaste sapendo di avere l'IA, lo fareste ancora così?"
+> **Domandina alla stanza (2 min):** "Pensate alla lezione che vi riesce meglio. Su cosa si regge, che deve restare solo vostro?" Si cerca il principio umano su cui poggia la lezione (un rapporto, un momento con la classe): è il punto dove l'AI First si ferma. Non anticipare la domanda aperta di fine corso: qui si resta sulla lezione.
 > **Frase chiave:** "AI First non vuol dire usarla di più. Vuol dire pensarla prima."
 
 ---

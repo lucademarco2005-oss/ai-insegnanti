@@ -57,13 +57,12 @@ Slide-gancio: **"L'IA sembra fatta d'aria. Ma cosa costa, davvero?"**
 ### Gancio → Informazione
 Slide-gancio: **"Se l'IA risponde e basta, chi paga chi crea le informazioni?"**
 
-### BLOCCO 4 — Il paradosso dell'informazione + caso Anthropic (14 min)
+### BLOCCO 4 — Il paradosso dell'informazione + caso Anthropic (10 min)
 - **Zero-click:** con il riassunto IA si clicca una fonte solo nell'**8% dei casi** (era 15%); i link dentro il riassunto, 1% (Pew 2025). Traffico verso gli editori: circa **-33% in un anno** (Reuters/Chartbeat 2026).
 - **Il paradosso:** i giornalisti producono le informazioni su cui l'IA è addestrata e che rivende come risposte, ma non ricevono più i clic, quindi i ricavi. Se crolla chi finanzia l'informazione di qualità, crolla la materia prima dell'IA.
 - **Model collapse** (Nature 2024): se l'IA si addestra su contenuti generati da IA, degrada. Servono fonti umane vere.
 - **Caso Anthropic:** Claude addestrato su oltre 7 milioni di libri scaricati piratati. Il giudice (2025): addestrare l'IA sui libri è lecito, ma **scaricarli piratati no**. Accordo da **1,5 miliardi di dollari**, il più grande sul copyright della storia. Principio: conta *come* ottieni l'opera.
 - Il punto: dietro ogni risposta c'è il lavoro di qualcuno. *"L'IA l'ha detto" non è una fonte.*
-- **Dibattito breve (4 min):** *"È giusto usare un'IA addestrata su libri presi senza permesso?"* Si raccolgono le posizioni, niente risposta giusta.
 
 ### Gancio → Deepfake
 Slide-gancio: **"Quanto siete sicuri di riconoscere un video falso?"**
@@ -112,7 +111,6 @@ Tre o quattro esempi, scegliendo materie diverse tra loro. Messaggio finale: **o
 - **Parte B (rischio densità):** se stringe, l'ambiente si può ridurre a 5 min (un dato solo: "come tutto il Giappone"). Deepfake e informazione sono prioritari.
 - **Pratica (rischio stanza bloccata):** gli spunti del menu servono proprio a sbloccare. Riserva: dare un esempio già adattato per due o tre materie diverse.
 - **Se si va lunghi:** la condivisione si accorcia a due esempi.
-- **Dibattito Anthropic:** se la stanza è fredda, lanciarlo come provocazione ("voi pagereste 3.000 euro a libro? Anthropic ha dovuto").
 
 ## Gap operativi da preparare prima dell'aula
 - [ ] 2-3 esempi di deepfake noti e verificabili da mostrare (immagine/voce/video)
