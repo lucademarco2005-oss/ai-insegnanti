@@ -14,8 +14,10 @@
 **Incontro 1.** 31 slide. Toccate 1, 4, 5, 6, 10, 16, 26, 27, 29. La slide 4 diventa una stima ("quanti, secondo voi") e la 5 la rivelazione del dato. La 6: la scuola è l'ultimo posto dove si impara la differenza, e non sono solo gli insegnanti.
 
 **Incontro 2.** 43 slide. Toccate 19, 24, 33, 34, 39, 40, 41, 43. Il blocco sui chatbot confidenti resta tutto, in chiave descrittiva: si passa da "in classe" a "la scuola". L'esercizio finale diventa **costruire una presentazione che spieghi l'impatto dell'IA**, fatta con l'IA, con dentro il brainstorming.
+Il 14 settembre 2026, su segnalazione delle formatrici, riscritte due domande arancioni con la risposta scontata. **Slide 9:** "Un collega vi passa una comunicazione scritta con l'IA in due minuti. Cosa guardate prima di mandarla alle famiglie?". **Slide 26:** "Pensate alla parte del vostro lavoro che vi riesce meglio. Su cosa si regge, che deve restare solo vostro?", con sottotitolo "Un principio, un rapporto con le famiglie, un momento allo sportello. È il punto dove l'AI First si ferma.". Aggiornata la scaletta.
 
 **Incontro 3.** Da 43 a 32 slide. Fuori tutta la Parte C didattica (18 slide) e il blocco sul ripensare i compiti, ridotto a una sola slide descrittiva. Dentro: **"Lo useresti?"** (quattro casi votati con le dita), **Human in the Loop** con l'aggancio all'Annex III dell'AI Act che nomina le ammissioni, e **il patto dell'ufficio** in cinque righe scritte dalla stanza.
+Il 14 settembre 2026, su segnalazione delle formatrici, **tolta la slide 15**, il dibattito "È giusto usare un'IA addestrata su libri presi senza permesso?": la risposta era scontata, e la slide prima l'aveva già data. Il deck passa da 32 a 31 slide, rinumerate; nella scaletta tolti dibattito e riserva, e aggiornati i rimandi alle slide 20-29.
 
 **Incontro 4.** Riportato invariato dalla Primaria per decisione di Luca. Restano da valutare la copertina e la pratica finale.
 

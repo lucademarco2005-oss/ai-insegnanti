@@ -49,13 +49,12 @@ Slide-gancio: **"L'IA sembra fatta d'aria. Ma cosa costa, davvero?"**
 ### Gancio verso Informazione
 Slide-gancio: **"Se l'IA risponde e basta, chi paga chi crea le informazioni?"**
 
-### BLOCCO 4 · Il paradosso dell'informazione + caso Anthropic (14 min)
+### BLOCCO 4 · Il paradosso dell'informazione + caso Anthropic (10 min)
 - **Zero-click:** con il riassunto IA si clicca una fonte solo nell'**8% dei casi** (era 15%); i link dentro il riassunto, 1% (Pew 2025). Traffico verso gli editori: circa **-33% in un anno** (Reuters/Chartbeat 2026).
 - **Il paradosso:** i giornalisti producono le informazioni su cui l'IA è addestrata e che rivende come risposte, ma non ricevono più i clic, quindi i ricavi. Se crolla chi finanzia l'informazione di qualità, crolla la materia prima dell'IA.
 - **Model collapse** (Nature 2024): se l'IA si addestra su contenuti generati da IA, degrada. Servono fonti umane vere.
 - **Caso Anthropic:** Claude addestrato su oltre 7 milioni di libri scaricati piratati. Il giudice (2025): addestrare l'IA sui libri è lecito, ma **scaricarli piratati no**. Accordo da **1,5 miliardi di dollari**, il più grande sul copyright della storia. Principio: conta *come* ottieni l'opera.
 - Il punto: dietro ogni risposta c'è il lavoro di qualcuno. *"L'IA l'ha detto" non è una fonte.*
-- **Dibattito breve (4 min):** *"È giusto usare un'IA addestrata su libri presi senza permesso?"* Si raccolgono le posizioni, niente risposta giusta.
 
 ### Gancio verso Deepfake
 Slide-gancio: **"Quanto siete sicuri di riconoscere un video falso?"**
@@ -71,11 +70,11 @@ Slide-gancio: **"Quanto siete sicuri di riconoscere un video falso?"**
 ---
 
 ## PARTE C · Pratica: "Lo useresti?" e il patto dell'ufficio (~45 min)
-**Slide 21-30**
+**Slide 20-29**
 
 > Il blocco produce un documento, non solo una discussione. Serve **una lavagna o un foglio grande**: dopo ogni caso ci si scrive sopra una riga, e a fine attività quelle quattro righe sono già il patto dell'ufficio.
 
-### Il meccanismo di voto (slide 21, 1 min)
+### Il meccanismo di voto (slide 20, 1 min)
 Si vota con le dita, tutti insieme al tre: **un dito verde, due dita giallo, tre dita rosso**. Simultaneo, così nessuno si adegua al vicino, e si vede la stanza in un colpo d'occhio. Fare una prova a vuoto ("al tre, fatemi vedere il giallo") così al primo caso vero nessuno esita. Non anticipare nulla dei casi.
 
 ### Il singolo caso, sempre lo stesso ritmo
@@ -87,19 +86,19 @@ Si vota con le dita, tutti insieme al tre: **un dito verde, due dita giallo, tre
 
 ### I quattro casi
 
-**Caso 1 · la circolare già pubblicata (slide 22, 3 min).** Quasi tutti verdi, va veloce. Serve a far alzare le mani senza paura.
+**Caso 1 · la circolare già pubblicata (slide 21, 3 min).** Quasi tutti verdi, va veloce. Serve a far alzare le mani senza paura.
 Riga sulla lavagna: **se è già pubblico, può entrare.**
 
-**Caso 2 · l'elenco della classe (slide 23, 4 min).** Il voto si spacca, perché "è solo una tabella". Doppia regola, e la seconda metà è quella che sorprende: *"Sono dati di minori. Ma c'è un motivo prima ancora: per ordinare una tabella l'IA non vi serve. Non si corre un rischio per un vantaggio che non c'è."*
+**Caso 2 · l'elenco della classe (slide 22, 4 min).** Il voto si spacca, perché "è solo una tabella". Doppia regola, e la seconda metà è quella che sorprende: *"Sono dati di minori. Ma c'è un motivo prima ancora: per ordinare una tabella l'IA non vi serve. Non si corre un rischio per un vantaggio che non c'è."*
 Riga: **dati di minori mai, e per una tabella l'IA non serve.**
 
-**Caso 3 · la mail del genitore (slide 24, 9 min).** È il cuore. Il voto sarà quasi tutto verde e giallo. Si lascia parlare e **non si dà la risposta**: si apre il portatile e si fa la demo. Sulla mail proiettata si tolgono il nome del figlio, la classe e il riferimento alla situazione familiare, si lascia il problema, si rilancia il prompt e si mostra che la risposta è identica. Trenta secondi di lavoro.
+**Caso 3 · la mail del genitore (slide 23, 9 min).** È il cuore. Il voto sarà quasi tutto verde e giallo. Si lascia parlare e **non si dà la risposta**: si apre il portatile e si fa la demo. Sulla mail proiettata si tolgono il nome del figlio, la classe e il riferimento alla situazione familiare, si lascia il problema, si rilancia il prompt e si mostra che la risposta è identica. Trenta secondi di lavoro.
 Riga: **si toglie chi è, si tiene cosa serve.**
 
-**Caso 4 · il certificato medico (slide 25, 3 min).** Dopo il caso 3 votano quasi tutti rosso, ed è voluto: serve a fissare che esiste una categoria senza vie di mezzo. Una frase e via: *"Qui non c'è versione ripulita che tenga."*
+**Caso 4 · il certificato medico (slide 24, 3 min).** Dopo il caso 3 votano quasi tutti rosso, ed è voluto: serve a fissare che esiste una categoria senza vie di mezzo. Una frase e via: *"Qui non c'è versione ripulita che tenga."*
 Riga: **salute e situazioni personali: nessuna versione ripulita basta.**
 
-**Sintesi (slide 26, 3 min).** *Non si cambia la domanda, si cambia il documento.* Si rileggono le quattro righe della lavagna e si dice che sono già mezzo patto.
+**Sintesi (slide 25, 3 min).** *Non si cambia la domanda, si cambia il documento.* Si rileggono le quattro righe della lavagna e si dice che sono già mezzo patto.
 
 ### Se la stanza non collabora
 - **Votano tutti uguale:** avvocato del diavolo. *"Nessuno dice verde? Eppure fa risparmiare mezz'ora. Chi me lo difende?"*
@@ -107,16 +106,16 @@ Riga: **salute e situazioni personali: nessuna versione ripulita basta.**
 - **Qualcuno porta un caso vero suo:** è la cosa migliore che possa succedere. Si ferma il proprio caso, non si proietta niente, e si vota il suo.
 - **Uno parla sempre:** dopo il secondo intervento, *"adesso voglio sentire uno che ha votato diverso da lui"*.
 
-### Human in the Loop (slide 27 e 28, 8 min)
+### Human in the Loop (slide 26 e 27, 8 min)
 - **Gancio:** *"Su una circolare sbagliata, chi risponde?"* Si lancia e si aspetta. Uscirà "il dirigente", e va accolto: è vero, è il titolare del trattamento. Poi il rilancio: *"Sì. Ma la mano che l'ha scritta è la vostra, e il dirigente firma quello che voi gli portate."*
 - L'IA non è responsabile di niente: non ha un nome, non firma, non risponde a nessuno.
 - L'AI Act la chiama sorveglianza umana e la rende obbligatoria dove l'errore pesa. Tra i casi ad alto rischio, per la scuola, ci sono la valutazione degli studenti **e le ammissioni**. Le iscrizioni sono un atto di segreteria: non è una raccomandazione, è la legge che nomina il loro lavoro.
 - **Frase da far atterrare:** *"Il vostro controllo non è il momento in cui non vi fidate. È il momento in cui il lavoro diventa valido."*
 - ⚠ **Doppione da gestire con l'Incontro 10:** lì la Matrice errore reversibile contro irreversibile resta, ma va introdotta con un richiamo ("ve lo ricordate dall'Incontro 3") invece che da zero.
 
-### Il patto dell'ufficio (slide 29 e 30, 7 min)
-- **Prima il perché (slide 29):** questo corso è cominciato con un patto d'aula e ha funzionato, non perché fosse un regolamento ma perché l'hanno accettato loro. Ai docenti si consiglia lo stesso patto con gli studenti. In un ufficio serve almeno quanto in una classe: *"se ognuno decide da solo cosa caricare, la scuola non ha una linea, ne ha venti."*
-- **Poi la lista (slide 30):** le prime quattro righe sono già sulla lavagna, quindi la slide non è una sorpresa ma un riconoscimento. **La quinta la decide la stanza ad alta voce, e va scritta davvero**, non lasciata in sospeso.
+### Il patto dell'ufficio (slide 28 e 29, 7 min)
+- **Prima il perché (slide 28):** questo corso è cominciato con un patto d'aula e ha funzionato, non perché fosse un regolamento ma perché l'hanno accettato loro. Ai docenti si consiglia lo stesso patto con gli studenti. In un ufficio serve almeno quanto in una classe: *"se ognuno decide da solo cosa caricare, la scuola non ha una linea, ne ha venti."*
+- **Poi la lista (slide 29):** le prime quattro righe sono già sulla lavagna, quindi la slide non è una sorpresa ma un riconoscimento. **La quinta la decide la stanza ad alta voce, e va scritta davvero**, non lasciata in sospeso.
 - Ognuno se la copia. È l'unica cosa scritta che si portano via da questo incontro.
 - Chiusura: *"Questa lista la riprendiamo negli incontri pratici. È la vostra, non la mia."*
 
@@ -130,7 +129,6 @@ Riga: **salute e situazioni personali: nessuna versione ripulita basta.**
 - **Parte B (rischio densità):** se stringe, l'ambiente si può ridurre a 5 min (un dato solo: "come tutto il Giappone"). Deepfake e informazione sono prioritari.
 - **Pratica (rischio stanza bloccata):** il voto con le dita obbliga tutti a esporsi senza dover parlare, quindi il blocco parte comunque. Se non si discute, si passa al caso dopo: sono quattro, il tempo si recupera sul caso 3.
 - **Se si va lunghi:** i casi 1 e 4 si comprimono a due minuti. Il caso 3 e il patto non si toccano mai.
-- **Dibattito Anthropic:** se la stanza è fredda, lanciarlo come provocazione ("voi pagereste 3.000 euro a libro? Anthropic ha dovuto").
 
 ## Gap operativi da preparare prima dell'aula
 - [ ] 2-3 esempi di deepfake noti e verificabili da mostrare (immagine, voce, video)
