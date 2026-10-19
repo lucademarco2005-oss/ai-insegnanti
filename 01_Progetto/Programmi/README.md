@@ -22,10 +22,10 @@ Programmi/
 
 | File | Percorso | Colore |
 |---|---|---|
-| `14h/PROGRAMMA_Scuola_14h.html` | Scuola, docenti, su Claude | viola |
+| `14h/PROGRAMMA_Secondaria_14h.html` | Secondaria, su Claude | ciano |
 | `14h/PROGRAMMA_Segreteria_14h.html` | ATA e Segreteria, su Claude | verde |
 
-Stessi punti dei programmi 20h da cui nascono: la Primaria per la Scuola, la segreteria per la Segreteria. Cambiano la durata (sotto ogni modulo c'è "1 ora" o "2 ore") e l'esercizio del modulo 5, che diventa scrivere il proprio file di contesto permanente.
+Stessi punti dei programmi 20h da cui nascono: la Secondaria per la Secondaria, la segreteria per la Segreteria. Cambiano la durata (sotto ogni modulo c'è "1 ora" o "2 ore") e l'esercizio del modulo 5, che diventa scrivere il proprio file di contesto permanente.
 
 ## 10h
 
