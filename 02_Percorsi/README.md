@@ -5,7 +5,7 @@ Tre macro aree, divise per durata. Ogni percorso è completo dentro la propria c
 ```
 02_Percorsi/
   20h/   Infanzia · Primaria · Secondaria · Segreteria_ATA
-  14h/   Segreteria_14h
+  14h/   Scuola_14h · Segreteria_14h
   10h/   Scuola_10h · Segreteria_10h
 ```
 
@@ -22,6 +22,7 @@ Tre macro aree, divise per durata. Ogni percorso è completo dentro la propria c
 
 | Cartella | Stato |
 |---|---|
+| `14h/Scuola_14h/` | **docenti, su Claude.** Moduli teorici dal `10h/Scuola_10h` (gruppi misti), blocco pratico intero dalla `20h/Primaria`: Claude, Canva, NotebookLM, laboratorio. Nell'Incontro 5 torna il Progetto. Gli esempi delle pratiche sono della primaria. Mancano i PDF di consegna. Vedi `14h/Scuola_14h/CAMBIAMENTI.md`. |
 | `14h/Segreteria_14h/` | **personale ATA e di segreteria, su Claude.** Moduli teorici dal `10h/Segreteria_10h`, blocco pratico intero dal `20h/Segreteria_ATA`. Nell'Incontro 5 torna il Progetto, che il 10h aveva tolto per Gemini. Mancano i PDF di consegna. Vedi `14h/Segreteria_14h/CAMBIAMENTI.md`. |
 
 ## 10h · 10 moduli da 1 ora, aggregabili in 5 incontri da 2 ore

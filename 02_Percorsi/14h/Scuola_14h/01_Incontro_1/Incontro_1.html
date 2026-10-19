@@ -1,0 +1,488 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Incontro 1 · Usare l'IA in modo potenziante</title>
+<!--
+  COME USARLO
+  · Presentare: apri nel browser. Frecce ↑↓ ← → o scroll per cambiare slide. Tasto F = schermo intero.
+  · Esportare in PDF/slide: Stampa (Cmd/Ctrl+P) → Layout ORIZZONTALE → Margini Nessuno → "Grafica di sfondo" ATTIVA → Salva come PDF.
+  · Modificare: ogni slide è un blocco section.slide con commento "SLIDE N". Cambia il testo dentro. I colori in :root (sotto).
+  TIPI DI SLIDE (colore = funzione):
+  · ink (navy scuro)  = statement chiave
+  · light             = contenuto
+  · indigobg (viola)  = GANCIO: domanda introduttiva del relatore (dà ritmo)
+  · coralbg (arancio) = DIBATTITO: parla la stanza
+-->
+<style>
+  :root{
+    --ink:#1E1B4B; --ink2:#2A2566; --indigo:#4F46E5; --violet:#7C3AED;
+    --cyan:#06B6D4; --coral:#F97316; --light:#F6F5FF; --text:#1A1730;
+    --muted:#6B6790; --white:#ffffff; --cfcb:#CFCBF0; --faint:#8E8AC4;
+    --line:#E6E3FB;
+    --font:'Inter','Segoe UI',-apple-system,Arial,sans-serif;
+  }
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap');
+  *{box-sizing:border-box;margin:0;padding:0;}
+  html,body{background:#0c0a1f;font-family:var(--font);}
+  .deck{height:100vh;overflow-y:scroll;scroll-snap-type:y mandatory;scroll-behavior:smooth;}
+  .slide{height:100vh;display:flex;align-items:center;justify-content:center;scroll-snap-align:start;background:#0c0a1f;}
+  .canvas{position:relative;width:min(100vw,177.78vh);height:min(56.25vw,100vh);container-type:size;overflow:hidden;}
+  .ink{background:var(--ink);} .light{background:var(--light);} .coralbg{background:var(--coral);} .indigobg{background:var(--indigo);}
+
+  .cy{color:var(--cyan);} .co{color:var(--coral);} .in{color:var(--indigo);}
+  .vi{color:var(--violet);} .wh{color:var(--white);} .tx{color:var(--text);}
+  .mu{color:var(--muted);} .inkc{color:var(--ink);}
+
+  .chip{position:absolute;top:8cqh;left:5.5cqw;padding:1.3cqh 2.2cqh;border-radius:2cqh;
+        font-size:2.4cqh;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#fff;}
+  .chip.violet{background:var(--violet);} .chip.cyan{background:var(--cyan);}
+  .chip.indigo{background:var(--indigo);} .chip.coral{background:var(--coral);} .chip.muted{background:var(--muted);}
+
+  .title{position:absolute;top:15cqh;left:5.5cqw;right:5.5cqw;font-size:6.2cqh;font-weight:800;color:var(--text);line-height:1.05;}
+
+  .stbar{position:absolute;top:34cqh;left:6.7cqw;width:4.2cqh;height:1.3cqh;background:var(--coral);}
+  .statement{position:absolute;top:38cqh;left:6.5cqw;right:6cqw;font-size:7.6cqh;font-weight:800;line-height:1.08;}
+  .statement.big{font-size:8.6cqh;}
+
+  .foot{position:absolute;bottom:4cqh;left:5.5cqw;font-size:1.7cqh;color:var(--muted);}
+  .foot.dark{color:var(--faint);}
+  .pageno{position:absolute;bottom:4cqh;right:5.5cqw;font-size:1.7cqh;color:var(--muted);}
+  .pageno.dark{color:var(--faint);}
+
+  /* flag "se avanza tempo" (in basso a destra, sopra il numero di pagina) */
+  .flag{position:absolute;bottom:9cqh;right:5.5cqw;max-width:46cqw;text-align:right;
+        border-radius:2.2cqh;padding:1.6cqh 2.4cqh;background:#fff;border:1.5px solid var(--coral);}
+  .flag b{display:block;font-size:2.2cqh;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--coral);}
+  .flag span{display:block;font-size:2.1cqh;color:var(--muted);line-height:1.2;margin-top:.5cqh;}
+  .flag.onbg{background:rgba(255,255,255,.16);border-color:rgba(255,255,255,.75);}
+  .flag.onbg b{color:#fff;} .flag.onbg span{color:#FFE9DA;}
+
+
+  .dots{position:absolute;display:flex;gap:1.4cqh;}
+  .dots span{width:2cqh;height:2cqh;border-radius:50%;}
+  .bigimg{position:absolute;top:26cqh;left:50%;transform:translateX(-50%);max-width:66cqw;max-height:47cqh;width:auto;height:auto;border-radius:1.8cqh;border:1px solid var(--line);box-shadow:0 10px 30px rgba(80,70,160,.22);}
+  .imgcap{position:absolute;bottom:8.5cqh;left:8cqw;right:8cqw;text-align:center;font-size:2.4cqh;color:var(--muted);line-height:1.25;}
+
+  .eyebrow{position:absolute;top:21cqh;left:5.5cqw;font-size:2.6cqh;font-weight:700;letter-spacing:.18em;color:var(--cyan);}
+  .cover-title{position:absolute;top:27cqh;left:5.2cqw;right:6cqw;font-size:9.4cqh;font-weight:800;color:#fff;line-height:.96;}
+  .cover-bar{position:absolute;top:54cqh;left:5.6cqw;width:4cqh;height:1.2cqh;background:var(--coral);}
+  .cover-sub{position:absolute;top:58cqh;left:5.5cqw;font-size:3.6cqh;color:var(--cfcb);}
+  .cover-foot{position:absolute;bottom:5cqh;left:5.5cqw;font-size:1.9cqh;color:var(--faint);}
+
+  .circ{position:absolute;border-radius:50%;}
+
+  /* hook (gancio) */
+  .hook-eyebrow{position:absolute;top:20cqh;left:6cqw;font-size:2.7cqh;font-weight:700;letter-spacing:.16em;color:var(--cfcb);text-transform:uppercase;}
+  .hook-q{position:absolute;top:36cqh;left:6cqw;right:7cqw;font-size:7.4cqh;font-weight:800;color:#fff;line-height:1.1;}
+
+  .cards{position:absolute;top:33cqh;left:5.5cqw;right:5.5cqw;display:flex;flex-direction:column;gap:2.4cqh;}
+  .card{display:flex;align-items:center;gap:2.6cqh;background:#fff;border:1px solid var(--line);
+        border-radius:2.2cqh;padding:3cqh 3cqh;box-shadow:0 4px 14px rgba(80,70,160,.10);}
+  .card-ic{flex:none;width:9cqh;height:9cqh;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:4.4cqh;color:#fff;}
+  .card h3{font-size:3.6cqh;font-weight:700;color:var(--text);margin-bottom:.5cqh;}
+  .card p{font-size:2.6cqh;color:var(--muted);line-height:1.25;}
+
+  .datawrap{position:absolute;top:30cqh;left:5.5cqw;right:5.5cqw;display:flex;gap:3cqh;}
+  .stat{flex:1;border-radius:2.6cqh;padding:4cqh 2cqh;text-align:center;}
+  .stat.dark{background:var(--ink);} .stat.lite{background:#fff;border:1.5px solid var(--line);}
+  .stat .num{font-size:16cqh;font-weight:800;line-height:1;}
+  .stat .lab{font-size:3.2cqh;margin-top:2cqh;}
+  .takeaway{position:absolute;top:79cqh;left:5.5cqw;right:5.5cqw;font-size:3.2cqh;font-weight:700;font-style:italic;color:var(--indigo);line-height:1.2;}
+
+  .cols{position:absolute;top:31cqh;left:5.5cqw;right:5.5cqw;display:flex;gap:3cqh;}
+  .col{flex:1;background:#fff;border:1px solid var(--line);border-radius:2.2cqh;overflow:hidden;}
+  .col-head{font-size:3.6cqh;font-weight:800;color:#fff;text-align:center;padding:2.2cqh;letter-spacing:.04em;}
+  .col ul{list-style:none;padding:2.6cqh 3cqh;}
+  .col li{display:flex;gap:1.6cqh;align-items:flex-start;font-size:2.7cqh;color:var(--text);line-height:1.2;margin-bottom:2.2cqh;}
+  .col li::before{content:"";flex:none;width:1.7cqh;height:1.7cqh;border-radius:50%;margin-top:.6cqh;background:currentColor;}
+  .col.cdcoral li{color:var(--coral);} .col.cdcyan li{color:var(--cyan);}
+  .col.cdindigo li{color:var(--indigo);} .col.cdmuted li{color:var(--muted);}
+  .col li span{color:var(--text);}
+
+  .qmark{position:absolute;top:6cqh;left:3.5cqw;font-size:46cqh;font-weight:800;color:var(--cyan);font-family:Georgia,serif;line-height:1;}
+  .quote{position:absolute;top:30cqh;left:11cqw;right:8cqw;font-size:5.8cqh;font-weight:800;color:#fff;line-height:1.12;}
+  .qgloss{position:absolute;top:60cqh;left:11.4cqw;right:8cqw;font-size:2.9cqh;color:var(--cfcb);line-height:1.25;}
+  .qauth{position:absolute;top:78cqh;left:11.4cqw;font-size:3.2cqh;}
+
+  /* big icon + text (analogy / framing) */
+  .bigicon{position:absolute;top:36cqh;left:7cqw;width:24cqh;height:24cqh;border-radius:50%;
+           display:flex;align-items:center;justify-content:center;font-size:12cqh;}
+  .bigtext{position:absolute;top:34cqh;left:33cqw;right:6cqw;font-size:3.5cqh;color:var(--text);line-height:1.3;}
+  .bigquote{position:absolute;top:78cqh;left:33cqw;right:6cqw;font-size:2.9cqh;font-style:italic;font-weight:700;}
+
+  .cbox{position:absolute;left:5.5cqw;right:5.5cqw;border-radius:2.2cqh;padding:3cqh 3.4cqh;}
+  .cbox.white{background:#fff;border:1px solid var(--line);}
+  .cbox.dark{background:var(--ink);}
+  .cbox h4{font-size:3.7cqh;font-weight:700;color:var(--text);line-height:1.15;}
+  .cbox .ex{font-size:3.1cqh;color:var(--text);margin-top:1.5cqh;}
+  .cbox.dark p{font-size:3.8cqh;color:var(--cfcb);font-weight:700;}
+
+  .deb-tag{position:absolute;top:9cqh;left:5.5cqw;background:#fff;color:var(--coral);
+           padding:1.3cqh 2.4cqh;border-radius:2.3cqh;font-size:2.5cqh;font-weight:700;letter-spacing:.12em;}
+  .deb-room{position:absolute;top:9.6cqh;left:24cqw;font-size:2.6cqh;font-style:italic;color:#FFE4D3;}
+  .deb-q{position:absolute;top:38cqh;left:5.5cqw;right:6cqw;font-size:7cqh;font-weight:800;color:#fff;line-height:1.1;}
+
+  .ponte-big{position:absolute;top:22cqh;left:5.5cqw;font-size:10cqh;font-weight:800;color:var(--text);}
+  .ponte-sub{position:absolute;top:40cqh;left:5.6cqw;right:8cqw;font-size:3.4cqh;color:var(--muted);}
+  .pcards{position:absolute;top:55cqh;left:5.5cqw;right:5.5cqw;display:flex;gap:2.6cqh;}
+  .pcard{flex:1;background:#fff;border:1px solid var(--line);border-radius:2.2cqh;padding:3cqh;}
+  .pnum{width:11cqh;height:11cqh;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:5cqh;font-weight:800;color:#fff;margin-bottom:2cqh;}
+  .pcard h3{font-size:3cqh;font-weight:700;color:var(--text);line-height:1.15;}
+
+  .chartbox{position:absolute;top:30cqh;left:5.5cqw;width:58cqw;height:55cqh;}
+  .chart-legend{position:absolute;display:flex;gap:3cqh;font-size:2.6cqh;font-weight:600;}
+  .chart-legend i{display:inline-block;width:2.4cqh;height:.8cqh;border-radius:1cqh;margin-right:.8cqh;vertical-align:middle;}
+  .gbox{position:absolute;top:33cqh;right:5.5cqw;width:27cqw;border-radius:2.2cqh;background:#fff;border:1px solid var(--line);padding:3cqh;text-align:center;}
+  .gbox .neq{font-size:6cqh;font-weight:800;color:var(--coral);}
+  .gbox p{font-size:2.7cqh;font-weight:700;color:var(--text);line-height:1.2;}
+  .gbox small{font-size:2.2cqh;color:var(--muted);font-weight:400;}
+
+  .hint{position:fixed;bottom:14px;right:16px;font-size:12px;color:#888;font-family:var(--font);z-index:50;}
+
+  @media print{
+    @page{size:1280px 720px;margin:0;}
+    html,body{background:#fff;}
+    .deck{height:auto;overflow:visible;display:block;}
+    .slide{height:720px;width:1280px;display:block;page-break-after:always;break-after:page;}
+    .canvas{width:1280px;height:720px;}
+    .hint{display:none;}
+    *{-webkit-print-color-adjust:exact;print-color-adjust:exact;}
+  }
+</style>
+</head>
+<body>
+<div class="deck" id="deck">
+
+  <!-- SLIDE 1 — COPERTINA -->
+  <section class="slide"><div class="canvas ink">
+    <div class="circ" style="top:-19%;left:78%;width:34%;height:60%;background:var(--indigo);opacity:.45;"></div>
+    <div class="circ" style="top:58%;left:88%;width:25%;height:45%;background:var(--violet);opacity:.4;"></div>
+    <div class="circ" style="top:70%;left:-8%;width:24%;height:42%;background:var(--cyan);opacity:.3;"></div>
+    <div class="eyebrow">USARE L'INTELLIGENZA ARTIFICIALE</div>
+    <div class="cover-title">In modo<br>potenziante</div>
+    <div class="cover-bar"></div>
+    <div class="cover-sub">Incontro 1 · Cos'è l'IA e perché ti riguarda</div>
+    <div class="dots" style="top:74%;left:5.6%;"><span style="background:var(--cyan)"></span><span style="background:var(--indigo)"></span><span style="background:var(--violet)"></span><span style="background:var(--coral)"></span></div>
+    <div class="cover-foot">Formazione docenti sull'Intelligenza Artificiale · PNRR DM 219/2025</div>
+  </div></section>
+
+  <!-- SLIDE 2 — PATTO D'AULA -->
+  <section class="slide"><div class="canvas light">
+    <div class="chip violet">Patto d'aula</div>
+    <div class="title">Come funziona questo corso</div>
+    <div class="cards">
+      <div class="card"><div class="card-ic" style="background:var(--indigo)">⚡</div><div><h3>Interattivo e pratico</h3><p>Non una lezione frontale: si fa, si prova, si sbaglia. L'IA si impara usandola.</p></div></div>
+      <div class="card"><div class="card-ic" style="background:var(--cyan)">💬</div><div><h3>Uno spazio di confronto</h3><p>Oggi più che mai serve: sull'IA siamo tutti, in parte, principianti.</p></div></div>
+      <div class="card"><div class="card-ic" style="background:var(--coral)">🚀</div><div><h3>Serve la vostra partecipazione</h3><p>Porterete i vostri casi reali, non esempi astratti. Più mettete, più portate a casa.</p></div></div>
+    </div>
+    <div class="foot">AI INSEGNANTI · Formazione PNRR</div><div class="pageno">2 / 31</div>
+  </div></section>
+
+  <!-- SLIDE 3 — STATEMENT (ammorbidita) -->
+  <section class="slide"><div class="canvas ink">
+    <div class="chip violet">Patto d'aula</div>
+    <div class="stbar"></div>
+    <div class="statement wh">Più ci mettete del <span class="cy">vostro</span>,<br>più portate a <span class="co">casa</span>.</div>
+    <div class="pageno dark">3 / 31</div>
+  </div></section>
+
+  <!-- SLIDE 4 — DIBATTITO apertura -->
+  <section class="slide"><div class="canvas coralbg">
+    <div class="circ" style="top:-21%;left:80%;width:38%;height:67%;background:#fff;opacity:.12;"></div>
+    <div class="circ" style="top:62%;left:-10%;width:30%;height:53%;background:var(--ink);opacity:.2;"></div>
+    <div class="deb-tag">DIBATTITO</div><div class="deb-room">Parla la stanza</div>
+    <div class="deb-q wh">Quanti dei vostri studenti<br>usano l'IA <span class="inkc">ogni giorno?</span></div>
+    <div class="pageno dark">4 / 31</div>
+  </div></section>
+
+  <!-- SLIDE 5 — DATO 81 vs 25 -->
+  <section class="slide"><div class="canvas light">
+    <div class="chip cyan">Il gap</div>
+    <div class="title">I tuoi studenti sono già avanti</div>
+    <div class="datawrap">
+      <div class="stat dark"><div class="num cy">81%</div><div class="lab wh">degli studenti italiani usa l'IA</div></div>
+      <div class="stat lite"><div class="num co">25%</div><div class="lab tx">degli insegnanti la usa</div></div>
+    </div>
+    <div class="takeaway">Sei l'unico adulto che può ancora insegnare la differenza tra usarla bene e usarla male.</div>
+    <div class="foot">Fonte: GoStudent Education Future Report 2025</div><div class="pageno">5 / 31</div>
+  </div></section>
+
+  <!-- SLIDE 6 — STATEMENT non siete indietro -->
+  <section class="slide"><div class="canvas light">
+    <div class="chip cyan">Il gap</div>
+    <div class="stbar"></div>
+    <div class="statement tx">Non siete indietro.<br><span class="in">Siete gli unici</span> che possono ancora insegnare la <span class="co">differenza</span>.</div>
+    <div class="pageno">6 / 31</div>
+  </div></section>
+
+  <!-- SLIDE 7 — GANCIO demistificazione -->
+  <section class="slide"><div class="canvas indigobg">
+    <div class="circ" style="top:-20%;left:75%;width:38%;height:66%;background:#fff;opacity:.08;"></div>
+    <div class="hook-eyebrow">Demistificazione</div>
+    <div class="hook-q wh">Ma allora…<br>cos'è <span class="cy">davvero</span> questa IA?</div>
+    <div class="pageno dark">7 / 31</div>
+  </div></section>
+
+  <!-- SLIDE 8 — STATEMENT non pensa -->
+  <section class="slide"><div class="canvas ink">
+    <div class="chip indigo">Demistificazione</div>
+    <div class="stbar"></div>
+    <div class="statement wh">L'IA non pensa.<br><span class="cy">Non capisce. Non ha opinioni.</span></div>
+    <div class="pageno dark">8 / 31</div>
+  </div></section>
+
+  <!-- SLIDE 9 — CONCETTO cosa fa davvero -->
+  <section class="slide"><div class="canvas light">
+    <div class="chip indigo">Demistificazione</div>
+    <div class="title">Cosa fa davvero</div>
+    <div class="cbox white" style="top:31cqh;">
+      <h4>Riconosce pattern nel linguaggio e predice la parola più probabile.</h4>
+      <div class="ex">"La capitale d'Italia è…" → <strong class="in">Roma</strong></div>
+    </div>
+    <div class="cbox dark" style="top:60cqh;"><p>Non perché lo sa.&nbsp;&nbsp;<span class="cy">Perché l'ha visto un miliardo di volte.</span></p></div>
+    <div class="foot">AI INSEGNANTI · Formazione PNRR</div><div class="pageno">9 / 31</div>
+  </div></section>
+
+  <!-- SLIDE 10 — ANALOGIA stagista -->
+  <section class="slide"><div class="canvas light">
+    <div class="chip violet">L'analogia</div>
+    <div class="title">Lo stagista brillante</div>
+    <div class="bigicon" style="background:var(--violet)">🎓</div>
+    <div class="bigtext"><strong>Ha letto tutto</strong>: ogni libro, articolo, manuale. Conosce tutte le teorie del mondo.<br><br><strong class="co">Non ha vissuto niente</strong>: non conosce la tua scuola, le tue classi, i tuoi studenti.</div>
+    <div class="bigquote vi">"Sa tutto e non sa niente del tuo contesto."</div>
+    <div class="foot">AI INSEGNANTI · Formazione PNRR</div><div class="pageno">10 / 31</div>
+  </div></section>
+
+  <!-- SLIDE 11 — GANCIO due framing -->
+  <section class="slide"><div class="canvas indigobg">
+    <div class="circ" style="top:-20%;left:75%;width:38%;height:66%;background:#fff;opacity:.08;"></div>
+    <div class="hook-eyebrow">I due framing</div>
+    <div class="hook-q wh">Hai due modi di usarla.<br>E sono <span class="co">opposti</span>.</div>
+    <div class="pageno dark">11 / 31</div>
+  </div></section>
+
+  <!-- SLIDE 12 — SCORCIATOIA -->
+  <section class="slide"><div class="canvas light">
+    <div class="chip muted">Framing 1</div>
+    <div class="title">La scorciatoia <span class="mu" style="font-weight:700">: per pensare meno</span></div>
+    <div class="bigicon" style="background:var(--coral)">⏩</div>
+    <div class="bigtext">Delego il pensiero, accetto l'output e vado.<br><br><strong>Effetto a breve:</strong> faccio prima.<br><strong class="co">Effetto a lungo:</strong> debito cognitivo.</div>
+    <div class="bigquote co">"Come un muscolo che non si usa: si atrofizza."</div>
+    <div class="foot">AI INSEGNANTI · Formazione PNRR</div><div class="pageno">12 / 31</div>
+  </div></section>
+
+  <!-- SLIDE 13 — SUPERPOTERE -->
+  <section class="slide"><div class="canvas light">
+    <div class="chip indigo">Framing 2</div>
+    <div class="title">Il superpotere <span class="in" style="font-weight:700">: per potenziarti</span></div>
+    <div class="bigicon" style="background:var(--indigo)">⚡</div>
+    <div class="bigtext"><strong>Amplifica le tue capacità</strong> invece di sostituirle.<br><br>Uso il mio giudizio sull'output, esploro, correggo.<br><strong class="in">Cresce nel tempo, non si spegne.</strong></div>
+    <div class="bigquote in">"Lo strumento è lo stesso. Cambia come lo usi."</div>
+    <div class="foot">AI INSEGNANTI · Formazione PNRR</div><div class="pageno">13 / 31</div>
+  </div></section>
+
+  <!-- SLIDE 14 — GANCIO jagged frontier -->
+  <section class="slide"><div class="canvas indigobg">
+    <div class="circ" style="top:-20%;left:75%;width:38%;height:66%;background:#fff;opacity:.08;"></div>
+    <div class="hook-eyebrow">I confini reali</div>
+    <div class="hook-q wh">Ma in cosa è <span class="cy">brava</span> davvero?<br>E in cosa <span class="co">no</span>?</div>
+    <div class="pageno dark">14 / 31</div>
+  </div></section>
+
+  <!-- SLIDE 15 — CITAZIONE Mollick + gloss jagged frontier -->
+  <section class="slide"><div class="canvas ink">
+    <div class="circ" style="top:-19%;left:78%;width:34%;height:60%;background:var(--indigo);opacity:.4;"></div>
+    <div class="qmark">“</div>
+    <div class="quote wh">L'IA eccelle dove non te lo aspetti e fallisce dove sembrerebbe banale.</div>
+    <div class="qgloss"><strong class="cy">Jagged frontier:</strong> il confine tra ciò che sa fare e ciò che non sa fare è frastagliato. Non è mai dove pensi.</div>
+    <div class="qauth"><strong class="cy">Ethan Mollick</strong><span style="color:var(--cfcb)">&nbsp;&nbsp;·&nbsp;&nbsp;Co-Intelligence (2024)</span></div>
+    <div class="pageno dark">15 / 31</div>
+  </div></section>
+
+  <!-- SLIDE 16 — CONFRONTO eccelle/fallisce -->
+  <section class="slide"><div class="canvas light">
+    <div class="chip cyan">Jagged frontier</div>
+    <div class="title">Dove eccelle, dove fallisce</div>
+    <div class="cols">
+      <div class="col"><div class="col-head" style="background:var(--cyan)">DOVE ECCELLE</div><ul class="cdcyan"><li><span>20 varianti di una spiegazione in 30 sec</span></li><li><span>Sintetizza 50 pagine in un minuto</span></li><li><span>Differenzia un materiale per livelli</span></li><li><span>Bozza di circolare o verifica</span></li></ul></div>
+      <div class="col"><div class="col-head" style="background:var(--coral)">DOVE FALLISCE</div><ul class="cdcoral"><li><span>Capire che Marco va incoraggiato</span></li><li><span>Leggere l'umore della classe</span></li><li><span>Giudicare se "va bene così" qui</span></li><li><span>Decidere cosa conta davvero</span></li></ul></div>
+    </div>
+    <div class="pageno">16 / 31</div>
+  </div></section>
+
+  <!-- SLIDE 17 — STATEMENT la differenza -->
+  <section class="slide"><div class="canvas ink">
+    <div class="chip coral">Il cuore del corso</div>
+    <div class="stbar"></div>
+    <div class="statement wh big">La differenza non è lo <span class="co">strumento</span>.<br>È il <span class="cy">metodo</span>.</div>
+    <div class="pageno dark">17 / 31</div>
+  </div></section>
+
+  <!-- SLIDE 18 — GRAFICO fatica -->
+  <section class="slide"><div class="canvas light">
+    <div class="chip indigo">Il concetto di fatica</div>
+    <div class="title">Stesso tempo, più cose</div>
+    <svg class="chartbox" viewBox="0 0 600 360" preserveAspectRatio="xMidYMid meet">
+      <line x1="60" y1="20" x2="60" y2="310" stroke="#D9D5F2" stroke-width="2"/>
+      <line x1="60" y1="310" x2="580" y2="310" stroke="#D9D5F2" stroke-width="2"/>
+      <polyline points="60,40 150,95 240,160 330,200 420,240 540,260" fill="none" stroke="#F97316" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+      <polyline points="60,260 150,235 240,205 330,170 420,150 540,120" fill="none" stroke="#06B6D4" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+      <text x="320" y="345" fill="#6B6790" font-size="20" text-anchor="middle" font-family="Inter,Arial">Sessioni</text>
+    </svg>
+    <div class="chart-legend" style="top:84cqh;left:8cqw;"><span><i style="background:var(--coral)"></i>Fatica</span><span><i style="background:var(--cyan)"></i>Output</span></div>
+    <div class="gbox"><p>Calo della fatica<br><span class="neq">≠</span><br>spegnere il cervello.</p><br><small>Il monitoraggio resta sempre tuo.</small></div>
+    <div class="foot">AI INSEGNANTI · Formazione PNRR</div><div class="pageno">18 / 31</div>
+  </div></section>
+
+  <!-- SLIDE 19 — GANCIO passivo/attivo -->
+  <section class="slide"><div class="canvas indigobg">
+    <div class="circ" style="top:-20%;left:75%;width:38%;height:66%;background:#fff;opacity:.08;"></div>
+    <div class="hook-eyebrow">Attenzione</div>
+    <div class="hook-q wh">Ma non tutti la usano<br>allo <span class="cy">stesso modo</span>.</div>
+    <div class="pageno dark">19 / 31</div>
+  </div></section>
+
+  <!-- SLIDE 20 — CONFRONTO passivo/attivo -->
+  <section class="slide"><div class="canvas light">
+    <div class="chip indigo">Due modi opposti</div>
+    <div class="title">Uso passivo vs uso attivo</div>
+    <div class="cols">
+      <div class="col"><div class="col-head" style="background:var(--coral)">PASSIVO</div><ul class="cdcoral"><li><span>"Scrivimi la relazione" → copia-incolla</span></li><li><span>Accetto l'output senza valutarlo</span></li><li><span>Spegne il pensiero critico</span></li></ul></div>
+      <div class="col"><div class="col-head" style="background:var(--cyan)">ATTIVO</div><ul class="cdcyan"><li><span>"Scrivimi una bozza, poi la correggo"</span></li><li><span>Valuto, itero, uso il mio giudizio</span></li><li><span>Allena e mantiene il pensiero critico</span></li></ul></div>
+    </div>
+    <div class="pageno">20 / 31</div>
+  </div></section>
+
+  <!-- SLIDE 21 — GANCIO allena pensiero critico -->
+  <section class="slide"><div class="canvas indigobg">
+    <div class="circ" style="top:-20%;left:75%;width:38%;height:66%;background:#fff;opacity:.08;"></div>
+    <div class="hook-eyebrow">Allena il pensiero critico</div>
+    <div class="hook-q wh">E se le domande<br>le facesse <span class="cy">lei a te</span>?</div>
+    <div class="pageno dark">21 / 31</div>
+  </div></section>
+
+  <!-- SLIDE 22 — CONCETTO ribalta lo strumento -->
+  <section class="slide"><div class="canvas light">
+    <div class="chip indigo">Allena il pensiero critico</div>
+    <div class="title">Ribalta lo strumento</div>
+    <div class="cbox white" style="top:31cqh;">
+      <h4>Siamo tutti abituati a fare domande all'IA.</h4>
+      <div class="ex">Ma il vero potenziamento arriva quando <strong class="in">è lei a fare domande a te</strong>.</div>
+    </div>
+    <div class="cbox dark" style="top:58cqh;"><p class="wh" style="color:#fff">Le sue domande ti costringono a <span class="cy">pensare</span>, non a delegare.</p></div>
+    <div class="foot">AI INSEGNANTI · Formazione PNRR</div><div class="pageno">22 / 31</div>
+  </div></section>
+
+  <!-- SLIDE 23 — ESEMPI prompt che ti fanno pensare -->
+  <section class="slide"><div class="canvas light">
+    <div class="chip indigo">Allena il pensiero critico</div>
+    <div class="title">Prompt che ti fanno pensare</div>
+    <div class="cards" style="top:30cqh;gap:1.7cqh;">
+      <div class="card" style="padding:2.1cqh 3cqh;"><div class="card-ic" style="background:var(--indigo);width:7cqh;height:7cqh;font-size:3.2cqh;">❓</div><div><h3 style="font-size:3cqh;margin:0">"Interrogami su questo argomento"</h3><p>Ti mette alla prova come farebbe un collega</p></div></div>
+      <div class="card" style="padding:2.1cqh 3cqh;"><div class="card-ic" style="background:var(--cyan);width:7cqh;height:7cqh;font-size:3.2cqh;">🔍</div><div><h3 style="font-size:3cqh;margin:0">"Sfida le mie conclusioni"</h3><p>Trova i punti deboli del tuo ragionamento</p></div></div>
+      <div class="card" style="padding:2.1cqh 3cqh;"><div class="card-ic" style="background:var(--violet);width:7cqh;height:7cqh;font-size:3.2cqh;">⚖️</div><div><h3 style="font-size:3cqh;margin:0">"Fai l'avvocato del diavolo"</h3><p>Ti mostra l'altra prospettiva</p></div></div>
+      <div class="card" style="padding:2.1cqh 3cqh;"><div class="card-ic" style="background:var(--coral);width:7cqh;height:7cqh;font-size:3.2cqh;">💡</div><div><h3 style="font-size:3cqh;margin:0">"Cosa non ho considerato?"</h3><p>Scopre i tuoi punti ciechi</p></div></div>
+    </div>
+    <div class="foot">AI INSEGNANTI · Formazione PNRR</div><div class="pageno">23 / 31</div>
+  </div></section>
+
+  <!-- SLIDE 24 — DATO CHIARO (sostituisce r=-0.75) -->
+  <section class="slide"><div class="canvas light">
+    <div class="chip indigo">Il dato</div>
+    <div class="title">Usarla senza pensare costa caro</div>
+    <div class="cbox dark" style="top:31cqh;"><p class="wh" style="color:#fff">Chi usa l'IA in modo <span class="co">passivo</span> perde progressivamente <span class="cy">pensiero critico</span>.</p></div>
+    <div class="cbox white" style="top:58cqh;">
+      <h4>La buona notizia 👇</h4>
+      <div class="ex">Chi <strong class="in">capisce come funziona</strong> lo strumento delega meno ciecamente, e l'effetto sparisce.</div>
+    </div>
+    <div class="foot">Fonte: Gerlich 2025 · MIT 2025</div><div class="pageno">24 / 31</div>
+  </div></section>
+
+  <!-- SLIDE 25 — STATEMENT non di meno -->
+  <section class="slide"><div class="canvas ink">
+    <div class="chip indigo">Il concetto di fatica</div>
+    <div class="stbar"></div>
+    <div class="statement wh">Stesso tempo, <span class="cy">più cose</span>.<br>Non di <span class="co">meno</span>, di <span class="cy">meglio</span>.</div>
+    <div class="pageno dark">25 / 31</div>
+  </div></section>
+
+  <!-- SLIDE 26 — DIBATTITO tagliato sul loro caso -->
+  <section class="slide"><div class="canvas coralbg">
+    <div class="circ" style="top:-21%;left:80%;width:38%;height:67%;background:#fff;opacity:.12;"></div>
+    <div class="deb-tag">DIBATTITO</div><div class="deb-room">Parla la stanza</div>
+    <div class="deb-q wh">Nel vostro lavoro:<br>dove vi ha già <span class="inkc">aiutato</span>? E dove vi ha <span class="inkc">deluso</span>?</div>
+    <div class="pageno dark">26 / 31</div>
+  </div></section>
+
+  <!-- SLIDE 27 — DIBATTITO ruolo -->
+  <section class="slide"><div class="canvas coralbg">
+    <div class="circ" style="top:-21%;left:80%;width:38%;height:67%;background:#fff;opacity:.12;"></div>
+    <div class="deb-tag">DIBATTITO</div><div class="deb-room">Parla la stanza</div>
+    <div class="deb-q wh">Come cambierà<br>il <span class="inkc">vostro ruolo</span>?</div>
+    <div class="flag onbg"><b>Se avanza tempo</b><span>Altrimenti resta uno spunto: ci ragionate voi.</span></div>
+    <div class="pageno dark">27 / 31</div>
+  </div></section>
+
+  <!-- SLIDE 28 — VERSO LA PERSONALIZZAZIONE -->
+  <section class="slide"><div class="canvas light">
+    <div class="chip cyan">Uno sguardo avanti</div>
+    <div class="title">Verso la personalizzazione</div>
+    <img class="bigimg" src="assets/learn-your-way.png" alt="Learn Your Way di Google: trasforma un testo in slide con narrazione, mappe e testo su misura">
+    <div class="imgcap">Lo stesso contenuto adattato a ogni studente. Esempio: Learn Your Way (Google) trasforma un libro di testo in slide con narrazione, mappe e testo immersivo.</div>
+    <div class="foot">AI INSEGNANTI · Formazione PNRR</div><div class="pageno">28 / 31</div>
+  </div></section>
+
+  <!-- SLIDE 29 — DIBATTITO aperta -->
+  <section class="slide"><div class="canvas coralbg">
+    <div class="circ" style="top:-21%;left:80%;width:38%;height:67%;background:#fff;opacity:.12;"></div>
+    <div class="deb-tag">DIBATTITO</div><div class="deb-room">Domanda aperta</div>
+    <div class="deb-q wh">Cosa pensi che l'IA<br><span class="inkc">non potrà mai fare?</span></div>
+    <div class="flag onbg"><b>Se avanza tempo</b><span>Altrimenti resta uno spunto: ci ragionate voi.</span></div>
+    <div class="pageno dark">29 / 31</div>
+  </div></section>
+
+  <!-- SLIDE 30 — PONTE -->
+  <section class="slide"><div class="canvas light">
+    <div class="chip violet">La prossima volta</div>
+    <div class="ponte-big">Il metodo</div>
+    <div class="ponte-sub">I 4 principi per usare l'IA da professionisti, non da chi ci prova.</div>
+    <div class="pcards">
+      <div class="pcard"><div class="pnum" style="background:var(--indigo)">1</div><h3>Non spegnere il cervello</h3></div>
+      <div class="pcard"><div class="pnum" style="background:var(--cyan)">2</div><h3>L'IA è un collega</h3></div>
+      <div class="pcard"><div class="pnum" style="background:var(--violet)">3</div><h3>Obiettivi chiari</h3></div>
+      <div class="pcard"><div class="pnum" style="background:var(--coral)">4</div><h3>AI First</h3></div>
+    </div>
+    <div class="foot">AI INSEGNANTI · Formazione PNRR</div><div class="pageno">30 / 31</div>
+  </div></section>
+
+  <!-- SLIDE 31 — CHIUSURA -->
+  <section class="slide"><div class="canvas ink">
+    <div class="circ" style="top:-19%;left:78%;width:34%;height:60%;background:var(--indigo);opacity:.45;"></div>
+    <div class="circ" style="top:58%;left:88%;width:25%;height:45%;background:var(--violet);opacity:.4;"></div>
+    <div class="circ" style="top:70%;left:-8%;width:24%;height:42%;background:var(--cyan);opacity:.3;"></div>
+    <div class="statement wh" style="top:33cqh;">Amplifica il tuo <span class="cy">potenziale</span>.<br>Usala ogni giorno.</div>
+    <div style="position:absolute;top:64cqh;left:6.5cqw;right:8cqw;font-size:3.2cqh;color:var(--cfcb);">L'IA non sostituisce l'intelligenza umana: la potenzia con metodo.</div>
+    <div class="dots" style="top:80%;left:6.6%;"><span style="background:var(--cyan)"></span><span style="background:var(--indigo)"></span><span style="background:var(--violet)"></span><span style="background:var(--coral)"></span></div>
+    <div class="pageno dark">31 / 31</div>
+  </div></section>
+
+</div>
+<div class="hint">↑ ↓ frecce · F schermo intero · Cmd/Ctrl+P per esportare PDF</div>
+<script>
+  const deck=document.getElementById('deck');
+  const slides=[...document.querySelectorAll('.slide')];
+  let i=0;
+  function go(n){i=Math.max(0,Math.min(slides.length-1,n));slides[i].scrollIntoView({behavior:'smooth'});}
+  deck.addEventListener('scroll',()=>{i=Math.round(deck.scrollTop/window.innerHeight);},{passive:true});
+  window.addEventListener('keydown',e=>{
+    if(['ArrowDown','ArrowRight','PageDown',' '].includes(e.key)){e.preventDefault();go(i+1);}
+    else if(['ArrowUp','ArrowLeft','PageUp'].includes(e.key)){e.preventDefault();go(i-1);}
+    else if(e.key==='Home'){e.preventDefault();go(0);}
+    else if(e.key==='End'){e.preventDefault();go(slides.length-1);}
+    else if(e.key.toLowerCase()==='f'){if(!document.fullscreenElement)document.documentElement.requestFullscreen();else document.exitFullscreen();}
+  });
+</script>
+</body>
+</html>
