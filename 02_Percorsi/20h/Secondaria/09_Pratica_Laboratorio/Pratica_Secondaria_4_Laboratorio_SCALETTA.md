@@ -2,7 +2,7 @@
 
 > Durata ~2h (un modulo) | Ripasso ~10 min · Il flusso ~10 min · Laboratorio ~85 min · Condivisione e chiusura ~15 min
 > **Chiave (secondaria):** oggi non si impara uno strumento nuovo. Si mettono insieme Claude, NotebookLM e Canva per costruire **una lezione vera, completa, sulla vostra materia**, pronta da portare in classe. Si lavora sul serio, sulla roba vostra.
-> **Account:** Claude (Cowork), NotebookLM (Google), Canva for Education. Tutti già visti e attivi.
+> **Account:** Claude (app sul computer), NotebookLM (Google), Canva for Education. Tutti già visti e attivi.
 > **Raccordo (continuità):** è l'ultima pratica e chiude il cerchio delle tre lezioni: Claude progetta, NotebookLM fonda sulle fonti, Canva dà la forma. Aggancio finale all'Incontro 6 (Futuro e chiusura).
 > **Regole:** mai dati degli studenti nei materiali. Per l'uso diretto da parte dei ragazzi vanno prima verificati età minima e account d'istituto. Niente trattino lungo né frecce come note.
 > **Nota di regia:** è un laboratorio, quindi quasi tutto il tempo è hands-on. Il formatore mostra il flusso una volta, poi gira tra i banchi.

@@ -3,7 +3,7 @@
 > Durata ~3h20 (1,5 moduli, nota interna; la struttura ufficiale resta invariata) | Parte A teorica ~28 min · Progetto ~40 min · Impostazioni ~16 min · Skill ~36 min · pausa · Routine ~24 min · Live Artifact ~28 min · Chiusura ~12 min
 > **Nota tempi:** lezione hands-on, il rischio è andare lunghi sui computer. Se si stringe, si proteggono sempre Progetto e Skill, le due stazioni che cambiano davvero il loro lavoro. Routine e Live Artifact si possono ridurre a demo forte.
 > **Chiave:** finora avete usato l'IA in modo generico, un po' per tutto. Oggi il salto è tecnico: si lavora dentro la piattaforma e si costruisce un Claude che conosce la vostra scuola. Non lo guardate, lo costruite.
-> **Account:** tutti su piano a pagamento con Cowork. Tutte le funzioni si fanno dal vivo, dal computer.
+> **Account:** tutti su piano a pagamento, con l'app Claude installata sul computer (da settembre 2026 Cowork è dentro Claude). Tutte le funzioni si fanno dal vivo, dal computer.
 > **Raccordo:** questa lezione viene dopo i cinque incontri comuni. Nell'Incontro 5 ognuno ha già scritto il proprio **file di contesto permanente** e ha visto il **Progetto Mail** compilato sulle slide. Oggi lo apre davvero. Nell'Incontro 3 ha scritto il **patto dell'ufficio**: qui torna, come regola operativa su cosa si carica.
 > **Format:** prima una mini lezione teorica che dà la mappa (Parte A), poi un tour a stazioni pratiche (Parte B). Ogni stazione apre con il gancio, una frase su cos'è, la demo dal vivo, poi due o tre esempi tagliati sulla segreteria, poi lo fanno loro.
 > **Il blocco pratico è a traino degli amministrativi.** Chi non lavora su documenti segue la logica, non la pratica: va detto all'inizio, senza girarci intorno.
@@ -25,17 +25,16 @@ Slide-gancio: **"Avete usato l'IA per mille cose diverse. Ma l'avete mai fatta d
 - Ripensate a quello che avete già fatto: testi, riassunti, idee, comunicazioni. Tutti usi **generici**, validi, ma senza un metodo tecnico dietro.
 - Il salto di oggi: da un uso generico a un **uso tecnico**, dentro la piattaforma. Stessa IA, ma resa vostra e messa al lavoro sul serio.
 
-## BLOCCO A2 · Le tre versioni di Claude, e perché useremo Cowork (8 min)
+## BLOCCO A2 · Un solo Claude (Cowork è entrato in Claude), e perché lavoriamo nei Progetti (8 min)
 ### Gancio
-Slide-gancio: **"Esistono tre Claude diversi. Sapete qual è quello giusto per voi?"**
-- **Chat:** la versione classica. Apri, chiedi, rispondi. Veloce, ma ogni conversazione vive per conto suo.
-- **Cowork:** una vera piattaforma di lavoro, dal computer. I vostri progetti, i materiali, le automazioni, gli strumenti, tutto in un posto solo. È quella di oggi.
+Slide-gancio: **"Chat e Cowork oggi sono un solo Claude. Cosa cambia per voi?"**
+- **Claude:** l'app che già conoscete, che da settembre 2026 fa anche tutto quello che faceva Cowork: chat veloci, ma anche progetti, materiali, automazioni e strumenti, tutto in un posto solo. Non c'è più una modalità da scegliere: è Claude a capire se basta una risposta o serve un lavoro più lungo. È quello che useremo oggi.
 - **Code:** la versione per chi scrive software. Non è il nostro caso, la nominiamo per completezza.
-- **La differenza che conta:** la Chat risponde a una domanda, Cowork tiene insieme il vostro lavoro nel tempo. Nella Chat ricominciate ogni volta. In Cowork costruite una volta e ritrovate tutto.
-- Nota pratica: Cowork si usa dal computer, non dallo smartphone. Oggi apriamo tutti il portatile.
+- **La differenza che conta:** una chat al volo risponde a una domanda, un Progetto tiene insieme il vostro lavoro nel tempo. In una chat al volo ricominciate ogni volta. In un Progetto costruite una volta e ritrovate tutto.
+- Nota pratica: l'app Claude la usiamo dal computer, non dallo smartphone. Oggi apriamo tutti il portatile.
 
 ## BLOCCO A3 · Com'è fatta la piattaforma: le cose base (7 min)
-> Tutti aprono Cowork e si guarda insieme l'interfaccia, così quando arrivano le funzioni sanno già dove stanno.
+> Tutti aprono l'app Claude e si guarda insieme l'interfaccia, così quando arrivano le funzioni sanno già dove stanno.
 - Giro dello schermo senza fretta: dove si scrive, dove sono le chat, e la **barra laterale a sinistra** con Projects, Scheduled, gli elementi Pinned.
 - Primo contatto, hands-on leggero. Tutti mandano un primo messaggio, in uno dei tre modi, così si vede subito che non è Google:
   - **a voce:** *"Aiutami a scrivere un avviso per le famiglie sulla chiusura degli uffici nei giorni prefestivi"*
@@ -153,8 +152,8 @@ Slide-gancio: **"E se ogni due settimane arrivasse da solo il punto sulle novit�
 - Una routine è un'attività schedulata: parte in automatico a una certa ora di un certo giorno, in modo ricorrente. Serve soprattutto a tenervi aggiornati e a farvi il punto da sola. Si ritrovano sotto Scheduled.
 
 ### Demo dal vivo (6 min)
-- In una chat di Cowork si incolla il prompt della routine:
-  > *"Imposta un'attività pianificata in Cowork. Ogni due settimane, il lunedì mattina, voglio ricevere in chat il punto sulle novità più rilevanti per chi lavora nella segreteria di una scuola: nuove note e circolari ministeriali, scadenze nazionali in arrivo, cambiamenti sulle procedure amministrative, sugli adempimenti e sulle piattaforme che usiamo. Massimo 8 punti. Per ognuno scrivi cosa è cambiato, da quando, e perché mi riguarda. Metti sempre la fonte con il link, e se per un punto non trovi una fonte ufficiale dimmelo invece di ricostruirlo. Prima spiegami come funzionano le attività pianificate, poi fammi le domande necessarie e crea la routine."*
+- In una chat di Claude si incolla il prompt della routine:
+  > *"Imposta un'attività pianificata. Ogni due settimane, il lunedì mattina, voglio ricevere in chat il punto sulle novità più rilevanti per chi lavora nella segreteria di una scuola: nuove note e circolari ministeriali, scadenze nazionali in arrivo, cambiamenti sulle procedure amministrative, sugli adempimenti e sulle piattaforme che usiamo. Massimo 8 punti. Per ognuno scrivi cosa è cambiato, da quando, e perché mi riguarda. Metti sempre la fonte con il link, e se per un punto non trovi una fonte ufficiale dimmelo invece di ricostruirlo. Prima spiegami come funzionano le attività pianificate, poi fammi le domande necessarie e crea la routine."*
 - Claude spiega, fa le domande e crea la routine. Compare nella barra laterale sotto Scheduled.
 
 ### ⚠ Nota di regia: la verifica in diretta
@@ -185,7 +184,7 @@ Slide-gancio: **"Quante volte una scadenza vi è arrivata addosso il giorno prim
 - Si costruisce un **cruscotto** che prende le scadenze ricorrenti dell'anno, le mostra mese per mese con lo stato, e in base alla data di oggi evidenzia cosa scade nei prossimi quindici giorni e cosa è già in ritardo. Può leggere lo scadenzario già dentro il Progetto.
 - **La cosa che stupisce:** lo si aggiorna parlando con Claude in chat. Si dice "la scadenza si sposta al 15" e la tabella si riscrive da sola. Da mostrare dal vivo.
 - Prompt-pronto per crearlo:
-  > *"Crea un artefatto dinamico in Cowork: un cruscotto delle scadenze della segreteria. 1) Parte da un anno scolastico italiano, da settembre ad agosto, e mi fa inserire le scadenze ricorrenti dell'ufficio, con data, di cosa si tratta, chi se ne occupa e cosa va preparato prima. 2) Mostra una tabella per mese, con lo stato: da fare, in corso, fatta. 3) In base alla data di oggi mi evidenzia cosa scade nei prossimi quindici giorni e cosa è già in ritardo. 4) Per ogni scadenza posso segnare la comunicazione collegata. 5) Posso aggiornarlo anche parlando con te in chat: se ti dico per esempio 'la scadenza si sposta al 15', aggiorni la tabella di conseguenza. 6) Resta pinnato e aggiornabile. Fammi al massimo 3 domande se ti servono, poi crea l'artefatto."*
+  > *"Crea un artefatto dinamico: un cruscotto delle scadenze della segreteria. 1) Parte da un anno scolastico italiano, da settembre ad agosto, e mi fa inserire le scadenze ricorrenti dell'ufficio, con data, di cosa si tratta, chi se ne occupa e cosa va preparato prima. 2) Mostra una tabella per mese, con lo stato: da fare, in corso, fatta. 3) In base alla data di oggi mi evidenzia cosa scade nei prossimi quindici giorni e cosa è già in ritardo. 4) Per ogni scadenza posso segnare la comunicazione collegata. 5) Posso aggiornarlo anche parlando con te in chat: se ti dico per esempio 'la scadenza si sposta al 15', aggiorni la tabella di conseguenza. 6) Resta pinnato e aggiornabile. Fammi al massimo 3 domande se ti servono, poi crea l'artefatto."*
 - Si vede l'artifact comparire pinnato a sinistra e riaprirsi con un click.
 
 ### Gli altri due esempi
@@ -215,7 +214,7 @@ Slide-gancio: **"Quante volte una scadenza vi è arrivata addosso il giorno prim
 ---
 
 ## Buchi di tempo e riserve
-- **Parte A teorica (rischio lungo):** se le tre versioni e l'interfaccia corrono, tenere stretti A1 e A2 e fare A3 e A4 a schermo, veloci.
+- **Parte A teorica (rischio lungo):** se le versioni e l'interfaccia corrono, tenere stretti A1 e A2 e fare A3 e A4 a schermo, veloci.
 - **Se i computer rallentano:** proteggere Progetto (Blocco 1) e Skill (Blocco 3). Tutto il resto può ridursi.
 - **Routine e Live Artifact:** se il tempo finisce, diventano demo forte del relatore con istruzioni scritte da rifare a casa.
 - **Riserva per i veloci:** chi finisce prima crea una seconda skill (il "controllo prima di inviare") oppure popola di più il proprio Progetto.
@@ -223,7 +222,7 @@ Slide-gancio: **"Quante volte una scadenza vi è arrivata addosso il giorno prim
 - **Chi non lavora su documenti:** ha comunque una strada su ogni stazione. Progetto: un contenitore per le procedure del proprio reparto. Skill: la checklist di fine giornata. Routine: il promemoria di cosa controllare. Artifact: il planner della settimana. ⚠ Da tarare quando si sa com'è composta l'aula.
 
 ## Gap operativi da preparare prima dell'aula
-- [ ] La cartella `Progetto_Demo_Mail` caricata in Cowork e provata
+- [ ] La cartella `Progetto_Demo_Mail` caricata in Claude e provata
 - [ ] ⚠ **Le mail dell'archivio sostituite con mail vere ripulite.** Quelle attuali sono ricostruite
 - [ ] Una foto di un modulo cartaceo e una circolare dell'anno scorso
 - [ ] `Asset_Skill_Prompt_Optimizer.md` e le istruzioni di installazione con screenshot

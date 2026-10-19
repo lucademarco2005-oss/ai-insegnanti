@@ -9,7 +9,7 @@ Questa cartella è un **progetto Claude già pronto e replicabile**. Serve a mos
 - `Esempio_verifica_generata.md` — un esempio dell'output atteso, da mostrare se serve.
 
 ## Come si usa in aula (3 minuti)
-1. In Cowork apri Projects, poi New project.
+1. Nell'app Claude apri Projects, poi New project.
 2. Scegli "Use an existing folder" e seleziona questa cartella (in alternativa: Start from scratch e carica i file della cartella come Dati).
 3. Apri le Instructions del progetto e incolla il contenuto di `ISTRUZIONI_PROGETTO.md`.
 4. Nella prima chat del progetto, chiedi una verifica. Esempio:

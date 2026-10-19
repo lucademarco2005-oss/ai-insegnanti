@@ -3,7 +3,7 @@
 > Durata ~3h20 (1,5 moduli, nota interna; la struttura ufficiale resta invariata) | Parte A teorica ~28 min · Progetto ~40 min · Impostazioni ~16 min · Skill e stile ~36 min · pausa · Routine ~24 min · Live Artifact ~28 min · Chiusura ~12 min
 > **Nota tempi:** lezione hands-on, il rischio è andare lunghi sui computer. Se si stringe, si proteggono sempre Progetto e Skill (le due stazioni che cambiano davvero il loro lavoro). Routine e Live Artifact si possono ridurre a demo forte se il tempo finisce.
 > **Chiave (infanzia):** questa non è una competenza da usare con i bambini, è una competenza vostra, professionale. I piccoli non useranno l'IA: la usate voi per preparare attività, schede, racconti e canzoncine. Il salto è tecnico: si lavora dentro la piattaforma e si costruisce un Claude che conosce la vostra sezione. Non lo guardate, lo costruite.
-> **Account:** tutti su piano a pagamento con Cowork. Tutte le funzioni si fanno dal vivo, dal computer.
+> **Account:** tutti su piano a pagamento, con l'app Claude installata sul computer (da settembre 2026 Cowork è dentro Claude). Tutte le funzioni si fanno dal vivo, dal computer.
 > **Raccordo (continuità):** questa lezione viene dopo i 5 incontri comuni. Nell'Incontro 5 ognuno ha già scritto il proprio **file di contesto permanente** ("ragiona come me") e abbozzato un primo Progetto; negli Incontri 2 e 4 ha definito un'attività reale e generato il primo materiale della propria lezione. Oggi si apre il computer e tutto quel lavoro diventa un sistema vivo.
 > **Format:** prima una mini lezione teorica che dà la mappa (Parte A), poi un tour a stazioni pratiche (Parte B). Ogni stazione apre con la sua panoramica (gancio, una frase su cos'è, demo dal vivo), poi due o tre esempi tagliati sull'infanzia, poi lo fanno loro.
 > **Progetto demo:** cartella `Progetto_Demo_Autunno`, già pronta e replicabile (Istruzioni, Programmazione dei temi, Banca spunti, Esempio di attività generata).
@@ -25,18 +25,17 @@ Slide-gancio: **"Avete usato l'IA per mille cose diverse. Ma l'avete mai fatta d
 - Ripensate a quello che avete già fatto nei mesi scorsi: spiegazioni, racconti, idee, schede, comunicazioni. Tutti usi **generici**, validi, ma senza un metodo tecnico dietro.
 - Il salto di oggi: da un uso generico a un **uso tecnico**, dentro la piattaforma. Stessa IA, ma resa vostra e messa al lavoro sul serio.
 
-## BLOCCO A2 · Le tre versioni di Claude, e perché useremo Cowork (8 min)
+## BLOCCO A2 · Un solo Claude (Cowork è entrato in Claude), e perché lavoriamo nei Progetti (8 min)
 ### Gancio
-Slide-gancio: **"Esistono tre Claude diversi. Sapete qual è quello giusto per voi?"**
-- Tre versioni, stessa intelligenza dietro, ambienti diversi:
-  - **Chat:** la versione classica, quella che già conoscete. Apri, chiedi, rispondi. Veloce, ma ogni conversazione vive per conto suo.
-  - **Cowork:** una vera piattaforma di lavoro. Si usa dal computer, e diventa un ambiente che vi conosce: i vostri progetti, i materiali, le automazioni, gli strumenti, tutto in un posto solo. È quella che useremo oggi.
+Slide-gancio: **"Chat e Cowork oggi sono un solo Claude. Cosa cambia per voi?"**
+- Fino a settembre 2026 c'erano tre versioni (Chat, Cowork, Code). Ora Chat e Cowork sono un solo Claude:
+  - **Claude:** l'app che già conoscete, che da settembre 2026 fa anche tutto quello che faceva Cowork: chat veloci, ma anche progetti, materiali, automazioni e strumenti, tutto in un posto solo. Non c'è più una modalità da scegliere: è Claude a capire se basta una risposta o serve un lavoro più lungo. È quello che useremo oggi.
   - **Code:** la versione per chi scrive software. Non è il nostro caso, la nominiamo solo per completezza.
-- **La differenza che conta, Chat contro Cowork:** la Chat risponde a una domanda; Cowork tiene insieme il vostro lavoro nel tempo. Nella Chat ricominciate ogni volta. In Cowork costruite una volta e ritrovate tutto: il progetto della sezione, le skill, le automazioni, le mini-app. Per questo oggi lavoriamo lì.
-- Nota pratica: Cowork si usa dal computer, non dallo smartphone. Oggi infatti apriamo tutti il portatile.
+- **La differenza che conta, chat al volo contro Progetto:** una chat al volo risponde a una domanda; un Progetto tiene insieme il vostro lavoro nel tempo. In una chat al volo ricominciate ogni volta. In un Progetto costruite una volta e ritrovate tutto: il progetto della sezione, le skill, le automazioni, le mini-app. Per questo oggi lavoriamo lì.
+- Nota pratica: l'app Claude la usiamo dal computer, non dallo smartphone. Oggi infatti apriamo tutti il portatile.
 
 ## BLOCCO A3 · Com'è fatta la piattaforma: le cose base (7 min)
-> Tutti aprono Cowork e si guarda insieme l'interfaccia, così quando arrivano le funzioni sanno già dove stanno.
+> Tutti aprono l'app Claude e si guarda insieme l'interfaccia, così quando arrivano le funzioni sanno già dove stanno.
 - Si fa il giro dello schermo, senza fretta: dove si scrive, dove sono le chat, e la **barra laterale a sinistra** con le sezioni che useremo: Projects, Scheduled, gli elementi Pinned.
 - Primo contatto, hands-on leggero: tutti mandano un primo messaggio, in uno dei tre modi (così nessuno resta indietro e si vede che non è Google):
   - **a voce:** "Dammi tre idee per introdurre l'autunno a una sezione di mezzani, con materiali di recupero";
@@ -51,7 +50,7 @@ Slide-gancio: **"Esistono tre Claude diversi. Sapete qual è quello giusto per v
 - **Automazioni (Schedule), a cosa servono:** vi tengono aggiornati e vi fanno il punto da sole, a un orario ricorrente. Esempio forte: una rassegna delle novità più utili per la scuola dell'infanzia, pronta ogni lunedì mattina.
 - **Live Artifact, a cosa servono:** una mini-app su misura dentro Claude. Oggi ne costruiamo una concreta e utile: il pianificatore dei temi dell'anno, per tenere il filo dei percorsi della sezione.
 - Il filo: prima la casa (Progetto), poi gli strumenti che ci mettiamo dentro. Transizione alla pratica: "Ora basta guardare. Apriamo e costruiamo, partendo dal Progetto."
-- ⚠ Da preparare: una scheda fotografata e una filastrocca pronta, per chi non ha materiale sottomano. Slide pulita con le tre versioni (Chat, Cowork, Code) e una con la mappa delle quattro funzioni.
+- ⚠ Da preparare: una scheda fotografata e una filastrocca pronta, per chi non ha materiale sottomano. Slide pulita con le versioni (Claude, Code) e una con la mappa delle quattro funzioni.
 
 ---
 
@@ -148,8 +147,8 @@ Slide-gancio: **"E se ogni due settimane arrivasse da solo un report con idee e 
 - Una routine è un'attività schedulata: parte in automatico a una certa ora di un certo giorno, in modo ricorrente. Servono soprattutto a tenervi aggiornati e a farvi il punto da sole, senza muovere un dito. Le ritrovate sotto Scheduled.
 
 ### Demo dal vivo (6 min)
-- In una chat di Cowork si incolla il prompt della routine (versione demo, testabile subito):
-  > *"Imposta un'attività pianificata in Cowork. Ogni due settimane, di lunedì mattina, voglio ricevere in chat un report con le novità più utili per la scuola dell'infanzia: nuove idee e attività da fare in sezione, spunti creativi e racconti, eventuali novità su didattica e materiali. Tienilo breve e pratico, massimo 8 punti, ognuno con il perché può servirmi. Prima spiegami come funzionano le attività pianificate, poi fammi le domande necessarie e crea la routine."*
+- In una chat di Claude si incolla il prompt della routine (versione demo, testabile subito):
+  > *"Imposta un'attività pianificata. Ogni due settimane, di lunedì mattina, voglio ricevere in chat un report con le novità più utili per la scuola dell'infanzia: nuove idee e attività da fare in sezione, spunti creativi e racconti, eventuali novità su didattica e materiali. Tienilo breve e pratico, massimo 8 punti, ognuno con il perché può servirmi. Prima spiegami come funzionano le attività pianificate, poi fammi le domande necessarie e crea la routine."*
 - Claude spiega, fa le domande e crea la routine. Compare nella barra laterale, sotto Scheduled, con la frequenza (ogni due settimane).
 
 ### Esempi tagliati sull'infanzia
@@ -178,7 +177,7 @@ Slide-gancio: **"Quante volte a fine anno vi accorgete che un tema è rimasto in
 - Si costruisce un **pianificatore annuale dei temi**: prende tutte le settimane dell'anno e ci distribuisce sopra i temi della sezione (autunno, feste, inverno, arte), una tabella settimana per settimana. In base alla data di oggi mostra a che punto dovreste essere. Tutto modificabile e salvato. Può leggere la programmazione già nel Progetto.
 - **La cosa che stupisce:** lo si aggiorna parlando con Claude in chat. Si dice "le prime due settimane sono di ambientamento" e la tabella si riscrive da sola. Da mostrare dal vivo.
 - Prompt-pronto per crearlo (testato, funziona anche subito):
-  > *"Crea un artefatto dinamico in Cowork: un pianificatore annuale dei temi della mia sezione dell'infanzia. 1) Parte da un anno scolastico italiano tipo, da metà settembre a fine giugno, e calcola le settimane effettive, togliendo le pause principali (Natale, Pasqua, ponti); mostrami il numero e lasciamelo correggere. 2) Mi fa inserire la sezione, l'età dei bambini e l'elenco dei temi dell'anno (per esempio autunno, le feste, l'inverno, un percorso d'arte), con quante settimane servono per ognuno. 3) Distribuisce i temi sulle settimane e mostra una tabella settimana per settimana (numero, date, tema, stato: da fare, in corso, fatto); posso spostare e modificare tutto. 4) In base alla data di oggi mi evidenzia a che punto dovrei essere, se sono indietro o avanti. 5) Posso aggiornarlo parlando con te in chat: se ti dico 'le prime due settimane sono di ambientamento', aggiorni la tabella. 6) Resta pinnato e aggiornabile. Fammi al massimo 3 domande se ti servono, poi crea l'artefatto."*
+  > *"Crea un artefatto dinamico: un pianificatore annuale dei temi della mia sezione dell'infanzia. 1) Parte da un anno scolastico italiano tipo, da metà settembre a fine giugno, e calcola le settimane effettive, togliendo le pause principali (Natale, Pasqua, ponti); mostrami il numero e lasciamelo correggere. 2) Mi fa inserire la sezione, l'età dei bambini e l'elenco dei temi dell'anno (per esempio autunno, le feste, l'inverno, un percorso d'arte), con quante settimane servono per ognuno. 3) Distribuisce i temi sulle settimane e mostra una tabella settimana per settimana (numero, date, tema, stato: da fare, in corso, fatto); posso spostare e modificare tutto. 4) In base alla data di oggi mi evidenzia a che punto dovrei essere, se sono indietro o avanti. 5) Posso aggiornarlo parlando con te in chat: se ti dico 'le prime due settimane sono di ambientamento', aggiorni la tabella. 6) Resta pinnato e aggiornabile. Fammi al massimo 3 domande se ti servono, poi crea l'artefatto."*
 - Si vede l'artifact comparire pinnato a sinistra e riaprirsi con un click.
 
 ### Altri esempi tagliati sull'infanzia
@@ -195,7 +194,7 @@ Slide-gancio: **"Quante volte a fine anno vi accorgete che un tema è rimasto in
 
 ## BLOCCO 6 · Chiusura: da chat a sistema (12 min)
 
-- Giro d'orizzonte di cosa ognuno si porta a casa, costruito oggi con le proprie mani, dentro Cowork:
+- Giro d'orizzonte di cosa ognuno si porta a casa, costruito oggi con le proprie mani, dentro Claude:
   - il **Progetto** delle proprie attività, con memoria, contesto e il vostro modo di lavorare dentro;
   - le **preferenze globali** impostate, Claude sa con chi parla ovunque;
   - una **skill** propria più Prompt Optimizer, un comando da un secondo;
@@ -208,14 +207,14 @@ Slide-gancio: **"Quante volte a fine anno vi accorgete che un tema è rimasto in
 ---
 
 ## Buchi di tempo e riserve
-- **Parte A teorica (rischio lungo):** se le tre versioni e l'interfaccia corrono, tenere stretti A1 e A2 (il concetto generico contro tecnico e Chat contro Cowork) e fare A3 e A4 a schermo, veloci.
+- **Parte A teorica (rischio lungo):** se le versioni e l'interfaccia corrono, tenere stretti A1 e A2 (il concetto generico contro tecnico e chat al volo contro Progetto) e fare A3 e A4 a schermo, veloci.
 - **Se i computer rallentano:** proteggere Progetto (Blocco 1) e Skill (Blocco 3), sono le due che cambiano il loro lavoro. Tutto il resto può ridursi.
 - **Routine e Live Artifact:** se il tempo finisce, diventano demo forte del relatore con istruzioni scritte da rifare a casa, invece di hands-on completo.
 - **Riserva per i veloci:** chi finisce prima crea una seconda skill (la "scheda da colorare" o lo "stile") oppure popola di più il proprio Progetto.
 - **Riserva per i lenti:** spunti pronti per ogni stazione (contesto progetto già scritto, skill già descritta, routine di esempio), così nessuno resta a guardare lo schermo bianco.
 
 ## Gap operativi da preparare prima dell'aula
-- [ ] Slide con le tre versioni (Chat, Cowork, Code) e slide con la mappa delle quattro funzioni
+- [ ] Slide con le versioni (Claude, Code) e slide con la mappa delle quattro funzioni
 - [ ] Il Progetto `Progetto_Demo_Autunno` già costruito e popolato (materiali anonimi: programmazione dei temi, banca spunti), da mostrare
 - [ ] Il prompt di inizio progetto dell'Incontro 5 a portata di copia
 - [ ] Skill Prompt Optimizer pronta da condividere, con istruzioni di installazione passo-passo (screenshot)
@@ -227,4 +226,4 @@ Slide-gancio: **"Quante volte a fine anno vi accorgete che un tema è rimasto in
 - [ ] Una scheda fotografata e una filastrocca, per il primo contatto a voce/foto/file
 
 ## Frasi chiave della lezione
-> **Claude è un generalista: oggi smettiamo di usarlo a caso e iniziamo a usarlo da tecnici, dentro la piattaforma. Chat risponde, Cowork lavora con voi nel tempo. Si parte dalla casa: il Progetto delle vostre attività. Un lavoro ripetuto si imposta una volta sola. I dati dei bambini restano sempre fuori. Stamattina era una chat, adesso è una piattaforma che conosce la vostra sezione e vi tiene il filo dei temi.**
+> **Claude è un generalista: oggi smettiamo di usarlo a caso e iniziamo a usarlo da tecnici, dentro la piattaforma. Una chat al volo risponde, un Progetto lavora con voi nel tempo. Si parte dalla casa: il Progetto delle vostre attività. Un lavoro ripetuto si imposta una volta sola. I dati dei bambini restano sempre fuori. Stamattina era una chat, adesso è una piattaforma che conosce la vostra sezione e vi tiene il filo dei temi.**

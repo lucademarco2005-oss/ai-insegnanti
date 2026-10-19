@@ -3,7 +3,7 @@
 > Durata ~3h20 (1,5 moduli, nota interna; la struttura ufficiale resta invariata) | Parte A teorica ~28 min · Progetto ~40 min · Impostazioni ~16 min · Skill e stile ~36 min · pausa · Routine ~24 min · Live Artifact ~28 min · Chiusura ~12 min
 > **Nota tempi:** lezione hands-on, il rischio è andare lunghi sui computer. Se si stringe, si proteggono sempre Progetto e Skill (le due stazioni che cambiano davvero il loro lavoro). Routine e Live Artifact si possono ridurre a demo forte se il tempo finisce.
 > **Chiave (secondaria):** finora avete usato l'IA in modo generico, un po' per tutto. Oggi il salto è tecnico: si lavora dentro la piattaforma e si costruisce un Claude che vi conosce davvero. Non lo guardate, lo costruite.
-> **Account:** tutti su piano a pagamento con Cowork. Tutte le funzioni si fanno dal vivo, dal computer.
+> **Account:** tutti su piano a pagamento, con l'app Claude installata sul computer (da settembre 2026 Cowork è dentro Claude). Tutte le funzioni si fanno dal vivo, dal computer.
 > **Raccordo (continuità):** questa lezione viene dopo i 5 incontri comuni. Nell'Incontro 5 ognuno ha già scritto il proprio **file di contesto permanente** ("ragiona come me") e abbozzato un primo Progetto; negli Incontri 2 e 4 ha definito un compito reale e generato il primo materiale della propria lezione. Oggi si apre il computer e tutto quel lavoro diventa un sistema vivo.
 > **Format:** prima una mini lezione teorica che dà la mappa (Parte A), poi un tour a stazioni pratiche (Parte B). Ogni stazione apre con la sua panoramica (gancio, una frase su cos'è, demo dal vivo), poi due o tre esempi tagliati sulla secondaria, poi lo fanno loro.
 > **Regole:** segue il MODUS_OPERANDI (ganci, domandine, tono che invita, dati con fonte, niente trattino lungo, niente freccia come nota di regia).
@@ -24,18 +24,17 @@ Slide-gancio: **"Avete usato l'IA per mille cose diverse. Ma l'avete mai fatta d
 - Ripensate a quello che avete già fatto nei mesi scorsi: spiegazioni, testi, idee, verifiche, comunicazioni. Tutti usi **generici**, validi, ma senza un metodo tecnico dietro.
 - Il salto di oggi: da un uso generico a un **uso tecnico**, dentro la piattaforma. Stessa IA, ma resa vostra e messa al lavoro sul serio.
 
-## BLOCCO A2 — Le tre versioni di Claude, e perché useremo Cowork (8 min)
+## BLOCCO A2 — Un solo Claude (Cowork è entrato in Claude), e perché lavoriamo nei Progetti (8 min)
 ### Gancio
-Slide-gancio: **"Esistono tre Claude diversi. Sapete qual è quello giusto per voi?"**
-- Tre versioni, stessa intelligenza dietro, ambienti diversi:
-  - **Chat:** la versione classica, quella che già conoscete. Apri, chiedi, rispondi. Veloce, ma ogni conversazione vive per conto suo.
-  - **Cowork:** una vera piattaforma di lavoro. Si usa dal computer, e diventa un ambiente che vi conosce: i vostri progetti, i materiali, le automazioni, gli strumenti, tutto in un posto solo. È quella che useremo oggi.
+Slide-gancio: **"Chat e Cowork oggi sono un solo Claude. Cosa cambia per voi?"**
+- Fino a settembre 2026 c'erano tre versioni (Chat, Cowork, Code). Ora Chat e Cowork sono un solo Claude:
+  - **Claude:** l'app che già conoscete, che da settembre 2026 fa anche tutto quello che faceva Cowork: chat veloci, ma anche progetti, materiali, automazioni e strumenti, tutto in un posto solo. Non c'è più una modalità da scegliere: è Claude a capire se basta una risposta o serve un lavoro più lungo. È quello che useremo oggi.
   - **Code:** la versione per chi scrive software. Non è il nostro caso, la nominiamo solo per completezza.
-- **La differenza che conta, Chat contro Cowork:** la Chat risponde a una domanda; Cowork tiene insieme il vostro lavoro nel tempo. Nella Chat ricominciate ogni volta. In Cowork costruite una volta e ritrovate tutto: il progetto della classe, le skill, le automazioni, le mini-app. Per questo oggi lavoriamo lì.
-- Nota pratica: Cowork si usa dal computer, non dallo smartphone. Oggi infatti apriamo tutti il portatile.
+- **La differenza che conta, chat al volo contro Progetto:** una chat al volo risponde a una domanda; un Progetto tiene insieme il vostro lavoro nel tempo. In una chat al volo ricominciate ogni volta. In un Progetto costruite una volta e ritrovate tutto: il progetto della classe, le skill, le automazioni, le mini-app. Per questo oggi lavoriamo lì.
+- Nota pratica: l'app Claude la usiamo dal computer, non dallo smartphone. Oggi infatti apriamo tutti il portatile.
 
 ## BLOCCO A3 — Com'è fatta la piattaforma: le cose base (7 min)
-> Tutti aprono Cowork e si guarda insieme l'interfaccia, così quando arrivano le funzioni sanno già dove stanno.
+> Tutti aprono l'app Claude e si guarda insieme l'interfaccia, così quando arrivano le funzioni sanno già dove stanno.
 - Si fa il giro dello schermo, senza fretta: dove si scrive, dove sono le chat, e la **barra laterale a sinistra** con le sezioni che useremo: Projects, Scheduled, gli elementi Pinned.
 - Primo contatto, hands-on leggero: tutti mandano un primo messaggio, in uno dei tre modi (così nessuno resta indietro e si vede che non è Google):
   - **a voce:** "Spiegami come introdurre la Prima guerra mondiale a una terza media, con un aggancio che li tenga svegli";
@@ -50,7 +49,7 @@ Slide-gancio: **"Esistono tre Claude diversi. Sapete qual è quello giusto per v
 - **Automazioni (Schedule), a cosa servono:** vi tengono aggiornati e vi fanno il punto da sole, a un orario ricorrente. Esempio forte: una rassegna stampa delle novità più importanti del mondo education, pronta ogni lunedì mattina.
 - **Live Artifact, a cosa servono:** una mini-app su misura dentro Claude. Oggi ne costruiamo una concreta e utile: il pianificatore dell'anno, per stare in pari col programma.
 - Il filo: prima la casa (Progetto), poi gli strumenti che ci mettiamo dentro. Transizione alla pratica: "Ora basta guardare. Apriamo e costruiamo, partendo dal Progetto."
-- ⚠ Da preparare: una pagina di esercizio fotografata e una scheda pronta, per chi non ha materiale sottomano. Slide pulita con le tre versioni (Chat, Cowork, Code) e una con la mappa delle quattro funzioni.
+- ⚠ Da preparare: una pagina di esercizio fotografata e una scheda pronta, per chi non ha materiale sottomano. Slide pulita con le versioni (Claude, Code) e una con la mappa delle quattro funzioni.
 
 ---
 
@@ -147,8 +146,8 @@ Slide-gancio: **"E se ogni due settimane arrivasse da solo un report con le novi
 - Una routine è un'attività schedulata: parte in automatico a una certa ora di un certo giorno, in modo ricorrente. Servono soprattutto a tenervi aggiornati e a farvi il punto da sole, senza muovere un dito. Le ritrovate sotto Scheduled.
 
 ### Demo dal vivo (6 min)
-- In una chat di Cowork si incolla il prompt della routine (versione demo, storia, testabile subito):
-  > *"Imposta un'attività pianificata in Cowork. Ogni due settimane, di lunedì mattina, voglio ricevere in chat un report con le novità più utili per insegnare storia alla scuola secondaria: nuove risorse e strumenti, idee e attività da fare in classe, eventuali novità su indicazioni ministeriali ed esami. Tienilo breve e pratico, massimo 8 punti, ognuno con il perché può servirmi. Prima spiegami come funzionano le attività pianificate, poi fammi le domande necessarie e crea la routine."*
+- In una chat di Claude si incolla il prompt della routine (versione demo, storia, testabile subito):
+  > *"Imposta un'attività pianificata. Ogni due settimane, di lunedì mattina, voglio ricevere in chat un report con le novità più utili per insegnare storia alla scuola secondaria: nuove risorse e strumenti, idee e attività da fare in classe, eventuali novità su indicazioni ministeriali ed esami. Tienilo breve e pratico, massimo 8 punti, ognuno con il perché può servirmi. Prima spiegami come funzionano le attività pianificate, poi fammi le domande necessarie e crea la routine."*
 - Claude spiega, fa le domande e crea la routine. Compare nella barra laterale, sotto Scheduled, con la frequenza (ogni due settimane).
 
 ### Esempi tagliati sulla secondaria
@@ -177,7 +176,7 @@ Slide-gancio: **"Quante volte vi siete accorti a maggio di essere indietro col p
 - Si costruisce un **pianificatore annuale**: prende tutte le settimane di lezione dell'anno (circa 33) e ci distribuisce sopra gli argomenti, una tabella settimana per settimana. In base alla data di oggi mostra a che punto dovreste essere, se siete indietro o avanti, e come recuperare. Tutto modificabile e salvato. Può leggere la programmazione già nel Progetto.
 - **La cosa che stupisce:** lo si aggiorna parlando con Claude in chat. Si dice "le prime tre settimane sono dedicate all'orientamento" e la tabella si riscrive da sola. Da mostrare dal vivo.
 - Prompt-pronto per crearlo (testato, funziona anche subito):
-  > *"Crea un artefatto dinamico in Cowork: un pianificatore annuale delle lezioni per la scuola secondaria. 1) Parte da un anno scolastico italiano tipo, lezioni da metà settembre a inizio giugno, e calcola le settimane effettive di lezione, circa 33, togliendo le pause principali (Natale, Pasqua, ponti); mostrami il numero e lasciamelo correggere. 2) Mi fa inserire materia, classe e l'elenco degli argomenti dell'anno presi dalla programmazione, con quante lezioni o settimane servono per ognuno e dove cadono le verifiche. 3) Distribuisce gli argomenti sulle settimane e mostra una tabella settimana per settimana (numero, date, argomento, stato: da fare, in corso, fatto); posso spostare e modificare tutto. 4) In base alla data di oggi mi evidenzia a che punto dovrei essere, se sono indietro o avanti, e come recuperare. 5) Posso aggiornarlo anche parlando con te in chat: se ti dico per esempio 'ho perso due settimane per l'assemblea e la gita', aggiorni la tabella di conseguenza. 6) Resta pinnato e aggiornabile. Fammi al massimo 3 domande se ti servono, poi crea l'artefatto."*
+  > *"Crea un artefatto dinamico: un pianificatore annuale delle lezioni per la scuola secondaria. 1) Parte da un anno scolastico italiano tipo, lezioni da metà settembre a inizio giugno, e calcola le settimane effettive di lezione, circa 33, togliendo le pause principali (Natale, Pasqua, ponti); mostrami il numero e lasciamelo correggere. 2) Mi fa inserire materia, classe e l'elenco degli argomenti dell'anno presi dalla programmazione, con quante lezioni o settimane servono per ognuno e dove cadono le verifiche. 3) Distribuisce gli argomenti sulle settimane e mostra una tabella settimana per settimana (numero, date, argomento, stato: da fare, in corso, fatto); posso spostare e modificare tutto. 4) In base alla data di oggi mi evidenzia a che punto dovrei essere, se sono indietro o avanti, e come recuperare. 5) Posso aggiornarlo anche parlando con te in chat: se ti dico per esempio 'ho perso due settimane per l'assemblea e la gita', aggiorni la tabella di conseguenza. 6) Resta pinnato e aggiornabile. Fammi al massimo 3 domande se ti servono, poi crea l'artefatto."*
 - Si vede l'artifact comparire pinnato a sinistra e riaprirsi con un click.
 
 ### Altri esempi tagliati sulla secondaria
@@ -194,7 +193,7 @@ Slide-gancio: **"Quante volte vi siete accorti a maggio di essere indietro col p
 
 ## BLOCCO 6 — Chiusura: da chat a sistema (12 min)
 
-- Giro d'orizzonte di cosa ognuno si porta a casa, costruito oggi con le proprie mani, dentro Cowork:
+- Giro d'orizzonte di cosa ognuno si porta a casa, costruito oggi con le proprie mani, dentro Claude:
   - il **Progetto** delle proprie lezioni, con memoria, contesto e il vostro modo di ragionare dentro;
   - le **preferenze globali** impostate, Claude sa con chi parla ovunque;
   - una **skill** propria più Prompt Optimizer, un comando da un secondo;
@@ -207,14 +206,14 @@ Slide-gancio: **"Quante volte vi siete accorti a maggio di essere indietro col p
 ---
 
 ## Buchi di tempo e riserve
-- **Parte A teorica (rischio lungo):** se le tre versioni e l'interfaccia corrono, tenere stretti A1 e A2 (il concetto generico contro tecnico e Chat contro Cowork) e fare A3 e A4 a schermo, veloci.
+- **Parte A teorica (rischio lungo):** se le versioni e l'interfaccia corrono, tenere stretti A1 e A2 (il concetto generico contro tecnico e chat al volo contro Progetto) e fare A3 e A4 a schermo, veloci.
 - **Se i computer rallentano:** proteggere Progetto (Blocco 1) e Skill (Blocco 3), sono le due che cambiano il loro lavoro. Tutto il resto può ridursi.
 - **Routine e Live Artifact:** se il tempo finisce, diventano demo forte del relatore con istruzioni scritte da rifare a casa, invece di hands-on completo.
 - **Riserva per i veloci:** chi finisce prima crea una seconda skill (la "scheda di comprensione" o lo "stile") oppure popola di più il proprio Progetto.
 - **Riserva per i lenti:** spunti pronti per ogni stazione (contesto progetto già scritto, skill già descritta, routine di esempio), così nessuno resta a guardare lo schermo bianco.
 
 ## Gap operativi da preparare prima dell'aula
-- [ ] Slide con le tre versioni (Chat, Cowork, Code) e slide con la mappa delle quattro funzioni
+- [ ] Slide con le versioni (Claude, Code) e slide con la mappa delle quattro funzioni
 - [ ] Un Progetto "lezioni" già costruito e popolato (materiali anonimi: programmazione, livelli per fasce), da mostrare
 - [ ] Il prompt di inizio progetto dell'Incontro 5 a portata di copia
 - [ ] Skill Prompt Optimizer pronta da condividere, con istruzioni di installazione passo-passo (screenshot)
@@ -226,4 +225,4 @@ Slide-gancio: **"Quante volte vi siete accorti a maggio di essere indietro col p
 - [ ] Una pagina di esercizio fotografata e una scheda, per il primo contatto a voce/foto/file
 
 ## Frasi chiave della lezione
-> **Claude è un generalista: oggi smettiamo di usarlo a caso e iniziamo a usarlo da tecnici, dentro la piattaforma. Chat risponde, Cowork lavora con voi nel tempo. Si parte dalla casa: il Progetto delle vostre lezioni. Un lavoro ripetuto si imposta una volta sola. I dati degli studenti restano sempre fuori. Stamattina era una chat, adesso è una piattaforma che vi conosce e vi tiene in programma.**
+> **Claude è un generalista: oggi smettiamo di usarlo a caso e iniziamo a usarlo da tecnici, dentro la piattaforma. Una chat al volo risponde, un Progetto lavora con voi nel tempo. Si parte dalla casa: il Progetto delle vostre lezioni. Un lavoro ripetuto si imposta una volta sola. I dati degli studenti restano sempre fuori. Stamattina era una chat, adesso è una piattaforma che vi conosce e vi tiene in programma.**
