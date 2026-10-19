@@ -7,15 +7,15 @@ Questa cartella è una **Gem di Gemini già pronta e replicabile**. Serve a most
 ## Cosa contiene
 - `ISTRUZIONI_GEM.md` , il testo da incollare nelle Istruzioni della Gem.
 - `Archivio_mail/` , le mail già inviate, divise per destinatario ed etichettate per tipo.
-- `Scadenzario_annuale.md` , le scadenze ricorrenti dell'ufficio. Serve anche al Live Artifact di fine giornata.
+- `Scadenzario_annuale.md` , le scadenze ricorrenti dell'ufficio.
 - `Modulistica.md` , l'elenco dei modelli in uso e a cosa servono.
 - `Esempio_mail_generata.md` , un esempio dell'output atteso, da mostrare se serve.
 
 ## Come si usa in aula (3 minuti)
-1. In Cowork apri Projects, poi New project.
-2. Scegli "Use an existing folder" e seleziona questa cartella (in alternativa: Start from scratch e carica i file della cartella come Dati).
-3. Apri le Istruzioni della Gem e incolla il contenuto di `ISTRUZIONI_GEM.md`.
-4. Nella prima chat della Gem, chiedi una comunicazione. Esempio:
+1. In Gemini apri **Gem** e crea una nuova Gem. Nome: `Gem Mail dell'ufficio`.
+2. **Istruzioni:** incolla il contenuto di `ISTRUZIONI_GEM.md`.
+3. **Conoscenza:** carica i file dell'archivio (`Archivio_mail/`), `Scadenzario_annuale.md` e `Modulistica.md`. Questo README e `Esempio_mail_generata.md` restano fuori. Salva la Gem.
+4. Apri una chat con la Gem e chiedi una comunicazione. Esempio:
    > "Scrivi la comunicazione alle famiglie per il rinvio dell'assemblea di classe di novembre. Dieci righe, oggetto esplicito, la nuova data in evidenza e il recapito per chi non può esserci. Pesca il tono dalle mail dell'archivio e la formula di chiusura da quelle agli enti."
 5. Mostra il risultato e confrontalo con `Esempio_mail_generata.md`.
 
