@@ -5,7 +5,7 @@ Formazione docenti sull'IA (PNRR DM 219/2025). Lead: Luca De Marco.
 ## Organizzazione cartelle
 - `00_Standard/` — modus operandi, **convenzioni di lavoro**, sistema slide, ricerca verificata
 - `01_Progetto/` — contesto PM, struttura percorsi, scalette 6 incontri, piani di lavoro e `Programmi/` (i programmi ufficiali, divisi in `20h/` e `10h/`)
-- `02_Percorsi/` — **il contenuto formativo, diviso per durata.** `20h/` contiene `Primaria/`, `Infanzia/`, `Secondaria/`, `Segreteria_ATA/`; `10h/` contiene `Scuola_10h/`. Dentro ogni percorso lo stesso schema: `01_Incontro_1` … `05_Incontro_5` (comune), `06` … `09` (pratica, uno strumento per incontro), `10_Incontro_10`, `_Consegna/` (PDF e zip). Vedi `02_Percorsi/README.md`.
+- `02_Percorsi/` — **il contenuto formativo, diviso per durata.** `20h/` contiene `Primaria/`, `Infanzia/`, `Secondaria/`, `Segreteria_ATA/`; `14h/` contiene `Segreteria_14h/`; `10h/` contiene `Scuola_10h/` e `Segreteria_10h/`. Dentro ogni percorso lo stesso schema: `01_Incontro_1` … `05_Incontro_5` (comune), `06` … `09` (pratica, uno strumento per incontro), `10_Incontro_10`, `_Consegna/` (PDF e zip). Vedi `02_Percorsi/README.md`.
 - `03_Team/` — formatori, CV standard, brief software di coordinamento, `Modulistica_Compensi/` (ricevuta con ritenuta d'acconto per i collaboratori). **Solo in locale da Luca: escluso dalla repo condivisa perché contiene dati personali dei collaboratori.**
 - `04_Tecnico/` — tooling e materiali grezzi: `slide_build/`, `Originali/`, tutorial
 - `graphify-out/` — knowledge graph (resta alla radice, è lì che lo scrive lo skill). Non versionato: si rigenera con `/graphify`.

@@ -1,10 +1,11 @@
 # Percorsi
 
-Due macro aree, divise per durata. Ogni percorso è completo dentro la propria cartella.
+Tre macro aree, divise per durata. Ogni percorso è completo dentro la propria cartella.
 
 ```
 02_Percorsi/
   20h/   Infanzia · Primaria · Secondaria · Segreteria_ATA
+  14h/   Segreteria_14h
   10h/   Scuola_10h · Segreteria_10h
 ```
 
@@ -16,6 +17,12 @@ Due macro aree, divise per durata. Ogni percorso è completo dentro la propria c
 | `20h/Infanzia/` | comuni adattati e pratica 06 fatta. Le pratiche 07, 08, 09 contengono ancora i deck della Primaria come segnaposto. |
 | `20h/Secondaria/` | completo: comuni, quattro pratiche e consegna in PDF. |
 | `20h/Segreteria_ATA/` | completo: comuni, quattro pratiche e scalette formatori. Mancano i PDF di consegna. |
+
+## 14h · 10 moduli: 6 teorici da 1 ora e 4 pratici da 2 ore
+
+| Cartella | Stato |
+|---|---|
+| `14h/Segreteria_14h/` | **personale ATA e di segreteria, su Claude.** Moduli teorici dal `10h/Segreteria_10h`, blocco pratico intero dal `20h/Segreteria_ATA`. Nell'Incontro 5 torna il Progetto, che il 10h aveva tolto per Gemini. Mancano i PDF di consegna. Vedi `14h/Segreteria_14h/CAMBIAMENTI.md`. |
 
 ## 10h · 10 moduli da 1 ora, aggregabili in 5 incontri da 2 ore
 

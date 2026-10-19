@@ -5,6 +5,7 @@ I documenti che si mandano alle scuole. Stessa impaginazione per tutti: 13 pagin
 ```
 Programmi/
   20h/   i quattro percorsi da 10 incontri da 2 ore
+  14h/   la segreteria su Claude: 6 moduli da 1 ora e 4 da 2 ore
   10h/   le quattro edizioni da 10 moduli da 1 ora
 ```
 
@@ -16,6 +17,14 @@ Programmi/
 | `20h/PROGRAMMA_Infanzia.html` | Infanzia | corallo |
 | `20h/PROGRAMMA_Secondaria.html` | Secondaria | ciano |
 | `20h/PROGRAMMA_ATA_Segreteria.html` | ATA e Segreteria | verde |
+
+## 14h
+
+| File | Percorso | Colore |
+|---|---|---|
+| `14h/PROGRAMMA_Segreteria_14h.html` | ATA e Segreteria, su Claude | verde |
+
+Stessi punti del programma 20h della segreteria. Cambiano la durata (sotto ogni modulo c'è "1 ora" o "2 ore") e l'esercizio del modulo 5, che diventa scrivere il proprio file di contesto permanente.
 
 ## 10h
 
