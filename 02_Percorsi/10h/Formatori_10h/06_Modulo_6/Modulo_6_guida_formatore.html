@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Percorso Formatori · Modulo 6 · Guida pratica per il formatore</title>
+<style>
+  :root{
+    --ink:#1E1B4B; --indigo:#4F46E5; --violet:#7C3AED; --cyan:#0891B2;
+    --coral:#EA6A1E; --teal:#0E9488; --bg:#F7F6FB; --text:#1A1730; --muted:#6B6790; --line:#E6E3FB; --card:#fff;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  body{font-family:'Inter','Segoe UI',-apple-system,Arial,sans-serif;background:var(--bg);color:var(--text);line-height:1.5;}
+  .wrap{max-width:900px;margin:0 auto;padding:36px 24px 80px;}
+  header{margin-bottom:18px;}
+  h1{font-size:30px;font-weight:800;color:var(--ink);}
+  .sub{color:var(--muted);font-size:15px;margin-top:4px;}
+  .sec-label{font-size:13px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);font-weight:700;margin:28px 0 10px;}
+  .block{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:20px 22px;margin-bottom:16px;border-left:6px solid var(--indigo);}
+  .block.setup{border-left-color:var(--teal);} .block.teoria{border-left-color:var(--cyan);} .block.pratica{border-left-color:var(--coral);}
+  .bhead{display:flex;align-items:baseline;gap:10px;margin-bottom:4px;flex-wrap:wrap;}
+  .bnum{font-size:13px;font-weight:800;color:#fff;background:var(--indigo);border-radius:20px;padding:2px 10px;}
+  .block.setup .bnum{background:var(--teal);} .block.teoria .bnum{background:var(--cyan);} .block.pratica .bnum{background:var(--coral);}
+  .btitle{font-size:20px;font-weight:800;color:var(--ink);}
+  .btime{font-size:13px;color:var(--muted);margin-left:auto;font-weight:600;}
+  .steps{list-style:none;counter-reset:s;margin-top:10px;}
+  .steps li{counter-increment:s;padding-left:30px;position:relative;margin-bottom:8px;font-size:15px;}
+  .steps li::before{content:counter(s);position:absolute;left:0;top:1px;width:20px;height:20px;background:var(--indigo);color:#fff;border-radius:50%;font-size:12px;font-weight:700;display:flex;align-items:center;justify-content:center;}
+  .steps b{color:var(--ink);}
+  ul.plain{list-style:none;margin-top:8px;} ul.plain li{font-size:15px;padding-left:18px;position:relative;margin-bottom:6px;}
+  ul.plain li::before{content:"";position:absolute;left:0;top:9px;width:6px;height:6px;border-radius:50%;background:var(--muted);}
+  .say{margin-top:12px;background:#F0EFFA;border-radius:8px;padding:10px 14px;font-size:14.5px;font-style:italic;color:var(--ink);}
+  .say b{font-style:normal;color:var(--violet);font-weight:700;}
+  .prompt{margin-top:10px;background:#FFF8F2;border:1px solid #F6D9C2;border-radius:8px;padding:10px 14px;font-size:14px;color:var(--ink);}
+  .prompt b{color:var(--coral);}
+  .cue{display:inline-block;background:#FFF1E6;color:var(--coral);border:1px solid #F6D9C2;border-radius:6px;padding:1px 8px;font-size:13px;font-weight:700;margin-top:10px;}
+  .note{margin-top:8px;font-size:13.5px;color:var(--muted);} .note b{color:var(--text);}
+  @media print{ body{background:#fff;} .block{break-inside:avoid;} }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header>
+    <h1>Modulo 6 · Dalla scaletta ai materiali<br>Guida pratica per il formatore</h1>
+    <div class="sub">La scaletta da seguire: cosa mostrare sullo schermo, in ordine. Un'ora: 22 minuti di guida, 33 di pratica, 5 di condivisione. Leggere sempre i prompt per intero.</div>
+  </header>
+
+  <div class="sec-label">Prima della lezione (setup)</div>
+  <div class="block setup">
+    <div class="bhead"><span class="bnum">0</span><span class="btitle">Da avere pronto</span></div>
+    <ul class="plain">
+      <li><b>Canvas</b> provato il giorno prima sull'account che si userà: dove si apre, cosa esporta.</li>
+      <li>Il <b>Progettista di percorsi</b> del modulo 4, funzionante.</li>
+      <li>In un'altra scheda: una scaletta di esempio già generata e corretta.</li>
+      <li>In un'altra scheda: le slide di esempio già generate, aperte in Presentazioni.</li>
+      <li>I tre prompt (slide 6, 9, 10) in un file condiviso.</li>
+    </ul>
+  </div>
+
+  <div class="sec-label">Parte guidata · slide, veloce</div>
+  <div class="block teoria">
+    <div class="bhead"><span class="bnum">T</span><span class="btitle">Apertura e perché</span><span class="btime">3 minuti</span></div>
+    <ul class="plain">
+      <li>Slide 2: scrivi alla lavagna due o tre dei numeri che dicono. Si riprendono alla fine.</li>
+      <li>Slide 4: prima la scaletta, poi le slide. Il deck è l'ultima cosa che si fa.</li>
+    </ul>
+    <div class="cue">Slide deck: 1-4</div>
+  </div>
+
+  <div class="sec-label">Parte pratica · cosa mostrare, in ordine</div>
+
+  <div class="block pratica">
+    <div class="bhead"><span class="bnum">1</span><span class="btitle">Apri Canvas</span><span class="btime">3 minuti</span></div>
+    <ul class="steps">
+      <li>In Gemini, dentro il <b>Progettista</b>. Sotto la casella di testo, il <b>più</b> ("Aggiungi file"), poi <b>Canvas</b>.</li>
+      <li>Mostra il pannello che si apre a fianco della chat.</li>
+      <li>Di' le tre cose: si apre a fianco, si corregge riga per riga, esce da Gemini.</li>
+    </ul>
+    <div class="say"><b>Da dire:</b> Non è un altro strumento. È la stessa chat, con un foglio accanto.</div>
+    <div class="cue">Slide deck: 5</div>
+  </div>
+
+  <div class="block pratica">
+    <div class="bhead"><span class="bnum">2</span><span class="btitle">Caso d'uso 1: la scaletta</span><span class="btime">6 minuti</span></div>
+    <ul class="steps">
+      <li>Leggi il prompt per intero. Fai notare le tre sezioni in fondo.</li>
+      <li>Incollalo, con un incontro di esempio al posto delle parentesi quadre. Invia.</li>
+      <li>Mentre scrive: slide 7, com'è fatta una scaletta che regge. Mostra quella che hai in mano.</li>
+      <li>Torna a Canvas. <b>Seleziona un blocco</b> e chiedi: "questo blocco dura troppo, portalo a sei minuti e togli il secondo esempio".</li>
+      <li>Mostra <b>Condividi ed esporta</b>, poi <b>Esporta in Documenti</b>.</li>
+      <li>Slide 8: tempi onesti. Somma i minuti della scaletta a schermo, davanti a loro.</li>
+    </ul>
+    <div class="prompt"><b>Prompt (slide 6, da leggere per intero):</b> "Scrivimi in Canvas la scaletta dell'incontro [numero e titolo] del mio percorso, durata [minuti]. In alto tre righe: la durata divisa per blocchi, la frase chiave dell'incontro, cosa riprende dall'incontro prima. Poi i blocchi, ciascuno con i minuti, la domanda che lo apre, cosa dico io, cosa fanno loro e la slide che serve. Almeno metà del tempo è pratica. In fondo tre sezioni: cosa proteggere se sono in ritardo e cosa saltare; le riserve se la stanza non parla; le cose da preparare prima dell'aula, segnate con ATTENZIONE."</div>
+    <div class="say"><b>Da dire:</b> È quello che distingue una scaletta da un indice: cosa proteggere, le riserve, cosa preparare.</div>
+    <div class="cue">Slide deck: 6-8</div>
+  </div>
+
+  <div class="block pratica">
+    <div class="bhead"><span class="bnum">3</span><span class="btitle">Caso d'uso 2: le slide</span><span class="btime">3 minuti</span></div>
+    <ul class="steps">
+      <li>Leggi il prompt. Fai notare: quattro tipi di slide, e prima l'elenco dei titoli.</li>
+      <li>Incollalo nella stessa chat. Mostra l'elenco dei titoli che arriva.</li>
+      <li><b>Non generare le slide in diretta.</b> Apri la scheda con quelle già pronte, in Presentazioni.</li>
+    </ul>
+    <div class="prompt"><b>Prompt (slide 9, da leggere per intero):</b> "Dalla scaletta che abbiamo scritto, preparami le slide dell'incontro. Regole: una slide, una sola idea; poco testo, grande; al massimo tre punti per slide. Usa solo quattro tipi di slide e scrivi il tipo accanto a ognuna: DOMANDA (apre un blocco, la leggo io alla stanza), CONTENUTO (titolo e tre punti), FRASE (una frase da ricordare, da sola), CONFRONTO (una domanda a cui risponde la stanza). Ogni blocco comincia con una DOMANDA. Niente dati senza fonte: dove servirebbe un numero scrivi [dato da verificare]. Prima fammi vedere l'elenco dei titoli: le slide le crei quando ti dico che va bene."</div>
+    <div class="say"><b>Da dire:</b> Le slide che escono vanno rifinite a mano. Gemini vi dà la struttura, non il deck finito.</div>
+    <div class="note">Sugli account della scuola le presentazioni generate al giorno sono limitate: una a testa basta.</div>
+    <div class="cue">Slide deck: 9</div>
+  </div>
+
+  <div class="block pratica">
+    <div class="bhead"><span class="bnum">4</span><span class="btitle">Caso d'uso 3: il foglio dei prompt</span><span class="btime">4 minuti</span></div>
+    <ul class="steps">
+      <li>Leggi il prompt.</li>
+      <li>Slide 11: le tre regole. Per intero, provati prima, letti ad alta voce.</li>
+    </ul>
+    <div class="prompt"><b>Prompt (slide 10, da leggere per intero):</b> "Per la parte pratica dell'incontro preparami il foglio dei prompt da dare ai colleghi: tre prompt pronti da copiare, uno per ciascun caso d'uso. Ogni prompt è un testo scorrevole, senza etichette, con dentro: per chi lavora l'IA, il compito con un verbo preciso, la classe o i destinatari, la durata o la lunghezza, il formato, e la riga "se una cosa non la sai, dimmelo invece di inventarla". Metti fra parentesi quadre le parti che ognuno deve cambiare. Sopra ogni prompt scrivi in una riga dove si incolla e cosa esce."</div>
+    <div class="say"><b>Da dire:</b> Una volta abbiamo messo in slide il riassunto di un prompt invece del testo. Non serviva a nessuno.</div>
+    <div class="cue">Slide deck: 10-11</div>
+  </div>
+
+  <div class="block pratica">
+    <div class="bhead"><span class="bnum">5</span><span class="btitle">Chi fa cosa, sotto il cofano</span><span class="btime">3 minuti</span></div>
+    <ul class="steps">
+      <li>Slide 12: gli esempi veri vengono dai colleghi, non da Gemini.</li>
+      <li>Slide 13: tre casi mostrati, una prova sola.</li>
+    </ul>
+    <div class="cue">Slide deck: 12-13</div>
+  </div>
+
+  <div class="block pratica">
+    <div class="bhead"><span class="bnum">6</span><span class="btitle">Tocca a voi</span><span class="btime">33 minuti</span></div>
+    <ul class="steps">
+      <li>12 minuti: la scaletta di <b>un solo incontro</b>. La correggono: i minuti si sommano? La pratica è almeno metà?</li>
+      <li>10 minuti: l'elenco delle slide. Ogni blocco comincia con una domanda?</li>
+      <li>8 minuti: il foglio dei prompt. Ne provano almeno uno in una chat nuova.</li>
+      <li>3 minuti: esportano la scaletta e la segnano sulla scheda 3 del quaderno.</li>
+    </ul>
+    <div class="say"><b>Da dire:</b> Fammi vedere la somma dei minuti. Qual è la domanda che apre? Hai provato un prompt?</div>
+    <div class="note"><b>Se Canvas non c'è o non risponde:</b> tutto funziona anche nella chat normale. Si copia il testo in un documento.</div>
+    <div class="cue">Slide deck: 14</div>
+  </div>
+
+  <div class="block pratica">
+    <div class="bhead"><span class="bnum">7</span><span class="btitle">Condivisione e chiusura</span><span class="btime">5 minuti</span></div>
+    <ul class="steps">
+      <li>"Quanto ci avete messo? E cosa avete dovuto correggere voi?" Riprendi i numeri della lavagna.</li>
+      <li>Aggancio al modulo 7: l'incontro c'è, la prossima volta si porta davanti a delle persone.</li>
+    </ul>
+    <div class="cue">Slide deck: 15-16</div>
+  </div>
+
+</div>
+</body>
+</html>

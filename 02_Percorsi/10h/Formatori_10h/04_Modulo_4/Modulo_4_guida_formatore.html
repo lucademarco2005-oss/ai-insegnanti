@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Percorso Formatori · Modulo 4 · Guida pratica per il formatore</title>
+<style>
+  :root{
+    --ink:#1E1B4B; --indigo:#4F46E5; --violet:#7C3AED; --cyan:#0891B2;
+    --coral:#EA6A1E; --teal:#0E9488; --bg:#F7F6FB; --text:#1A1730; --muted:#6B6790; --line:#E6E3FB; --card:#fff;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  body{font-family:'Inter','Segoe UI',-apple-system,Arial,sans-serif;background:var(--bg);color:var(--text);line-height:1.5;}
+  .wrap{max-width:900px;margin:0 auto;padding:36px 24px 80px;}
+  header{margin-bottom:18px;}
+  h1{font-size:30px;font-weight:800;color:var(--ink);}
+  .sub{color:var(--muted);font-size:15px;margin-top:4px;}
+  .sec-label{font-size:13px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);font-weight:700;margin:28px 0 10px;}
+  .block{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:20px 22px;margin-bottom:16px;border-left:6px solid var(--indigo);}
+  .block.setup{border-left-color:var(--teal);} .block.teoria{border-left-color:var(--cyan);} .block.pratica{border-left-color:var(--coral);}
+  .bhead{display:flex;align-items:baseline;gap:10px;margin-bottom:4px;flex-wrap:wrap;}
+  .bnum{font-size:13px;font-weight:800;color:#fff;background:var(--indigo);border-radius:20px;padding:2px 10px;}
+  .block.setup .bnum{background:var(--teal);} .block.teoria .bnum{background:var(--cyan);} .block.pratica .bnum{background:var(--coral);}
+  .btitle{font-size:20px;font-weight:800;color:var(--ink);}
+  .btime{font-size:13px;color:var(--muted);margin-left:auto;font-weight:600;}
+  .steps{list-style:none;counter-reset:s;margin-top:10px;}
+  .steps li{counter-increment:s;padding-left:30px;position:relative;margin-bottom:8px;font-size:15px;}
+  .steps li::before{content:counter(s);position:absolute;left:0;top:1px;width:20px;height:20px;background:var(--indigo);color:#fff;border-radius:50%;font-size:12px;font-weight:700;display:flex;align-items:center;justify-content:center;}
+  .steps b{color:var(--ink);}
+  ul.plain{list-style:none;margin-top:8px;} ul.plain li{font-size:15px;padding-left:18px;position:relative;margin-bottom:6px;}
+  ul.plain li::before{content:"";position:absolute;left:0;top:9px;width:6px;height:6px;border-radius:50%;background:var(--muted);}
+  .say{margin-top:12px;background:#F0EFFA;border-radius:8px;padding:10px 14px;font-size:14.5px;font-style:italic;color:var(--ink);}
+  .say b{font-style:normal;color:var(--violet);font-weight:700;}
+  .prompt{margin-top:10px;background:#FFF8F2;border:1px solid #F6D9C2;border-radius:8px;padding:10px 14px;font-size:14px;color:var(--ink);}
+  .prompt b{color:var(--coral);}
+  .cue{display:inline-block;background:#FFF1E6;color:var(--coral);border:1px solid #F6D9C2;border-radius:6px;padding:1px 8px;font-size:13px;font-weight:700;margin-top:10px;}
+  .note{margin-top:8px;font-size:13.5px;color:var(--muted);} .note b{color:var(--text);}
+  @media print{ body{background:#fff;} .block{break-inside:avoid;} }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header>
+    <h1>Modulo 4 · L'assistente che vi conosce<br>Guida pratica per il formatore</h1>
+    <div class="sub">La scaletta da seguire: cosa mostrare sullo schermo, in ordine. Un'ora: 24 minuti di guida, 33 di pratica, 3 di chiusura. <b>Il giorno prima va controllato se l'account mostra Gem o Skill.</b></div>
+  </header>
+
+  <div class="sec-label">Prima della lezione (setup)</div>
+  <div class="block setup">
+    <div class="bhead"><span class="bnum">0</span><span class="btitle">Da avere pronto</span></div>
+    <ul class="plain">
+      <li><b>Verificato il giorno prima:</b> sull'account compare <b>Gem</b>, <b>Skill</b> o nessuno dei due. I percorsi sono due, vedi il passo 1.</li>
+      <li>Lo <b>Scrittore di prompt</b> e il <b>Progettista di percorsi</b> già costruiti sul proprio account.</li>
+      <li>I testi delle istruzioni in un file condiviso (<b>Asset_Assistente_Scrittore_di_Prompt.md</b>, <b>Asset_Assistente_Progettista_di_Percorsi.md</b>).</li>
+      <li>Una scheda del pubblico di esempio, con il traguardo.</li>
+      <li>In un'altra scheda: la risposta dei dieci casi d'uso e quella della sequenza, già pronte.</li>
+    </ul>
+  </div>
+
+  <div class="sec-label">Parte guidata · slide, veloce</div>
+  <div class="block teoria">
+    <div class="bhead"><span class="bnum">T</span><span class="btitle">Apertura, perché, la funzione</span><span class="btime">8 minuti</span></div>
+    <ul class="plain">
+      <li>Chiedi chi ha con sé i tre casi d'uso scritti a mano nel modulo 3.</li>
+      <li>Slide 4: il contesto si scrive una volta.</li>
+      <li>Slide 6: <b>apri Gemini e fai vedere dove sta l'assistente su questo account</b> (passo 1 qui sotto).</li>
+      <li>Slide 7: fermati. È una slide su come si insegna, non su Gemini.</li>
+    </ul>
+    <div class="cue">Slide deck: 1-7</div>
+  </div>
+
+  <div class="sec-label">Parte pratica · cosa mostrare, in ordine</div>
+
+  <div class="block pratica">
+    <div class="bhead"><span class="bnum">1</span><span class="btitle">Dove si trova l'assistente</span><span class="btime">dentro gli 8 minuti</span></div>
+    <ul class="steps">
+      <li><b>Se l'account mostra Skill:</b> barra laterale, <b>Personalizza</b>, <b>Skill</b>, <b>Crea</b>, <b>Crea manualmente</b>. Campi: nome, descrizione, istruzioni, file. In chat si richiama scrivendo <b>@</b> e il nome.</li>
+      <li><b>Se l'account mostra ancora Gem:</b> dalle <b>Impostazioni</b>, <b>Gem</b>, <b>Nuovo Gem</b>. Campi: nome, istruzioni, conoscenza. Poi <b>Salva</b>.</li>
+      <li><b>Se non c'è nessuno dei due:</b> si va avanti lo stesso. Il testo si incolla come prima riga di una chat normale (slide 17).</li>
+    </ul>
+    <div class="say"><b>Da dire:</b> Cambia il nome e cambia il menu. Quello che ci scrivete dentro è identico.</div>
+    <div class="note">I nomi dei menu sono quelli verificati il 16 novembre 2026. <b>L'interfaccia cambia:</b> il riferimento buono è quello del giorno prima.</div>
+    <div class="cue">Slide deck: 6</div>
+  </div>
+
+  <div class="block pratica">
+    <div class="bhead"><span class="bnum">2</span><span class="btitle">Caso d'uso 1: lo Scrittore di prompt</span><span class="btime">4 minuti</span></div>
+    <ul class="steps">
+      <li>Slide 9: leggi il testo per intero.</li>
+      <li>Costruiscilo dal vivo: nome <b>Scrittore di prompt</b>, incolla le istruzioni, nessun file, salva. Tre minuti.</li>
+      <li>Provalo subito: "Mi serve una verifica di storia sulla Prima guerra mondiale per la terza media."</li>
+      <li>Mostra che torna con due domande, poi con il prompt completo.</li>
+    </ul>
+    <div class="prompt"><b>Prompt (slide 9, da leggere per intero):</b> "Sei uno scrittore di prompt per insegnanti. Il tuo unico lavoro è trasformare quello che ti chiedo in un prompt pronto da copiare in un'altra chat.  Regola assoluta: non rispondere mai al contenuto della richiesta. Non scrivere tu la verifica, non scrivere tu la scheda. Scrivi soltanto il prompt che la farà scrivere bene.  Come lavori. Se ti manca qualcosa di importante, fammi al massimo due domande, una alla volta: che classe, quanto tempo ho, che formato voglio. Se hai già abbastanza informazioni, parti subito senza chiedere.  Cosa deve contenere il prompt che scrivi, in un testo scorrevole e senza etichette: chi deve essere l'IA e per chi lavora, il compito espresso con un verbo preciso, il contesto (materia, classe, età, livello, tempo a disposizione), il formato dell'output (quante parti, quanto lungo, che tono) e i vincoli (cosa non fare, in che lingua, cosa fare se non sa una cosa).  Scrivilo in italiano naturale, frasi corte, senza parole tecniche e senza etichette tipo Ruolo o Contesto. Deve funzionare copiato e incollato così com'è.  Dopo il prompt aggiungi due righe soltanto: cosa hai aggiunto rispetto a come te l'avevo chiesto, e perché migliora il risultato.  Se il prompt che ti do è già buono, dimmelo e cambia solo quello che serve davvero."</div>
+    <div class="say"><b>Da dire:</b> È il primo oggetto che farete costruire ai colleghi. Serve dal primo giorno e toglie la paura del foglio bianco.</div>
+    <div class="cue">Slide deck: 8-9</div>
+  </div>
+
+  <div class="block pratica">
+    <div class="bhead"><span class="bnum">3</span><span class="btitle">Caso d'uso 2: il Progettista di percorsi</span><span class="btime">8 minuti</span></div>
+    <ul class="steps">
+      <li>Slide 11 e 12: le istruzioni. Leggi per intero la <b>parte 2</b>: è il metodo in sei regole.</li>
+      <li>Apri il Progettista <b>già costruito</b> (non costruirlo in diretta).</li>
+      <li>Incolla il prompt dei casi d'uso (slide 13) con la scheda del pubblico di esempio.</li>
+      <li>Commenta la risposta: quali ha scartato perché toccano dati personali? Quali tre propone?</li>
+      <li>Nella stessa chat incolla il prompt della sequenza (slide 14). Mentre scrive, passa alla slide 15.</li>
+    </ul>
+    <div class="prompt"><b>Prompt (slide 13, da leggere per intero):</b> "Ti incollo la scheda del pubblico e il traguardo del mio percorso. Proponimi dieci casi d'uso, cioè dieci lavori veri che questi colleghi fanno ogni settimana e in cui Gemini li può aiutare. Per ognuno scrivi: il lavoro, quanto spesso lo fanno, e cosa avrebbero in mano dopo venti minuti di prova. Scarta quelli che richiedono dati personali di alunni o famiglie. Poi mettili in ordine, dal più sentito al meno sentito, e dimmi quali tre sceglieresti per cominciare, e perché. [scheda del pubblico e traguardo]"</div>
+    <div class="say"><b>Da dire:</b> La prima versione metteva lo strumento nel primo incontro. L'abbiamo spostato noi. L'assistente fa la bozza, il percorso lo decidete voi.</div>
+    <div class="note">Se la risposta tarda, apri la scheda con quella già pronta.</div>
+    <div class="cue">Slide deck: 10-15</div>
+  </div>
+
+  <div class="block pratica">
+    <div class="bhead"><span class="bnum">4</span><span class="btitle">Piano B e sotto il cofano</span><span class="btime">4 minuti</span></div>
+    <ul class="steps">
+      <li>Slide 17: il piano B, detto con calma.</li>
+      <li>Slide 18: le 4 mosse di nuovo. E la scelta in più: il primo oggetto costruito scrive tutti gli altri.</li>
+    </ul>
+    <div class="cue">Slide deck: 16-18</div>
+  </div>
+
+  <div class="block pratica">
+    <div class="bhead"><span class="bnum">5</span><span class="btitle">Tocca a voi</span><span class="btime">33 minuti</span></div>
+    <ul class="steps">
+      <li>3 minuti: costruiscono lo Scrittore di prompt.</li>
+      <li>7 minuti: costruiscono il Progettista (parte 1 e parte 2, una di seguito all'altra).</li>
+      <li>10 minuti: dieci casi d'uso. Li confrontano con i tre scritti a mano. Tengono i tre migliori.</li>
+      <li>10 minuti: la sequenza. La correggono.</li>
+      <li>3 minuti: la copiano sulla scheda 2 del quaderno.</li>
+    </ul>
+    <div class="say"><b>Da dire:</b> Quale caso avevate scritto voi, e lui non ha proposto? Cosa avete cambiato nella sequenza?</div>
+    <div class="note"><b>Chi è bloccato sull'accesso</b> lavora in coppia o con il piano B. <b>Riserva per chi finisce:</b> chiedere quale incontro taglierebbe con metà del tempo.</div>
+    <div class="cue">Slide deck: 19</div>
+  </div>
+
+  <div class="block pratica">
+    <div class="bhead"><span class="bnum">6</span><span class="btitle">Chiusura</span><span class="btime">3 minuti</span></div>
+    <ul class="steps">
+      <li>"Cosa avete corretto?" Due risposte.</li>
+      <li>Aggancio al modulo 5: com'è fatta un'ora di lezione.</li>
+    </ul>
+    <div class="cue">Slide deck: 20</div>
+  </div>
+
+</div>
+</body>
+</html>

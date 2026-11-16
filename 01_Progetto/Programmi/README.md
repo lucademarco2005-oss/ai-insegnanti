@@ -35,6 +35,7 @@ Stessi punti dei programmi 20h da cui nascono: la Secondaria per la Secondaria, 
 | `10h/PROGRAMMA_10h_Secondaria.html` + `.pdf` | Secondaria | ciano |
 | `10h/PROGRAMMA_10h_Segreteria.html` + `.pdf` | ATA e Segreteria | verde |
 | `10h/PROGRAMMA_10h_Formatori_Figure_di_Sistema.html` + `.pdf` | Formatori e figure di sistema, gruppo misto primaria e secondaria | indaco |
+| `10h/PROGRAMMA_10h_Formare_i_Formatori.html` + `.pdf` | **percorso `Formatori_10h`: come si forma sull'IA.** 5 moduli teorici e 5 pratici, solo Gemini. Non è l'edizione qui sopra: quella ha i dieci moduli standard, questa insegna a costruire e condurre un percorso | indaco |
 | `10h/PROGRAMMA_Scuola_10h.html` | versione generica "Scuola", precedente alle quattro edizioni | viola |
 
 Le quattro edizioni da 10 ore hanno gli stessi 10 moduli, ma i punti di ogni modulo sono riscritti sul pubblico. Nel modulo 5 si insegna il file di contesto permanente al posto del Progetto, come deciso in `PIANO_PERCORSI_10H.md`. Lo strumento del blocco pratico è Gemini.

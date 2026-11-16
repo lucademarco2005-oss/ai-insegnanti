@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Percorso Formatori · Modulo 2 · Guida pratica per il formatore</title>
+<style>
+  :root{
+    --ink:#1E1B4B; --indigo:#4F46E5; --violet:#7C3AED; --cyan:#0891B2;
+    --coral:#EA6A1E; --teal:#0E9488; --bg:#F7F6FB; --text:#1A1730; --muted:#6B6790; --line:#E6E3FB; --card:#fff;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  body{font-family:'Inter','Segoe UI',-apple-system,Arial,sans-serif;background:var(--bg);color:var(--text);line-height:1.5;}
+  .wrap{max-width:900px;margin:0 auto;padding:36px 24px 80px;}
+  header{margin-bottom:18px;}
+  h1{font-size:30px;font-weight:800;color:var(--ink);}
+  .sub{color:var(--muted);font-size:15px;margin-top:4px;}
+  .sec-label{font-size:13px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);font-weight:700;margin:28px 0 10px;}
+  .block{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:20px 22px;margin-bottom:16px;border-left:6px solid var(--indigo);}
+  .block.setup{border-left-color:var(--teal);} .block.teoria{border-left-color:var(--cyan);} .block.pratica{border-left-color:var(--coral);}
+  .bhead{display:flex;align-items:baseline;gap:10px;margin-bottom:4px;flex-wrap:wrap;}
+  .bnum{font-size:13px;font-weight:800;color:#fff;background:var(--indigo);border-radius:20px;padding:2px 10px;}
+  .block.setup .bnum{background:var(--teal);} .block.teoria .bnum{background:var(--cyan);} .block.pratica .bnum{background:var(--coral);}
+  .btitle{font-size:20px;font-weight:800;color:var(--ink);}
+  .btime{font-size:13px;color:var(--muted);margin-left:auto;font-weight:600;}
+  .steps{list-style:none;counter-reset:s;margin-top:10px;}
+  .steps li{counter-increment:s;padding-left:30px;position:relative;margin-bottom:8px;font-size:15px;}
+  .steps li::before{content:counter(s);position:absolute;left:0;top:1px;width:20px;height:20px;background:var(--indigo);color:#fff;border-radius:50%;font-size:12px;font-weight:700;display:flex;align-items:center;justify-content:center;}
+  .steps b{color:var(--ink);}
+  ul.plain{list-style:none;margin-top:8px;} ul.plain li{font-size:15px;padding-left:18px;position:relative;margin-bottom:6px;}
+  ul.plain li::before{content:"";position:absolute;left:0;top:9px;width:6px;height:6px;border-radius:50%;background:var(--muted);}
+  .say{margin-top:12px;background:#F0EFFA;border-radius:8px;padding:10px 14px;font-size:14.5px;font-style:italic;color:var(--ink);}
+  .say b{font-style:normal;color:var(--violet);font-weight:700;}
+  .prompt{margin-top:10px;background:#FFF8F2;border:1px solid #F6D9C2;border-radius:8px;padding:10px 14px;font-size:14px;color:var(--ink);}
+  .prompt b{color:var(--coral);}
+  .cue{display:inline-block;background:#FFF1E6;color:var(--coral);border:1px solid #F6D9C2;border-radius:6px;padding:1px 8px;font-size:13px;font-weight:700;margin-top:10px;}
+  .note{margin-top:8px;font-size:13.5px;color:var(--muted);} .note b{color:var(--text);}
+  @media print{ body{background:#fff;} .block{break-inside:avoid;} }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header>
+    <h1>Modulo 2 · Gemini: la base, fatta bene<br>Guida pratica per il formatore</h1>
+    <div class="sub">La scaletta da seguire: cosa mostrare sullo schermo, in ordine. Un'ora: 10 minuti da corsisti, 5 sotto il cofano, 6 sui passi 1 e 2, 33 di pratica. Leggere sempre i prompt per intero.</div>
+  </header>
+
+  <div class="sec-label">Prima della lezione (setup)</div>
+  <div class="block setup">
+    <div class="bhead"><span class="bnum">0</span><span class="btitle">Da avere pronto</span></div>
+    <ul class="plain">
+      <li><b>Gemini</b> aperto su gemini.google.com, sull'account che si userà in aula. Provato il giorno prima.</li>
+      <li>In un file: la richiesta vaga e quella completa della slide 9, e il prompt dell'intervista (slide 18).</li>
+      <li>In un'altra scheda: la risposta di Gemini alla richiesta completa, già pronta.</li>
+      <li>Il <b>quaderno</b>, scheda 1, stampato o condiviso.</li>
+    </ul>
+  </div>
+
+  <div class="sec-label">Parte guidata · slide, veloce</div>
+  <div class="block teoria">
+    <div class="bhead"><span class="bnum">T</span><span class="btitle">Apertura e patto dell'ora</span><span class="btime">2 minuti</span></div>
+    <ul class="plain">
+      <li>Il gancio (slide 2) non si risponde.</li>
+      <li>Il patto: per dieci minuti sono docenti a un nostro corso. Poi cambiano sedia.</li>
+      <li><b>Non nominare le 4 mosse</b> fino alla slide 12.</li>
+    </ul>
+    <div class="cue">Slide deck: 1-3</div>
+  </div>
+
+  <div class="sec-label">Parte pratica · cosa mostrare, in ordine</div>
+
+  <div class="block pratica">
+    <div class="bhead"><span class="bnum">1</span><span class="btitle">Da corsisti: il perché e lo strumento</span><span class="btime">4 minuti</span></div>
+    <ul class="steps">
+      <li>Slide 4: la domanda sulla delusione. Due risposte per alzata di mano.</li>
+      <li>Passa a <b>Gemini</b>. Mostra la pagina iniziale: la casella dove si scrive, il <b>più</b> sotto la casella (i file, Canvas, Deep Research), la barra laterale con le chat.</li>
+      <li>Indica dove sta l'assistente su misura <b>su questo account</b>: può chiamarsi Gem oppure Skill.</li>
+      <li>Torna alle slide: la regola dei dati (slide 7), letta per intero.</li>
+    </ul>
+    <div class="say"><b>Da dire:</b> Non serve conoscere tutto il menu. Servono quattro cose: la chat, i file, Canvas, l'assistente che vi conosce.</div>
+    <div class="cue">Slide deck: 4-7</div>
+  </div>
+
+  <div class="block pratica">
+    <div class="bhead"><span class="bnum">2</span><span class="btitle">Da corsisti: il caso d'uso</span><span class="btime">3 minuti</span></div>
+    <ul class="steps">
+      <li>Slide 8: le 5 fasi, veloce.</li>
+      <li>In Gemini, <b>chat nuova</b>. Incolla la richiesta vaga: "Preparami un corso sull'intelligenza artificiale per i miei colleghi." Mostra la risposta: generica, lunga, uguale per tutti.</li>
+      <li><b>Chat nuova.</b> Incolla la richiesta completa (slide 9) e leggila ad alta voce mentre la incolli.</li>
+      <li>Mostra cosa cambia: prima di scrivere, fa delle domande. Se ci mette troppo, apri la scheda con la risposta già pronta.</li>
+    </ul>
+    <div class="say"><b>Da dire:</b> Stesso strumento, stessa persona. È cambiato quello che gli abbiamo detto.</div>
+    <div class="cue">Slide deck: 8-9</div>
+  </div>
+
+  <div class="block pratica">
+    <div class="bhead"><span class="bnum">3</span><span class="btitle">Da corsisti: la prova lampo</span><span class="btime">3 minuti</span></div>
+    <ul class="steps">
+      <li>Ognuno apre Gemini e riscrive una richiesta propria, vera, di questa settimana.</li>
+      <li>A coppie: il vicino dice quale delle 5 fasi manca.</li>
+      <li>Chi non riesce a entrare lavora con il vicino. Non fermare l'aula.</li>
+    </ul>
+    <div class="cue">Slide deck: 10</div>
+  </div>
+
+  <div class="block pratica">
+    <div class="bhead"><span class="bnum">4</span><span class="btitle">Sotto il cofano</span><span class="btime">5 minuti</span></div>
+    <ul class="steps">
+      <li>Slide 11: "Adesso cambiate sedia." Pausa.</li>
+      <li>Slide 12: per ogni mossa, di' quale slide era.</li>
+      <li>Slide 13: chiedi quanti corsi hanno seguito che somigliavano alla colonna di sinistra.</li>
+      <li>Slide 14.</li>
+    </ul>
+    <div class="say"><b>Da dire:</b> Perché, funzione, caso d'uso, prova. In quest'ordine, per ogni cosa che insegnate.</div>
+    <div class="cue">Slide deck: 11-14</div>
+  </div>
+
+  <div class="block pratica">
+    <div class="bhead"><span class="bnum">5</span><span class="btitle">Passo 1: la scheda del pubblico</span><span class="btime">4 minuti</span></div>
+    <ul class="steps">
+      <li>Slide 15-17: le quattro domande e i ganci.</li>
+      <li>In Gemini, <b>chat nuova</b>. Incolla il prompt dell'intervista e leggilo per intero.</li>
+      <li>Rispondi alle prime due domande, in modo rapido, con un pubblico di esempio. Fai vedere che aspetta la risposta prima di chiedere altro.</li>
+      <li>Non finire l'intervista: mostra la scheda compilata della slide 19.</li>
+    </ul>
+    <div class="prompt"><b>Prompt (slide 18, da leggere per intero):</b> "Devo preparare un percorso di formazione sull'intelligenza artificiale per i miei colleghi e voglio prima capire bene chi ho davanti. Fammi da intervistatore: una domanda alla volta, in tutto non più di otto, e aspetta la mia risposta prima di passare alla successiva. Chiedimi chi sono i colleghi (ordine di scuola, materie, quanti), da dove partono con l'IA, cosa temono, quali lavori ripetono ogni settimana e quanto tempo avremo insieme. Non mi servono i loro nomi e non chiedermeli. Alla fine scrivimi la scheda del pubblico in quattro paragrafi: chi sono, da dove partono, cosa temono, cosa ripetono ogni settimana. Aggiungi in fondo tre cose che non ti ho detto e che dovrei scoprire prima di cominciare."</div>
+    <div class="note">Far notare tre cose nel prompt: una domanda alla volta, il tetto di otto, <b>"non mi servono i loro nomi"</b>.</div>
+    <div class="cue">Slide deck: 15-19</div>
+  </div>
+
+  <div class="block pratica">
+    <div class="bhead"><span class="bnum">6</span><span class="btitle">Passo 2: il traguardo</span><span class="btime">2 minuti</span></div>
+    <ul class="steps">
+      <li>Slide 21: vago e verificabile.</li>
+      <li>La regola: un <b>verbo</b>, un <b>oggetto finito</b>, una <b>scadenza</b>.</li>
+    </ul>
+    <div class="cue">Slide deck: 20-21</div>
+  </div>
+
+  <div class="block pratica">
+    <div class="bhead"><span class="bnum">7</span><span class="btitle">Tocca a voi</span><span class="btime">33 minuti</span></div>
+    <ul class="steps">
+      <li>15 minuti: l'intervista, in una chat nuova.</li>
+      <li>8 minuti: correggono la scheda che esce.</li>
+      <li>6 minuti: scrivono il traguardo in una frase.</li>
+      <li>4 minuti: copiano tutto sulla scheda 1 del quaderno.</li>
+    </ul>
+    <div class="say"><b>Da dire:</b> Alla fine cosa hanno in mano? Se la risposta è "conoscono" o "sanno", riscrivetela.</div>
+    <div class="note">Il formatore gira e sblocca. <b>Riserva per chi finisce:</b> chiedere a Gemini quali tre cose della scheda sono supposizioni e non fatti.</div>
+    <div class="cue">Slide deck: 22</div>
+  </div>
+
+  <div class="block pratica">
+    <div class="bhead"><span class="bnum">8</span><span class="btitle">Chiusura</span><span class="btime">4 minuti</span></div>
+    <ul class="steps">
+      <li>Due o tre leggono il proprio traguardo. La stanza dice se si può verificare.</li>
+      <li>Aggancio al modulo 3: su cosa li fate lavorare, e in che ordine.</li>
+    </ul>
+    <div class="cue">Slide deck: 23</div>
+  </div>
+
+</div>
+</body>
+</html>

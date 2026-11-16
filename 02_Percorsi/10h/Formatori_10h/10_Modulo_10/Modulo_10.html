@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Percorso Formatori · Modulo 10 · Dopo l'aula</title>
+<!--
+  SLIDE 1-3 = ripasso (i 6 passi, i due stampi). SLIDE 4-7 = misurare (quattro livelli, tre strumenti leggeri).
+  SLIDE 8-10 = correggere e adattare. SLIDE 11-14 = far durare (riaprire, le coppie, la cornice normativa).
+  SLIDE 15-17 = dibattito che chiude il cerchio e piano personale. SLIDE 18-20 = sotto il cofano e chiusura.
+  Colori: ink = statement · light = contenuto · indigobg = gancio · coralbg = pratica e dibattito.
+-->
+<style>
+  :root{
+    --ink:#1E1B4B; --ink2:#2A2566; --indigo:#4F46E5; --violet:#7C3AED;
+    --cyan:#06B6D4; --coral:#F97316; --light:#F6F5FF; --text:#1A1730;
+    --muted:#6B6790; --white:#ffffff; --cfcb:#CFCBF0; --faint:#8E8AC4;
+    --line:#E6E3FB;
+    --font:'Inter','Segoe UI',-apple-system,Arial,sans-serif;
+  }
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap');
+  *{box-sizing:border-box;margin:0;padding:0;}
+  html,body{background:#0c0a1f;font-family:var(--font);}
+  .deck{height:100vh;overflow-y:scroll;scroll-snap-type:y mandatory;scroll-behavior:smooth;}
+  .slide{height:100vh;display:flex;align-items:center;justify-content:center;scroll-snap-align:start;background:#0c0a1f;}
+  .canvas{position:relative;width:min(100vw,177.78vh);height:min(56.25vw,100vh);container-type:size;overflow:hidden;}
+  .ink{background:var(--ink);} .light{background:var(--light);} .coralbg{background:var(--coral);} .indigobg{background:var(--indigo);}
+
+  .cy{color:var(--cyan);} .co{color:var(--coral);} .in{color:var(--indigo);}
+  .vi{color:var(--violet);} .wh{color:var(--white);} .tx{color:var(--text);}
+  .mu{color:var(--muted);} .inkc{color:var(--ink);}
+
+  .chip{position:absolute;top:8cqh;left:5.5cqw;padding:1.3cqh 2.2cqh;border-radius:2cqh;
+        font-size:2.4cqh;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#fff;}
+  .chip.violet{background:var(--violet);} .chip.cyan{background:var(--cyan);}
+  .chip.indigo{background:var(--indigo);} .chip.coral{background:var(--coral);} .chip.muted{background:var(--muted);}
+
+  .title{position:absolute;top:15cqh;left:5.5cqw;right:5.5cqw;font-size:6.2cqh;font-weight:800;color:var(--text);line-height:1.05;}
+
+  .stbar{position:absolute;top:34cqh;left:6.7cqw;width:4.2cqh;height:1.3cqh;background:var(--coral);}
+  .statement{position:absolute;top:38cqh;left:6.5cqw;right:6cqw;font-size:7.6cqh;font-weight:800;line-height:1.08;}
+  .statement.big{font-size:8.6cqh;}
+
+  .foot{position:absolute;bottom:4cqh;left:5.5cqw;font-size:1.7cqh;color:var(--muted);}
+  .foot.dark{color:var(--faint);}
+  .pageno{position:absolute;bottom:4cqh;right:5.5cqw;font-size:1.7cqh;color:var(--muted);}
+  .pageno.dark{color:var(--faint);}
+
+  /* flag "se avanza tempo" (in basso a destra, sopra il numero di pagina) */
+  .flag{position:absolute;bottom:9cqh;right:5.5cqw;max-width:46cqw;text-align:right;
+        border-radius:2.2cqh;padding:1.6cqh 2.4cqh;background:#fff;border:1.5px solid var(--coral);}
+  .flag b{display:block;font-size:2.2cqh;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--coral);}
+  .flag span{display:block;font-size:2.1cqh;color:var(--muted);line-height:1.2;margin-top:.5cqh;}
+  .flag.onbg{background:rgba(255,255,255,.16);border-color:rgba(255,255,255,.75);}
+  .flag.onbg b{color:#fff;} .flag.onbg span{color:#FFE9DA;}
+
+
+  .dots{position:absolute;display:flex;gap:1.4cqh;}
+  .dots span{width:2cqh;height:2cqh;border-radius:50%;}
+
+  .eyebrow{position:absolute;top:21cqh;left:5.5cqw;font-size:2.6cqh;font-weight:700;letter-spacing:.18em;color:var(--cyan);}
+  .cover-title{position:absolute;top:27cqh;left:5.2cqw;right:6cqw;font-size:8.8cqh;font-weight:800;color:#fff;line-height:.98;}
+  .cover-bar{position:absolute;top:57cqh;left:5.6cqw;width:4cqh;height:1.2cqh;background:var(--coral);}
+  .cover-sub{position:absolute;top:61cqh;left:5.5cqw;font-size:3.6cqh;color:var(--cfcb);}
+  .cover-foot{position:absolute;bottom:5cqh;left:5.5cqw;font-size:1.9cqh;color:var(--faint);}
+
+  .circ{position:absolute;border-radius:50%;}
+
+  .hook-eyebrow{position:absolute;top:20cqh;left:6cqw;font-size:2.7cqh;font-weight:700;letter-spacing:.16em;color:var(--cfcb);text-transform:uppercase;}
+  .hook-q{position:absolute;top:36cqh;left:6cqw;right:7cqw;font-size:7.4cqh;font-weight:800;color:#fff;line-height:1.1;}
+
+  .cards{position:absolute;top:33cqh;left:5.5cqw;right:5.5cqw;display:flex;flex-direction:column;gap:2.4cqh;}
+  .card{display:flex;align-items:center;gap:2.6cqh;background:#fff;border:1px solid var(--line);
+        border-radius:2.2cqh;padding:3cqh 3cqh;box-shadow:0 4px 14px rgba(80,70,160,.10);}
+  .card-ic{flex:none;width:9cqh;height:9cqh;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:4.4cqh;color:#fff;}
+  .card h3{font-size:3.6cqh;font-weight:700;color:var(--text);margin-bottom:.5cqh;}
+  .card p{font-size:2.6cqh;color:var(--muted);line-height:1.25;}
+
+  .takeaway{position:absolute;top:79cqh;left:5.5cqw;right:5.5cqw;font-size:3.2cqh;font-weight:700;font-style:italic;color:var(--indigo);line-height:1.2;}
+
+  .cols{position:absolute;top:31cqh;left:5.5cqw;right:5.5cqw;display:flex;gap:3cqh;}
+  .col{flex:1;background:#fff;border:1px solid var(--line);border-radius:2.2cqh;overflow:hidden;}
+  .col-head{font-size:3.6cqh;font-weight:800;color:#fff;text-align:center;padding:2.2cqh;letter-spacing:.04em;}
+  .col ul{list-style:none;padding:2.6cqh 3cqh;}
+  .col li{display:flex;gap:1.6cqh;align-items:flex-start;font-size:2.7cqh;color:var(--text);line-height:1.2;margin-bottom:2.2cqh;}
+  .col li::before{content:"";flex:none;width:1.7cqh;height:1.7cqh;border-radius:50%;margin-top:.6cqh;background:currentColor;}
+  .col.cdcoral li{color:var(--coral);} .col.cdcyan li{color:var(--cyan);}
+  .col.cdindigo li{color:var(--indigo);} .col.cdmuted li{color:var(--muted);}
+  .col li span{color:var(--text);}
+  .col .para{padding:2.6cqh 3cqh;font-size:2.4cqh;color:var(--text);line-height:1.36;}
+
+  .cbox{position:absolute;left:5.5cqw;right:5.5cqw;border-radius:2.2cqh;padding:3cqh 3.4cqh;}
+  .cbox.white{background:#fff;border:1px solid var(--line);}
+  .cbox.dark{background:var(--ink);}
+  .cbox h4{font-size:3.7cqh;font-weight:700;color:var(--text);line-height:1.15;}
+  .cbox .ex{font-size:3.1cqh;color:var(--text);margin-top:1.5cqh;}
+  .cbox.dark p{font-size:3.8cqh;color:var(--cfcb);font-weight:700;}
+
+  /* lista di domande (Identifica) */
+  .qlist{position:absolute;left:5.5cqw;right:6cqw;top:30cqh;}
+  .qlist li{list-style:none;display:flex;gap:2.2cqh;align-items:flex-start;font-size:3.3cqh;color:var(--text);line-height:1.3;margin-bottom:2.7cqh;}
+  .qlist li::before{content:"";flex:none;width:1.8cqh;height:1.8cqh;border-radius:50%;margin-top:1cqh;background:var(--indigo);}
+  .qnote{position:absolute;left:5.5cqw;right:6cqw;top:80cqh;font-size:2.7cqh;font-style:italic;color:var(--muted);line-height:1.25;}
+
+  /* scheda compilata (file di contesto) */
+  .fieldbox{position:absolute;left:5.5cqw;right:5.5cqw;top:25cqh;background:#fff;border:1px solid var(--line);
+            border-radius:2.2cqh;padding:3cqh 3.6cqh;box-shadow:0 4px 14px rgba(80,70,160,.08);}
+  .fieldbox p{font-size:2.9cqh;line-height:1.42;color:var(--text);}
+  .fieldbox p+p{margin-top:1.8cqh;}
+  .fieldbox b{font-weight:800;letter-spacing:.04em;}
+
+  /* riquadro prompt */
+  .promptbox{position:absolute;left:5.5cqw;right:5.5cqw;top:28cqh;background:var(--ink);border-radius:2.2cqh;padding:3cqh 3.6cqh;}
+  .promptbox p{font-size:2.7cqh;line-height:1.44;color:var(--cfcb);font-weight:600;}
+  .promptbox .slot{color:var(--coral);font-weight:800;}
+  .promptbox .blk{color:var(--cyan);font-weight:800;}
+
+
+  .copysub{position:absolute;top:26.5cqh;left:6cqw;right:6cqw;font-size:2.5cqh;color:var(--muted);font-style:italic;}
+  .codebox{position:absolute;top:32cqh;left:6cqw;right:6cqw;background:#fff;border:1.5px solid var(--line);border-radius:1.8cqh;padding:3.4cqh 3.8cqh;font-size:3cqh;line-height:1.42;color:var(--text);box-shadow:0 6px 20px rgba(80,70,160,.10);}
+  .codebox.sm{top:29cqh;font-size:2.3cqh;line-height:1.36;}
+  .codebox .slot{color:var(--indigo);font-weight:700;}
+  .deb-tag{position:absolute;top:9cqh;left:5.5cqw;background:#fff;color:var(--coral);
+           padding:1.3cqh 2.4cqh;border-radius:2.3cqh;font-size:2.5cqh;font-weight:700;letter-spacing:.12em;}
+  .deb-room{position:absolute;top:9.6cqh;left:28cqw;font-size:2.6cqh;font-style:italic;color:#FFE4D3;}
+  .deb-q{position:absolute;top:38cqh;left:5.5cqw;right:6cqw;font-size:7cqh;font-weight:800;color:#fff;line-height:1.1;}
+  .deb-q.sm{font-size:6cqh;}
+  .deb-sub{position:absolute;top:74cqh;left:5.6cqw;right:8cqw;font-size:2.9cqh;color:#FFEAD9;line-height:1.25;}
+
+  .ponte-big{position:absolute;top:22cqh;left:5.5cqw;font-size:10cqh;font-weight:800;color:var(--text);}
+  .ponte-sub{position:absolute;top:40cqh;left:5.6cqw;right:8cqw;font-size:3.4cqh;color:var(--muted);}
+  .pcards{position:absolute;top:55cqh;left:5.5cqw;right:5.5cqw;display:flex;gap:2.6cqh;}
+  .pcard{flex:1;background:#fff;border:1px solid var(--line);border-radius:2.2cqh;padding:3cqh;}
+  .pnum{width:11cqh;height:11cqh;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:5cqh;font-weight:800;color:#fff;margin-bottom:2cqh;}
+  .pcard h3{font-size:3cqh;font-weight:700;color:var(--text);line-height:1.15;}
+
+  .hint{position:fixed;bottom:14px;right:16px;font-size:12px;color:#888;font-family:var(--font);z-index:50;}
+
+  @media print{
+    @page{size:1280px 720px;margin:0;}
+    html,body{background:#fff;}
+    .deck{height:auto;overflow:visible;display:block;}
+    .slide{height:720px;width:1280px;display:block;page-break-after:always;break-after:page;}
+    .canvas{width:1280px;height:720px;}
+    .hint{display:none;}
+    *{-webkit-print-color-adjust:exact;print-color-adjust:exact;}
+  }
+
+  /* dati (dai deck teorici) */
+  .datawrap{position:absolute;top:30cqh;left:5.5cqw;right:5.5cqw;display:flex;gap:3cqh;}
+  .stat{flex:1;border-radius:2.6cqh;padding:4cqh 2cqh;text-align:center;}
+  .stat.dark{background:var(--ink);} .stat.lite{background:#fff;border:1.5px solid var(--line);}
+  .stat .num{font-size:16cqh;font-weight:800;line-height:1;}
+  .stat .lab{font-size:3.2cqh;margin-top:2cqh;}
+  .stat.sm .num{font-size:11cqh;} .stat.sm .lab{font-size:2.7cqh;}
+
+  /* citazione */
+  .qmark{position:absolute;top:6cqh;left:3.5cqw;font-size:46cqh;font-weight:800;color:var(--cyan);font-family:Georgia,serif;line-height:1;}
+  .quote{position:absolute;top:30cqh;left:11cqw;right:8cqw;font-size:5.8cqh;font-weight:800;color:#fff;line-height:1.12;}
+  .qgloss{position:absolute;top:60cqh;left:11.4cqw;right:8cqw;font-size:2.9cqh;color:var(--cfcb);line-height:1.25;}
+  .qauth{position:absolute;top:78cqh;left:11.4cqw;font-size:3.2cqh;}
+
+  /* big icon + text (analogia) */
+  .bigicon{position:absolute;top:36cqh;left:7cqw;width:24cqh;height:24cqh;border-radius:50%;
+           display:flex;align-items:center;justify-content:center;font-size:12cqh;}
+  .bigtext{position:absolute;top:34cqh;left:33cqw;right:6cqw;font-size:3.5cqh;color:var(--text);line-height:1.3;}
+  .bigquote{position:absolute;top:78cqh;left:33cqw;right:6cqw;font-size:2.9cqh;font-style:italic;font-weight:700;}
+
+  /* esempi: fatto male / fatto bene */
+  .pex{position:absolute;left:5.5cqw;right:5.5cqw;border-radius:1.8cqh;padding:2.4cqh 3cqh;background:#fff;border:1px solid var(--line);box-shadow:0 4px 14px rgba(80,70,160,.08);}
+  .pex .lab{font-size:2.2cqh;font-weight:700;letter-spacing:.1em;text-transform:uppercase;margin-bottom:1cqh;}
+  .pex.bad{top:22cqh;border-left:7px solid var(--muted);}
+  .pex.bad .lab{color:var(--muted);}
+  .pex.bad .txt{font-size:3cqh;color:var(--text);font-style:italic;line-height:1.3;}
+  .pex.good{top:39cqh;border:1.5px solid var(--indigo);border-left:7px solid var(--indigo);}
+  .pex.good .lab{color:var(--indigo);}
+  .pex.good .txt{font-size:2.55cqh;color:var(--text);line-height:1.34;}
+  .pex-tags{position:absolute;left:5.5cqw;right:5.5cqw;top:80cqh;font-size:2.4cqh;color:var(--muted);font-weight:600;}
+  .pex-tags b{color:var(--indigo);font-weight:700;}
+
+  /* fila di passi (stesse card del ponte, piu' in alto e con una riga di testo) */
+  .pcards.rowcards{top:31cqh;}
+  .pcards.rowcards .pnum{width:9cqh;height:9cqh;font-size:4.2cqh;margin-bottom:1.6cqh;}
+  .pcard p{font-size:2.6cqh;color:var(--muted);line-height:1.28;margin-top:1cqh;}
+</style>
+</head>
+<body>
+<div class="deck" id="deck">
+  <!-- SLIDE 1 · COPERTINA -->
+  <section class="slide"><div class="canvas ink">
+    <div class="circ" style="top:-19%;left:78%;width:34%;height:60%;background:var(--indigo);opacity:.45;"></div>
+    <div class="circ" style="top:58%;left:88%;width:25%;height:45%;background:var(--violet);opacity:.4;"></div>
+    <div class="circ" style="top:70%;left:-8%;width:24%;height:42%;background:var(--cyan);opacity:.3;"></div>
+    <div class="eyebrow">PERCORSO FORMATORI · MODULO 10 · TEORIA</div>
+    <div class="cover-title">Dopo<br>l'aula</div>
+    <div class="cover-bar"></div>
+    <div class="cover-sub">Modulo 10 · come si capisce se ha funzionato, come si corregge, come si fa durare</div>
+    <div class="dots" style="top:74%;left:5.6%;"><span style="background:var(--cyan)"></span><span style="background:var(--indigo)"></span><span style="background:var(--violet)"></span><span style="background:var(--coral)"></span></div>
+    <div class="cover-foot">Formazione docenti sull'Intelligenza Artificiale · PNRR DM 219/2025</div>
+  </div></section>
+
+  <!-- SLIDE 2 · PASSI -->
+  <section class="slide"><div class="canvas light">
+    <div class="chip cyan">Il ripasso</div>
+    <div class="title">I 6 passi, ora che li avete fatti</div>
+    <div class="pcards rowcards">
+      <div class="pcard"><div class="pnum" style="background:var(--indigo)">1</div><h3>Pubblico</h3><p>La scheda, con i loro ganci.</p></div>
+      <div class="pcard"><div class="pnum" style="background:var(--cyan)">2</div><h3>Traguardo</h3><p>Un verbo, un oggetto, una scadenza.</p></div>
+      <div class="pcard"><div class="pnum" style="background:var(--violet)">3</div><h3>Casi d'uso</h3><p>Dieci, poi tre: quelli che pesano.</p></div>
+      <div class="pcard"><div class="pnum" style="background:var(--coral)">4</div><h3>Sequenza</h3><p>Il metodo prima, un filo, un pezzo a incontro.</p></div>
+      <div class="pcard"><div class="pnum" style="background:var(--indigo)">5</div><h3>Lezione</h3><p>Le 4 mosse e il blocco.</p></div>
+      <div class="pcard"><div class="pnum" style="background:var(--cyan)">6</div><h3>Regia</h3><p>Tono, tempo, piano B.</p></div>
+    </div>
+    <div class="foot">Percorso Formatori · Modulo 10</div>
+    <div class="pageno">2 / 20</div>
+  </div></section>
+
+  <!-- SLIDE 3 · CONFRONTO -->
+  <section class="slide"><div class="canvas light">
+    <div class="chip cyan">Il ripasso</div>
+    <div class="title">I due stampi di una lezione</div>
+    <div class="cols">
+      <div class="col cdcyan"><div class="col-head" style="background:var(--cyan)">LE 4 MOSSE · PER UNO STRUMENTO</div><ul><li><span>Perché</span></li><li><span>Funzione</span></li><li><span>Caso d'uso</span></li><li><span>Prova</span></li></ul></div>
+      <div class="col cdindigo"><div class="col-head" style="background:var(--indigo)">IL BLOCCO · PER UN'IDEA</div><ul><li><span>Domanda</span></li><li><span>Contenuto</span></li><li><span>Frase</span></li><li><span>Stanza</span></li></ul></div>
+    </div>
+    <div class="takeaway" style="top:82cqh;">Uno strumento si insegna facendolo usare. Un'idea, facendola riconoscere.</div>
+    <div class="foot">Percorso Formatori · Modulo 10</div>
+    <div class="pageno">3 / 20</div>
+  </div></section>
+
+  <!-- SLIDE 4 · GANCIO -->
+  <section class="slide"><div class="canvas indigobg">
+    <div class="circ" style="top:-20%;left:75%;width:38%;height:66%;background:#fff;opacity:.08;"></div>
+    <div class="hook-eyebrow">Misurare</div>
+    <div class="hook-q wh">Come si capisce se un corso<br>ha <span class="cy">funzionato</span>?</div>
+    <div class="pageno dark">4 / 20</div>
+  </div></section>
+
+  <!-- SLIDE 5 · PASSI -->
+  <section class="slide"><div class="canvas light">
+    <div class="chip indigo">Quattro livelli</div>
+    <div class="title">Quattro domande, dalla più facile alla più vera</div>
+    <div class="pcards rowcards">
+      <div class="pcard"><div class="pnum" style="background:var(--indigo)">1</div><h3>È piaciuto?</h3><p>Lo dicono a fine incontro.</p></div>
+      <div class="pcard"><div class="pnum" style="background:var(--cyan)">2</div><h3>Hanno imparato?</h3><p>Si vede da quello che fanno in aula.</p></div>
+      <div class="pcard"><div class="pnum" style="background:var(--violet)">3</div><h3>Lo usano?</h3><p>Si vede dopo due settimane, nel loro lavoro.</p></div>
+      <div class="pcard"><div class="pnum" style="background:var(--coral)">4</div><h3>Cambia qualcosa?</h3><p>Per gli studenti, per l'ufficio, per la scuola.</p></div>
+    </div>
+    <div class="takeaway" style="top:81cqh;">Quasi tutti i corsi misurano solo la prima. La terza è quella che conta.</div>
+    <div class="foot">Fonte: Kirkpatrick, i quattro livelli di valutazione della formazione</div>
+    <div class="pageno">5 / 20</div>
+  </div></section>
+
+  <!-- SLIDE 6 · STATEMENT -->
+  <section class="slide"><div class="canvas ink">
+    <div class="chip violet">La misura</div>
+    <div class="stbar"></div>
+    <div class="statement wh">Il gradimento si misura in aula.<br>Il risultato, <span class="cy">due settimane dopo</span>.</div>
+    <div class="pageno dark">6 / 20</div>
+  </div></section>
+
+  <!-- SLIDE 7 · CONCETTO -->
+  <section class="slide"><div class="canvas light">
+    <div class="chip indigo">Tre strumenti leggeri</div>
+    <div class="title">Come si misura, senza questionari</div>
+    <div class="cards">
+      <div class="card"><div class="card-ic" style="background:var(--indigo)">1</div><div><h3>La domanda di uscita</h3><p>"Quale di queste cose userete già la prossima settimana?" A voce, prima di salutare.</p></div></div>
+      <div class="card"><div class="card-ic" style="background:var(--cyan)">2</div><div><h3>Il materiale portato</h3><p>L'incontro dopo si apre così: "Chi ha usato qualcosa? Fatecelo vedere."</p></div></div>
+      <div class="card"><div class="card-ic" style="background:var(--coral)">3</div><div><h3>Il messaggio a quindici giorni</h3><p>Tre righe: cosa hai usato, cosa ti ha bloccato, cosa ti serve.</p></div></div>
+    </div>
+    <div class="foot">Percorso Formatori · Modulo 10</div>
+    <div class="pageno">7 / 20</div>
+  </div></section>
+
+  <!-- SLIDE 8 · GANCIO -->
+  <section class="slide"><div class="canvas indigobg">
+    <div class="circ" style="top:-20%;left:75%;width:38%;height:66%;background:#fff;opacity:.08;"></div>
+    <div class="hook-eyebrow">Correggere</div>
+    <div class="hook-q wh">E dopo la prima volta,<br>cosa si <span class="cy">cambia</span>?</div>
+    <div class="pageno dark">8 / 20</div>
+  </div></section>
+
+  <!-- SLIDE 9 · CONCETTO -->
+  <section class="slide"><div class="canvas light">
+    <div class="chip violet">Dai nostri corsi</div>
+    <div class="title">Quello che abbiamo cambiato dopo le aule</div>
+    <div class="cards">
+      <div class="card"><div class="card-ic" style="background:var(--indigo)">1</div><div><h3>Le domande</h3><p>Due riscritte e una tolta, su segnalazione di chi le aveva fatte in aula: non aprivano la discussione.</p></div></div>
+      <div class="card"><div class="card-ic" style="background:var(--cyan)">2</div><div><h3>La durata</h3><p>Una lezione accorciata perché quella prima era già lunga. Deciso guardando l'orologio, non la scaletta.</p></div></div>
+      <div class="card"><div class="card-ic" style="background:var(--coral)">3</div><div><h3>L'ordine</h3><p>In un'aula un concetto non passava e un altro sì. Abbiamo messo prima quello che passava.</p></div></div>
+    </div>
+    <div class="foot">Percorso Formatori · Modulo 10</div>
+    <div class="pageno">9 / 20</div>
+  </div></section>
+
+  <!-- SLIDE 10 · CONFRONTO -->
+  <section class="slide"><div class="canvas light">
+    <div class="chip indigo">Adattare</div>
+    <div class="title">Lo stesso percorso, per un altro pubblico</div>
+    <div class="cols">
+      <div class="col cdindigo"><div class="col-head" style="background:var(--indigo)">RESTA</div><ul><li><span>I 6 passi e la sequenza</span></li><li><span>Le frasi da ricordare</span></li><li><span>Le 4 mosse</span></li><li><span>Il tono</span></li></ul></div>
+      <div class="col cdcoral"><div class="col-head" style="background:var(--coral)">SI RIFÀ</div><ul><li><span>La scheda del pubblico, da capo</span></li><li><span>Gli esempi e il caso che fa da filo</span></li><li><span>Le parole del loro mestiere</span></li><li><span>La frase d'apertura</span></li></ul></div>
+    </div>
+    <div class="takeaway" style="top:82cqh;">Per ogni pubblico nuovo: stessa struttura, esempi nuovi, una frase d'apertura nuova.</div>
+    <div class="foot">Percorso Formatori · Modulo 10</div>
+    <div class="pageno">10 / 20</div>
+  </div></section>
+
+  <!-- SLIDE 11 · GANCIO -->
+  <section class="slide"><div class="canvas indigobg">
+    <div class="circ" style="top:-20%;left:75%;width:38%;height:66%;background:#fff;opacity:.08;"></div>
+    <div class="hook-eyebrow">Far durare</div>
+    <div class="hook-q wh">E perché non resti<br>un corso <span class="cy">solo</span>?</div>
+    <div class="pageno dark">11 / 20</div>
+  </div></section>
+
+  <!-- SLIDE 12 · DATO -->
+  <section class="slide"><div class="canvas light">
+    <div class="chip cyan">Riaprire</div>
+    <div class="title">Mettersi alla prova vale più che rileggere</div>
+    <div class="datawrap">
+      <div class="stat dark"><div class="num cy">56%</div><div class="lab wh">ricordato dopo una settimana da chi si era messo alla prova</div></div>
+      <div class="stat lite"><div class="num co">42%</div><div class="lab tx">ricordato dopo una settimana da chi aveva solo riletto</div></div>
+    </div>
+    <div class="takeaway">Ogni incontro si apre con una domanda sul precedente. Non con un riassunto fatto da voi.</div>
+    <div class="foot">Fonte: Roediger e Karpicke, Psychological Science, 2006. Esperimento su 120 studenti universitari</div>
+    <div class="pageno">12 / 20</div>
+  </div></section>
+
+  <!-- SLIDE 13 · CONCETTO -->
+  <section class="slide"><div class="canvas light">
+    <div class="chip indigo">Far durare</div>
+    <div class="title">Tre cose che tengono vivo un corso</div>
+    <div class="cards">
+      <div class="card"><div class="card-ic" style="background:var(--indigo)">1</div><div><h3>Le coppie</h3><p>Due colleghi che si mostrano a vicenda cosa hanno provato. È il sostegno fra pari che porta la novità in classe.</p></div></div>
+      <div class="card"><div class="card-ic" style="background:var(--cyan)">2</div><div><h3>La cartella comune</h3><p>I prompt che funzionano, in un posto solo, con il nome di chi li ha provati.</p></div></div>
+      <div class="card"><div class="card-ic" style="background:var(--coral)">3</div><div><h3>Un appuntamento</h3><p>Mezz'ora al mese: cosa ha funzionato, cosa no. Messo in calendario adesso.</p></div></div>
+    </div>
+    <div class="foot">Fonte: Sul sostegno fra pari: Joyce e Showers, Student Achievement Through Staff Development, 2002 (stima degli autori)</div>
+    <div class="pageno">13 / 20</div>
+  </div></section>
+
+  <!-- SLIDE 14 · REGOLA -->
+  <section class="slide"><div class="canvas light">
+    <div class="chip cyan">La cornice</div>
+    <div class="title">La scuola è tenuta a occuparsene</div>
+    <div class="cbox white" style="top:32cqh;"><h4>Chi usa sistemi di intelligenza artificiale adotta misure per formare il proprio personale.</h4>
+      <div class="ex">Lo chiede l'articolo 4 del regolamento europeo sull'IA. Non serve un certificato: serve farlo, e tenerne traccia.</div></div>
+    <div class="cbox dark" style="top:62cqh;"><p>Le linee guida del Ministero suggeriscono un <span class="cy">piano di formazione</span> per tutto il personale. Il vostro percorso può essere quel piano.</p></div>
+    <div class="foot">Fonte: Regolamento UE sull'intelligenza artificiale, art. 4. Linee guida MIM allegate al DM 166/2025</div>
+    <div class="pageno">14 / 20</div>
+  </div></section>
+
+  <!-- SLIDE 15 · DIBATTITO -->
+  <section class="slide"><div class="canvas coralbg">
+    <div class="circ" style="top:-21%;left:80%;width:38%;height:67%;background:#fff;opacity:.12;"></div>
+    <div class="circ" style="top:62%;left:-10%;width:30%;height:53%;background:var(--ink);opacity:.2;"></div>
+    <div class="deb-tag">DIBATTITO</div><div class="deb-room" style="left:21.6cqw;">Torna dal modulo 1</div>
+    <div class="deb-q sm wh">Tra tre mesi, da cosa capirete<br>che il vostro corso è <span class="inkc">servito</span>?</div>
+    <div class="deb-sub">Ve l'abbiamo chiesto nel primo modulo. Adesso avete gli strumenti per rispondere.</div>
+    <div class="pageno dark">15 / 20</div>
+  </div></section>
+
+  <!-- SLIDE 16 · DIBATTITO -->
+  <section class="slide"><div class="canvas coralbg">
+    <div class="circ" style="top:-21%;left:80%;width:38%;height:67%;background:#fff;opacity:.12;"></div>
+    <div class="circ" style="top:62%;left:-10%;width:30%;height:53%;background:var(--ink);opacity:.2;"></div>
+    <div class="deb-tag">DIBATTITO</div><div class="deb-room" style="left:21.6cqw;">Parla la stanza</div>
+    <div class="deb-q sm wh">Cosa vi serve dalla vostra scuola<br>per farlo <span class="inkc">davvero</span>?</div>
+    <div class="flag onbg"><b>Se avanza tempo</b><span>Altrimenti resta uno spunto: ci ragionate voi.</span></div>
+    <div class="pageno dark">16 / 20</div>
+  </div></section>
+
+  <!-- SLIDE 17 · ELENCO -->
+  <section class="slide"><div class="canvas light">
+    <div class="chip coral">Il piano</div>
+    <div class="title">Una data, un gruppo, un primo incontro</div>
+    <ul class="qlist"><li>Quando: la data del primo incontro, scritta</li><li>A chi: il gruppo con cui parto, anche piccolo</li><li>Cosa: l'incontro che ho già costruito e provato</li><li>Con chi: il collega che mi dà una mano in aula</li><li>Come lo saprò: la domanda che farò dopo due settimane</li></ul>
+    <div class="qnote" style="top:82cqh;">È la scheda 6 del quaderno. Cinque righe, da compilare prima di uscire.</div>
+    <div class="foot">Percorso Formatori · Modulo 10</div>
+    <div class="pageno">17 / 20</div>
+  </div></section>
+
+  <!-- SLIDE 18 · SOTTO IL COFANO -->
+  <section class="slide"><div class="canvas light">
+    <div class="chip violet">Sotto il cofano</div>
+    <div class="title">L'intero percorso, sotto il cofano</div>
+    <div class="pcards rowcards">
+      <div class="pcard"><div class="pnum" style="background:var(--indigo)">1</div><h3>L'avete vissuto</h3><p>Ogni modulo usava il metodo che spiegava.</p></div>
+      <div class="pcard"><div class="pnum" style="background:var(--cyan)">2</div><h3>L'avete smontato</h3><p>Una slide a ogni modulo: cosa c'era dentro.</p></div>
+      <div class="pcard"><div class="pnum" style="background:var(--violet)">3</div><h3>L'avete rifatto</h3><p>Sul vostro percorso, un pezzo alla volta.</p></div>
+      <div class="pcard"><div class="pnum" style="background:var(--coral)">4</div><h3>L'avete provato</h3><p>Sei minuti, davanti a qualcuno.</p></div>
+    </div>
+    <div class="takeaway" style="top:81cqh;">Vivere, smontare, rifare, provare. È lo stesso ordine che potete usare con i vostri colleghi.</div>
+    <div class="foot">Percorso Formatori · Modulo 10</div>
+    <div class="pageno">18 / 20</div>
+  </div></section>
+
+  <!-- SLIDE 19 · STATEMENT -->
+  <section class="slide"><div class="canvas ink">
+    <div class="chip violet">Dove siete arrivati</div>
+    <div class="stbar"></div>
+    <div class="statement wh">Non avete seguito un corso.<br>Ne avete <span class="cy">costruito</span> uno.</div>
+    <div class="pageno dark">19 / 20</div>
+  </div></section>
+
+  <!-- SLIDE 20 · CHIUSURA -->
+  <section class="slide"><div class="canvas ink">
+    <div class="circ" style="top:-19%;left:78%;width:34%;height:60%;background:var(--indigo);opacity:.45;"></div>
+    <div class="circ" style="top:58%;left:88%;width:25%;height:45%;background:var(--violet);opacity:.4;"></div>
+    <div class="circ" style="top:70%;left:-8%;width:24%;height:42%;background:var(--cyan);opacity:.3;"></div>
+    <div class="chip violet">Per chiudere</div>
+    <div class="stbar"></div>
+    <div class="statement wh" style="font-size:6.4cqh;">I menu cambieranno ancora.<br>Il vostro <span class="cy">metodo</span>, no.</div>
+    <div class="dots" style="top:80%;left:6.6%;"><span style="background:var(--cyan)"></span><span style="background:var(--indigo)"></span><span style="background:var(--violet)"></span><span style="background:var(--coral)"></span></div>
+    <div class="pageno dark">20 / 20</div>
+  </div></section>
+</div>
+<div class="hint">↑ ↓ frecce · F schermo intero · Cmd/Ctrl+P per esportare PDF</div>
+<script>
+  const deck=document.getElementById('deck');
+  const slides=[...document.querySelectorAll('.slide')];
+  let i=0;
+  function go(n){i=Math.max(0,Math.min(slides.length-1,n));slides[i].scrollIntoView({behavior:'smooth'});}
+  deck.addEventListener('scroll',()=>{i=Math.round(deck.scrollTop/window.innerHeight);},{passive:true});
+  window.addEventListener('keydown',e=>{
+    if(['ArrowDown','ArrowRight','PageDown',' '].includes(e.key)){e.preventDefault();go(i+1);}
+    else if(['ArrowUp','ArrowLeft','PageUp'].includes(e.key)){e.preventDefault();go(i-1);}
+    else if(e.key==='Home'){e.preventDefault();go(0);}
+    else if(e.key==='End'){e.preventDefault();go(slides.length-1);}
+    else if(e.key.toLowerCase()==='f'){if(!document.fullscreenElement)document.documentElement.requestFullscreen();else document.exitFullscreen();}
+  });
+</script>
+</body>
+</html>

@@ -6,7 +6,7 @@ Tre macro aree, divise per durata. Ogni percorso è completo dentro la propria c
 02_Percorsi/
   20h/   Infanzia · Primaria · Secondaria · Segreteria_ATA
   14h/   Secondaria_14h · Segreteria_14h
-  10h/   Scuola_10h · Segreteria_10h
+  10h/   Scuola_10h · Segreteria_10h · Formatori_10h
 ```
 
 ## 20h · 10 incontri da 2 ore
@@ -32,7 +32,9 @@ Tre macro aree, divise per durata. Ogni percorso è completo dentro la propria c
 | `10h/Scuola_10h/` | **gruppi misti** (primaria, medie, superiori). Derivato dalla Primaria: dibattiti extra marcati col flag "se avanza tempo", Incontro 5 senza il Progetto, blocco pratico su **Gemini** al posto di Claude. Vedi `10h/Scuola_10h/CAMBIAMENTI.md`. |
 | `10h/Segreteria_10h/` | **personale ATA e di segreteria**. Derivato dalla Segreteria_ATA 20h con lo stesso metodo: flag "se avanza tempo", Incontro 5 senza il Progetto, blocco pratico su **Gemini**. Modulo 6 riscritto, moduli 7, 8 e 9 convertiti senza perdere slide. Vedi `10h/Segreteria_10h/CAMBIAMENTI.md` e `01_Progetto/PIANO_SEGRETERIA_GEMINI.md`. |
 
-I programmi ufficiali delle quattro edizioni da 10 ore (Primaria, Secondaria, Segreteria, Formatori e Figure di sistema) stanno in `01_Progetto/Programmi/10h/`. I deck costruiti sono due: il misto e la segreteria. Mancano ancora Formatori e Figure di sistema.
+| `10h/Formatori_10h/` | **formatori e figure di sistema: come si forma sull'IA.** Percorso nuovo, non un adattamento: 5 moduli teorici e 5 pratici alternati, solo **Gemini**. I partecipanti costruiscono e provano un percorso proprio per i colleghi (i 6 passi, le 4 mosse, la slide "Sotto il cofano"). Completo di deck, scalette, guide pratiche, quaderno e consegna. Non ancora erogato, prompt da provare dentro Gemini. Vedi `10h/Formatori_10h/README.md` e `01_Progetto/PIANO_FORMATORI_10H.md`. |
+
+I programmi ufficiali delle quattro edizioni da 10 ore (Primaria, Secondaria, Segreteria, Formatori e Figure di sistema) stanno in `01_Progetto/Programmi/10h/`, insieme al programma del percorso `Formatori_10h` (`PROGRAMMA_10h_Formare_i_Formatori.html`). I deck costruiti sono tre: il misto, la segreteria e il percorso per formatori. L'edizione "Formatori e Figure di sistema" con i dieci moduli standard resta solo come programma: è un prodotto diverso da `Formatori_10h`.
 
 ## Schema interno, uguale per tutti
 
@@ -45,4 +47,5 @@ In `10h/Scuola_10h/` lo schema è lo stesso, ma ogni modulo dura 1 ora e la prat
 
 Metodo di lavoro e piano dei due percorsi mancanti: `01_Progetto/PIANO_SECONDARIA_SEGRETERIA.md`.
 Impianto dei percorsi da 10 ore: `01_Progetto/PIANO_PERCORSI_10H.md`.
+Percorso per formatori, con il reverse engineering del metodo: `01_Progetto/PIANO_FORMATORI_10H.md`.
 Standard su scalette, slide e testi: `00_Standard/MODUS_OPERANDI.md`.

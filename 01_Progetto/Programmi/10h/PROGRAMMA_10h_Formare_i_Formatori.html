@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Programma · Formare i formatori · 10h</title>
+<!--
+  MODULO INDIPENDENTE E COMPLETO · Percorso FORMATORI e FIGURE DI SISTEMA · 10 ore · gruppo misto primaria e secondaria
+  10 moduli da 1h, aggregabili in 5 incontri da 2h. Ogni modulo: una parte di spiegazione e una di pratica.
+-->
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap');
+  :root{
+    --ink:#1E1B4B; --indigo:#4F46E5; --violet:#7C3AED; --cyan:#0891B2; --coral:#F97316;
+    --teal:#0D9488; --royal:#5B54E8; --light:#F6F5FF; --text:#1A1730; --muted:#6B6790; --cfcb:#CFCBF0; --faint:#8E8AC4;
+    --line:#E6E3FB; --font:'Inter','Segoe UI',-apple-system,Arial,sans-serif;
+    --acc:var(--royal);
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  html,body{background:#0c0a1f;font-family:var(--font);}
+  .deck{height:100vh;overflow-y:scroll;scroll-snap-type:y mandatory;scroll-behavior:smooth;}
+  .slide{height:100vh;display:flex;align-items:center;justify-content:center;scroll-snap-align:start;background:#0c0a1f;}
+  .canvas{position:relative;width:min(100vw,177.78vh);height:min(56.25vw,100vh);container-type:size;overflow:hidden;}
+  .ink{background:var(--ink);} .light{background:var(--light);}
+  .circ{position:absolute;border-radius:50%;}
+  .chip{position:absolute;top:8cqh;left:5.5cqw;padding:1.3cqh 2.4cqh;border-radius:2cqh;font-size:2.4cqh;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#fff;background:var(--acc);}
+  .lcode{position:absolute;top:7.4cqh;right:5.5cqw;font-size:4.2cqh;font-weight:800;color:var(--acc);letter-spacing:.02em;}
+  .title{position:absolute;top:17cqh;left:5.5cqw;right:5.5cqw;font-size:6cqh;font-weight:800;color:var(--text);line-height:1.06;}
+  .plist{position:absolute;top:38cqh;left:5.5cqw;right:5.5cqw;display:flex;flex-direction:column;gap:2.5cqh;}
+  .plist .pi{display:flex;gap:2.2cqh;align-items:flex-start;font-size:3.2cqh;color:var(--text);line-height:1.2;}
+  .plist .pi::before{content:"";flex:none;width:1.9cqh;height:1.9cqh;border-radius:50%;margin-top:.65cqh;background:var(--acc);}
+  .plist .pi b{font-weight:800;}
+  .foot{position:absolute;bottom:4cqh;left:5.5cqw;font-size:1.7cqh;color:var(--muted);}
+  .pageno{position:absolute;bottom:4cqh;right:5.5cqw;font-size:1.7cqh;color:var(--muted);}
+  .eyebrow{position:absolute;top:21cqh;left:5.5cqw;font-size:2.6cqh;font-weight:700;letter-spacing:.18em;color:var(--acc);}
+  .cover-title{position:absolute;top:27cqh;left:5.2cqw;right:6cqw;font-size:9.4cqh;font-weight:800;color:#fff;line-height:.96;}
+  .cover-bar{position:absolute;top:55cqh;left:5.6cqw;width:4cqh;height:1.2cqh;background:var(--acc);}
+  .cover-sub{position:absolute;top:59cqh;left:5.5cqw;font-size:3.4cqh;color:var(--cfcb);}
+  .cover-foot{position:absolute;bottom:5cqh;left:5.5cqw;font-size:1.9cqh;color:var(--faint);}
+  .lead{position:absolute;top:24cqh;left:5.5cqw;right:5.5cqw;font-size:3.5cqh;color:var(--text);line-height:1.32;}
+  .seq{position:absolute;top:52cqh;left:5.5cqw;right:5.5cqw;display:flex;gap:1cqh;}
+  .seq .b{flex:1;height:12cqh;border-radius:1.4cqh;display:flex;flex-direction:column;align-items:center;justify-content:center;color:#fff;font-weight:800;font-size:3cqh;background:var(--acc);}
+  .seq .b small{font-size:1.4cqh;font-weight:600;opacity:.9;margin-top:.4cqh;letter-spacing:.04em;}
+  .hint{position:fixed;bottom:14px;right:16px;font-size:12px;color:#888;z-index:50;}
+  @media print{
+    @page{size:1280px 720px;margin:0;}
+    html,body{background:#fff;}
+    .deck{height:auto;overflow:visible;display:block;}
+    .slide{height:720px;width:1280px;display:block;page-break-after:always;break-after:page;}
+    .canvas{width:1280px;height:720px;}
+    .hint{display:none;}
+    *{-webkit-print-color-adjust:exact;print-color-adjust:exact;}
+  }
+</style>
+</head>
+<body>
+<div class="deck">
+  <!-- 1 COVER -->
+  <section class="slide"><div class="canvas ink">
+    <div class="circ" style="top:-19%;left:78%;width:34%;height:60%;background:var(--royal);opacity:.42;"></div>
+    <div class="circ" style="top:58%;left:88%;width:25%;height:45%;background:var(--indigo);opacity:.4;"></div>
+    <div class="circ" style="top:70%;left:-8%;width:24%;height:42%;background:var(--cyan);opacity:.3;"></div>
+    <div class="eyebrow">PROGRAMMA COMPLETO 10H</div>
+    <div class="cover-title">Formare<br>i formatori</div>
+    <div class="cover-bar"></div>
+    <div class="cover-sub">10 moduli da 1 ora · per formatori e figure di sistema</div>
+    <div class="cover-foot">Formazione docenti sull'Intelligenza Artificiale · PNRR DM 219/2025</div>
+  </div></section>
+  <!-- 2 PRESENTAZIONE -->
+  <section class="slide"><div class="canvas light">
+    <div class="chip">Il corso</div>
+    <div class="title">Imparare a insegnare l'IA ai colleghi</div>
+    <div class="lead">Dieci moduli da un'ora, cinque teorici e cinque pratici, aggregabili in cinque incontri da due ore. Per docenti che dovranno formare i colleghi: alla fine ognuno ha un percorso proprio, costruito e provato. È consigliato a chi ha già seguito una formazione di base sull'IA.</div>
+    <div class="seq">
+      <div class="b">1<small>MODULO</small></div><div class="b">2<small>MODULO</small></div>
+      <div class="b">3<small>MODULO</small></div><div class="b">4<small>MODULO</small></div>
+      <div class="b">5<small>MODULO</small></div><div class="b">6<small>MODULO</small></div>
+      <div class="b">7<small>MODULO</small></div><div class="b">8<small>MODULO</small></div>
+      <div class="b">9<small>MODULO</small></div><div class="b">10<small>MODULO</small></div>
+    </div>
+    <div class="foot">Formare i formatori · 10h</div><div class="pageno">2 / 13</div>
+  </div></section>
+  <!-- 3 MODULO 1 -->
+  <section class="slide"><div class="canvas light">
+    <div class="chip">Modulo 1 · Teoria</div><div class="lcode">01</div>
+    <div class="title">Il mestiere di chi forma</div>
+    <div class="plist">
+      <div class="pi">Perché tanti corsi piacciono e poi non cambia niente: cosa dicono i dati</div>
+      <div class="pi">Le tre scelte che reggono un corso: il metodo e non lo strumento, dentro la scuola, qualcosa in mano ogni volta</div>
+      <div class="pi">La mappa: i 6 passi per costruire un percorso di formazione</div>
+      <div class="pi">Dibattito: chi sarà il collega più difficile da portare a bordo</div>
+    </div>
+    <div class="foot">Formare i formatori · 10h</div><div class="pageno">3 / 13</div>
+  </div></section>
+  <!-- 4 MODULO 2 -->
+  <section class="slide"><div class="canvas light">
+    <div class="chip">Modulo 2 · Pratica</div><div class="lcode">02</div>
+    <div class="title">Gemini: la base, fatta bene</div>
+    <div class="plist">
+      <div class="pi">Una lezione vera su Gemini, vissuta da corsisti: chat, file, le 5 fasi di una richiesta</div>
+      <div class="pi">Sotto il cofano: le 4 mosse per insegnare uno strumento (perché, funzione, caso d'uso, prova)</div>
+      <div class="pi">Passi 1 e 2: chi avete davanti, e cosa avrà in mano alla fine</div>
+      <div class="pi">In pratica: farsi intervistare da Gemini e scrivere la scheda del pubblico e il traguardo</div>
+    </div>
+    <div class="foot">Formare i formatori · 10h</div><div class="pageno">4 / 13</div>
+  </div></section>
+  <!-- 5 MODULO 3 -->
+  <section class="slide"><div class="canvas light">
+    <div class="chip">Modulo 3 · Teoria</div><div class="lcode">03</div>
+    <div class="title">Dal bisogno alla sequenza</div>
+    <div class="plist">
+      <div class="pi">Progettare a ritroso: prima il traguardo, poi le attività</div>
+      <div class="pi">Passo 3: i quattro criteri di un buon caso d'uso</div>
+      <div class="pi">Passo 4: tre regole per mettere in fila gli incontri, e come adattarli a un altro pubblico</div>
+      <div class="pi">Esercizio: dieci lavori che i colleghi ripetono ogni settimana, poi ne restano tre</div>
+    </div>
+    <div class="foot">Formare i formatori · 10h</div><div class="pageno">5 / 13</div>
+  </div></section>
+  <!-- 6 MODULO 4 -->
+  <section class="slide"><div class="canvas light">
+    <div class="chip">Modulo 4 · Pratica</div><div class="lcode">04</div>
+    <div class="title">L'assistente che vi conosce</div>
+    <div class="plist">
+      <div class="pi">L'assistente su misura di Gemini (Gem o Skill): istruzioni che restano, file a portata</div>
+      <div class="pi">Lo scrittore di prompt: il primo oggetto da far costruire ai colleghi</div>
+      <div class="pi">Il progettista di percorsi: un assistente che conosce il metodo</div>
+      <div class="pi">In pratica: casi d'uso e sequenza del proprio percorso, proposti da Gemini e corretti a mano</div>
+    </div>
+    <div class="foot">Formare i formatori · 10h</div><div class="pageno">6 / 13</div>
+  </div></section>
+  <!-- 7 MODULO 5 -->
+  <section class="slide"><div class="canvas light">
+    <div class="chip">Modulo 5 · Teoria</div><div class="lcode">05</div>
+    <div class="title">Costruire la lezione</div>
+    <div class="plist">
+      <div class="pi">Due stampi: le 4 mosse per uno strumento, il blocco a domande per un'idea</div>
+      <div class="pi">Tensione prima del dato: prima si chiede, poi si mostra</div>
+      <div class="pi">Calare un'idea nella scuola: una persona, un oggetto del mestiere, un gesto</div>
+      <div class="pi">Esercizio: la domanda che apre la propria lezione e la frase che la chiude</div>
+    </div>
+    <div class="foot">Formare i formatori · 10h</div><div class="pageno">7 / 13</div>
+  </div></section>
+  <!-- 8 MODULO 6 -->
+  <section class="slide"><div class="canvas light">
+    <div class="chip">Modulo 6 · Pratica</div><div class="lcode">06</div>
+    <div class="title">Dalla scaletta ai materiali</div>
+    <div class="plist">
+      <div class="pi">Canvas in Gemini: la risposta diventa un documento da correggere</div>
+      <div class="pi">La scaletta prima delle slide: minuti onesti, cosa proteggere, le riserve</div>
+      <div class="pi">Dalla scaletta alle slide e al foglio dei prompt per i colleghi</div>
+      <div class="pi">In pratica: un incontro intero del proprio percorso, portato in fondo</div>
+    </div>
+    <div class="foot">Formare i formatori · 10h</div><div class="pageno">8 / 13</div>
+  </div></section>
+  <!-- 9 MODULO 7 -->
+  <section class="slide"><div class="canvas light">
+    <div class="chip">Modulo 7 · Teoria</div><div class="lcode">07</div>
+    <div class="title">Condurre l'aula</div>
+    <div class="plist">
+      <div class="pi">Chi avete davanti: chi è già avanti, chi non ne vede l'utilità, chi ha paura di sbagliare</div>
+      <div class="pi">Il tono che invita e le domande che aprono una discussione</div>
+      <div class="pi">Il tempo, il piano B, e cosa fare quando lo strumento tradisce in diretta</div>
+      <div class="pi">Esercizio a gruppi di tre: rispondere alle obiezioni dei colleghi</div>
+    </div>
+    <div class="foot">Formare i formatori · 10h</div><div class="pageno">9 / 13</div>
+  </div></section>
+  <!-- 10 MODULO 8 -->
+  <section class="slide"><div class="canvas light">
+    <div class="chip">Modulo 8 · Pratica</div><div class="lcode">08</div>
+    <div class="title">La demo, i dati, le obiezioni</div>
+    <div class="plist">
+      <div class="pi">Deep Research: verificare un dato prima di metterlo in slide</div>
+      <div class="pi">Gemini nel ruolo del collega difficile: provare le risposte prima dell'aula</div>
+      <div class="pi">Preparare una demo che non tradisce, e l'esercizio con l'errore da scovare</div>
+      <div class="pi">In pratica: un dato verificato, un'obiezione provata, la lista dei controlli</div>
+    </div>
+    <div class="foot">Formare i formatori · 10h</div><div class="pageno">10 / 13</div>
+  </div></section>
+  <!-- 11 MODULO 9 -->
+  <section class="slide"><div class="canvas light">
+    <div class="chip">Modulo 9 · Pratica</div><div class="lcode">09</div>
+    <div class="title">Sei minuti in aula</div>
+    <div class="plist">
+      <div class="pi">Ognuno conduce sei minuti della propria lezione davanti a tre colleghi</div>
+      <div class="pi">La griglia di chi osserva: quattro domande</div>
+      <div class="pi">Il riscontro: una cosa da tenere, una da cambiare</div>
+      <div class="pi">Dai riscontri alle tre modifiche, con l'aiuto di Gemini</div>
+    </div>
+    <div class="foot">Formare i formatori · 10h</div><div class="pageno">11 / 13</div>
+  </div></section>
+  <!-- 12 MODULO 10 -->
+  <section class="slide"><div class="canvas light">
+    <div class="chip">Modulo 10 · Teoria</div><div class="lcode">10</div>
+    <div class="title">Dopo l'aula</div>
+    <div class="plist">
+      <div class="pi">Come si capisce se un corso ha funzionato: quattro domande, dalla più facile alla più vera</div>
+      <div class="pi">Correggere dopo le aule e adattare a un altro pubblico</div>
+      <div class="pi">Far durare: le coppie di colleghi, la cartella comune, l'appuntamento</div>
+      <div class="pi">Il piano personale: una data, un gruppo, un primo incontro</div>
+    </div>
+    <div class="foot">Formare i formatori · 10h</div><div class="pageno">12 / 13</div>
+  </div></section>
+  <!-- 13 STRUMENTI -->
+  <section class="slide"><div class="canvas light">
+    <div class="chip">Strumenti e materiali</div>
+    <div class="title">Lo strumento del percorso, e cosa resta in mano</div>
+    <div class="plist">
+      <div class="pi"><b>Gemini</b> · con l'account Google della scuola: chat e file, assistente su misura, Canvas, Deep Research</div>
+      <div class="pi"><b>Il quaderno del formatore</b> · il metodo in una pagina e sei schede, una per ogni pezzo del percorso</div>
+      <div class="pi"><b>I prompt pronti</b> · tredici testi da copiare, compreso l'assistente che progetta i percorsi</div>
+      <div class="pi">Alla fine ogni partecipante ha un percorso proprio per i colleghi: costruito, provato, con una data</div>
+    </div>
+    <div class="foot">Formare i formatori · 10h</div><div class="pageno">13 / 13</div>
+  </div></section>
+
+</div>
+<div class="hint">Frecce o scroll per navigare · F schermo intero · Stampa per PDF</div>
+</body>
+</html>

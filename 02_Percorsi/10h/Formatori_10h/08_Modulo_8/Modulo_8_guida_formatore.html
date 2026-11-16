@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Percorso Formatori · Modulo 8 · Guida pratica per il formatore</title>
+<style>
+  :root{
+    --ink:#1E1B4B; --indigo:#4F46E5; --violet:#7C3AED; --cyan:#0891B2;
+    --coral:#EA6A1E; --teal:#0E9488; --bg:#F7F6FB; --text:#1A1730; --muted:#6B6790; --line:#E6E3FB; --card:#fff;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  body{font-family:'Inter','Segoe UI',-apple-system,Arial,sans-serif;background:var(--bg);color:var(--text);line-height:1.5;}
+  .wrap{max-width:900px;margin:0 auto;padding:36px 24px 80px;}
+  header{margin-bottom:18px;}
+  h1{font-size:30px;font-weight:800;color:var(--ink);}
+  .sub{color:var(--muted);font-size:15px;margin-top:4px;}
+  .sec-label{font-size:13px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);font-weight:700;margin:28px 0 10px;}
+  .block{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:20px 22px;margin-bottom:16px;border-left:6px solid var(--indigo);}
+  .block.setup{border-left-color:var(--teal);} .block.teoria{border-left-color:var(--cyan);} .block.pratica{border-left-color:var(--coral);}
+  .bhead{display:flex;align-items:baseline;gap:10px;margin-bottom:4px;flex-wrap:wrap;}
+  .bnum{font-size:13px;font-weight:800;color:#fff;background:var(--indigo);border-radius:20px;padding:2px 10px;}
+  .block.setup .bnum{background:var(--teal);} .block.teoria .bnum{background:var(--cyan);} .block.pratica .bnum{background:var(--coral);}
+  .btitle{font-size:20px;font-weight:800;color:var(--ink);}
+  .btime{font-size:13px;color:var(--muted);margin-left:auto;font-weight:600;}
+  .steps{list-style:none;counter-reset:s;margin-top:10px;}
+  .steps li{counter-increment:s;padding-left:30px;position:relative;margin-bottom:8px;font-size:15px;}
+  .steps li::before{content:counter(s);position:absolute;left:0;top:1px;width:20px;height:20px;background:var(--indigo);color:#fff;border-radius:50%;font-size:12px;font-weight:700;display:flex;align-items:center;justify-content:center;}
+  .steps b{color:var(--ink);}
+  ul.plain{list-style:none;margin-top:8px;} ul.plain li{font-size:15px;padding-left:18px;position:relative;margin-bottom:6px;}
+  ul.plain li::before{content:"";position:absolute;left:0;top:9px;width:6px;height:6px;border-radius:50%;background:var(--muted);}
+  .say{margin-top:12px;background:#F0EFFA;border-radius:8px;padding:10px 14px;font-size:14.5px;font-style:italic;color:var(--ink);}
+  .say b{font-style:normal;color:var(--violet);font-weight:700;}
+  .prompt{margin-top:10px;background:#FFF8F2;border:1px solid #F6D9C2;border-radius:8px;padding:10px 14px;font-size:14px;color:var(--ink);}
+  .prompt b{color:var(--coral);}
+  .cue{display:inline-block;background:#FFF1E6;color:var(--coral);border:1px solid #F6D9C2;border-radius:6px;padding:1px 8px;font-size:13px;font-weight:700;margin-top:10px;}
+  .note{margin-top:8px;font-size:13.5px;color:var(--muted);} .note b{color:var(--text);}
+  @media print{ body{background:#fff;} .block{break-inside:avoid;} }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header>
+    <h1>Modulo 8 · La demo, i dati, le obiezioni<br>Guida pratica per il formatore</h1>
+    <div class="sub">La scaletta da seguire: cosa mostrare sullo schermo, in ordine. Un'ora: 22 minuti di guida, 33 di pratica, 5 di chiusura. <b>La ricerca si lancia al minuto 5 e si riapre al minuto 18.</b></div>
+  </header>
+
+  <div class="sec-label">Prima della lezione (setup)</div>
+  <div class="block setup">
+    <div class="bhead"><span class="bnum">0</span><span class="btitle">Da avere pronto</span></div>
+    <ul class="plain">
+      <li><b>Deep Research</b> provata il giorno prima sull'account che si userà. Verificare se è attiva e quante ricerche concede.</li>
+      <li>In un'altra scheda: un rapporto già pronto, con una fonte già individuata da aprire dal vivo.</li>
+      <li>I tre prompt (slide 6, 9, 11) in un file condiviso.</li>
+      <li>Le tre risposte con l'errore già generate su un compito di esempio, con la <b>soluzione verificata</b>.</li>
+      <li>Un dato di esempio da verificare in diretta.</li>
+    </ul>
+  </div>
+
+  <div class="sec-label">Parte guidata · slide, veloce</div>
+  <div class="block teoria">
+    <div class="bhead"><span class="bnum">T</span><span class="btitle">Apertura e perché</span><span class="btime">4 minuti</span></div>
+    <ul class="plain">
+      <li>Slide 3: i tre errori nostri, raccontati con i dettagli. Li abbiamo trovati perché abbiamo aperto le fonti.</li>
+      <li>Slide 4: davanti a degli insegnanti, un dato sbagliato costa tutto il resto.</li>
+    </ul>
+    <div class="cue">Slide deck: 1-4</div>
+  </div>
+
+  <div class="sec-label">Parte pratica · cosa mostrare, in ordine</div>
+
+  <div class="block pratica">
+    <div class="bhead"><span class="bnum">1</span><span class="btitle">Funzione 1: Deep Research</span><span class="btime">6 minuti</span></div>
+    <ul class="steps">
+      <li>In Gemini, <b>chat nuova</b>. Sotto la casella, il <b>più</b>, poi <b>Deep Research</b>.</li>
+      <li>Incolla il prompt con il dato di esempio. Leggilo per intero.</li>
+      <li>Gemini propone un <b>piano di ricerca</b>: mostralo, poi <b>Avvia ricerca</b>.</li>
+      <li><b>Non aspettare.</b> Torna alle slide: la regola dei tre controlli (slide 7).</li>
+      <li>Apri la scheda con il rapporto già pronto: mostra i link accanto alle frasi. <b>Aprine uno</b>, davanti a loro.</li>
+    </ul>
+    <div class="prompt"><b>Prompt (slide 6, da leggere per intero):</b> "Devo usare questo dato in una formazione per insegnanti: [il dato, con la fonte che ho trovato]. Verificalo. Trova la fonte primaria, cioè il rapporto o l'articolo originale, non chi lo cita. Dimmi: chi l'ha prodotto e in che anno; su quante persone e di quale Paese; la frase esatta e la pagina in cui compare il numero; se il numero che ho io corrisponde o è stato deformato passando di mano in mano. Se non trovi la fonte primaria, scrivilo chiaramente e non proporre un numero simile al suo posto. Chiudi con un giudizio in una riga: si può usare, si può usare con una precisazione, non si può usare."</div>
+    <div class="say"><b>Da dire:</b> Vi dà i link, non la verità. Aprirli resta un lavoro vostro.</div>
+    <div class="note">Sugli account della scuola le ricerche sono contate e serve la maggiore età. <b>Chi non ce l'ha</b> usa lo stesso prompt in una chat normale.</div>
+    <div class="cue">Slide deck: 5-7</div>
+  </div>
+
+  <div class="block pratica">
+    <div class="bhead"><span class="bnum">2</span><span class="btitle">Funzione 2: il collega difficile</span><span class="btime">4 minuti</span></div>
+    <ul class="steps">
+      <li><b>Chat nuova</b>, normale. Incolla il prompt e leggilo.</li>
+      <li>Rispondi una volta sola, come faresti in aula.</li>
+      <li>Mostra che insiste. Non finire i tre scambi.</li>
+    </ul>
+    <div class="prompt"><b>Prompt (slide 9, da leggere per intero):</b> "Fai la parte di un collega insegnante che partecipa a una formazione sull'intelligenza artificiale. Hai molti anni di scuola, hai visto passare tante novità e sei stanco. Non sei contrario: sei poco convinto. La tua obiezione è: ["Io queste cose non le uso, tanto sbaglia"]. Io sono il formatore e ti rispondo. Resta nel ruolo per tre scambi: non cedere alla prima risposta, e ribatti come farebbe una persona vera, con esempi dalla vita di scuola. Dopo il terzo scambio esci dal ruolo e dimmi: cosa ti ha convinto, cosa ti ha irrigidito, e una frase che avrebbe funzionato meglio."</div>
+    <div class="say"><b>Da dire:</b> Nel modulo 7 l'avete fatto fra di voi. Questo serve la sera prima, quando un collega per provare non c'è.</div>
+    <div class="cue">Slide deck: 8-9</div>
+  </div>
+
+  <div class="block pratica">
+    <div class="bhead"><span class="bnum">3</span><span class="btitle">Funzione 3: la demo che non tradisce</span><span class="btime">4 minuti</span></div>
+    <ul class="steps">
+      <li>Slide 10: i tre materiali di una demo.</li>
+      <li>Leggi il prompt (slide 11). Mostra le tre risposte già generate.</li>
+      <li>Chiedi alla stanza: "Quale usereste?" Poi mostra la soluzione.</li>
+    </ul>
+    <div class="prompt"><b>Prompt (slide 11, da leggere per intero):</b> "Sto preparando un esercizio per insegnanti: devono leggere tre risposte dell'IA e decidere quale userebbero. Il compito era: [il compito, ad esempio "una scheda di ripasso sulle frazioni per la quinta primaria"]. Scrivimi tre risposte, della stessa lunghezza e con lo stesso tono sicuro. Due sono corrette e utilizzabili. Una contiene un solo errore di contenuto, plausibile e non evidente, del tipo che un insegnante di quella materia riconosce e un lettore frettoloso no. Non segnalare qual è. Dopo le tre risposte, separata da una riga, scrivimi la soluzione per me: quale contiene l'errore, qual è, e perché è facile non vederlo."</div>
+    <div class="say"><b>Da dire:</b> Chi trova l'errore ha appena capito perché serve un insegnante.</div>
+    <div class="note"><b>Controllare sempre la soluzione.</b> L'errore lo sceglie Gemini: va verificato che sia davvero un errore.</div>
+    <div class="cue">Slide deck: 10-11</div>
+  </div>
+
+  <div class="block pratica">
+    <div class="bhead"><span class="bnum">4</span><span class="btitle">Lista dei controlli, sotto il cofano</span><span class="btime">4 minuti</span></div>
+    <ul class="steps">
+      <li>Slide 12: le cinque righe.</li>
+      <li><b>Riapri la ricerca lanciata al minuto 5.</b> Mostra il giudizio finale in una riga.</li>
+      <li>Slide 13: un perché solo, tre funzioni, una prova alla fine.</li>
+    </ul>
+    <div class="cue">Slide deck: 12-13</div>
+  </div>
+
+  <div class="block pratica">
+    <div class="bhead"><span class="bnum">5</span><span class="btitle">Tocca a voi</span><span class="btime">33 minuti</span></div>
+    <ul class="steps">
+      <li>3 minuti: <b>per prima cosa</b> lanciano la ricerca sul proprio dato.</li>
+      <li>10 minuti: il collega difficile, sull'obiezione che temono di più.</li>
+      <li>8 minuti: le tre risposte con l'errore, su un loro caso d'uso. Controllano la soluzione.</li>
+      <li>7 minuti: riaprono la ricerca, aprono almeno una fonte, scrivono il giudizio.</li>
+      <li>5 minuti: la lista dei controlli, scheda 5 del quaderno.</li>
+    </ul>
+    <div class="say"><b>Da dire:</b> L'hai aperta, la fonte?</div>
+    <div class="note"><b>Riserva per chi non ha un dato:</b> verificare "l'81% degli studenti italiani usa l'IA".</div>
+    <div class="cue">Slide deck: 14</div>
+  </div>
+
+  <div class="block pratica">
+    <div class="bhead"><span class="bnum">6</span><span class="btitle">Chiusura</span><span class="btime">5 minuti</span></div>
+    <ul class="steps">
+      <li>"Chi ha scoperto che il suo dato non si poteva usare così com'era?"</li>
+      <li>Di' con precisione cosa portare al modulo 9: <b>sei minuti</b> della propria lezione.</li>
+    </ul>
+    <div class="cue">Slide deck: 15-16</div>
+  </div>
+
+</div>
+</body>
+</html>

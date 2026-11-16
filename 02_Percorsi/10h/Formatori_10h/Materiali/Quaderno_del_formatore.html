@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Percorso Formatori · Il quaderno</title>
+<!--
+  Quaderno di lavoro dei partecipanti. Una pagina A4 per scheda: si stampa (Cmd/Ctrl+P, verticale, grafica di sfondo ON)
+  oppure si compila a schermo copiando il testo in un documento.
+  Pagina 1 = copertina. Pagina 2 = il metodo in una pagina. Pagine 3-8 = schede 1-6.
+-->
+<style>
+  :root{
+    --ink:#1E1B4B; --indigo:#4F46E5; --violet:#7C3AED; --cyan:#06B6D4; --coral:#F97316;
+    --light:#F6F5FF; --text:#1A1730; --muted:#6B6790; --line:#D9D5F2;
+    --font:'Inter','Segoe UI',-apple-system,Arial,sans-serif;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  html,body{background:#E9E7F5;font-family:var(--font);color:var(--text);}
+  .page{width:210mm;min-height:297mm;margin:10mm auto;background:#fff;padding:16mm 16mm 14mm;position:relative;box-shadow:0 6px 24px rgba(30,27,75,.12);}
+  .cover{background:var(--ink);color:#fff;display:flex;flex-direction:column;justify-content:center;overflow:hidden;}
+  .cover .eyebrow{font-size:11pt;font-weight:700;letter-spacing:.18em;color:var(--cyan);}
+  .cover h1{font-size:44pt;font-weight:800;line-height:1;margin-top:8mm;}
+  .cover .bar{width:14mm;height:3.4mm;background:var(--coral);margin:12mm 0 6mm;}
+  .cover p{font-size:14pt;color:#CFCBF0;line-height:1.4;max-width:150mm;}
+  .cover .circ{position:absolute;border-radius:50%;}
+  .cover .name{position:absolute;left:16mm;right:16mm;bottom:26mm;font-size:11pt;color:#CFCBF0;}
+  .cover .name span{display:inline-block;border-bottom:1px solid #8E8AC4;width:110mm;margin-left:3mm;}
+  .chip{display:inline-block;padding:1.6mm 3.4mm;border-radius:3mm;font-size:8pt;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#fff;background:var(--indigo);}
+  .chip.cyan{background:var(--cyan);} .chip.coral{background:var(--coral);} .chip.violet{background:var(--violet);}
+  h2{font-size:22pt;font-weight:800;line-height:1.1;margin:4mm 0 2mm;}
+  .lead{font-size:10.5pt;color:var(--muted);line-height:1.4;margin-bottom:5mm;}
+  h3{font-size:11pt;font-weight:800;color:var(--ink);margin:5mm 0 1.5mm;}
+  h3 small{font-weight:400;color:var(--muted);font-size:9.5pt;}
+  .lines{border:1px solid var(--line);border-radius:2.5mm;background:
+     repeating-linear-gradient(to bottom, transparent 0, transparent 8.6mm, var(--line) 8.6mm, var(--line) 8.9mm);}
+  .l2{height:17.8mm;} .l3{height:26.7mm;} .l4{height:35.6mm;} .l5{height:44.5mm;} .l6{height:53.4mm;} .l1{height:8.9mm;}
+  .grid2{display:flex;gap:5mm;} .grid2>div{flex:1;}
+  .note{margin-top:5mm;background:var(--light);border-left:1.6mm solid var(--indigo);border-radius:2mm;padding:3mm 4mm;font-size:9.5pt;line-height:1.4;}
+  .note b{color:var(--indigo);}
+  table{width:100%;border-collapse:collapse;font-size:9.5pt;}
+  th{background:var(--ink);color:#fff;text-align:left;padding:2.4mm 3mm;font-size:8.5pt;letter-spacing:.06em;text-transform:uppercase;}
+  td{border:1px solid var(--line);padding:2.4mm 3mm;height:11mm;vertical-align:top;}
+  td.k{background:var(--light);font-weight:700;width:34mm;}
+  .check{list-style:none;} .check li{position:relative;padding:2.6mm 0 2.6mm 9mm;border-bottom:1px solid var(--line);font-size:10.5pt;line-height:1.35;}
+  .check li::before{content:"";position:absolute;left:0;top:3mm;width:4.6mm;height:4.6mm;border:1.4px solid var(--indigo);border-radius:1mm;}
+  .cards{display:flex;gap:4mm;margin:2mm 0 4mm;} .cardx{flex:1;border:1px solid var(--line);border-radius:3mm;padding:3.4mm;}
+  .num{width:9mm;height:9mm;border-radius:50%;color:#fff;font-weight:800;display:flex;align-items:center;justify-content:center;font-size:11pt;margin-bottom:2mm;}
+  .cardx b{display:block;font-size:10.5pt;} .cardx span{display:block;font-size:8.8pt;color:var(--muted);line-height:1.3;margin-top:1mm;}
+  .rules{font-size:10pt;line-height:1.5;} .rules li{margin:0 0 1.4mm 5mm;}
+  .foot{position:absolute;left:16mm;right:16mm;bottom:8mm;display:flex;justify-content:space-between;font-size:8pt;color:var(--muted);}
+  @media print{
+    @page{size:A4;margin:0;}
+    html,body{background:#fff;}
+    .page{margin:0;box-shadow:none;page-break-after:always;break-after:page;height:297mm;}
+    *{-webkit-print-color-adjust:exact;print-color-adjust:exact;}
+  }
+</style>
+</head>
+<body>
+
+<!-- PAGINA 1 · COPERTINA -->
+<section class="page cover">
+  <div class="circ" style="top:-40mm;right:-40mm;width:150mm;height:150mm;background:var(--indigo);opacity:.45;"></div>
+  <div class="circ" style="bottom:-30mm;right:-20mm;width:90mm;height:90mm;background:var(--violet);opacity:.4;"></div>
+  <div class="circ" style="bottom:-40mm;left:-30mm;width:100mm;height:100mm;background:var(--cyan);opacity:.25;"></div>
+  <div class="eyebrow">PERCORSO FORMATORI · 10 ORE</div>
+  <h1>Il quaderno<br>del formatore</h1>
+  <div class="bar"></div>
+  <p>Sei schede, una per ogni pezzo del vostro percorso. Alla fine delle dieci ore, questo quaderno è il percorso che porterete ai vostri colleghi.</p>
+  <div class="name">Nome <span></span></div>
+</section>
+
+<!-- PAGINA 2 · IL METODO IN UNA PAGINA -->
+<section class="page">
+  <span class="chip violet">Da tenere sul tavolo</span>
+  <h2>Il metodo in una pagina</h2>
+  <p class="lead">Quello che avete vissuto, smontato e rifatto in dieci ore. Serve quando costruite un percorso nuovo, e quando lo adattate a un altro pubblico.</p>
+
+  <h3>I 6 passi per costruire un percorso</h3>
+  <div class="cards">
+    <div class="cardx"><div class="num" style="background:var(--indigo)">1</div><b>Pubblico</b><span>Chi ho davanti. I loro ganci.</span></div>
+    <div class="cardx"><div class="num" style="background:var(--cyan)">2</div><b>Traguardo</b><span>Un verbo, un oggetto finito, una scadenza.</span></div>
+    <div class="cardx"><div class="num" style="background:var(--violet)">3</div><b>Casi d'uso</b><span>Si ripete, pesa, si finisce in aula, niente dati personali.</span></div>
+  </div>
+  <div class="cards">
+    <div class="cardx"><div class="num" style="background:var(--coral)">4</div><b>Sequenza</b><span>Il metodo prima, un filo solo, un pezzo a incontro.</span></div>
+    <div class="cardx"><div class="num" style="background:var(--indigo)">5</div><b>Lezione</b><span>Le 4 mosse per uno strumento. Il blocco per un'idea.</span></div>
+    <div class="cardx"><div class="num" style="background:var(--cyan)">6</div><b>Regia</b><span>Tono che invita, tempi onesti, piano B scritto.</span></div>
+  </div>
+
+  <div class="grid2">
+    <div>
+      <h3>Le 4 mosse <small>per insegnare uno strumento</small></h3>
+      <ol class="rules">
+        <li><b>Perché.</b> A cosa serve, prima di come si usa.</li>
+        <li><b>Funzione.</b> Una sola, dal vivo. Prima il risultato.</li>
+        <li><b>Caso d'uso.</b> Un compito di scuola, già pronto e provato.</li>
+        <li><b>Prova.</b> Subito, sul mio caso o sul vostro.</li>
+      </ol>
+    </div>
+    <div>
+      <h3>Il blocco <small>per spiegare un'idea</small></h3>
+      <ol class="rules">
+        <li><b>Domanda.</b> La fate voi alla stanza: apre il blocco.</li>
+        <li><b>Contenuto.</b> Un titolo e tre punti.</li>
+        <li><b>Frase.</b> Una sola, da portare via.</li>
+        <li><b>Stanza.</b> Una domanda a cui rispondono loro.</li>
+      </ol>
+    </div>
+  </div>
+
+  <h3>Le regole che non si saltano</h3>
+  <ul class="rules">
+    <li>Si insegna il metodo, non lo strumento. I menu cambiano, il modo di lavorare resta.</li>
+    <li>Ogni idea si cala nella scuola: una persona, un oggetto del mestiere, un gesto.</li>
+    <li>Prima si chiede, poi si mostra il dato. E ogni dato ha la fonte, aperta da voi.</li>
+    <li>Ogni incontro lascia in mano un oggetto finito. Almeno metà del tempo è pratica.</li>
+    <li>Ogni allarme si chiude con una cosa che si può fare.</li>
+    <li>Non si decide in aula cosa tagliare: si decide prima cosa proteggere.</li>
+    <li>Nessun dato vero di alunni, famiglie o colleghi dentro lo strumento. Nemmeno per far vedere.</li>
+  </ul>
+  <div class="foot"><span>Percorso Formatori · Il quaderno</span><span>Il metodo in una pagina</span></div>
+</section>
+
+<!-- PAGINA 3 · SCHEDA 1 -->
+<section class="page">
+  <span class="chip">Scheda 1 · Modulo 2</span>
+  <h2>Il pubblico e il traguardo</h2>
+  <p class="lead">Passi 1 e 2. Fatevi intervistare da Gemini, poi correggete quello che non torna. Nessun nome di persona.</p>
+  <h3>Chi sono <small>ordine di scuola, materie, età, quanti, chi è lì perché deve</small></h3><div class="lines l2"></div>
+  <h3>Da dove partono <small>chi non l'ha mai aperta, chi la usa senza dirlo, chi è già avanti</small></h3><div class="lines l2"></div>
+  <h3>Cosa temono</h3><div class="lines l2"></div>
+  <h3>Cosa ripetono ogni settimana <small>è qui che nascono i casi d'uso</small></h3><div class="lines l3"></div>
+  <h3>I loro ganci <small>le parole che usano loro, non quelle del manuale</small></h3><div class="lines l2"></div>
+  <h3>Da scoprire prima di cominciare</h3><div class="lines l1"></div>
+  <h3>Il traguardo, in una frase <small>un verbo, un oggetto finito, una scadenza</small></h3><div class="lines l2"></div>
+  <div class="note"><b>Il controllo.</b> Se nel traguardo c'è "conoscono", "sanno" o "capiscono", riscrivetelo: cosa avranno in mano?</div>
+  <div class="foot"><span>Percorso Formatori · Il quaderno</span><span>Scheda 1</span></div>
+</section>
+
+<!-- PAGINA 4 · SCHEDA 2 -->
+<section class="page">
+  <span class="chip cyan">Scheda 2 · Moduli 3 e 4</span>
+  <h2>I casi d'uso e la sequenza</h2>
+  <p class="lead">Passi 3 e 4. Dieci casi sulla carta, poi dieci con il progettista. Ne restano tre. Poi si mettono in fila.</p>
+  <h3>I tre casi d'uso scelti</h3>
+  <table>
+    <tr><th>Il lavoro</th><th>Quanto spesso</th><th>Cosa hanno in mano dopo 20 minuti</th></tr>
+    <tr><td></td><td></td><td></td></tr><tr><td></td><td></td><td></td></tr><tr><td></td><td></td><td></td></tr>
+  </table>
+  <div class="note"><b>I quattro criteri.</b> Si ripete ogni settimana. Pesa. Si finisce in aula. Non tocca dati personali.</div>
+  <h3>La sequenza degli incontri</h3>
+  <table>
+    <tr><th>Incontro</th><th>La domanda che lo apre</th><th>Cosa si prova</th><th>Cosa portano a casa</th></tr>
+    <tr><td class="k">1</td><td></td><td></td><td></td></tr>
+    <tr><td class="k">2</td><td></td><td></td><td></td></tr>
+    <tr><td class="k">3</td><td></td><td></td><td></td></tr>
+    <tr><td class="k">4</td><td></td><td></td><td></td></tr>
+    <tr><td class="k">5</td><td></td><td></td><td></td></tr>
+  </table>
+  <h3>Il filo <small>il caso che attraversa tutti gli incontri</small></h3><div class="lines l2"></div>
+  <h3>Cosa ho corretto io, rispetto alla proposta del progettista</h3><div class="lines l3"></div>
+  <div class="foot"><span>Percorso Formatori · Il quaderno</span><span>Scheda 2</span></div>
+</section>
+
+<!-- PAGINA 5 · SCHEDA 3 -->
+<section class="page">
+  <span class="chip violet">Scheda 3 · Moduli 5 e 6</span>
+  <h2>La scaletta di un incontro</h2>
+  <p class="lead">Passo 5. Un incontro solo, portato in fondo. La versione completa sta in Documenti: qui il riassunto che tenete in mano in aula.</p>
+  <div class="grid2">
+    <div><h3>Incontro e durata</h3><div class="lines l1"></div></div>
+    <div><h3>La frase chiave</h3><div class="lines l1"></div></div>
+  </div>
+  <h3>La domanda che lo apre</h3><div class="lines l2"></div>
+  <h3>I blocchi</h3>
+  <table>
+    <tr><th>Minuti</th><th>Cosa faccio io</th><th>Cosa fanno loro</th><th>Slide</th></tr>
+    <tr><td></td><td></td><td></td><td></td></tr><tr><td></td><td></td><td></td><td></td></tr>
+    <tr><td></td><td></td><td></td><td></td></tr><tr><td></td><td></td><td></td><td></td></tr>
+    <tr><td></td><td></td><td></td><td></td></tr><tr><td></td><td></td><td></td><td></td></tr>
+  </table>
+  <div class="grid2">
+    <div><h3>Somma dei minuti</h3><div class="lines l1"></div></div>
+    <div><h3>Di cui pratica <small>almeno metà</small></h3><div class="lines l1"></div></div>
+  </div>
+  <div class="grid2">
+    <div><h3>Se sono in ritardo, salto</h3><div class="lines l2"></div></div>
+    <div><h3>Proteggo sempre</h3><div class="lines l2"></div></div>
+  </div>
+  <h3>Le riserve, se la stanza non parla</h3><div class="lines l2"></div>
+  <h3>La frase che lo chiude</h3><div class="lines l1"></div>
+  <div class="foot"><span>Percorso Formatori · Il quaderno</span><span>Scheda 3</span></div>
+</section>
+
+<!-- PAGINA 6 · SCHEDA 4 -->
+<section class="page">
+  <span class="chip coral">Scheda 4 · Modulo 9</span>
+  <h2>La griglia di chi osserva</h2>
+  <p class="lead">Sei minuti di un collega. Guardate solo queste quattro cose. Poi gli dite due frasi: una cosa da tenere, una da cambiare. Tre copie a testa.</p>
+  <h3>Chi conduce</h3><div class="lines l1"></div>
+  <table style="margin-top:5mm;">
+    <tr><th>Cosa guardo</th><th>Sì, in parte, no</th><th>Cosa ho visto</th></tr>
+    <tr><td class="k">Il perché è arrivato prima?</td><td></td><td style="height:22mm"></td></tr>
+    <tr><td class="k">Era dentro la scuola?</td><td></td><td style="height:22mm"></td></tr>
+    <tr><td class="k">Ho fatto qualcosa?</td><td></td><td style="height:22mm"></td></tr>
+    <tr><td class="k">Cosa mi porto via?</td><td></td><td style="height:22mm"></td></tr>
+  </table>
+  <h3>Una cosa da tenere</h3><div class="lines l3"></div>
+  <h3>Una cosa da cambiare</h3><div class="lines l3"></div>
+  <div class="note"><b>Come si dice.</b> In prima persona e su cose viste: "mi sono perso quando", "mi ha fatto pensare al mio caso quando". Chi riceve ascolta e ringrazia.</div>
+  <div class="foot"><span>Percorso Formatori · Il quaderno</span><span>Scheda 4</span></div>
+</section>
+
+<!-- PAGINA 7 · SCHEDA 5 -->
+<section class="page">
+  <span class="chip">Scheda 5 · Modulo 8</span>
+  <h2>La lista dei controlli</h2>
+  <p class="lead">Passo 6. Da rifare prima di ogni incontro. Dieci minuti che evitano metà dei problemi d'aula.</p>
+  <h3>Il giorno prima</h3>
+  <ul class="check">
+    <li>Ho provato tutto, sull'account che userò in aula.</li>
+    <li>I prompt sono in un file, pronti da incollare. Li ho provati uno per uno.</li>
+    <li>Il risultato di ogni demo è aperto in un'altra scheda.</li>
+    <li>Ho sommato i minuti della scaletta. La pratica è almeno metà.</li>
+    <li>Ogni dato che cito ha la fonte, e la fonte l'ho aperta io.</li>
+  </ul>
+  <h3>Tre giorni prima</h3>
+  <ul class="check">
+    <li>Ho mandato a tutti le istruzioni per accedere, e ho chiesto di provare.</li>
+    <li>So quanti hanno l'account della scuola attivo e quanti useranno il proprio.</li>
+  </ul>
+  <h3>Il mio piano B</h3>
+  <table>
+    <tr><th>Se succede</th><th>Allora</th></tr>
+    <tr><td class="k">L'assistente su misura non è attivo</td><td></td></tr>
+    <tr><td class="k">L'account della scuola non entra</td><td></td></tr>
+    <tr><td class="k">La ricerca ci mette troppo</td><td></td></tr>
+    <tr><td class="k">Cade la rete</td><td></td></tr>
+  </table>
+  <h3>Il dato che uso, verificato</h3>
+  <table>
+    <tr><td class="k">Il dato</td><td></td></tr>
+    <tr><td class="k">Fonte primaria e anno</td><td></td></tr>
+    <tr><td class="k">Di chi parla</td><td></td></tr>
+    <tr><td class="k">Giudizio</td><td>si usa &nbsp;·&nbsp; si usa con una precisazione &nbsp;·&nbsp; non si usa</td></tr>
+  </table>
+  <div class="foot"><span>Percorso Formatori · Il quaderno</span><span>Scheda 5</span></div>
+</section>
+
+<!-- PAGINA 8 · SCHEDA 6 -->
+<section class="page">
+  <span class="chip cyan">Scheda 6 · Modulo 10</span>
+  <h2>Il piano: una data, un gruppo, un primo incontro</h2>
+  <p class="lead">Da compilare prima di uscire. Poi lo leggete al vicino, che vi chiede una cosa sola: cosa può far saltare la data?</p>
+  <h3>Quando <small>una data, non "entro Natale"</small></h3><div class="lines l1"></div>
+  <h3>A chi <small>il gruppo con cui parto, anche piccolo</small></h3><div class="lines l2"></div>
+  <h3>Cosa <small>l'incontro che ho già costruito e provato</small></h3><div class="lines l2"></div>
+  <h3>Con chi <small>il collega che mi dà una mano in aula, e con cui mi confronto dopo</small></h3><div class="lines l2"></div>
+  <h3>Cosa può far saltare la data, e cosa faccio</h3><div class="lines l2"></div>
+  <h3>Cosa mi serve dalla scuola</h3><div class="lines l1"></div>
+  <h3>Come lo saprò <small>la domanda che farò dopo due settimane</small></h3><div class="lines l2"></div>
+  <h3>Tra tre mesi, da cosa capirò che è servito</h3><div class="lines l2"></div>
+  <div class="note"><b>Per far durare.</b> Ogni incontro si apre con una domanda sul precedente. Due colleghi si mostrano a vicenda cosa hanno provato. I prompt che funzionano stanno in una cartella comune.</div>
+  <div class="foot"><span>Percorso Formatori · Il quaderno</span><span>Scheda 6</span></div>
+</section>
+
+</body>
+</html>
